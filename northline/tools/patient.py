@@ -2,6 +2,7 @@
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any
 from . import store
 from .calllog import log_dir as _log_dir
 
@@ -28,7 +29,7 @@ def _flag(kind: str, value: str) -> str:
         return "normal"
 
 
-def log_reading(patient_id: str, kind: str, value: str) -> dict:
+def log_reading(patient_id: str, kind: str, value: str) -> dict[str, Any]:
     """Log a blood pressure (kind 'bp', value like '146/92') or glucose (kind 'glucose', value like '62') reading."""
     pts = store.load("patients")
     pt = next((x for x in pts if x["id"] == patient_id), None)
@@ -43,7 +44,7 @@ def log_reading(patient_id: str, kind: str, value: str) -> dict:
     return {"status": "ok", "reading_id": row["id"], "flag": row["flag"]}
 
 
-def log_medication(patient_id: str, taken: bool, note: str = "") -> dict:
+def log_medication(patient_id: str, taken: bool, note: str = "") -> dict[str, Any]:
     """Record whether the patient took their medication this week, with an optional note."""
     if _patient(patient_id) is None:
         return {"status": "not_found", "message": f"no patient {patient_id}"}
@@ -61,7 +62,7 @@ def _median_hours() -> float:
     return 31.0
 
 
-def escalate_to_nurse(patient_id: str, reason: str, urgency: str = "routine") -> dict:
+def escalate_to_nurse(patient_id: str, reason: str, urgency: str = "routine") -> dict[str, Any]:
     """Hand a concerning reading or symptom to a nurse. urgency is 'routine' or 'urgent'. Use for any clinical question."""
     if _patient(patient_id) is None:
         return {"status": "not_found", "message": f"no patient {patient_id}"}
@@ -76,7 +77,7 @@ def escalate_to_nurse(patient_id: str, reason: str, urgency: str = "routine") ->
             "message": f"A nurse will review this. Median response time is currently {_median_hours()} hours."}
 
 
-def next_checkin(patient_id: str) -> dict:
+def next_checkin(patient_id: str) -> dict[str, Any]:
     """When the patient's next weekly check-in is due."""
     if _patient(patient_id) is None:
         return {"status": "not_found", "message": f"no patient {patient_id}"}

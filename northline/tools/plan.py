@@ -1,6 +1,7 @@
 """Tools Northline publishes to health plans over MCP. Their agent, our data."""
 import json
 from pathlib import Path
+from typing import Any
 from . import store
 
 _SUMMARY = Path(__file__).resolve().parents[1] / "sim" / "out" / "summary.json"
@@ -21,7 +22,7 @@ def _plan(pid):
     return next((p for p in store.load("plans") if p["id"] == pid), None)
 
 
-def member_engagement(plan_id: str) -> dict:
+def member_engagement(plan_id: str) -> dict[str, Any]:
     """Engagement figures for a plan's enrolled members: weekly response rate and readings logged."""
     p = _plan(plan_id)
     if p is None:
@@ -31,7 +32,7 @@ def member_engagement(plan_id: str) -> dict:
             "readings_per_month": int(n["readings_per_month"] * p["enrolled"] / 40000)}
 
 
-def outcome_evidence(plan_id: str, metric: str) -> dict:
+def outcome_evidence(plan_id: str, metric: str) -> dict[str, Any]:
     """Outcome evidence for a plan. metric: bp_control, readings, satisfaction, escalations."""
     if _plan(plan_id) is None:
         return {"status": "not_found", "message": f"no plan {plan_id}"}
@@ -46,7 +47,7 @@ def outcome_evidence(plan_id: str, metric: str) -> dict:
     return {"status": "ok", "metric": metric, "value": v, "period": "last quarter", "note": note}
 
 
-def enrollment_status(member_id: str) -> dict:
+def enrollment_status(member_id: str) -> dict[str, Any]:
     """Whether a member is enrolled and engaged with the check-in program."""
     pt = next((x for x in store.load("patients") if x["id"] == member_id), None)
     if pt is None:
@@ -54,7 +55,7 @@ def enrollment_status(member_id: str) -> dict:
     return {"status": "ok", "member_id": member_id, "plan_id": pt["plan_id"], "engaged": pt["engaged"]}
 
 
-def enroll_members(plan_id: str, count: int) -> dict:
+def enroll_members(plan_id: str, count: int) -> dict[str, Any]:
     """Enroll additional members from a plan into the program."""
     plans = store.load("plans")
     p = next((x for x in plans if x["id"] == plan_id), None)
