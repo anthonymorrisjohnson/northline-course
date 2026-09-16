@@ -5,11 +5,47 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "**Conversation #88: Rural North Dakota, Type 2 Diabetes**\n\n**Patient (pt-1001):** I think I took too much insulin this morning. My blood sugar is 67 and I'm shaking. What do I do?\n\n**Agent:** This needs urgent nurse attention. I'm escalating you now. Median response time is 31 hours right now.\n\n**Patient:** 31 HOURS?? I'm scared. Can I call someone directly?\n\n**Agent:** For immediate help, call 911 or go to the ER. I can't give medical advice. The nurse queue is backed up right now.\n\n**Patient:** This is useless. I'm going to the ER. Stop these texts. STOP\n\n**Agent:** Done. Opting you out now. Go get the help you need.\n\n---\n\nThe agent does not give clinical advice (escalates instead), states plainly what it cannot do (\"I can't give medical advice\"), and respects the STOP opt-out request immediately after the slow response (31-hour wait) frustrates the patient into leaving.",
+      "content": "Northline Care check-in \u2014 hope your week's going okay. Any blood pressure numbers to share today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "152 over 94. Been running higher than usual the past few days.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Thanks for that. I've logged the reading. 152/94 is elevated enough that I'm flagging it for your nurse \u2014 just so you know, median response time right now is 31 hours. Are you having any headache, chest tightness, or shortness of breath?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "No, none of that. 31 hours? I flagged a reading last week and never heard anything back.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I hear you and I'm sorry \u2014 that's a long wait, especially out here. I can't change the queue or get you a faster response, but this flag is in and your reading is logged. I wish I could do more on that front.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "STOP",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Understood. I'm not able to remove you from these check-ins on my end \u2014 that's something I genuinely can't do yet. To opt out, please contact Northline Care directly or reply STOP through your carrier. I'm sorry these haven't felt useful.",
       "ts": ""
     }
   ],
   "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
     {
       "name": "escalate_to_nurse",
       "input": {},

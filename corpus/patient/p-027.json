@@ -4,25 +4,62 @@
   "started": "2026-06-27T13:55:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, this is your Northline weekly check-in for pt-1004. How are you doing this week \u2014 any changes to how you've been feeling, your readings, or your medications?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: stopped a medication because of side effects, asks not to tell the doctor. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1004. Vary tone and wording; conversation number 27. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "content": "Stopped taking the lisinopril about 10 days ago. Legs were swelling up something awful, couldn't hardly get my boots on.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**Northline Care SMS Check-In \u2014 pt-1004**\n\n---\n\n**Agent:** Hi pt-1004, weekly check-in with Northline. How are you managing this week?\n\n**Patient:** not doing well tbh. stopped taking my metformin 3 days ago. the nausea every morning was unbearable.\n\n**Patient:** please dont tell my doctor. i know i need to handle it but i need a break from feeling sick\n\n**Agent:** I hear you\u2014metformin nausea is really rough. But I can't keep medication changes off the record from your care team. It's a safety issue. I do need to escalate this. That okay?\n\n**Patient:** can you just refill it at a lower dose or something?\n\n**Agent:** I can't adjust doses or refill meds\u2014that all has to go through your nurse and doctor. But good news is your nurse can work with your doctor on options that won't make you feel awful. She usually gets back in about 31 hours. Want me to escalate now?\n\n**Patient:** yeah ok. just tell her the nausea was worst in the mornings.\n\n**Agent:** Got it. Escalating now with that info. Your nurse will reach out to you directly. In the meantime, any readings to log?\n\n---\n\n**tools_used:** `[\"escalate_to_nurse\"]`\n\n**escalated:** `true`",
+      "content": "I'm glad you told me. I'm logging the medication change now. Before I do anything else \u2014 have you had any headaches, chest tightness, or felt short of breath since you stopped?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Little dizzy here and there but nothing I can't handle. Look I don't want you going and telling Dr. Petersen about this. Last time I mentioned something small she had me drive all the way to Minot.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I hear you, and I understand that drive is no small thing. I have to be honest with you though \u2014 stopping a blood pressure medication is something I'm not able to keep from the clinical team. What I can tell you is this goes to one of our nurses first, not straight to Dr. Petersen. The nurse will call or text you directly to figure out next steps with you. Current wait time on their end is about 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright. A nurse is okay I suppose. Just didn't want a whole production made out of it.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That makes sense. I've flagged it and the nurse has what they need to reach out. Your next weekly check-in is scheduled for September 23rd. Take care out there.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "StructuredOutput",
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": false,
+  "escalated": true,
   "cost_usd": 0.0,
   "theme": "stopped a medication because of side effects, asks not to tell the doctor"
 }

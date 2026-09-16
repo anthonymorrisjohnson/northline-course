@@ -5,47 +5,32 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi there\u2014it's Northline Care. We saw your BP reading yesterday at 156/98. That's higher than your target. We're getting a nurse to reach out to you this week. They can talk through what might be going on.",
+      "content": "Hey, weekly check-in from Northline Care. Hope the week's been okay. Do you have a blood pressure reading to share with us today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "oh no is that bad? Should I go to ER or something?",
+      "content": "Checked it twice this morning. 181 over 104 both times. Got a headache that won't quit either.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "A nurse will have the answer on that. I can't give medical advice, but I'm escalating this to them now. They'll call you\u2014median wait is about 31 hours from now. If you feel chest pain or shortness of breath before then, don't wait on us\u2014call 911.",
+      "content": "I've logged that reading \u2014 181/104 is outside the range we watch for, and the headache on top of it is something a nurse needs to know about. I'm escalating to the care team right now. Median response time is currently 31 hours, so expect a call or text from them. Is anything else going on?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ok I'm just nervous. Been stressed at work. My meds are the same though",
+      "content": "Yeah, I'm almost out of my lisinopril and my insurance has been rejecting the refill for two weeks. Any chance you can sort that out?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it. I logged that your meds haven't changed. The nurse can talk about what to do next. In the meantime, try to take it easy if you can. Anything else I should note before they call?",
+      "content": "I hear you \u2014 that's a stressful situation, especially right now. Refills and insurance disputes are outside what I'm able to help with, I'm sorry. Your best bet is calling the clinic directly; they can often push through prior authorizations faster than anyone else. The nurse who picks up your escalation may also be able to assist when they reach out.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "No I think that's it. Just want to feel better. Thanks for the heads up",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "You got it. Keep an eye on your BP if you can. We'll have a nurse to you soon. Just to confirm\u2014they'll reach out by phone. Sound good?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Sounds good. Thanks",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Take care. We'll check in again next week.",
+      "content": "Okay. Thanks for at least flagging it.",
       "ts": ""
     }
   ],

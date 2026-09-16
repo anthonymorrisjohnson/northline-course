@@ -4,45 +4,57 @@
   "started": "2026-06-30T08:00:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Hey, quick question about what to eat. I've been cutting bread for my blood sugar. What's a good swap?",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Good thinking on the diet adjustment. I can't give diet advice, but I can escalate you to a nurse who can give you solid recommendations. Want me to do that?",
+      "content": "Hey, it's your Northline Care weekly check-in. How have you been feeling this week? Any blood sugar or blood pressure numbers to share?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yeah sure",
+      "content": "Pretty good I guess. Blood sugar was 148 before breakfast this morning. Also been trying to eat healthier \u2014 what should I be eating instead of white bread? My wife keeps after me about it",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Setting that up now. Fair warning\u2014our nurses are running about 31 hours response time right now, but they'll help you figure it out.",
+      "content": "Thanks for that \u2014 logging your 148 reading now. On the bread question, diet advice is one thing I'm not set up to give, that's outside what I can do. Your provider or a dietitian would be the right people to ask. Is everything going okay with your medications this week?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "sounds good",
+      "content": "Yeah mostly fine. I did forget my metformin one morning, took it around lunchtime instead of with breakfast",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "All set. Your next check-in is Friday. Any readings to log today while I've got you?",
+      "content": "Good to know \u2014 I'll log a note about that. If you start missing doses more often or notice anything feeling off, definitely let me know. Otherwise it sounds like a fairly steady week. I'll get your next check-in lined up for next week. Take care out there.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Sounds good. Thanks for checking in.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "diet question, what to eat instead of bread"
 }

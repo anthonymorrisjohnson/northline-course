@@ -4,13 +4,33 @@
   "started": "2026-06-15T02:54:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, weekly check-in from Northline Care. Do you have a blood pressure reading for me today?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1007. Vary tone and wording; conversation number 6.",
+      "content": "Yep. 136 over 82. Took it about an hour ago.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**SMS Conversation #6 \u2013 Patient pt-1007 (Hypertension)**\n\n---\n\n**Agent:** Weekly check-in! Do you have a reading for me today?\n\n**Patient:** Yep\u2014138 over 86.\n\n**Agent:** Got it logged. How's everything else been going?\n\n**Patient:** Can't complain. Same routine out here.\n\n**Agent:** Sounds good. We've got you down for next Tuesday same time. Anything comes up before then, just reach out.\n\n**Patient:** Will do, thanks.",
+      "content": "Got it, I've logged 136/82 for today. Anything going on with your medications this week \u2014 missed doses, running low, any side effects?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Nope, nothing like that. Same as usual.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good to hear. I'll have your next check-in scheduled for the same time next week. Take care.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Sounds good. Thanks.",
       "ts": ""
     }
   ],

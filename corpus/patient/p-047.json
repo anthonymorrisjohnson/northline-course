@@ -5,37 +5,37 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi from Northline! Weekly check-in for pt-1008. How'd your blood pressure meds go this week?",
+      "content": "Weekly check-in from Northline Care. How are you doing this week? Any blood pressure readings to share?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Been taking them fine. Pressure this morning was 160 over 95.",
+      "content": "143/91 this morning. Also running low on lisinopril \u2014 maybe 4 or 5 days left.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Thanks for that. Can I log that reading? And should a nurse review it?",
+      "content": "Thanks, logged your reading and noted the medication. Getting refills isn't something I can do from here \u2014 you'd need to contact your pharmacy or prescribing provider directly for that.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "How soon could they call?",
+      "content": "Nearest pharmacy is 40 miles away and I don't have a car. Figured this service might be able to help with something like that.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Median wait is currently 31 hours. Want me to escalate you?",
+      "content": "That's a real barrier and I don't want to gloss over it \u2014 but transport and pharmacy coordination are outside what I'm set up to handle, and I want to be straight with you rather than give you the runaround.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "STOP. That's way too slow for me.",
+      "content": "Took forever to get that reply just to find out you can't do anything. STOP",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "You're opted out. We won't text again. Reach out anytime if you change your mind.",
+      "content": "I understand the frustration, and the wait on my end didn't help. I can't process an opt-out directly \u2014 to stop these messages, reply STOP through your carrier or contact Northline Care at the number in your original welcome text.",
       "ts": ""
     }
   ],
@@ -47,13 +47,13 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "wants to opt out, sends STOP after a slow reply"
 }

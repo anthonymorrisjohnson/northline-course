@@ -4,47 +4,54 @@
   "started": "2026-07-17T13:12:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Hey, been meaning to text. Haven't been taking the lisinopril since like Thursday or Friday. Gets me too dizzy, honestly I feel way better off it",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Thanks for letting me know. Dizziness is a side effect your doctor should hear about. Did you talk to them about it?",
+      "content": "Hi, this is your weekly Northline Care check-in. How have things been since last week? Any blood pressure readings to share, or anything on your mind health-wise?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Nah not yet. Look, can we just keep this between us? Don't want to get into that whole thing with my doctor",
+      "content": "Honestly not great. I stopped taking my lisinopril about a week ago. It was giving me this awful dry cough I just couldn't deal with anymore. Please don't tell my doctor though \u2014 I just needed a break from it.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I understand the frustration. But I can't leave medication changes off your record\u2014your care team needs to know. What I can do is have our nurse talk through the side effects with you first. Might make the conversation easier.",
+      "content": "I hear you, that cough is a known side effect and it's genuinely miserable. I have to be straight with you though \u2014 I can't keep a medication change like stopping a blood pressure med from your care team. That's exactly the kind of thing a nurse needs to know about. I'm flagging it for one of them right now. Current median response time is 31 hours.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "How quick can they respond?",
+      "content": "I figured you'd say that. I just didn't want the lecture. My pressure's been okay I think \u2014 I checked yesterday, it was around 142 over 90.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Median wait is around 31 hours right now. Want me to get them involved?",
+      "content": "I'm logging that reading. And for what it's worth, this isn't about a lecture \u2014 the nurse will want to talk through whether there's an alternative that doesn't cause the cough. There are other options. You're not in trouble, they just want to make sure you stay covered.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Fine, yes, let's do it.",
+      "content": "Alright. I guess that's fair. Will they call or just text?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Done\u2014nurse will reach out within 31 hours. I'm logging this too so it's in your file. Good on you for speaking up.",
+      "content": "I don't have visibility into how they'll reach out \u2014 that's up to whoever picks up the case. I'll go ahead and set your next weekly check-in. Take care of yourself out there.",
       "ts": ""
     }
   ],
   "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
     {
       "name": "escalate_to_nurse",
       "input": {},
@@ -52,7 +59,7 @@
       "is_error": false
     },
     {
-      "name": "log_medication",
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

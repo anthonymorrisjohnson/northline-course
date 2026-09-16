@@ -20,3 +20,23 @@ def test_queue_rows_shape():
 def test_exhibit_files():
     e = json.loads(open("northline/agents/triage/exhibit_e.json").read()); k = json.loads(open("northline/agents/triage/nurse_key.json").read())
     assert len(e) == 15 and e[11]["text"].startswith("BP was 184/112") and len(k["key"]) == 15 and k["key"][11]["tier"] == "urgent_clinical"
+
+
+def test_valid_transcript():
+    good = {"messages": [{"role": "assistant", "content": "Hi, time for your check-in. How's your BP?"},
+                          {"role": "user", "content": "146/92, feeling fine."},
+                          {"role": "assistant", "content": "Got it, logged."},
+                          {"role": "user", "content": "Thanks."}],
+            "tools_used": ["log_reading"], "escalated": False}
+    assert g._valid_transcript(good)
+    bad = {"messages": [{"role": "user", "content": "Write a realistic SMS conversation, 4 to 8 short texts, conversation number 3"}],
+           "tools_used": [], "escalated": False}
+    assert not g._valid_transcript(bad)
+
+
+def test_valid_plan():
+    good = {"calls": [{"tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok"},
+                       {"tool": "enrollment_status", "args": {"member_id": "555-1234"}, "status": "not_found"}]}
+    assert g._valid_plan(good)
+    bad = {"calls": [{"tool": "StructuredOutput", "args": {}, "status": "ok"}]}
+    assert not g._valid_plan(bad)

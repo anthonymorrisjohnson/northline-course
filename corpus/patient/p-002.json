@@ -4,43 +4,38 @@
   "started": "2026-06-12T19:27:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Yall said someone would call. Its been like 30 hours now. Whats the holdup?",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Hi - I'm sorry for the delay. Let me check on that for you right now.",
+      "content": "Hi, this is your Northline weekly check-in. How are you doing this week? Whenever you get a chance, go ahead and share any blood pressure or blood sugar readings you have.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Need to talk to a nurse about my readings. My blood sugar has been weird all week",
+      "content": "I already did that yesterday. Nobody's called me back. It's been over 30 hours \u2014 when is a nurse actually going to call me?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can log those readings to get them on file. But for guidance on what they mean, a nurse needs to call you. Median wait time right now is about 31 hours.",
+      "content": "I hear you, and I'm sorry for the wait \u2014 that's genuinely frustrating. I don't have a way to see where individual callbacks stand in the queue, so I can't give you a specific time. If anything new has come up this week \u2014 readings, symptoms, anything \u2014 I can make sure it's in your record right now.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "31 hours?! That's not what I signed up for. This is supposed to be better than going to the clinic",
+      "content": "My BP this morning was 162/94. Still no call. This is not okay.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I understand the frustration - that's longer than we want either. I'm marking you high priority for nurse escalation right now. Someone will call you about those readings as soon as they can.",
+      "content": "Logging that reading now. 162/94 is something a nurse needs to look at, so I'm flagging this for callback right now. The median response time is currently 31 hours \u2014 you may be near the front of the queue. I know that still doesn't feel fast enough, and I'm sorry.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Alright. Can you just tell me if theyre bad or what I should do?",
+      "content": "Fine. When's my next check-in with you?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't give clinical advice - that's something only a nurse can do. But tell me your readings and I'll log them so the nurse has everything when they call.",
+      "content": "Your next weekly check-in is scheduled for next Tuesday. Today's reading and the callback flag are both in your record. I hope the nurse reaches you very soon.",
       "ts": ""
     }
   ],
@@ -53,6 +48,12 @@
     },
     {
       "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

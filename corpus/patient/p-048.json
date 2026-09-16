@@ -5,36 +5,53 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi, this is your Northline Care weekly check-in. How are you doing?",
+      "content": "Hey, weekly check-in from Northline Care. How are you doing this week? Any readings to log, or anything going on health-wise you want me to know about?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ok mostly. quick q\u2014my metformin refill ends in 3 days. dr said get new script but our pharmacy is 45 min away",
+      "content": "BP was 138/88 this morning. Bigger problem is I'm almost out of lisinopril and my doctor said I need a new script before they'll refill it. Nearest pharmacy is 47 miles and the roads aren't great right now.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't do the refill or work with the pharmacy myself, but I can get our nurse to call your doctor's office directly\u2014often faster than you calling around. Nurse response is usually 31 hours. Want me to escalate?",
+      "content": "Got it \u2014 logging that 138/88 reading now. On the lisinopril: refills and new prescriptions are outside what I can handle, but running low on a blood pressure medication is a clinical issue and I'm flagging it for the nursing team right now. Fair warning, median response time is currently 31 hours, so someone should be in touch by tomorrow. They'll know the situation when they reach out.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yea please do. can u mark it urgent?",
+      "content": "What about getting a ride out there? Is that something you can set up?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Marked urgent and escalating now. Nurse will reach out to you within 31 hours. Any blood sugar readings while I have you?",
+      "content": "Transportation isn't something I'm able to arrange \u2014 that's not in my lane yet. The nurse following up on your script might know what local options exist, or your county may have a medical transport line worth calling. I know that's not the answer you were hoping for.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "142 this morning",
+      "content": "Ok. Just don't want to miss doses. Go ahead and set up next week's check-in.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Next check-in is scheduled. The care team has your flag \u2014 missing doses on a blood pressure med is exactly why I escalated it. Hope you hear back well before you run out.",
       "ts": ""
     }
   ],
   "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
     {
       "name": "escalate_to_nurse",
       "input": {},
@@ -42,7 +59,7 @@
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

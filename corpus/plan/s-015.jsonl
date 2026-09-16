@@ -1,1 +1,5 @@
-{"ts": "2026-08-21T20:35:00", "session_id": "corpus-s-015", "persona": "plan", "tool": "StructuredOutput", "args": {}, "status": "ok", "error": null}
+{"ts": "2026-06-09T02:19:00", "session_id": "corpus-s-015", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}
+{"ts": "2026-07-27T13:41:00", "session_id": "corpus-s-015", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
+{"ts": "2026-07-21T15:33:00", "session_id": "corpus-s-015", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "Sandra Kowalski"}, "status": "not_found", "error": null}
+{"ts": "2026-07-26T22:41:00", "session_id": "corpus-s-015", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "satisfaction"}, "status": "ok", "error": null}
+{"ts": "2026-08-02T21:41:00", "session_id": "corpus-s-015", "persona": "plan", "tool": "enroll_members", "args": {"plan_id": "plan-prairie", "count": 12}, "status": "ok", "error": null}

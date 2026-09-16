@@ -5,46 +5,53 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi! Weekly check-in. How have you been?",
+      "content": "Hey, this is your weekly Northline Care check-in. How are you doing this week? Any readings to share, or anything going on with your medications?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "not great. my ride broke down. pharmacy is 40 mins away and i'm out of my blood pressure meds",
+      "content": "Took my blood pressure this morning, got 158/94. Also I ran out of lisinopril four days ago. Pharmacy is 47 miles and I've got no way to get out there right now, roads haven't been great either.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "That's tough. I can't help with rides or refills, but our nurse team can\u2014want me to escalate? Median response is 31 hours.",
+      "content": "Thanks for letting me know \u2014 I've logged your reading and noted that you've been without lisinopril for four days. Going that long without a blood pressure medication is something the care team needs to know about, so I'm sending this to a nurse right now. Just so you know, median response time is currently 31 hours. I'm not able to arrange transport or process a refill, but your nurse will be able to work through next steps with you.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yes please. also been dizzy since i stopped them",
+      "content": "Is there any way they could call it in to a closer pharmacy? There's one about 12 miles from me.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Escalating now. Tell them about the dizziness. Any BP reading handy?",
+      "content": "I can't handle refills or pharmacy routing \u2014 that's not something I'm set up to do. I've passed everything along to your nurse, including that you have a pharmacy 12 miles out. That's exactly the kind of thing they can look into.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "150/94 yesterday. will that help?",
+      "content": "Ok. Fingers crossed. I've just been tired and a little headachy the last couple days, don't know if that's related.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logged (150/94). That helps the nurse see the picture. They'll call/text within 31 hours with access resources.",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "ok thanks",
+      "content": "I've added the tiredness and headaches to what I'm sending over \u2014 your nurse will have the full picture. Please don't hesitate to call 911 if anything feels urgent before you hear back. Your next scheduled check-in is Tuesday. Take care of yourself.",
       "ts": ""
     }
   ],
   "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
     {
       "name": "escalate_to_nurse",
       "input": {},
@@ -52,7 +59,7 @@
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

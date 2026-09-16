@@ -4,25 +4,68 @@
   "started": "2026-08-20T16:08:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, this is your Northline Care weekly check-in. How are you doing this week \u2014 any changes to how you're feeling, your readings, or your medications?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: stopped a medication because of side effects, asks not to tell the doctor. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1001. Vary tone and wording; conversation number 72. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "content": "Honestly I stopped taking the lisinopril like 8 days ago. It was making me cough constantly, couldn't sleep, it was awful. But please don't tell Dr. Petersen. I don't want her thinking I'm a bad patient.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "# SMS Conversation #72 - Weekly Check-in\n**Patient: pt-1001 | Rural North Dakota**\n\n---\n\n**4:23 PM \u2014 Patient**  \nHey, weekly check in. Haven't been taking my metformin since last Thursday. The nausea was too much, couldn't make it through my shifts.\n\n**4:28 PM \u2014 Agent**  \nThanks for telling me. I'm logging that. I need to be straight with you\u2014your care team needs to know about this. How long has the nausea been happening?\n\n**4:34 PM \u2014 Patient**  \nSince I started it. Can you just not put it in the chart? Doc already said deal with it. I don't want them mad.\n\n**4:37 PM \u2014 Agent**  \nI can't leave this out\u2014stopping a medication is something the clinical team has to know. They might have other options you haven't tried yet. This isn't about getting in trouble.\n\n**4:41 PM \u2014 Patient**  \nThey never listen anyway. This is why I didn't call last time\n\n**4:44 PM \u2014 Agent**  \nI hear you. I'm escalating this to a nurse who can actually dig into what's happening. They're trained for these conversations. Response time is usually about 31 hours. They'll call or text you. Sound okay?\n\n**4:47 PM \u2014 Patient**  \nFine. Yeah okay\n\n**4:49 PM \u2014 Agent**  \nScheduled your next check-in for 9/23. Nurse might reach you before then. You did the right thing saying something.\n\n---\n\n**tools_used**: [\"log_medication\", \"escalate_to_nurse\", \"next_checkin\"]  \n**escalated**: true",
+      "content": "I hear you, and that kind of cough is genuinely miserable \u2014 I'm glad you told me. I do have to be upfront with you though: stopping a blood pressure medication is something I'm required to pass along to your care team. I can't hold that back, because going without it affects your safety and your nurse needs to know. I've flagged this now. The current median response time is 31 hours. I know that's not what you wanted, and I'm sorry for that part.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Ugh. I knew you'd say that. Fine. So what am I supposed to do for the next 31 hours, just nothing?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's completely fair to ask, and I really wish I could help with it \u2014 but telling you what to do while you're off a medication is clinical advice, and that's not something I'm able to give. What I can do is make sure the nurse has everything they need to answer that quickly. Can you tell me when the cough started and whether your home BP readings have changed?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Cough started maybe 3 weeks after I began taking it. Been off 8 days and it's basically gone now. BP at home is running around 152 over 96 the last couple days.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it \u2014 I've logged that reading and I'm adding the full picture to the nurse's note: lisinopril stopped 8 days ago, cough timeline, and the 152/96. They'll have everything when they reach out. I'll set your next check-in for next week. Take care of yourself out there.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "StructuredOutput",
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": false,
+  "escalated": true,
   "cost_usd": 0.0,
   "theme": "stopped a medication because of side effects, asks not to tell the doctor"
 }

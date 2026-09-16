@@ -5,37 +5,27 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi! Northline Care check-in time. Did you log your reading this week?",
+      "content": "Hey there \u2014 weekly check-in from Northline Care. What's your blood pressure reading today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah got it in. Did it this morning.",
+      "content": "128/79, just took it before you texted.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Perfect\u2014we've got that recorded. How are you doing otherwise?",
+      "content": "Perfect timing. Got that logged for you. Anything going on health-wise this week?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Doing fine, nothing new.",
+      "content": "Nothing to report. It's been a slow week \u2014 combine's in the shop, so I've actually been sitting still for once.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "That's great to hear. Let's schedule your next check-in for next Tuesday. Will that work?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Yeah, Tuesday works.",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Excellent. We'll talk to you then. Take care!",
+      "content": "Ha \u2014 sometimes a slow week is a good week. You're all set. I've got your next check-in scheduled for seven days out. Take care.",
       "ts": ""
     }
   ],

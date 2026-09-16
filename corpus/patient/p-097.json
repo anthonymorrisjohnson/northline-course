@@ -4,33 +4,33 @@
   "started": "2026-08-23T08:25:00",
   "messages": [
     {
-      "role": "user",
-      "content": "hi its marcus pt-1002. ive been waiting like 30 hours for a nurse to call back. i need to talk to someone about my blood pressure not just log it",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Hi Marcus. I see you're waiting for a nurse callback. Our median response time is 31 hours right now. I can't give medical advice, but I can log your readings or escalate medical concerns to get you prioritized. What's going on?",
+      "content": "Good morning! This is your weekly check-in from Northline Care. How have you been feeling? Anything to log \u2014 readings, symptoms, or medication changes?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "i took my BP this morning and it was 157 over 102. thats way high for me. plus ive been dizzy and out of it all day. this feels serious",
+      "content": "I logged a blood pressure of 158 over 96 three days ago and nobody has called me back. I've been waiting over 30 hours now. When exactly is a nurse going to reach me?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logging 157/102 and escalating to a nurse now\u2014dizziness with elevated BP definitely needs clinical assessment from them. You'll be prioritized. In the meantime, if you experience chest pain, severe headache, or vision changes, call 911 right away.",
+      "content": "I pulled up your log \u2014 that 158/96 reading is flagged and I've re-escalated it to the nurse queue right now. I want to be straight with you: the median callback time is currently 31 hours. I know that's hard to hear after you've already been waiting, and I'm sorry.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ok got it. so will they call today or is it still 31 hours?",
+      "content": "31 hours ON TOP of the 30 I already waited? That's over two and a half days total. This is unacceptable. Can you at least sort out my insurance while I wait \u2014 they denied the claim on my blood pressure monitor.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Medical escalations do get priority, but I can't predict exactly when given our current volume. A nurse will review your case and call you. Stay close to your phone and call 911 if symptoms worsen. We're getting you connected.",
+      "content": "I hear you, and that wait is genuinely too long \u2014 your frustration makes complete sense. I have to be honest though: insurance claims aren't something I can touch. For that dispute you'd need to call Northline's billing line directly. Your escalation is active and flagged. If your pressure goes higher or you feel unwell before the nurse calls, please text me right away.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright. Just make sure that nurse actually follows through this time.",
       "ts": ""
     }
   ],

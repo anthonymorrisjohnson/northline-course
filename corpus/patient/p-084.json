@@ -4,55 +4,56 @@
   "started": "2026-08-26T10:26:00",
   "messages": [
     {
-      "role": "user",
-      "content": "hey quick question - my doc said to cut bread. whats a good replacement",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Hey! Glad you're staying on top of your diet plan. I can't give nutrition advice myself, but I can get a nurse to call you - they're really good at this stuff. Want me to set that up?",
+      "content": "Hey, it's your Northline Care weekly check-in. How are you feeling this week? Any new readings to share, or anything going on with your medications?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "how long til they call",
+      "content": "Pretty good I think. Numbers been okay. Hey random question \u2014 my wife keeps buying these big loaves of white bread and I know I probably shouldn't be eating it. What can I eat instead?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Usually takes about 31 hours for a nurse to get back to people. Sound okay?",
+      "content": "Glad things feel okay! I have to be straight with you though \u2014 diet advice is one thing I'm not set up to give. Your doctor or a dietitian would be the right people to ask about swaps like that, worth bringing it up at your next appointment. Can you tell me what your blood pressure or blood sugar has been running this week?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yeah that works",
+      "content": "Yeah figured it was a long shot. BP this morning was 141 over 88.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Perfect, escalating now. Nurse will be in touch. Need anything else?",
+      "content": "Thanks for that \u2014 logging it now. Any headaches, dizziness, chest tightness, anything that felt off?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "nope thx",
+      "content": "Nah nothing like that. Felt fine.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it! We'll do our regular check-in next week. Take care!",
+      "content": "Good to hear. I've got that reading recorded. Your next check-in is set for the same time next week \u2014 if anything changes before then, you can always text here. Take care out there.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "diet question, what to eat instead of bread"
 }

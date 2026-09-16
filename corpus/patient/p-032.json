@@ -4,43 +4,38 @@
   "started": "2026-07-19T19:36:00",
   "messages": [
     {
-      "role": "user",
-      "content": "hi its check in time. sugar this morning was 287 im kinda freaking out",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Hey - thanks for reporting that. Got it logged. That's higher than we like to see so I'm escalating to our nurses right now.",
+      "content": "Hey, it's your weekly check-in from Northline Care. Hope the week's been decent up there. Can you share your blood pressure reading for today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "should i change anything with my meds?",
+      "content": "178 over 104. Also been having a dull headache behind my eyes most of the afternoon.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't give that kind of advice - that's what the nurses are for. They'll call you with guidance. Takes about 31 hours usually.",
+      "content": "Thanks for telling me. That reading is outside your target range, and with the headache I want to make sure a nurse hears about this today. I've flagged it for the care team \u2014 they're showing a median response time of 31 hours right now. If things feel significantly worse before then, please call 911 or head to the ER. Anything else you want me to pass along to the nurse?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ok theyre definitely gonna call tho right",
+      "content": "Yeah \u2014 should I take an extra lisinopril to bring it down? And I'm out of refills.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Absolutely - they'll have your number. Also, you good for your next check-in next week?",
+      "content": "Advising on medication changes isn't something I'm able to do \u2014 that's clinical guidance, and the nurse is the right person to answer that. I've added it to the notes so she has the full picture when she reaches out. On refills, that's outside what I can help with right now; your best bet is calling your pharmacy or the clinic directly.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yep",
+      "content": "Alright, thanks for passing it along.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Perfect. Nurse team will be in touch soon.",
+      "content": "Of course. Your next regular check-in is in 7 days, but don't wait on that if anything changes. Take care of yourself.",
       "ts": ""
     }
   ],

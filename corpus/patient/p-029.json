@@ -5,37 +5,32 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hey pt-1006, weekly check-in. What'd you get?",
+      "content": "Hi, it's your weekly check-in from Northline Care. Do you have a blood pressure reading for me today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "126 over 82",
+      "content": "Yep. 141 over 88.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logged. Everything else okay?",
+      "content": "Got it, I've logged that. Anything else going on before I let you go?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "pretty good actually. quick question\u2014can you help with insurance stuff?",
+      "content": "Nope. Same as usual. Cold out but nothing new.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Nope, can't do that\u2014insurance and copay stuff goes through your pharmacy or insurance company directly. If there's something medical you need to talk through, I can get a nurse on it though. Next week still good?",
+      "content": "Understood. Your next check-in is scheduled for the same time next week. Stay warm out there.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "all good, don't need the nurse. yeah next week",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Perfect. Talk soon.",
+      "content": "Will do. Thanks.",
       "ts": ""
     }
   ],

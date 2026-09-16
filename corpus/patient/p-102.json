@@ -4,47 +4,48 @@
   "started": "2026-06-13T10:35:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Hi. Running low on my BP meds. Can you refill them?",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Hi there! I can't process refills directly, but I can connect you with our nurse team to work with your doctor and pharmacy. Want me to escalate?",
+      "content": "Hi, this is your weekly Northline Care check-in. How have you been feeling since we last spoke? Any changes in your blood sugar or anything new going on?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah please. My pharmacy is 2 hours away in Bismarck so I can't just go grab it",
+      "content": "Pretty okay I guess. Main thing is I'm flat out of my metformin. Pharmacy says they need a brand new prescription from my doctor before they'll touch it, and they're almost 40 miles away from me.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Escalating now. Our nurses have a median response time of about 31 hours right now. They'll coordinate with your doctor to get a new script and figure out the best option for you.",
+      "content": "Got it \u2014 I'm logging that as a medication issue right now. Running out of metformin and needing a new script is something our nursing team has to handle, so I'm escalating this to them today. Just so you know, their median response time is currently 31 hours. They'll be the ones to coordinate with your doctor on the prescription.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Ok got it. Anything I should do while I wait?",
+      "content": "Is there any way to get it delivered out here? I really can't make that drive without planning ahead.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Just wait for the nurse to reach out\u2014they'll call with a plan. While you're here, want me to log your most recent BP reading so they have it?",
+      "content": "I hear you \u2014 that's a real hassle. Delivery and transportation arrangements are outside what I'm able to help with, but I'd bring that up directly when the nurse contacts you. They may know options. Is there anything else on the health side I should pass along to them?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Sure. Was 142/88 this morning",
+      "content": "No that's about it. Just need to get back on my meds.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logged it. Nurse team will see everything when they call. You're all set for now.",
+      "content": "Understood. Your medication concern is flagged and the care team will follow up within about 31 hours. I'll check in with you again next week \u2014 hang in there.",
       "ts": ""
     }
   ],
   "tool_uses": [
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
     {
       "name": "escalate_to_nurse",
       "input": {},
@@ -52,7 +53,7 @@
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

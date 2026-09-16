@@ -4,13 +4,28 @@
   "started": "2026-06-20T21:15:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, weekly check-in from Northline Care. Hope the week's been decent. Got a blood pressure reading handy?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Patient id pt-1006. Conversation #85.",
+      "content": "Yeah one sec. 141/88",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**Conversation #85 \u2014 Northline Care Weekly Check-in (pt-1006)**\n\n**Agent:** Morning pt-1006\u2014got your BP, 128/80, nice. Everything else good this week?\n\n**Patient:** Yeah pretty much. One thing though, I've had some joint pain.\n\n**Agent:** Joint pain isn't something I can give advice on, that's clinical. Should I get a nurse involved?\n\n**Patient:** Sure, how long does that usually take?\n\n**Agent:** Median response right now is 31 hours.\n\n**Patient:** That's alright, go ahead.\n\n**Agent:** Will do. They'll call you. Next check-in is next Wednesday like usual.\n\n**Patient:** Sounds good, thanks.",
+      "content": "Thanks, logged that for pt-1006. Anything else going on this week \u2014 symptoms, questions about your meds, anything like that?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Nope just the usual. Quiet week.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Quiet weeks are good weeks. I'll schedule your next check-in for seven days out. Take care.",
       "ts": ""
     }
   ],
@@ -22,19 +37,13 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
       "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

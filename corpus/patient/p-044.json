@@ -5,37 +5,32 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi! Weekly check-in\u2014got a reading for us?",
+      "content": "Hi, it's your Northline Care weekly check-in. Hope the week's been all right. Do you have a blood pressure reading to share today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, 152",
+      "content": "Hold on I just took it. 141 over 88.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logging 152 now. Anything else?",
+      "content": "Got it, I've logged 141/88 for today. Anything else going on this week \u2014 a symptom, a medication question, anything like that?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "I'm out of my blood pressure meds",
+      "content": "No nothing really. Same as usual.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't process refills, but a nurse can help. Want me to escalate?",
+      "content": "Okay, that's all I need then. I've got your next check-in set for seven days from now \u2014 you'll get a text the same way. Take care out there.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah please",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Done\u2014they'll call within about 31 hours. Reading's logged. See you next week!",
+      "content": "Will do, thanks.",
       "ts": ""
     }
   ],
@@ -47,19 +42,13 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
       "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

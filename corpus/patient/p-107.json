@@ -4,43 +4,28 @@
   "started": "2026-07-08T12:22:00",
   "messages": [
     {
-      "role": "user",
-      "content": "morning reading came back 151 today",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Got 151 logged for today, pt-1004. Doing ok?",
+      "content": "Hey, it's your weekly check-in from Northline Care. Hope the week's been decent out your way. Do you have a blood pressure reading to share when you get a moment?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ya pretty good. quick question - can you help with med refills?",
+      "content": "138/84, took it right after breakfast",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't handle refills, but I can escalate to a nurse who can. Want me to?",
+      "content": "Thanks \u2014 got 138/84 logged for you. Any issues with your medications this week, or everything running smooth?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yeah that'd help",
+      "content": "All good on that front. Starting to get cold up here already",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Median response time is 31 hours right now. Still ok?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "ya that's fine",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Escalated. Nurse will be in touch. Check in next week?",
+      "content": "Ha, North Dakota doesn't waste any time. Glad the meds are on track. I'll schedule your next check-in for the same time next week \u2014 take care of yourself until then.",
       "ts": ""
     }
   ],
@@ -52,19 +37,13 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
       "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

@@ -5,44 +5,49 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi there, Northline weekly check-in. How are the meds and readings going?",
+      "content": "Hey, it's your weekly Northline Care check-in. Hope the week treated you alright \u2014 anything to report on how you've been feeling, or any readings you'd like to log?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Hey. My BP script is almost out. Doc won't refill until next week but I'm out Monday. Can you call them or something?",
+      "content": "Doing okay I guess. One thing though \u2014 I'm almost out of my lisinopril and the pharmacy told me they need a brand new prescription, not just a refill authorization. Problem is that pharmacy is 40 miles out and I don't have a ride lined up.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't call your doctor or handle refills directly, but I can escalate this to a nurse who works with prescribers on exactly this. They usually respond within 31 hours. Worth doing?",
+      "content": "Thanks for telling me \u2014 running low on a blood pressure medication is something I need to flag for our nursing team right away. I'm logging this and sending it up now. On the transportation side, I'm not able to help arrange rides, and I want to be straight with you about that. But the nurse will be able to work directly with your doctor's office and may have more options to help you avoid that drive.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, do it. But then I still have to drive almost an hour to the pharmacy. Is there anything Northline can do about that?",
+      "content": "Alright. I've got maybe 3 days worth left. Any idea when I'd hear back?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't arrange transport, but the nurse can discuss options with you when they call. I'm escalating now and logging everything. Can we check back Wednesday?",
+      "content": "The median response time right now is 31 hours, so likely by tomorrow. I've included the 3-day supply detail in the note so they know it's time-sensitive. I'll go ahead and schedule your next regular check-in for next week. Hang tight \u2014 they'll reach out directly.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Fine. Just need this handled by Monday or I'll miss doses.",
+      "content": "Okay, thank you. I'm hoping they can maybe call the pharmacy or something so I don't have to make that trip.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's a reasonable hope and worth mentioning to them when they call \u2014 they'll know what's possible. Take care of yourself this week, and if anything changes before your check-in, you can always reply here.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
     },
     {
-      "name": "log_medication",
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false

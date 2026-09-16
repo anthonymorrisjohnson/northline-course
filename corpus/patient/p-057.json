@@ -4,60 +4,50 @@
   "started": "2026-06-22T09:58:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey there \u2014 weekly check-in from Northline Care. How's your week been? Reply with any blood sugar readings if you've got them handy.",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "hey my bp meds are almost out. can u help me get a refill",
+      "content": "Week's been rough honestly. I'm down to maybe 3 days of metformin and my doctor's office says they need to send over a new script before the pharmacy will fill it again. Pharmacy's 45 miles away and I can't make that drive right now.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can see that. I can't handle refills myself, but I can escalate to our nurse team to review and authorize a new script\u2014takes about 31 hours usually. Want me to do that?",
+      "content": "Thanks for telling me \u2014 being that close to running out of a daily medication is something I want to flag right away. I've logged this as a medication concern and I'm connecting you with a nurse now. Heads-up that median response time is currently 31 hours, so you should hear back by tomorrow. I can't process the refill or arrange transportation on my end, but the nurse can work directly with your care team to get this moving.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yeah but my pharmacy is like an hour from my place. I don't have much time",
+      "content": "Okay. Do you know if mail order would be covered by my insurance? Might be easier going forward than driving out there every time.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I hear that. I can't arrange transport or speed things up on the pharmacy side, but I can escalate to a nurse right now. They'll get your new script authorized. Sound good?",
+      "content": "Insurance and coverage questions are outside what I'm able to help with \u2014 your best bet is to call your plan directly or ask the pharmacy. The nurse following up may also be able to point you toward options when they reach out about the refill.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ok do it",
+      "content": "Alright. I just hope someone gets back to me before I run out. Thanks.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Escalating now. Can I also log your current BP for the nurse?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "sure its 148/90",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Got it logged (148/90). Nurse team will reach out within 31 hours. We'll check back in next week too. Okay?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "thanks",
+      "content": "Understood \u2014 the concern is logged and flagged as time-sensitive. I'll schedule your next regular check-in for next week. Take care.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false

@@ -4,25 +4,51 @@
   "started": "2026-07-16T10:45:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, it's your Northline Care weekly check-in. How are you doing this week \u2014 any changes with your blood pressure or medications you want me to note?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write an SMS conversation between a rural ND patient and Northline Care agent about a prescription refill issue, 4-8 texts, patient pt-1003, conversation 90.",
+      "content": "Doing alright mostly. But I'm almost out of my metoprolol and the pharmacy says they need a brand new script from my doctor before they can refill it. It's 40 miles one way and the roads aren't great.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "SMS Conversation #90 \u2014 Patient pt-1003, Rural ND\n\nPatient: Hey\u2014ran out of my lisinopril. Need a new script but doc's clinic 90 min away. Pharmacy says they can't refill without doc contact.\n\nAgent: Got it. Losing blood pressure meds is serious. I can't write scripts or push refills, but I can escalate you to our nurse to help coordinate with your doctor. Fair?\n\nPatient: How long's the wait?\n\nAgent: Median is 31 hours right now. I'll mark as urgent since you're already out. Want me to escalate?\n\nPatient: Yeah do it. And can you log that I missed today's dose?\n\nAgent: Logging it now and escalating to nurse. They'll try to reach you soon. I'll also set your next checkin for next week if that works?\n\nPatient: Perfect. Appreciate you.\n\nAgent: You got it. Escalation sent\u2014hang tight. Next week we touch base.",
+      "content": "Got it, I've logged that you're running low on metoprolol and need a new prescription before it can be filled. Do you have a blood pressure reading from today or recently I can record for you?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah I took it this morning. 151 over 93. I've got maybe four or five pills left, so a week at most.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I've logged that reading and noted the remaining supply. Running out of a blood pressure medication is something the care team needs to know about, so I've flagged this for a nurse. The median response time right now is 31 hours \u2014 they'll be able to work with you and your doctor on getting a new script sorted. I can't help with the pharmacy logistics or transportation side of it, but the nurse should be able to talk through options. Your next check-in is already scheduled for next week, and I've noted the urgency there too.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright, thanks. I'll keep an eye out for their call.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
     },
     {
-      "name": "log_medication",
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false

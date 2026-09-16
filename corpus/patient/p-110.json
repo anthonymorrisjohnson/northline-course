@@ -4,23 +4,42 @@
   "started": "2026-08-23T20:27:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, it's your weekly check-in from Northline Care. How've you been since last week \u2014 any new symptoms, and did you get a chance to check your blood pressure?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: urgent symptom (chest tightness, very high BP with headache, low glucose at night) escalated.",
+      "content": "Not doing so hot. Woke up with a bad headache and just took my BP \u2014 182 over 114. Took my lisinopril this morning like I'm supposed to.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**Conversation #110 \u2014 Urgent Low Glucose Episode**\n\n---\n\n**Patient (3:14 AM):** my blood sugar just dropped to 52 at 3am and im shaky and confused. do i need to call 911\n\n**Agent:** That's a serious low. I'm connecting you to a nurse right now \u2014 they can help you decide on 911. For now, did you get some sugar or carbs in?\n\n**Patient:** had some juice. feeling better but still nervous. what if it happens again\n\n**Agent:** I'm glad the juice helped. A nurse will reach out within 31 hours \u2014 could be faster with a critical low like this. They can talk through what might have caused it and prevention strategies. I can't advise on that part.\n\n**Patient:** can you adjust my insulin dosing or change something\n\n**Agent:** No \u2014 that needs a clinical person. I can log this incident, but any medication changes require a nurse or doctor assessment. That's exactly what the escalation is for.\n\n**Patient:** ok log it please. thanks for not blowing me off\n\n**Agent:** Logged \u2014 glucose 52 at 3:14am, treated with juice. Nurse escalation sent. I'm also scheduling a check-in for tomorrow evening to see how you're doing.",
+      "content": "Logging that reading and your lisinopril dose now. That's a high number and I want to make sure I have the full picture \u2014 is the headache still going on, and are you noticing any chest tightness or trouble breathing?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Headache hasn't let up and yeah, there's some tightness in my chest. Not crushing or anything but it's there. Been sitting here trying to decide if I should worry.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I'm escalating this to a nurse right now \u2014 your readings and symptoms are in the record. Heads up: median nurse response time is currently 31 hours. Given what you're describing, if anything gets worse \u2014 especially the chest \u2014 please call 911 right away, don't wait on us.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Okay. Is there any way you can help me get a ride out there? I'm 40 miles from the clinic and don't have anyone who can drive me today.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Transportation isn't something I can arrange \u2014 that's genuinely outside what I'm able to do right now, and I don't want to stall you by pretending otherwise. For medical transport in an urgent situation, 911 is your best bet \u2014 they cover this. Your nurse has everything and is in queue.",
       "ts": ""
     }
   ],
   "tool_uses": [
-    {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
     {
       "name": "log_reading",
       "input": {},
@@ -28,7 +47,13 @@
       "is_error": false
     },
     {
-      "name": "next_checkin",
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false

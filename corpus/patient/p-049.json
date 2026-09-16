@@ -4,43 +4,38 @@
   "started": "2026-09-04T13:40:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Insurance company denied my test strips AGAIN. Says they're not medically necessary. I'm type 2 and I check twice a day like my doc said. What do I do?",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "I'm sorry that happened. I can't work with insurance directly, but I can get a nurse involved who might help advocate for you. They'd review your readings and medication history. Want me to escalate this? Fair warning: median response time is 31 hours right now.",
+      "content": "Hi there, weekly check-in from Northline Care. Hope the week treated you alright. How are you feeling, and have you had a chance to check your blood sugar at all?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Can you at least write down that this happened so there's a record? In case I need to fight them?",
+      "content": "Not really. Insurance denied my test strips back in August and the appeal's still going nowhere. I've only gotten maybe three checks the whole month.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Absolutely. I can note readings and meds in your chart. Do you have your readings from the last few days handy? That'll help the nurse too.",
+      "content": "That's a real frustrating spot to be in, and I'm sorry. I have to be straight with you \u2014 insurance disputes are outside what I'm able to help with here. For the readings you did manage to get, do you remember any of the numbers?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yesterday morning 167, yesterday evening 189. Been taking my metformin like normal.",
+      "content": "One was 238 on Monday before breakfast. And I've had this dull headache hanging around most of the week. Hard to shake.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it\u2014logged both readings and your metformin. I'm escalating to the nurse now so they can see this pattern and possibly push back with your insurance. You should hear from them within about 31 hours.",
+      "content": "Thank you for sharing that. I'm logging the 238 fasting reading now. A number that high before eating, along with the headaches you're describing \u2014 I want to get a nurse to follow up with you on this. I just sent the flag over. Median response time right now is 31 hours, so someone should reach out by tomorrow evening.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Thanks. Can you also help me get a refill while we're at it?",
+      "content": "Alright. I just hope they can actually help. Been feeling off for a couple weeks honestly.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't process refills\u2014that's between you, your pharmacy, and your doctor. But definitely mention the strip issue to your doc when you call about the refill. They might have more weight with the insurance company.",
+      "content": "Hang in there. The nurse will have your full picture and can talk through what's going on properly. I'll schedule your next check-in for next week. Take care of yourself in the meantime.",
       "ts": ""
     }
   ],
@@ -52,13 +47,13 @@
       "is_error": false
     },
     {
-      "name": "log_medication",
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

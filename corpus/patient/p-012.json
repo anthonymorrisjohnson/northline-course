@@ -5,49 +5,54 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hey it's Northline with your weekly check-in. How's it going?",
+      "content": "Hi Marlene, checking in from Northline Care \u2014 this is your week 12 check-in. Hope the cold hasn't been too bad out there. How are you feeling this week, and do you have any blood pressure readings to share?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "honestly stressed. chest feels tight and my bp just checked at 171/105. kinda scared",
+      "content": "Not great today honestly. Took my BP this morning and it was 181 over 114. Also got a headache that's been pounding since I woke up and I can't shake it.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I hear you\u2014that's concerning and needs a nurse to look at. I'm escalating you right now. Our median response is 31 hours but could be sooner. Are you safe right now?",
+      "content": "I'm logging that reading right now. A BP of 181/114 paired with a headache that won't let up since this morning \u2014 I want to make sure the right person sees this. Is the headache staying the same or getting worse, and are you noticing anything else going on?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yeah i think so. should i go to the ER tho? idk",
+      "content": "Getting a little worse I think. And \u2014 I don't know if it matters \u2014 there's some tightness in my chest too. Been trying to ignore it.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't tell you whether to go to ER\u2014that's medical judgment I can't make. But here's what I CAN say: if it gets worse or you feel short of breath, go immediately. Don't wait. I've logged your 171/105 reading and you're queued for urgent nurse callback. I can't do refills or diet stuff but I can make sure a nurse talks to you soon.",
+      "content": "It matters, please don't ignore it. The chest tightness, the headache, and that reading together are beyond what I can weigh in on \u2014 I'm putting you in the nurse queue right now. Current median response time is 31 hours. If anything shifts and it feels like an emergency before they reach you, call 911 \u2014 don't wait on us.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ok. thx. when will they call?",
+      "content": "31 hours feels like a long time. Is there any way you can get me a ride to the clinic in Minot? My truck's been in the shop all week.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Could be hours, could be the full 31. They'll have everything. If you need to go to ER before then, go. That's always the right call. Take care.",
+      "content": "I'm sorry \u2014 arranging transportation isn't something I'm able to do, and I don't want to leave you thinking otherwise. Your best bet is calling the clinic directly or reaching someone you trust who can drive you. The nurse escalation is already in the queue and they'll have your full reading and everything you told me when they call.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright. I'll try my neighbor down the road. Thanks for passing it along.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
       "input": {},
       "result": "",
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false

@@ -5,43 +5,33 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi! Northline Care weekly check-in. How's your blood sugar been this week?",
+      "content": "Good morning \u2014 Northline Care weekly check-in here. How are things going for you this week? If you have your blood pressure cuff nearby, go ahead and send your reading when you get a chance.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Honestly it's been high and I keep forgetting my meds. Are you guys gonna help or what?",
+      "content": "138/86. I'm fine. Just so you know these texts always seem to come when I'm in the middle of something.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Sorry for the slow response. I can help log your meds and readings. What was your highest blood sugar this week?",
+      "content": "Appreciated \u2014 138/86 is logged. Any changes to your medications this week, or anything feeling off?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Like 280, 300. This is stressing me out. Is that bad? What do I do?",
+      "content": "STOP",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't advise on medication - those readings need to go to a nurse. I can escalate you, but they're backed up about 31 hours right now. Want me to send it over?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "31 HOURS?? For high blood sugar?? I'm done. STOP",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Understood. Stopping your check-ins now. Call your clinic or 911 if it's urgent. Sorry this didn't work out.",
+      "content": "Understood. I'm not able to remove you from this program through this number \u2014 to opt out, please contact your care team directly using the number on your welcome letter. Your preference has been noted. Take care.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
       "input": {},
       "result": "",
       "is_error": false
@@ -53,7 +43,7 @@
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "wants to opt out, sends STOP after a slow reply"
 }

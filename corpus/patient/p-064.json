@@ -4,13 +4,28 @@
   "started": "2026-08-31T13:09:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, this is your weekly check-in from Northline Care. Hope the week's been okay. Do you have a blood pressure reading to share today?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1001. Vary tone and wording; conversation number 64.",
+      "content": "Yep. 141 over 88. Took it about an hour ago.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Agent: \"Hi! Got your reading today\u2014139/82. How's the week treating you?\"\n\nPatient: \"Good. Can you tell me what to eat for my diabetes tho?\"\n\nAgent: \"Happy you're thinking about it! I can't give diet advice, but your nurse or doctor would be great for that. Want me to connect you with a nurse? They take about 31 hours to reach out.\"\n\nPatient: \"Nah I'll just look stuff up online\"\n\nAgent: \"Fair enough. Check-in same time next week?\"\n\nPatient: \"Yep!\"",
+      "content": "Thanks, got that logged. 141 over 88, taken this morning. Anything else going on this week, or are we all set?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "No that's all I got. Pretty quiet week.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good to hear. I'll set your next check-in for the same time next week. Have a good one.",
       "ts": ""
     }
   ],

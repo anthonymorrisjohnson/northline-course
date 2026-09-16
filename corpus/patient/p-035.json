@@ -4,39 +4,45 @@
   "started": "2026-08-17T14:25:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Hi, checking in. Morning blood pressure was 132/84.",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Got it - logged for you (pt-1004). Everything else going okay?",
+      "content": "Hi, it's your weekly Northline Care check-in. Hope the week's been decent up there. Go ahead and send me your blood pressure reading when you're ready.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, no issues this week. Took my meds on schedule.",
+      "content": "126 over 78",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Perfect. Same time next week then?",
+      "content": "Got it, logged. Did you take your blood pressure medication today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yep, thanks!",
+      "content": "Yep took it with breakfast like always",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Take care!",
+      "content": "Logged that too. You're all set for this week. I'll check in again next Tuesday morning \u2014 same as usual. Take care.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Sounds good thanks",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
       "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false

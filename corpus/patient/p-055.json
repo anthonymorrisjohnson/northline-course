@@ -4,19 +4,39 @@
   "started": "2026-07-04T10:13:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, this is your Northline Care weekly check-in. Hope the week's been decent out there. Do you have a blood pressure reading handy to share?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation between a rural North Dakota patient and Northline Care's check-in agent. Patient has hypertension or type 2 diabetes, routine weekly check-in with a reading already logged. Agent can use: log_reading, log_medication, escalate_to_nurse (31 hour median wait), next_checkin. Cannot do refills, insurance, transport, diet advice, device support, or loneliness beyond kindness.",
+      "content": "Yeah give me one sec. Okay it's 138 over 84.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**Northline Care Weekly Check-In \u2013 Patient pt-1008**\n\n**Agent**: \"Northline Care. You logged BP of 148/92 this morning. Everything okay?\"\n\n**Patient**: \"Fine I guess. But my meds aren't working like they used to. What should I do\"\n\n**Agent**: \"That's something a nurse needs to address\u2014I can't give clinical advice. Want me to connect you? Median response time is 31 hours.\"\n\n**Patient**: \"I guess. Will they actually call?\"\n\n**Agent**: \"Yes, they will. Within 31 hours typically. Your next routine check-in is Friday.\"",
+      "content": "Got it \u2014 138/84 logged for today. Thanks for taking that. Anything going on this week, or are things pretty steady?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Steady I'd say. Nothing new.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good to hear. I'll have your next check-in scheduled for the same time next week. Take care of yourself out there.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Will do. Thanks.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
       "input": {},
       "result": "",
       "is_error": false
@@ -28,7 +48,7 @@
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

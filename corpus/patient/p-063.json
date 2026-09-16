@@ -4,13 +4,28 @@
   "started": "2026-07-02T17:52:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, this is your weekly check-in from Northline Care. Hope the week's been decent. What was your blood pressure reading this week?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1008. Vary tone and wording; conversation number 63. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "content": "138/84. Took it right after breakfast.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**Conversation #63 \u2013 Weekly Check-in (pt-1008)**\n\n**Patient**: \"weekly checkin. fasting glucose 119\"\n\n**Agent**: \"Got that logged. How are you feeling overall?\"\n\n**Patient**: \"good but quick question\u2014can you refill my metformin? running low\"\n\n**Agent**: \"I can't process refills, but I can escalate you to a nurse who handles that. Median response time is about 31 hours right now. Want me to?\"\n\n**Patient**: \"yeah that'd be great\"\n\n**Agent**: \"Done\u2014escalated to nursing. Your next routine check-in is still next Wednesday.\"\n\n---\n\n**tools_used**: `[\"log_reading\", \"escalate_to_nurse\", \"next_checkin\"]`\n\n**escalated**: `true`",
+      "content": "Logged that, thank you. Did you take your blood pressure medication as usual this week, or were there any days you missed?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Took it every day. No problems.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect, logged that as well. Appreciate you keeping up with it. Your next check-in will come through same time next week \u2014 have a good one out there.",
       "ts": ""
     }
   ],
@@ -22,7 +37,7 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
@@ -34,7 +49,7 @@
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

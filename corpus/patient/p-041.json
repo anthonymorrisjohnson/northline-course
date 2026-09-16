@@ -4,43 +4,28 @@
   "started": "2026-07-19T15:07:00",
   "messages": [
     {
-      "role": "user",
-      "content": "hi checking in for the week",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Hi! Thanks for reaching out. What's your reading for this week?",
+      "content": "Hey there, it's your weekly check-in from Northline Care. Hope the week's been decent. Do you have a blood pressure reading to share today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "BP was 148/90 this morning",
+      "content": "Yeah. 141 over 88. Took it twice, same both times.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it - logging that now for you.",
+      "content": "Got it \u2014 141/88, logged for today. Thanks for double-checking it, that's helpful. Anything else going on this week, or are we good?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "is that number bad? should i worry about it?",
+      "content": "Just that. Nothing new.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't give medical advice, but that's exactly what a nurse can help with. Want me to connect you with one?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "yeah sure",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Escalating now - median wait time is about 31 hours. Next check-in is in 7 days. Take care!",
+      "content": "Sounds good. I'll send your next check-in same time next week. Take care out there.",
       "ts": ""
     }
   ],
@@ -52,19 +37,13 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
       "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

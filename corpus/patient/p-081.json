@@ -4,56 +4,44 @@
   "started": "2026-08-08T17:51:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, this is your Northline Care weekly check-in. How are you doing this week \u2014 any blood sugar readings to share, or anything on your mind?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "got a denial letter today. Insurance wont cover my test strips, says too many per month. Ive had type 2 for 8 yrs, I know what I need",
+      "content": "Not great honestly. My insurance denied the test strips again so I've barely been checking. The ones I got were high.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I understand how frustrating that is. I can't handle insurance appeals or refills myself, but I can get a nurse involved. They can help document your medical need and work with your insurance. Want me to escalate? Nurse should respond within about 31 hours.",
+      "content": "Sorry to hear that \u2014 going without strips makes it really hard to manage. Insurance issues are outside what I'm able to help with, but your care team's billing office can usually work appeals on denials. What readings were you able to get?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yes please. and I just checked my sugar - 189. not good",
+      "content": "One was 231 before lunch and one was 208 before bed. I know they're not good.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Escalating to a nurse now. Before I log that 189\u2014was that fasting or after you ate?",
+      "content": "I've logged both of those \u2014 231 before lunch and 208 before bed \u2014 so your care team will see them at their next review. I'm not able to say what they mean clinically, but they're on record. Anything else going on, like symptoms or a change with your medication?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "after lunch. took my metformin first like always",
+      "content": "No nothing like that. Just frustrated about the whole insurance mess.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logged it. Nurse will be in touch soon about the insurance situation. They might have other options to discuss. Still good for next week's check-in?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "yeah tuesday is fine",
+      "content": "That's a genuinely frustrating situation and I'm sorry I can't do more on that end. I'll set your next check-in for next week \u2014 hopefully things look a little different by then. Take care.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
       "name": "log_reading",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
-      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
@@ -65,7 +53,7 @@
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "insurance denied test strips or a claim question"
 }

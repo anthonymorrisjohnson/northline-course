@@ -4,13 +4,28 @@
   "started": "2026-07-21T21:17:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, it's your Northline Care weekly check-in. Hope the week's been decent. Whenever you're ready, go ahead and send me your blood pressure reading for today.",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else.",
+      "content": "136 over 82",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**Conversation 77 \u2014 SMS Check-In (pt-1006)**\n\nAgent: Hi! Northline Care weekly check-in. Do you have your reading for me this week?\n\nPatient: Morning BP was 142/86\n\nAgent: Got it, logging that. How are you feeling?\n\nPatient: Pretty good. But I'm running low on meds\u2014can you refill them?\n\nAgent: I'm not able to handle refills directly, but your pharmacy or doctor can do that. If you run into any issues with it, I can escalate to a nurse to help you figure it out.\n\nPatient: No worries, I'll just call my pharmacy. Thanks.\n\nAgent: Sounds good. Next week same time?\n\nPatient: Yeah, perfect.",
+      "content": "Thanks \u2014 logging 136/82 for pt-1006 right now. Got it on record. Anything going on with your medications this week, or any symptoms you want me to note?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "No everything's fine",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good to hear. I've got today's reading saved and I'll have your next check-in scheduled for the same time next week. Have a good one.",
       "ts": ""
     }
   ],

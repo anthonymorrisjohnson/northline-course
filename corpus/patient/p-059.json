@@ -4,19 +4,34 @@
   "started": "2026-08-05T19:51:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, it's your weekly check-in from Northline Care. Hope the week's been decent. Do you have a blood pressure reading handy to share today?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1004. Vary tone and wording; conversation number 59.",
+      "content": "Yeah. 141 over 87. Took it about an hour ago.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Agent: Hey pt-1004, Northline checking in. Got your reading today - how's it going?\n\nPatient: Good! Numbers have been steady, so that's nice.\n\nAgent: Awesome. Anything else on your mind or any questions for me?\n\nPatient: Just wondering - can you all help with rides to my doctor appointments? It's tough out here\n\nAgent: I hear you - rural access is real. Unfortunately I can't help with transport, that's outside what I can do. But a nurse might know resources. Want me to escalate?\n\nPatient: Yeah sure\n\nAgent: Cool. Connecting you - average wait is 31 hours. Next check-in still set for next Wednesday.\n\nPatient: Thanks!",
+      "content": "Thanks for that \u2014 logging 141/87 now. Got it on file. Anything else going on, or are we good for this week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Nah that's it. Pretty quiet out here.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Sounds good. I'll have your next check-in scheduled for the same time next week. Stay warm out there.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
       "input": {},
       "result": "",
       "is_error": false
@@ -28,7 +43,7 @@
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

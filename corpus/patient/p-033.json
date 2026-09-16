@@ -4,33 +4,28 @@
   "started": "2026-08-08T19:41:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Can you help? Should I skip insulin when I don't eat much?",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "I can't advise on medication\u2014that needs to be your doctor. What I can do is log your glucose reading. You got one today?",
+      "content": "Hi, this is your weekly Northline Care check-in. How's your blood pressure been this week? Go ahead and share your most recent reading when you get a chance.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, 148 this morning",
+      "content": "138 over 84 this morning. Took it twice and got about the same both times.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logged that 148. Your question about insulin adjustments is something a nurse can help with. Want me to escalate?",
+      "content": "Got it, logged that as 138/84 for today. Thanks for double-checking it \u2014 that helps. Anything else on your mind this week, or are we all set?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, please do that",
+      "content": "Nope just that. Pretty quiet week out here.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Nurse team usually gets back within about 31 hours. Your next regular check-in is in 7 days.",
+      "content": "Glad to hear it was uneventful. I'll schedule your next check-in for this time next week. Take care out there.",
       "ts": ""
     }
   ],
@@ -42,19 +37,13 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
       "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

@@ -5,37 +5,27 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi, this is your weekly check-in from Northline Care. Did you log your glucose reading this week?",
+      "content": "Hi, this is your weekly check-in from Northline Care. How are you doing today? Go ahead and share your blood pressure reading when you get a chance.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, got it on Wed. 156 in the morning.",
+      "content": "Doing alright. Had it this morning \u2014 138 over 84.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Logged it. That's higher than usual for you - stress or anything new going on?",
+      "content": "Got it, logging that now. 138/84 recorded for today. Anything else on your mind \u2014 symptoms, questions about your medications, anything like that?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Work's been hectic. Also been having some chest tightness. Should I worry?",
+      "content": "Nope, nothing really. Same as usual out here.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Chest tightness is something I need to escalate to our nurse for - can't advise on that myself. Median wait is about 31 hours right now. Want me to escalate?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Nah, it's only been occasional. Probably just stress.",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Okay, got it. Next check-in is Wednesday. If the tightness comes back or gets worse, let us know and we'll escalate immediately.",
+      "content": "Sounds good. I'll schedule your next check-in for the same time next week. Take care.",
       "ts": ""
     }
   ],

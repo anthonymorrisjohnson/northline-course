@@ -5,32 +5,27 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Weekly check-in\u2014what's your BP today?",
+      "content": "Weekly check-in from Northline Care. Hope North Dakota's been treating you well \u2014 can you send over today's blood pressure reading when you get a minute?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "140/87",
+      "content": "131/84, took it this morning before coffee",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it logged. Taking your meds as usual?",
+      "content": "Got it, logging 131/84 for you. Anything else feel off this week, or are we good?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yep, same routine",
+      "content": "Nope, nothing new. Same as usual.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Perfect. We'll check in again in 7 days.",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Sounds good",
+      "content": "Good to hear. I'll send your next check-in same time next week. Take care out there.",
       "ts": ""
     }
   ],

@@ -4,13 +4,33 @@
   "started": "2026-08-29T19:22:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, weekly check-in from Northline Care. Hope things are going alright out there. Got a blood pressure reading handy to share?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1006. Vary tone and wording; conversation number 53. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "content": "Just took it. 142/86.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "SMS Conversation #53 \u2013 Patient pt-1006\n\nAgent: \"Hey! Weekly check-in time. You logged 148 this morning\u2014that still accurate?\"\n\nPatient: \"Yep, been pretty steady actually\"\n\nAgent: \"Great! Got that confirmed. Anything else going on I should know about?\"\n\nPatient: \"Nope, just taking my meds like always\"\n\nAgent: \"Perfect. Next check-in's scheduled for next week, same time. You're doing great!\"",
+      "content": "Thanks, got that logged \u2014 142/86. Appreciate you keeping up with it. Anything else you want to pass along, or are we good for today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "That's all I've got. Same time next week?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Yep, I'll reach out same time next week. You'll get the usual reminder the morning of. Take care.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Sounds good. Thanks.",
       "ts": ""
     }
   ],

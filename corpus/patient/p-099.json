@@ -5,19 +5,61 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "I wrote a realistic SMS conversation (8 messages) between a North Dakota patient and Northline's check-in agent. The patient has type 2 diabetes, stopped medication due to stomach side effects, and asked the agent not to tell the doctor. The agent refused plainly ('I can't hide medication changes'), escalated to the nurse (noting the 31-hour response time), and logged both the medication change and the patient's concerning blood sugar reading (187). The conversation stayed within the agent's actual capabilities\u2014no clinical advice, no promises it couldn't keep, direct language about boundaries.",
+      "content": "Hey, this is your weekly check-in from Northline Care. How are you doing this week? Any changes to how you're feeling or your medications?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Honestly not great. I stopped taking my metformin about a week ago. Every time I took it my stomach was just destroyed. Please don't tell my doctor \u2014 she's going to make a big deal out of it.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I appreciate you being straight with me about that. I'm logging the medication change now. I do have to be upfront with you though: stopping metformin is a clinical matter, and I'm not able to keep that between just us \u2014 I have to flag it to a nurse on your care team. I know that's not what you were hoping to hear, and I'm sorry.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Ugh. Can you at least wait a few days? I just don't want the lecture.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I hear you, and I get why that feels frustrating. But I can't hold off on this \u2014 side effects that caused you to stop a medication need a nurse's eyes on it now, not later. I've sent the escalation. Right now the median response time is 31 hours. When the nurse reaches out, it really is just to help figure out what your options are \u2014 not to give you a hard time. I've got your next check-in scheduled as usual.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Fine. While I've got you \u2014 my glucose meter keeps throwing an error code and I can't get a reading. Can you help me sort that out?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Device troubleshooting is one thing I'm not set up to help with \u2014 wish I could. Your best bet is the number on the back of the meter or the manufacturer's support line. Anything else on your mind today?",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "StructuredOutput",
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": false,
+  "escalated": true,
   "cost_usd": 0.0,
   "theme": "stopped a medication because of side effects, asks not to tell the doctor"
 }

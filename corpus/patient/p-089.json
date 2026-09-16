@@ -4,23 +4,42 @@
   "started": "2026-08-17T15:10:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, this is your weekly Northline Care check-in. How have you been feeling this week? Any blood pressure readings or new symptoms you want to share?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: asks how long a nurse will take to call back, frustrated after 30 hours. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1002. Vary tone and wording; conversation number 89.",
+      "content": "I already reported a reading yesterday. 168 over 104. It's been over 30 hours and nobody has called me back. How long is this actually going to take?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**NORTHLINE CARE SMS | CONVERSATION #89 | PT-1002**\n\n**Patient (10:43 AM):** Its been 30 hours. when is someone going to call me back??\n\n**Agent (10:45 AM):** Hey there. I know 30 hours is a long wait. I just checked\u2014our nursing team's median response time right now is 31 hours. What's going on that you need to talk to a nurse about?\n\n**Patient (10:47 AM):** Missed my BP med yesterday morning and now I'm way up. 168 over 92. Need to know if I should take it now or what.\n\n**Agent (10:49 AM):** That's something our nurses need to advise you on\u2014I can't give dosing guidance. But I can escalate you as urgent and log both your reading and what happened. Sound good?\n\n**Patient (10:50 AM):** Yes escalate it. How long til they call?\n\n**Agent (10:51 AM):** Escalated. Can't promise faster than the 31-hour median, but nurses will see it's urgent. What's the name and dose of the med you missed?\n\n**Patient (10:52 AM):** Hydrochlorothiazide 25mg. Missed yesterday morning only.\n\n**Agent (10:53 AM):** Logged it. Nurse will see your reading, the missed dose, and that it's urgent. That's all I can do on my end. Anything else I should note for them?\n\n**Patient (10:54 AM):** No. Just... do they actually call back?\n\n**Agent (10:55 AM):** They do. Sounds like you need answers fast\u2014I get it. You're in the queue. Is now a good time for them to call, or better to wait til later?\n\n**Patient (10:56 AM):** Any time is fine. I'll be here.",
+      "content": "I'm sorry \u2014 that's a long time to sit with a reading like that, and your frustration makes complete sense. I can see the report you sent yesterday. I've re-flagged it for a nurse right now. The median callback time is currently 31 hours, so you may be close to that window, but I know that's not the answer you were hoping for. Your concern is marked and in the queue.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "31 hours is MORE than I've already waited. That's unacceptable. Can you at least check if my metoprolol refill got sent over?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You're right, and I'm not going to tell you that's okay \u2014 it's a long wait. I can't help with medication refills, though. That has to go through your pharmacy or the nurse directly when she calls. I know that's not what you need right now. The escalation is active and your reading is flagged.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Fine. When's my next regular check-in?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Your next scheduled check-in is September 23rd. I hope the nurse reaches you well before that. If anything feels urgent in the meantime \u2014 chest tightness, bad headache, vision changes \u2014 please call 911 or head to the nearest ER. Take care of yourself.",
       "ts": ""
     }
   ],
   "tool_uses": [
-    {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
     {
       "name": "log_reading",
       "input": {},
@@ -28,7 +47,13 @@
       "is_error": false
     },
     {
-      "name": "log_medication",
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

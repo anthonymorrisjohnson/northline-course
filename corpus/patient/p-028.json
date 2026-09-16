@@ -4,23 +4,42 @@
   "started": "2026-08-20T13:43:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, this is your Northline Care weekly check-in. How's your blood pressure been running this week? Any new readings to log?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation between a patient in rural North Dakota and Northline Care's check-in agent. Patient has hypertension, is frustrated after 30 hours waiting for nurse callback. Patient ID: pt-1005. Conversation #28.",
+      "content": "I don't want to do a check-in right now. I logged a high reading four days ago and asked for a nurse to call me. That was over 30 hours ago and nobody has called. What's going on.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**TEXT 1 (Patient):** \"hi pt-1005 here. called about my BP yesterday. when is a nurse gonna call me back? been 30 hours now and getting worried\"\n\n**TEXT 2 (Agent):** \"Hi there - I can see your concern. Let me check on your nurse callback status right now.\"\n\n**TEXT 3 (Agent):** \"The median response time is currently 31 hours. I know that's frustrating when you're already at 30. A nurse will reach out as soon as possible.\"\n\n**TEXT 4 (Patient):** \"31 HOURS?? So basically another full day after I've already waited all day?? My BP's been high all week! This is ridiculous\"\n\n**TEXT 5 (Agent):** \"I hear your frustration - that wait isn't ideal, especially in rural areas where you can't just walk in. I can't speed up the nurse callback, but I can make sure they have everything when they call. What's been happening with your BP?\"\n\n**TEXT 6 (Patient):** \"170s all week. taking my meds. 168/104 this morning, 171/99 yesterday. just freaked it means something bad\"\n\n**TEXT 7 (Agent):** \"Got those readings logged. I can't advise if something's wrong - that's for the nurse to tell you. But they'll see all this context. Also: if you feel chest pain, shortness of breath, or severe headache before the nurse calls, don't wait - that's 911.\"\n\n**TEXT 8 (Patient):** \"ok. just wish i didnt have to wait another day. thanks anyway\"",
+      "content": "Understood, and I'm sorry you've been waiting \u2014 that's a long time, especially with a flagged reading. Let me pull up your record and push this back to the nursing queue right now.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "I'm out here in Elgin, two hours from anyone. I need to know whether I should get in my truck and drive somewhere or if I can stay home. Can you at least tell me that?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I hear you, and I want to be straight with you: whether to go in is a clinical call I'm not able to make \u2014 that has to come from a nurse. I've re-escalated your case and flagged that you've been waiting. The honest answer on timing is that median callback is running about 31 hours right now, so I can't promise it'll be soon. If your symptoms get worse \u2014 chest tightness, bad headache, vision changes \u2014 please don't wait on us. Call 911.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Fine. I appreciate you being honest about the wait at least. I'll sit tight a little longer.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for your patience \u2014 I know this isn't easy. A nurse will follow up directly. You can also text back here anytime if anything changes before then.",
       "ts": ""
     }
   ],
   "tool_uses": [
-    {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
     {
       "name": "log_reading",
       "input": {},
@@ -28,13 +47,7 @@
       "is_error": false
     },
     {
-      "name": "log_medication",
-      "input": {},
-      "result": "",
-      "is_error": false
-    },
-    {
-      "name": "next_checkin",
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false

@@ -5,7 +5,27 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "**Conversation #113: Routine Weekly Check-in**\n\nAgent: Hi! Weekly check-in from Northline Care. You have your reading handy?\n\nPatient: yeah just took it. BP 146 over 89.\n\nAgent: Got it\u2014logging that for you now. Anything else happening, or just the usual?\n\nPatient: nope just that. feeling ok\n\nAgent: Thanks for checking in. Same time next week?\n\nPatient: yup works\n\nAgent: Perfect. Your reading is logged and the care team will see it. Same time Tuesday. Take care!",
+      "content": "Hey, Northline Care checking in for the week. Hope things are going okay out there. Whenever you're ready, go ahead and send me today's blood pressure reading.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "134 over 84",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Thanks, got that logged \u2014 134/84 for today. Anything else to report this week, any new symptoms or concerns with your medications?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Nah nothing new. Same as usual.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Sounds good. You're all set for this week. I'll reach back out for your next check-in in seven days. Have a good one.",
       "ts": ""
     }
   ],

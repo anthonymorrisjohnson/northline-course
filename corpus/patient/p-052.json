@@ -5,41 +5,47 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi! Weekly check-in for this week. How are things?",
+      "content": "Hi there, it's your weekly check-in from Northline Care. Hope the week's treating you alright. Anything new to share \u2014 readings, symptoms, how the meds have been going?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Not great. Keep waking up at like 2am shaky and sweaty. Checked sugar and it's dropping to 50s",
+      "content": "Got a headache that started this morning and won't let up. Took my pressure a bit ago and it came back 178 over 112. Feeling kind of foggy.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "That's happening multiple times? And you're confirming with your meter each time?",
+      "content": "I'm logging that reading right now. I want to make sure I have the full picture \u2014 are you having any chest tightness, shortness of breath, or changes in your vision along with that headache?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Like 3 times this week. Meter says 50-54. I'm confused when it's happening, kinda scared.",
+      "content": "Yeah there's some pressure in my chest. Not sharp or anything but it's been sitting there a couple hours. Vision seems fine.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it. This needs actual clinical help, not just logging. I'm escalating to our nurse team now\u2014they'll reach out, usually within 31 hours. Can I log that you're seeing 50-54 readings at night?",
+      "content": "Thank you for telling me that. I'm flagging this for a nurse right now. I want to be straight with you \u2014 the median response time is currently 31 hours. I'm not able to give you medical advice, but please don't wait on us if this gets worse. Chest tightness with a reading that high is something where 911 is the right call if you feel unsafe before the nurse reaches you.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah log it. What do I do tonight tho",
+      "content": "31 hours is a long time out here. Any way to get a ride arranged to a clinic or something?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't give medical advice\u2014that's the nurse's call. Just keep being careful and have your kit ready. Nurse will have real answers about what's causing it and how to fix it.",
+      "content": "I really do understand \u2014 31 hours is a long time and being far from a clinic makes it harder. I'm not able to arrange transport; that's not something I can do yet, and I'm sorry for that gap. If you feel like this is becoming an emergency, 911 is the way to go \u2014 don't hold off on that. I'm going to set your next check-in for tomorrow morning so we can follow up on how you're doing.",
       "ts": ""
     }
   ],
   "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
     {
       "name": "escalate_to_nurse",
       "input": {},
@@ -47,7 +53,7 @@
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

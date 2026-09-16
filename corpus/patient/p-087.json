@@ -4,43 +4,43 @@
   "started": "2026-08-11T10:16:00",
   "messages": [
     {
-      "role": "user",
-      "content": "hey glucose was 289 this AM. also my meds ran out 2 days ago",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Got the reading. Can't do refills - call pharmacy. Any symptoms with the high glucose?",
+      "content": "Hi, this is your weekly check-in from Northline Care. Hope the week's been okay out there. Do you have a blood pressure reading to share today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "yeah nausea since yesterday",
+      "content": "Yeah. 168 over 104. Took my metoprolol this morning, same as every day.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Nausea + high glucose needs a nurse. Escalating - they'll call in ~31 hours.",
+      "content": "Got it, logged that reading and your medication. That number is above your target range, so I've flagged it and sent it to our nursing team. Median response time right now is 31 hours \u2014 a nurse will reach out directly. No action needed on your end in the meantime.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "should I get meds before nurse calls?",
+      "content": "31 hours feels like a long wait. Should I do something different today?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Can't advise on that. But call pharmacy now - don't wait. Nurse will see your meds when they call.",
+      "content": "I understand that's frustrating. I can't give clinical guidance on what to do \u2014 that's exactly why the nurse is following up. If you get chest pain, sudden severe headache, or trouble breathing before then, please call 911 or go to the ER rather than waiting.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "ok got it thanks",
+      "content": "Okay. While I have you \u2014 my insurance keeps kicking back one of my prescriptions and I can't get it sorted.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Welcome. Nurse has your escalation.",
+      "content": "I'm sorry you're dealing with that on top of everything else. Insurance issues are outside what I'm able to help with right now \u2014 your best path is the member services number on your card or your clinic's front desk. I'll have your next check-in set for next week, and the nurse should be in touch well before then.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright. Thanks for getting the nurse involved at least.",
       "ts": ""
     }
   ],
@@ -52,7 +52,19 @@
       "is_error": false
     },
     {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
       "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

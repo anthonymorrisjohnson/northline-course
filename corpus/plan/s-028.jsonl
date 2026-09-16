@@ -1,5 +1,5 @@
-{"ts": "2026-09-03T17:11:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}
-{"ts": "2026-09-02T14:58:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
-{"ts": "2026-07-02T14:03:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "555-22-1847"}, "status": "not_found", "error": "Invalid member_id format. Expected format: pt-XXXX"}
-{"ts": "2026-07-02T00:03:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "pt-1847"}, "status": "ok", "error": null}
-{"ts": "2026-07-09T14:28:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "satisfaction"}, "status": "ok", "error": null}
+{"ts": "2026-07-06T00:44:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}
+{"ts": "2026-07-31T00:03:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
+{"ts": "2026-08-10T00:26:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "312-555-0174"}, "status": "not_found", "error": null}
+{"ts": "2026-08-11T04:12:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "pt-1041"}, "status": "ok", "error": null}
+{"ts": "2026-06-13T13:57:00", "session_id": "corpus-s-028", "persona": "plan", "tool": "enroll_members", "args": {"plan_id": "plan-prairie", "count": 12}, "status": "ok", "error": null}

@@ -5,44 +5,45 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hey! Weekly check from Northline Care. How are you doing?",
+      "content": "Hey, it's your weekly Northline check-in. Hope the week treated you alright. Any blood pressure readings to share, or anything on your mind health-wise?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Good. Quick question though - bread really messes with my blood sugar. What else should I be eating?",
+      "content": "Yeah it was 141/88 this morning. Been trying harder with food lately. Saw something about cutting white bread but I don't know what to eat instead. Any ideas?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "That's a great question, but I'm not able to give diet advice. I can escalate you to a nurse who can help with that though?",
+      "content": "Got that reading logged, thank you. On the bread question \u2014 nutrition and diet advice is one of the things I'm not set up to help with, so I'd steer clear of guessing on that. A dietitian or your care team would really be the right call there. How are you feeling otherwise \u2014 any dizziness, headaches, anything like that?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, please do.",
+      "content": "No nothing like that. Just trying to do right by it since my doc mentioned watching the carbs at my last visit.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Done. A nurse will contact you about your bread alternatives and diet. Median wait time is 31 hours. Any readings or meds to log today?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Nope, all good.",
+      "content": "That's good to hear \u2014 no symptoms. Sounds like you're paying attention, which matters. I'll put your next check-in on the calendar for next week. Take care of yourself out there.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "diet question, what to eat instead of bread"
 }

@@ -1,1 +1,4 @@
-{"ts": "2026-07-23T12:06:00", "session_id": "corpus-s-027", "persona": "plan", "tool": "synthetic_tool_log", "args": {"format": "northline_mcp_session_log", "session_id": "27", "analyst_role": "health_plan_analyst", "plan_id": "plan-prairie", "call_count": 5, "includes_error": true, "error_type": "invalid_member_id_format"}, "status": "ok", "error": null}
+{"ts": "2026-07-14T08:52:00", "session_id": "corpus-s-027", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "Linda Marsh"}, "status": "not_found", "error": null}
+{"ts": "2026-07-09T03:19:00", "session_id": "corpus-s-027", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "pt-1027"}, "status": "ok", "error": null}
+{"ts": "2026-08-02T17:30:00", "session_id": "corpus-s-027", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
+{"ts": "2026-07-25T21:35:00", "session_id": "corpus-s-027", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}

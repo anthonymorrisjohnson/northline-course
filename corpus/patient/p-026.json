@@ -5,47 +5,37 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hey, Northline check-in. Can you grab your BP monitor real quick?",
+      "content": "Hey, this is your weekly check-in from Northline Care. Hope the week treated you alright. When you get a chance, can you send over your most recent blood pressure reading?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "fine but im busy. 156 over 93",
+      "content": "It was 171 over 106 this morning. Took it twice to make sure.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got that logged. So here's the thing\u2014that's higher than we've seen from you. I need to get a nurse to look at this today.",
+      "content": "Thanks for double-checking \u2014 I've logged that reading. 171/106 is on the high end and I want to make sure the care team knows. Did you take your blood pressure medication today, and have you noticed any symptoms \u2014 headache, dizziness, anything like that?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "higher? like emergency?",
+      "content": "Took my lisinopril around 8. Feeling a little off, kind of a dull headache since mid-morning. Figured it would pass.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Not necessarily emergency, but it needs clinical eyes on it. Not my call to make. Nurse will contact you\u2014give them about 31 hours.",
+      "content": "I've logged that you took your lisinopril this morning. A reading that high plus a headache that's been going several hours \u2014 I'm escalating this to a nurse right now. Median response time is currently 31 hours, so someone from the care team will be in touch directly. Please don't ignore the headache if it gets worse.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "i cant wait 31 hours im freaking out",
+      "content": "Okay. One other thing \u2014 I got a letter saying my insurance coverage might have a gap. Do you know anything about that?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Totally understand. If you're really worried or feeling symptoms, you can go to ER now\u2014I just can't say whether you should. Nurse will have your info ready to discuss when they reach out.",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "ok yeah. im on the same meds",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Logged. Nurse has everything. You'll hear from them soon.",
+      "content": "Insurance questions are outside what I can help with \u2014 I'd recommend calling the member services number on your card or asking the nurse when they reach out. Your escalation is in the queue and a nurse will be calling. Take care, and reach out if anything changes before then.",
       "ts": ""
     }
   ],

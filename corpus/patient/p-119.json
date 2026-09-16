@@ -4,55 +4,56 @@
   "started": "2026-07-11T11:21:00",
   "messages": [
     {
-      "role": "user",
-      "content": "Hi there. Question - what kind of bread should I be eating with my type 2?",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Good thinking - but I can't give diet advice. A nurse can walk through what works for your situation though. Want me to set that up?",
+      "content": "Hey, it's your weekly check-in from Northline Care. How are you doing this week \u2014 any symptoms, or changes with your meds?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, I'd like that. Nothing's worked so far",
+      "content": "Doing alright I guess. Numbers have been pretty normal. I did have a question though \u2014 everyone says cut back on bread but I don't know what I'm supposed to eat instead. Any ideas?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I'll escalate you now. Heads up: it's about 31 hours median wait right now, but they'll take good care of you on this.",
+      "content": "Glad the numbers are holding. I pulled up your recent readings and they look stable \u2014 good to see. On the bread question though, diet advice is something I genuinely can't give. That one needs a dietitian or your care team. Your clinic should be able to connect you.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Cool, thanks",
+      "content": "Could a Northline nurse at least point me in the right direction?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "You're set. Also - have you logged your meds for today? I can note them if you haven't",
+      "content": "I hear you \u2014 it's a reasonable thing to want to know. Diet guidance is outside what I can route to our nurses though, even the simple stuff. That really does need to go through your clinic or a dietitian. I don't want to steer you wrong by going around that.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Already did, I'm good",
+      "content": "Alright, I'll call the clinic tomorrow. Kind of a pain but whatever.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Perfect. Nurse will be in touch.",
+      "content": "Totally fair, sorry it's an extra step. I've got your next check-in scheduled for next week. If anything comes up before then \u2014 a weird reading, a symptom, anything with your meds \u2014 just text back. Take care.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "diet question, what to eat instead of bread"
 }

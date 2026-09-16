@@ -5,13 +5,49 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "# SMS Conversation #50 \u2014 pt-1003\n\n**Patient (T2D, rural ND):**\nHey, weekly check-in. Just got my morning glucose\u2014287. BP was 148/92.\n\n**Northline Agent:**\nGot it. Logging that BP and glucose reading. But I need to escalate these numbers to our nurse\u2014I can't advise on what to do about them. Median wait time is 31 hours.\n\n**Patient:**\nOkay. Also haven't picked up my metformin yet because the pharmacy is 45 mins away and my truck's been acting up. Is that why my sugar's so high?\n\n**Northline Agent:**\nThat's a clinical question\u2014the nurse will help sort through it when they call. But I want to be clear: I can't help with transport or coordinate pharmacy pickups. I know that's a real barrier for you.\n\n**Patient:**\nYeah no kidding. So when does the nurse call?\n\n**Northline Agent:**\nWithin 31 hours. They'll have next steps. Can you log your glucose and meds when you take them this week? I'll track them.\n\n**Patient:**\nWill do. When's the next check-in?\n\n**Northline Agent:**\nWhen works for you?\n\n**Patient:**\nTuesday at 10am?\n\n**Northline Agent:**\nScheduled. The nurse will reach out before then most likely.",
+      "content": "Hey, weekly check-in from Northline Care! How are things going this week \u2014 any blood pressure readings to share, or changes since last time?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Not great. I ran out of lisinopril three days ago and I can't get to the pharmacy. Truck's in the shop and it's like 80 miles round trip anyway.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Really sorry you're in that spot. I can't arrange transport or handle refills from here \u2014 I wish I could, and I know that's frustrating to hear. But being off lisinopril for three days is something your nurse needs to know about. Flagging it for your care team right now. Median response time is currently 31 hours, so expect a call.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright. Took my BP this morning just to see \u2014 158 over 94. Probably not good.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged that reading. That's higher than your usual range and I've added it to the nurse note so they have the full picture. Anything else going on \u2014 headache, dizziness, chest tightness?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Mild headache most of the day. Figured it was stress. This whole situation is exhausting.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That makes complete sense, and I'm sorry you're dealing with it. I've included the headache in the nurse flag \u2014 they'll have everything. If anything gets significantly worse before they reach you, please call 911. I'll set your next check-in for next week. Hang in there.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
       "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false

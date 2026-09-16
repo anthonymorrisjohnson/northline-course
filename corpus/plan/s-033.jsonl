@@ -1,1 +1,5 @@
-{"ts": "2026-08-02T04:59:00", "session_id": "corpus-s-033", "persona": "plan", "tool": "generated_tool_call_log", "args": {"session_id": "33", "plan_id": "plan-prairie", "total_calls": 4, "call_types": ["enrollment_status", "member_engagement", "enrollment_status", "outcome_evidence"]}, "status": "ok", "error": null}
+{"ts": "2026-06-20T14:32:00", "session_id": "corpus-s-033", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}
+{"ts": "2026-06-15T08:40:00", "session_id": "corpus-s-033", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
+{"ts": "2026-08-03T06:46:00", "session_id": "corpus-s-033", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "Denise Okafor"}, "status": "not_found", "error": null}
+{"ts": "2026-06-16T16:57:00", "session_id": "corpus-s-033", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "pt-1033"}, "status": "ok", "error": null}
+{"ts": "2026-07-01T18:54:00", "session_id": "corpus-s-033", "persona": "plan", "tool": "enroll_members", "args": {"plan_id": "plan-prairie", "count": 12}, "status": "ok", "error": null}

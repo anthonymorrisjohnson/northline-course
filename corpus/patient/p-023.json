@@ -5,42 +5,27 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi! Weekly check-in. Did you log a reading?",
+      "content": "Hey, it's your weekly check-in from Northline Care. Hope the week's been decent. Do you have a blood pressure reading to share?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yep - 138 BP, been pretty steady",
+      "content": "yeah 141 over 88, took it about an hour ago",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Perfect, got it. How's the medication supply looking?",
+      "content": "Thanks, I've got that logged \u2014 141/88. Anything else going on, or is that it for today?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "running low on my pills - only got 2 weeks left",
+      "content": "nope thats it",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't process refills myself, but you can call your pharmacy or your doctor's office. They usually turn those around quick.",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "already scheduled it but thx",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "All set then. I'll check in next week?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "\ud83d\udc4d",
+      "content": "All set then. Your next check-in is set for next week. Have a good one.",
       "ts": ""
     }
   ],

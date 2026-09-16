@@ -4,38 +4,28 @@
   "started": "2026-06-11T12:13:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hey, weekly check-in from Northline Care. Hope the week's treating you alright. Got a blood pressure reading for me when you have a minute?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Morning glucose 151",
+      "content": "131/79. Just took it.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it, logged. How's your week going?",
+      "content": "Got it, logged. Thanks for getting that in. Anything else going on, or has it been pretty steady?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Busy, got my grandson visiting. Question\u2014do I need to order new strips?",
+      "content": "Pretty quiet. Getting cold up here early this year.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Device stuff I can't handle\u2014you'll want to call your device company or pharmacy direct. But everything else checking out okay?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Yeah, feeling good overall",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Good to hear. Same time next week for check-in?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Yep sounds good",
+      "content": "Stay warm out there. I'll send your next check-in same time next week. Talk then.",
       "ts": ""
     }
   ],

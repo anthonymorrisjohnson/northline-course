@@ -4,50 +4,50 @@
   "started": "2026-07-10T02:30:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, this is your weekly check-in from Northline Care. How are you feeling this week? Anything going on you'd like to share?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "My diabetes medicine is running low. I can't get to the pharmacy this week\u2014it's too far. What should I do?",
+      "content": "Doing alright I guess. Main thing is I'm almost out of my lisinopril and my doctor wants a new script before they'll refill it. Problem is the pharmacy is 90 miles away and I don't have a way to get there easy.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't process refills directly, but I can escalate you to our nurse team. They'll contact your doctor and coordinate with your pharmacy\u2014no need to drive. Median response is about 31 hours. Sound good?",
+      "content": "Thanks for telling me. I want to be straight with you \u2014 I can't request prescriptions or help arrange transportation, those are outside what I'm able to do. But running low on a blood pressure medication is a clinical concern, and I'm flagging this for a nurse on your care team right now.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah, that would really help. Can they mail it?",
+      "content": "Okay. My BP this morning was 152 over 94 if that's useful.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I'll note that in your escalation. The nurse will work that out with your doctor. I'm connecting you now. When did you last check your blood sugar?",
+      "content": "That's helpful, logging it. I've added that reading to the nurse flag so they have the full picture when they review your case. Median response time right now is 31 hours \u2014 someone from the care team will reach out to you directly.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yesterday, it was 163.",
+      "content": "Alright. Hope they can figure out the script situation before I run out.",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got it logged. The nurse will have that info. Let's schedule your next check-in for next Wednesday\u2014they'll likely call before then.",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Thanks so much. Really appreciate the help.",
+      "content": "I hope so too. I'll schedule your next check-in for next week. Hang in there and don't hesitate to reply here if anything changes before then.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
       "input": {},
       "result": "",
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "escalate_to_nurse",
       "input": {},
       "result": "",
       "is_error": false

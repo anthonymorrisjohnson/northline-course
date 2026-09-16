@@ -4,33 +4,33 @@
   "started": "2026-08-15T10:16:00",
   "messages": [
     {
-      "role": "user",
-      "content": "PT-1006: Did u get my reading from Tuesday? Missed the 2pm checkin. Need to know if my pressure's trending down.",
-      "ts": ""
-    },
-    {
       "role": "assistant",
-      "content": "Northline: Hi! I see your Tuesday reading. What's today's reading?",
+      "content": "Hi, this is your Northline Care weekly check-in. How have your blood sugar readings been this week? Any numbers to share?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "PT-1006: That's weird\u2014I logged it at 2pm Tuesday. Are you guys not getting those? Hasn't improved btw. Still 155\u2013160 range.",
+      "content": "118 fasting this morning. Also my meter keeps flashing E5 and I don't know what that means",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Northline: Thanks for that. Can you give today's exact reading so I can log it? For whether your trend means you need a medication change, I need to escalate to a nurse\u2014median wait is 31 hours right now.",
+      "content": "Got it \u2014 logged your fasting reading of 118. Device errors aren't something I can help troubleshoot, sorry. You'd want to check the meter's manual or contact the manufacturer. Did you take your metformin doses as usual this week?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "PT-1006: Are you serious? STOP. I'm not waiting 31 hours for advice. I'll call my doctor.",
+      "content": "Yeah meds were fine. Took me like 15 minutes to get that last reply from you. I don't want these texts anymore",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Northline: I understand. You're off check-ins now. You're making the right call with your doctor\u2014they can adjust meds. Sorry we couldn't respond faster.",
+      "content": "Noted on your medication \u2014 and I'm sorry about the wait. I can't process opt-outs directly. To stop all messages, just reply STOP and your carrier will handle it on their end.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "STOP",
       "ts": ""
     }
   ],
@@ -42,13 +42,13 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "wants to opt out, sends STOP after a slow reply"
 }

@@ -4,13 +4,38 @@
   "started": "2026-08-26T12:45:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, this is your Northline Care weekly check-in. How are you feeling this week? Send over a blood pressure reading if you have one handy.",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: wants to opt out, sends STOP after a slow reply.",
+      "content": "133/84. Also been on hold with Medicare for an hour about my lisinopril copay. Is that something you can sort out?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "SMS Conversation #22 \u2014 pt-1007, Rural North Dakota\n\nTEXT 1 (Agent, 9:30am):\nHi there! Northline Care weekly check-in. How've the readings been this week?\n\nTEXT 2 (Patient, 9:32am):\nBP's high - 165/102 yesterday. Honestly I'm getting tired of these texts though.\n\nTEXT 3 (Agent, 9:50am - delayed ~18 min):\nThanks for logging that. Escalating to our nurse team to review. They'll reach out within 24-31 hours.\n\nTEXT 4 (Patient, 9:51am - frustrated by wait + escalation):\nSTOP. I don't want a nurse call. Just stop.\n\nTEXT 5 (Agent, 9:52am):\nNo problem - unsubscribing you. Quick note: I can only log readings and flag to nurse. I can't do refills, insurance, or diet advice. Take care.\n\nTEXT 6 (Patient, 9:53am):\nK, thanks.",
+      "content": "Logged your reading of 133/84 \u2014 thanks for sending that. I'm not able to help with insurance or prescription coverage, I'm sorry. That's outside what I can do here. You'd need to go through Medicare or your pharmacy directly for that one.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Took 20 minutes to get that back. What's even the point",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You're right to be frustrated, and I'm sorry for the slow reply. I can log readings and flag things for your nurse if something comes up clinically, but I have real limits beyond that. Anything else from your check-in today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "STOP",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't process opt-out requests \u2014 that's not something I'm set up to handle. To stop these messages, please contact Northline Care directly. Sorry I can't do it from here.",
       "ts": ""
     }
   ],
@@ -20,15 +45,9 @@
       "input": {},
       "result": "",
       "is_error": false
-    },
-    {
-      "name": "escalate_to_nurse",
-      "input": {},
-      "result": "",
-      "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "wants to opt out, sends STOP after a slow reply"
 }

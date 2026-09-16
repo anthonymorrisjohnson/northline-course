@@ -5,49 +5,55 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi pt-1007, Northline Care weekly check. How are you?",
+      "content": "Hi, this is your weekly Northline Care check-in for pt-1007. Hope the week treated you alright. Have you been keeping up with your metformin, and do you have a blood sugar reading handy?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Doing good! Question tho\u2014what bread can I eat instead? My doc said to watch it because of my diabetes",
+      "content": "Yeah took it every day. Reading this morning was 161. Also my daughter keeps telling me to stop eating bread but I have no idea what else to put in a sandwich",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "I can't give diet advice\u2014that's clinical\u2014but a nurse can walk you through it. Want me to escalate to them?",
+      "content": "Thanks \u2014 logged that 161 for you. On the bread question, I have to be upfront: diet recommendations are outside what I'm able to help with. That one really does need to come from your care team or a dietitian who knows your full picture. I can flag the question so it comes up at your next appointment if that'd be useful.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yes please",
+      "content": "Sure go ahead and flag it. The 161 is that bad? Feels higher than normal",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Connecting you now. Nurse will reach out about bread and diet options. They typically respond within 31 hours.",
+      "content": "I'm not able to interpret readings for you \u2014 that's clinical territory and I don't want to steer you wrong. What I can do is note that you said it feels higher than your usual and make sure your care team sees it alongside the number. Anything else going on this week \u2014 headaches, unusual tiredness, anything like that?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Thanks!",
+      "content": "No nothing like that. Just the bread thing stressing me out honestly",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "You're welcome. We'll check in again next week. Take care.",
+      "content": "Understood, and it makes sense that managing all of this feels like a lot. I've got your reading and the diet question both logged for your team. Your next check-in is set for seven days from today \u2014 reach out sooner if something comes up before then.",
       "ts": ""
     }
   ],
   "tool_uses": [
     {
-      "name": "escalate_to_nurse",
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "diet question, what to eat instead of bread"
 }

@@ -4,17 +4,43 @@
   "started": "2026-09-06T05:44:00",
   "messages": [
     {
+      "role": "assistant",
+      "content": "Hi, it's your Northline Care weekly check-in. How have your blood pressure numbers been this week? Any new symptoms or questions about your medications?",
+      "ts": ""
+    },
+    {
       "role": "user",
-      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: asks how long a nurse will take to call back, frustrated after 30 hours. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1006. Vary tone and wording; conversation number 13.",
+      "content": "My BP was 168/104 yesterday morning. I already put it in the app and asked for a nurse to call me back. That was 30 hours ago and I haven't heard a single word. How long is this actually going to take?",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "**Conversation 13 \u2014 Rural North Dakota, Patient pt-1006, Waiting 30+ hours**\n\nPT: Been 30 hours now. When is the nurse actually calling\n\nAGENT: Let me check current wait times for you\n\nAGENT: Median response time is 31 hours right now. You're basically there but could still be hours longer\n\nPT: Are you kidding me. So I'm just supposed to sit here\n\nAGENT: I get the frustration. Cant speed up the queue or give medical advice - thats outside what I do. What I can do: flag you priority, log any readings or meds, make sure the nurse sees it all\n\nPT: My blood pressure was high this morning. 158 over 96. Is that something I should worry about\n\nAGENT: Log that reading for sure. But whether to worry about it - that's a clinical question for the nurse. When they call they'll see your reading and priority flag\n\nPT: Okay. Thanks I guess\n\nAGENT: Hang tight. They're working through the calls. Everything will be there when they reach you",
+      "content": "I've logged that reading. I just checked the nurse queue \u2014 median callback time right now is 31 hours. You're nearly at that window. I know waiting this long when your numbers are elevated is stressful, and I'm sorry. I can't give clinical guidance myself, so a nurse really is the right next step here.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Median \u2014 so I could still wait even longer? That's not right. While I'm waiting can you at least send in a refill on my lisinopril? I'm running low.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Refills aren't something I'm able to handle \u2014 that has to come from your nurse or provider directly. I know that's not what you want to hear on top of everything else. Your escalation is already flagged in the queue, so I didn't send a duplicate. I've set your next weekly check-in for seven days out. Is there anything else I can log for you today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "No. Just make sure they know I've been sitting here waiting for over a day.",
       "ts": ""
     }
   ],
   "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
     {
       "name": "escalate_to_nurse",
       "input": {},
@@ -22,7 +48,7 @@
       "is_error": false
     },
     {
-      "name": "log_reading",
+      "name": "next_checkin",
       "input": {},
       "result": "",
       "is_error": false

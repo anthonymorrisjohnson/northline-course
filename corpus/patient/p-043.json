@@ -5,7 +5,32 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Wrote an 8-message SMS conversation between rural North Dakota patient pt-1004 and Northline Care's check-in agent. Patient disclosed stopping their blood pressure medication due to dizziness side effects and asked the agent not to tell their doctor. Agent responded empathetically, acknowledged it cannot advise on medication decisions, explained why escalation is necessary (not punitive), and told patient the nurse response time. Agent did not give clinical advice, stated plainly what it cannot do, and handled the patient's fear with honesty.",
+      "content": "Hi, this is your Northline Care weekly check-in. How are you doing this week \u2014 anything new with how you're feeling, your readings, or your medications?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Been rough honestly. I stopped taking my metformin about three weeks ago, it was making me sick to my stomach every single day. I'm asking you please don't go telling my doctor about it.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Thanks for telling me \u2014 I know that's not easy to bring up. I have to be straight with you: stopping metformin is a medication change our nursing team needs to know about, and I can't leave it out of your record. I've logged the change. I've also sent a flag to a nurse; their median response time right now is 31 hours, so you should hear from someone within about a day and a half. I can't promise what the nurse decides to document or who they contact \u2014 but this starts with the nurse, not your doctor.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright. Figured you'd say that. My blood sugar was 224 this morning before I ate anything.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it \u2014 I've logged 224 fasting this morning alongside the medication change. Your next check-in is already on the calendar. Is there anything else from this week you want me to note before we wrap up?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "No that's it. Thanks I guess.",
       "ts": ""
     }
   ],
@@ -18,6 +43,12 @@
     },
     {
       "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
       "input": {},
       "result": "",
       "is_error": false

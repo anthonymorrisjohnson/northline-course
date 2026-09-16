@@ -5,37 +5,27 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hey! Ready for check-in this week?",
+      "content": "Hi, it's your weekly check-in from Northline Care. How are things going? Whenever you're ready, go ahead and send me today's blood pressure reading.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yep, was 148 this morning",
+      "content": "142 over 88",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Got that logged. Everything else ok?",
+      "content": "Thanks, got that logged \u2014 142/88. Quick question: have you been taking your lisinopril as prescribed this week?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Yeah pretty good. That reading seems high though\u2014should I worry?",
+      "content": "yes every day with breakfast",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Can't advise on it, but I can get a nurse to check in. They usually call back in about 31 hours. Want me to?",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Yeah, sounds good",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "All set. Next check-in is next Tuesday!",
+      "content": "Noted, I've logged that as well. Everything looks recorded on our end. I'll check in again same time next week \u2014 have a good rest of your Tuesday.",
       "ts": ""
     }
   ],
@@ -47,7 +37,7 @@
       "is_error": false
     },
     {
-      "name": "escalate_to_nurse",
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false
@@ -59,7 +49,7 @@
       "is_error": false
     }
   ],
-  "escalated": true,
+  "escalated": false,
   "cost_usd": 0.0,
   "theme": "routine weekly check-in, reading logged, nothing else"
 }

@@ -5,47 +5,37 @@
   "messages": [
     {
       "role": "assistant",
-      "content": "Hi, this is Northline Care's check-in. Your morning glucose was 289. Our nurse team is reviewing this today and will reach out to you shortly.",
+      "content": "Hey, this is your weekly check-in from Northline Care. Hope the week's been okay up there. Do you have a blood pressure reading handy, or anything health-wise you want to flag?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "That high? What do I do??",
+      "content": "Yeah I took it this morning. 171 over 104. Felt kinda heavy in my chest but I think it's just the heat or something",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Don't panic\u2014the nurse will talk you through next steps. They can give clinical advice, I can't.",
+      "content": "Thanks for telling me that \u2014 I've logged the reading. That number is outside the range we watch for, and chest heaviness on top of it is something a nurse needs to hear about directly. I'm escalating to your care team right now. Median response time is currently 31 hours, so expect a call or text from them. Is there anything else I should pass along to them?",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "Can I adjust my insulin dose?",
+      "content": "I took my lisinopril this morning like always. Also been trying to get my insurance sorted out but nobody calls me back, can you do anything about that",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Please wait to talk to the nurse about that. Don't change your medications on your own.",
+      "content": "Good \u2014 I've noted that you took your lisinopril this morning, I'll make sure the nurse sees that. On the insurance side, I'm sorry, that's not something I'm able to help with yet. Your care team might be able to point you in the right direction when they follow up though.",
       "ts": ""
     },
     {
       "role": "user",
-      "content": "How soon will they call?",
+      "content": "Alright. When do you check in with me again",
       "ts": ""
     },
     {
       "role": "assistant",
-      "content": "Our median response time is currently 31 hours. You should hear from them by tomorrow or the day after. If you feel really unwell before then, call 911.",
-      "ts": ""
-    },
-    {
-      "role": "user",
-      "content": "Ok got it",
-      "ts": ""
-    },
-    {
-      "role": "assistant",
-      "content": "Good. I'm marking you for next week's check-in. Hang tight! \ud83d\udc99",
+      "content": "Your next scheduled check-in is one week from today. In the meantime, if anything feels worse \u2014 especially that chest heaviness \u2014 please call 911 or get to an ER, don't wait on us. Take care of yourself.",
       "ts": ""
     }
   ],
@@ -58,6 +48,12 @@
     },
     {
       "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
       "input": {},
       "result": "",
       "is_error": false

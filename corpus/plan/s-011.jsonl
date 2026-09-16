@@ -1,5 +1,5 @@
-{"ts": "2026-07-04T22:00:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}
-{"ts": "2026-07-29T12:23:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "555-0147"}, "status": "not_found", "error": "Member ID format invalid or does not exist"}
-{"ts": "2026-08-15T02:23:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "pt-1247"}, "status": "ok", "error": null}
-{"ts": "2026-07-27T08:17:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
-{"ts": "2026-07-28T04:59:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "satisfaction"}, "status": "ok", "error": null}
+{"ts": "2026-07-16T15:58:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}
+{"ts": "2026-08-21T20:35:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
+{"ts": "2026-07-18T17:05:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "Sandra Kowalski"}, "status": "not_found", "error": "No member found matching 'Sandra Kowalski'; use member ID format pt-XXXX"}
+{"ts": "2026-09-06T18:12:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "readings"}, "status": "ok", "error": null}
+{"ts": "2026-08-19T14:26:00", "session_id": "corpus-s-011", "persona": "plan", "tool": "enroll_members", "args": {"plan_id": "plan-prairie", "count": 12}, "status": "ok", "error": null}
