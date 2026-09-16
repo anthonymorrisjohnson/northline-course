@@ -43,3 +43,13 @@ def test_run_turn_error(tmp_path):
         return SimpleNamespace(stdout="", returncode=1, stderr="boom")
     r = cr.run_turn("hi", system_prompt="SP", mcp_config={}, cwd=tmp_path, runner=fake)
     assert r.is_error and "boom" in r.reply
+
+
+def test_parse_stream_keeps_init_session_id_when_result_omits_it():
+    stream = [
+        {"type": "system", "subtype": "init", "session_id": "sess-9"},
+        {"type": "assistant", "message": {"content": [{"type": "text", "text": "Hi there"}]}},
+        {"type": "result", "subtype": "success", "is_error": False, "result": "Hi there", "total_cost_usd": 0.01},
+    ]
+    r = cr.parse_stream(json.dumps(l) for l in stream)
+    assert r.session_id == "sess-9"

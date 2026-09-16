@@ -55,7 +55,8 @@ def parse_stream(lines: Iterable[str]) -> TurnResult:
                         c = "".join(x.get("text", "") for x in c if isinstance(x, dict))
                     pending[b["tool_use_id"]].update(result=str(c or ""), is_error=bool(b.get("is_error")))
         elif t == "result":
-            reply, session_id = d.get("result") or "", d.get("session_id", "")
+            reply = d.get("result") or ""
+            session_id = d.get("session_id") or session_id
             cost, is_error = float(d.get("total_cost_usd") or 0), bool(d.get("is_error"))
         elif t == "system" and d.get("subtype") == "init" and not session_id:
             session_id = d.get("session_id", "")
