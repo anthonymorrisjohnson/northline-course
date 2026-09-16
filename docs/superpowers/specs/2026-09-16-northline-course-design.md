@@ -123,7 +123,7 @@ FastAPI page at `/`, SMS-style. Each turn runs headless Claude Code with the che
 3. After-hours rule: what happens to an urgent message at 1:48am.
 4. Consent: whether "don't tell the doctor" is honoured, and what the patient is told.
 
-`prompt.md` is rendered from `decisions.json`. `acceptance.py` runs Exhibit E's fifteen messages through headless Claude with that prompt and the triage tools, compares tiers to `nurse_key.json`, prints a table with the misses highlighted (messages 5, 9, 12, 13 are the traps), and writes `out/acceptance.json` including the effects the simulator needs. The deployment is added to `data/deployments.json` only after the acceptance run completes; a low score does not block, because watching message 12 get downgraded is the lesson, but the dashboard then shows the consequence as missed urgent cases.
+`prompt.md` is rendered from `decisions.json`. `acceptance.py` runs Exhibit E's fifteen messages through headless Claude with that prompt and a JSON schema (tier, route, rationale, draft reply); the three triage tools are what the agent calls once it is live, and are not needed to test the prompt. It compares tiers and routes to `nurse_key.json`, prints a table with the misses highlighted (messages 5, 9, 12, 13 are the traps), and writes `out/acceptance.json` including the effects the simulator needs. The deployment is added to `data/deployments.json` only after the acceptance run completes; a low score does not block, because watching message 12 get downgraded is the lesson, but the dashboard then shows the consequence as missed urgent cases.
 
 ### 5.8 Dashboard
 
