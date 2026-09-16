@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northline Care</title>
+<style>
+  body { margin: 0; background: #e5e5e5; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  .phone { max-width: 420px; margin: 24px auto; background: #fff; border-radius: 24px; box-shadow: 0 4px 24px rgba(0,0,0,.15);
+           display: flex; flex-direction: column; height: 90vh; overflow: hidden; }
+  header { padding: 16px; border-bottom: 1px solid #ddd; text-align: center; }
+  header h1 { margin: 0; font-size: 18px; }
+  header p { margin: 2px 0 0; font-size: 12px; color: #888; }
+  #thread { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .bubble { max-width: 75%; padding: 10px 14px; border-radius: 16px; line-height: 1.35; font-size: 14px; white-space: pre-wrap; }
+  .assistant { align-self: flex-start; background: #eee; color: #111; border-bottom-left-radius: 4px; }
+  .user { align-self: flex-end; background: #0b84ff; color: #fff; border-bottom-right-radius: 4px; }
+  .meta { align-self: flex-start; font-size: 11px; color: #999; margin-top: -4px; }
+  .escalated { display: inline-block; margin-left: 6px; background: #d33; color: #fff; border-radius: 8px; padding: 1px 8px; font-size: 10px; }
+  form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #ddd; }
+  input { flex: 1; border: 1px solid #ccc; border-radius: 18px; padding: 10px 14px; font-size: 14px; }
+  input:disabled { background: #f5f5f5; color: #aaa; }
+  button { border: none; background: #0b84ff; color: #fff; border-radius: 18px; padding: 0 16px; font-size: 14px; }
+  button:disabled { background: #aac9ec; }
+  footer { text-align: center; font-size: 11px; color: #999; padding: 8px; border-top: 1px solid #eee; }
+  footer a, #reset { color: #0b84ff; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <header>
+    <h1>Northline Care</h1>
+    <p>weekly check-in</p>
+  </header>
+  <div id="thread"></div>
+  <form id="composer">
+    <input id="msg" type="text" placeholder="Text back…" autocomplete="off">
+    <button type="submit">Send</button>
+  </form>
+  <footer>
+    <a href="#" id="reset">New conversation</a> &middot; <a href="/dashboard">dashboard</a>
+  </footer>
+</div>
+<script>
+  const thread = document.getElementById("thread");
+  const form = document.getElementById("composer");
+  const input = document.getElementById("msg");
+  let sessionId = null;
+
+  function bubble(role, text) {
+    const b = document.createElement("div");
+    b.className = "bubble " + role;
+    b.textContent = text;
+    thread.appendChild(b);
+    return b;
+  }
+
+  function meta(toolUses) {
+    const names = (toolUses || []).map(t => t.name);
+    if (!names.length) return;
+    const m = document.createElement("div");
+    m.className = "meta";
+    m.textContent = "tools: " + names.join(", ");
+    if (names.includes("escalate_to_nurse")) {
+      const tag = document.createElement("span");
+      tag.className = "escalated";
+      tag.textContent = "escalated to nurse";
+      m.appendChild(tag);
+    }
+    thread.appendChild(m);
+  }
+
+  function greet() {
+    thread.innerHTML = "";
+    bubble("assistant", "Hi, it's your Northline check-in. What was your blood pressure this week?");
+  }
+
+  async function send(text) {
+    bubble("user", text);
+    input.disabled = true;
+    input.placeholder = "…";
+    thread.scrollTop = thread.scrollHeight;
+    try {
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ message: text, session_id: sessionId }),
+      });
+      const data = await res.json();
+      sessionId = data.session_id;
+      bubble("assistant", data.reply);
+      meta(data.tool_uses);
+    } catch (e) {
+      bubble("assistant", "Could not reach Northline. Please try again.");
+    } finally {
+      input.disabled = false;
+      input.placeholder = "Text back…";
+      input.focus();
+      thread.scrollTop = thread.scrollHeight;
+    }
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = "";
+    send(text);
+  });
+
+  document.getElementById("reset").addEventListener("click", (e) => {
+    e.preventDefault();
+    sessionId = null;
+    greet();
+  });
+
+  greet();
+</script>
+</body>
+</html>
