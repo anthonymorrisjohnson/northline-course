@@ -9,3 +9,5 @@ def test_zip_has_no_git_venv_or_logs(tmp_path):
     assert not any("/.git/" in n or "/.venv/" in n or "/__pycache__/" in n for n in names)
     assert not any("northline/logs/" in n and not n.endswith(".gitkeep") for n in names)
     assert all(n.startswith("northline-course/") for n in names)
+    assert not any("/.superpowers/" in n for n in names)
+    assert not any(n.startswith("northline-course/docs/superpowers/") for n in names)
