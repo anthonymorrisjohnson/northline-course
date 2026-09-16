@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 
 from northline.sim import model as m
+from northline.sim import run as sim_run
+from northline.tools import store
 
 SUMMARY_PATH = Path(__file__).resolve().parents[1] / "northline" / "sim" / "out" / "summary.json"
 
@@ -57,3 +59,17 @@ def test_summary_feeds_plan_tools():
     summary = json.loads(SUMMARY_PATH.read_text())
     assert close(summary["now"]["satisfaction"], 72)
     assert close(summary["now"]["escalations_per_week"], 2400)
+
+
+def test_now_ignores_deployments_not_yet_live(data_dir, monkeypatch, tmp_path):
+    monkeypatch.setattr(sim_run, "OUT", tmp_path / "out")
+    store.append("deployments", {"name": "triage", "live_from_week": 60, "effects": {}})
+    summary = sim_run.main()
+    assert summary["now"] == summary["last_quarter"]
+
+
+def test_now_uses_next_quarter_when_deployment_is_live(data_dir, monkeypatch, tmp_path):
+    monkeypatch.setattr(sim_run, "OUT", tmp_path / "out")
+    store.append("deployments", {"name": "triage", "live_from_week": 40, "effects": {}})
+    summary = sim_run.main()
+    assert summary["now"] == summary["next_quarter"]

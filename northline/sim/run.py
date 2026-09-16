@@ -17,7 +17,7 @@ def main() -> dict:
     prairie_wo = m.run(range(40, 53), checkin, start=start, patients=100000)
     _, before = m.step(m.State(0, 40000, 25, 0.0, 0), m.params_for(0, []))
     last_q, next_q = m.average(history[26:]), m.average(nxt)
-    new_live = any(d["name"] != "checkin_agent" for d in deps)
+    new_live = any(d["name"] != "checkin_agent" and d.get("live_from_week", 1) <= 52 for d in deps)
     summary = {"before": before, "last_quarter": last_q, "next_quarter": next_q, "prairie": m.average(prairie),
                "prairie_without": m.average(prairie_wo), "now": next_q if new_live else last_q, "deployments": deps}
     OUT.mkdir(exist_ok=True)
