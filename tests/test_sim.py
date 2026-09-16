@@ -47,6 +47,12 @@ def test_prairie_projection_without_triage_is_worse():
     assert p["nurse_response_median_h"] > 60
 
 
+def test_response_is_capped():
+    rows = m.run(range(40, 53), CHECKIN, start=m.State(39, 40000, 16, 0.0, 0), patients=100000)
+    assert all(r["nurse_response_median_h"] <= 336.0 for r in rows)
+    assert m.average(rows)["nurse_response_median_h"] > 60
+
+
 def test_summary_feeds_plan_tools():
     summary = json.loads(SUMMARY_PATH.read_text())
     assert close(summary["now"]["satisfaction"], 72)

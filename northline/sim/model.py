@@ -5,6 +5,8 @@ Deployments override parameters. That is the whole mechanism: deploy an agent, t
 import math
 from dataclasses import dataclass, replace
 
+MAX_RESPONSE_H = 336.0
+
 BASE = {
     "nurse_capacity_items_per_week": 150, "hours_per_item": 0.27, "nurse_cost_month": 9000, "overtime_rate": 45, "fee": 25,
     "monthly_reach": 0.60, "readings_per_reach": 0.5,          # before: 40000 * 0.6 * 0.5 = 12,000 readings a month
@@ -45,7 +47,7 @@ def step(s: State, p: dict) -> tuple[State, dict]:
     items = urgent + (esc - urgent) * p["routine_time_factor"] + inbound * p["inbound_to_nurse_share"]
     capacity = N * p["nurse_capacity_items_per_week"]
     load = items / capacity if capacity else 99.0
-    median_h = round(4.0 * math.exp(p["response_curve"] * max(0.0, load - 0.8)), 1)
+    median_h = round(min(MAX_RESPONSE_H, 4.0 * math.exp(p["response_curve"] * max(0.0, load - 0.8))), 1)  # capped at two weeks; beyond that the number stops meaning anything
     urgent_h = 4.0 if p["routine_time_factor"] < 1.0 else median_h   # a triage layer sees urgent items first
     overtime = p["baseline_overtime_month"] + max(0.0, items - capacity) * p["hours_per_item"] * 4.33
     accum = s.resign_accum + N * p["resignation_rate"] * max(0.0, load - 1.0)
