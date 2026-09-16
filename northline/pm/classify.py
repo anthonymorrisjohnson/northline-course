@@ -53,9 +53,9 @@ def _prompt(batch):
     return f"{TAXONOMY}\n\nClassify each item. Return exactly {len(batch)} records in order, copying each id and persona.\n\n{body}"
 
 
-def classify_items(items, *, batch_size=8, ask=claude_json.ask_json_many) -> list[dict]:
+def classify_items(items, *, batch_size=8, model="haiku", ask=claude_json.ask_json_many) -> list[dict]:
     batches = [items[i:i + batch_size] for i in range(0, len(items), batch_size)]
-    outs = ask([(_prompt(b), BATCH_SCHEMA) for b in batches])
+    outs = ask([(_prompt(b), BATCH_SCHEMA) for b in batches], model=model)
     records = []
     for batch, out in zip(batches, outs):
         recs = out["records"] + [None] * (len(batch) - len(out["records"]))

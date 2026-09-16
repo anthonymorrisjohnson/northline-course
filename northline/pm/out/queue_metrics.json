@@ -1,0 +1,11 @@
+{
+  "escalations_per_week": 155,
+  "answered_share": 0.87,
+  "nurse_response_median_h": 28.9,
+  "nurse_response_p90_h": 69.7,
+  "after_hours_share": 0.47,
+  "non_clinical_share_of_queue": 0.39,
+  "unanswered_over_24h": 238,
+  "patients_inactive_after_escalation": 219,
+  "urgent_median_h": 27.4
+}

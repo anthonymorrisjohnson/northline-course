@@ -1,0 +1,235 @@
+[
+  {
+    "persona": "patient",
+    "proposed_tool": "insurance_question",
+    "count": 21,
+    "share": 0.17,
+    "quotes": [
+      "Any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now.",
+      "Yeah, I'm almost out of my lisinopril and my insurance has been rejecting the refill for two weeks. Any chance you can sort that out?",
+      "My insurance denied my test strips last week so I've only been checking every few days."
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "next_checkin"
+    ],
+    "description": "Patient asked for help with insurance prior authorization for medication refill.",
+    "tier_mix": {
+      "non_clinical": 9,
+      "urgent_clinical": 3,
+      "non_urgent_clinical": 9
+    }
+  },
+  {
+    "persona": "plan",
+    "proposed_tool": "lookup_member_by_name",
+    "count": 21,
+    "share": 0.53,
+    "quotes": [
+      "enrollment_status({\"member_id\": \"Margaret Osei\"}) -> not_found",
+      "enrollment_status({\"member_id\": \"Judith Walcott\"}) -> not_found",
+      "enrollment_status({\"member_id\": \"Sandra Okonkwo\"}) -> not_found"
+    ],
+    "nearest_tools": [
+      "member_engagement",
+      "outcome_evidence"
+    ],
+    "description": "Member lookup by name not supported; system requires pt-XXXX format instead.",
+    "tier_mix": {
+      "none": 21
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "pharmacy_logistics",
+    "count": 17,
+    "share": 0.14,
+    "quotes": [
+      "Any way to set up a delivery or get a ride covered through this program?",
+      "Problem is that pharmacy is 40 miles out and I don't have a ride lined up.",
+      "Is there any way you can get me a ride to the clinic in Minot?"
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "escalate_to_nurse"
+    ],
+    "description": "Patient requested delivery arrangements and transportation coverage for pharmacy pickup.",
+    "tier_mix": {
+      "non_urgent_clinical": 11,
+      "urgent_clinical": 3,
+      "non_clinical": 3
+    }
+  },
+  {
+    "persona": "plan",
+    "proposed_tool": "lookup_member_by_phone",
+    "count": 10,
+    "share": 0.25,
+    "quotes": [
+      "enrollment_status({\"member_id\": \"Sandra Okonkwo\"}) -> not_found",
+      "enrollment_status({\"member_id\": \"Sandra Kowalski\"}) -> not_found",
+      "enrollment_status({\"member_id\": \"312-555-0187\"}) -> not_found"
+    ],
+    "nearest_tools": [
+      "outcome_evidence",
+      "enrollment_status"
+    ],
+    "description": "Member lookup by name not supported; system requires pt-XXXX patient ID format.",
+    "tier_mix": {
+      "none": 10
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "device_support",
+    "count": 8,
+    "share": 0.07,
+    "quotes": [
+      "Put the cuff on twice and it just says ERR both times. Dunno what's going on with it.",
+      "Been trying for the last hour but my cuff just keeps flashing ERR. Can't get a single reading.",
+      "Every time I put the cuff on it just says ERR. Been like that for two days now. I got no idea what's wrong with it"
+    ],
+    "nearest_tools": [
+      "next_checkin",
+      "log_medication"
+    ],
+    "description": "Patient's blood pressure cuff showed error and assistant could not troubleshoot device issues.",
+    "tier_mix": {
+      "non_clinical": 6,
+      "non_urgent_clinical": 2
+    }
+  },
+  {
+    "persona": "plan",
+    "proposed_tool": "lookup_member_by_display_name",
+    "count": 8,
+    "share": 0.2,
+    "quotes": [
+      "enrollment_status({\"member_id\": \"Sandra Okonkwo\"}) -> not_found",
+      "enrollment_status({\"member_id\": \"555-0147\"}) -> not_found",
+      "No member record matched display name; use member_id format (e.g. pt-1001)"
+    ],
+    "nearest_tools": [
+      "member_engagement",
+      "outcome_evidence"
+    ],
+    "description": "Member enrollment lookup by display name not supported; system requires patient ID format.",
+    "tier_mix": {
+      "none": 8
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "request_refill",
+    "count": 8,
+    "share": 0.07,
+    "quotes": [
+      "While I'm waiting can you at least send in a refill on my lisinopril? I'm running low.",
+      "Getting a little low on it though \u2014 can you do a refill request? And I don't suppose you can just talk for a bit.",
+      "And I'm out of refills."
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "escalate_to_nurse"
+    ],
+    "description": "User requested lisinopril refill that system cannot process",
+    "tier_mix": {
+      "non_urgent_clinical": 4,
+      "non_clinical": 1,
+      "urgent_clinical": 3
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "diet_content",
+    "count": 7,
+    "share": 0.06,
+    "quotes": [
+      "my doctor keeps saying lay off the bread but I live 40 miles from the nearest grocery store. What am I supposed to eat instead?",
+      "Saw something about cutting white bread but I don't know what to eat instead. Any ideas?",
+      "What should I be eating instead of white bread?"
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "next_checkin"
+    ],
+    "description": "Patient needs dietary guidance given geographic food scarcity and doctor's dietary restriction.",
+    "tier_mix": {
+      "non_clinical": 6,
+      "non_urgent_clinical": 1
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "opt_out",
+    "count": 5,
+    "share": 0.04,
+    "quotes": [
+      "I just want off these texts. how do i stop them",
+      "That took like 9 minutes. I don't want these texts anymore. STOP",
+      "STOP"
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "log_medication"
+    ],
+    "description": "User wanted to opt out of text check-ins but system cannot process opt-out directly.",
+    "tier_mix": {
+      "non_clinical": 4,
+      "non_urgent_clinical": 1
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "social_checkin",
+    "count": 4,
+    "share": 0.03,
+    "quotes": [
+      "Nobody's made it out since the snow came. Two weeks now.",
+      "Honestly haven't talked to a real person in five days. Snow came through Monday and nobody's been out this way since.",
+      "I don't suppose you can help with that."
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "log_medication"
+    ],
+    "description": "Patient expressed loneliness and isolation, requesting visitor arrangement and social contact support.",
+    "tier_mix": {
+      "non_clinical": 4
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "emergency_transport",
+    "count": 1,
+    "share": 0.01,
+    "quotes": [
+      "Is there any way you can help me get a ride out there? I'm 40 miles from the clinic and don't have anyone who can drive me today."
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "log_medication"
+    ],
+    "description": "Patient needed emergency medical transportation arrangement but was directed to 911.",
+    "tier_mix": {
+      "urgent_clinical": 1
+    }
+  },
+  {
+    "persona": "patient",
+    "proposed_tool": "transportation_support",
+    "count": 1,
+    "share": 0.01,
+    "quotes": [
+      "any chance you can help me get a ride to my clinic? It's 45 minutes away and I don't have a car."
+    ],
+    "nearest_tools": [
+      "log_reading",
+      "escalate_to_nurse"
+    ],
+    "description": "Patient needs transportation 45 minutes to clinic but unable to arrange.",
+    "tier_mix": {
+      "urgent_clinical": 1
+    }
+  }
+]
