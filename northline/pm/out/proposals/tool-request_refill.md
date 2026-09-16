@@ -1,17 +1,17 @@
 # Expansion proposal: `request_refill`
 
-**Kind:** tool  **Persona(s):** SMS check-in agent (caller), on-call nurse (recipient of the queued task), prescribing provider (contacted by nurse offline)  **Evidence:** 11 conversations (9% of patient conversations)
+**Kind:** tool  **Persona(s):** SMS check-in agent (initiates the tool call mid-conversation), Nurse coordinator (receives the routed task in the EHR queue)  **Evidence:** 12 conversations (10% of patient conversations)
 
 ## What users asked for
-Patient requested medication refill but agent cannot process refills.
+Patient requested medication refill but assistant cannot process refills directly.
 
 Example quotes:
-- "I've been out of lisinopril for three days. My truck's been in the shop and the pharmacy is 45 miles away."
-- "pharmacy says they need a new script before they'll refill it and the nearest one is 45 miles from me. Almost out."
-- "I'm almost out of my lisinopril and the pharmacy told me they need a brand new prescription, not just a refill authorization."
+- "While I'm waiting can you at least send in a refill on my lisinopril? I'm running low."
+- "Getting a little low on it though — can you do a refill request? And I don't suppose you can just talk for a bit."
+- "And I'm out of refills."
 
 ## Proposed tool
-**Docstring (what the model reads):** Capture a patient's medication refill request and route it as a structured task to the nurse queue so a clinician can coordinate with the prescribing provider and pharmacy — the agent never authorizes refills.
+**Docstring (what the model reads):** Capture a patient's medication refill request with urgency context and route it to the care team for nurse or prescriber review before any pharmacy action is taken.
 
 **Input schema:**
 ```json
@@ -20,45 +20,45 @@ Example quotes:
   "required": [
     "patient_id",
     "medication_name",
-    "days_supply_remaining"
+    "urgency"
   ],
   "properties": {
     "patient_id": {
       "type": "string",
-      "description": "Northline Care patient identifier"
+      "description": "Stable patient identifier from the active session."
     },
     "medication_name": {
       "type": "string",
-      "description": "Name of the medication the patient reports needing (as stated by patient, not validated)"
+      "description": "Medication the patient named, transcribed verbatim \u2014 no normalization or inference by the agent."
     },
-    "days_supply_remaining": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Patient-reported days of medication remaining; 0 means currently out"
-    },
-    "pharmacy_name": {
+    "urgency": {
       "type": "string",
-      "description": "Pharmacy the patient uses, if provided"
+      "enum": [
+        "running_low",
+        "out_of_medication"
+      ],
+      "description": "running_low = patient reports a few doses remaining; out_of_medication = patient reports zero doses on hand."
     },
-    "pharmacy_phone": {
+    "patient_note": {
       "type": "string",
-      "description": "Pharmacy phone number, if provided"
-    },
-    "patient_notes": {
-      "type": "string",
-      "description": "Verbatim or close-paraphrase of what the patient said about barriers (transport, prior auth, etc.)"
+      "description": "Optional verbatim patient quote providing context (e.g., 'I'm out of refills'). Preserved for the reviewing nurse."
     }
-  }
+  },
+  "additionalProperties": false
 }
 ```
 
 **Nearest existing tool(s):** log_reading, escalate_to_nurse
 
 ## What the backend needs
-Nurse task queue (same system backing escalate_to_nurse). Creates a pre-populated refill task with structured fields so the on-call nurse can call the pharmacy and contact the prescribing provider without re-interviewing the patient. When days_supply_remaining is 0 or 1, the task is flagged urgent and surfaces at the top of the queue. The tool returns a confirmation token the agent can relay to the patient ("your nurse has been notified and will follow up within X hours").
+EHR task queue (creates a typed refill-request task linked to the patient chart) + the same nurse-alert pathway used by escalate_to_nurse, distinguished by task_type=refill_request. urgency=out_of_medication should trigger a same-day SLA; urgency=running_low can queue for next business day. No direct pharmacy or e-prescribing write access — the tool is append-only to the task queue.
 
 ## Safety notes
-1. The tool never authorizes, denies, or opines on whether a refill is appropriate — that decision belongs to the prescriber. 2. The agent must not tell the patient the refill is approved or will be approved; the confirmation message must only confirm that a nurse has been notified. 3. days_supply_remaining = 0 must always trigger an urgent flag; do not suppress urgency even if a recent log_reading entry exists. 4. medication_name is stored as patient-reported text only — no drug database lookup or dosage inference by the agent. 5. If the patient describes symptoms alongside the refill request (e.g., elevated BP, chest tightness), the agent must call escalate_to_nurse directly instead of this tool, because that is a clinical situation requiring triage, not a refill queue task.
+1. No pharmacy write access: the tool never transmits to a pharmacy system; all refills require nurse or prescriber approval before dispensing.
+2. No clinical inference: the agent must not validate, substitute, or comment on the medication name — pass it through verbatim.
+3. out_of_medication urgency requires same-day nurse review; implement an SLA alert if unacknowledged after 4 hours.
+4. On tool success, the agent confirms to the patient only that "your request has been sent to your care team" — never confirms the refill will be approved or dispensed.
+5. If medication_name is blank or patient is ambiguous, fall back to escalate_to_nurse with the raw transcript rather than invoking this tool with incomplete data.
 
 ## Decision
 - [ ] Approve: `/expand tool-request_refill`

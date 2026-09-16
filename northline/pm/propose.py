@@ -68,6 +68,8 @@ def main(top: int = 4, ask=claude_json.ask_json_many) -> None:
     qm = json.loads((OUT / "queue_metrics.json").read_text())
     outs = ask([(_tool_prompt(c), PROPOSAL_SCHEMA) for c in cands] + [(_deploy_prompt(qm), DEPLOY_SCHEMA)], model="sonnet")
     (OUT / "proposals").mkdir(exist_ok=True)
+    for p in (OUT / "proposals").glob("tool-*.md"):
+        p.unlink()
     for c, o in zip(cands, outs[:-1]):
         (OUT / "proposals" / f"tool-{c['proposed_tool']}.md").write_text(render_tool(c, o))
     d = outs[-1]; d["agent_name"] = "triage"

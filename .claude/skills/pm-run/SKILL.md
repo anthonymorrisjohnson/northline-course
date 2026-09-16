@@ -5,7 +5,7 @@ description: Run the product-management loop over Northline's conversations and 
 
 You are running the loop with the attendee. The judgment steps call headless Claude Code; the counting is Python. Narrate briefly; do not paste whole files.
 
-1. Say how many items will be classified: `uv run python -c "from northline.pm.classify import load_items, REPO_ROOT; print(len(load_items(REPO_ROOT/'corpus', REPO_ROOT/'northline'/'logs')))"`. Tell them this takes about two minutes.
+1. Say how many items will be classified: `uv run python -c "from northline.pm.classify import load_items, REPO_ROOT; print(len(load_items(REPO_ROOT/'corpus', REPO_ROOT/'northline'/'logs')))"`. Tell them this takes about three minutes.
 2. Run `uv run python -m northline.pm.classify`. On a RuntimeError, run it once more.
 3. Run `uv run python -m northline.pm.aggregate`, then `uv run python -m northline.pm.diagnose`, then `uv run python -m northline.pm.propose`. Do not show diagnosis.md yet.
 4. Show, from `northline/pm/out/report.md`: the "board's numbers next to the logs" table, the tier table, and the top five candidate expansions. If any ids in `classified.jsonl` start with `live-`, find them and say which candidate the attendee's own conversation landed in, quoting their line.

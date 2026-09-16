@@ -71,7 +71,7 @@ def main() -> None:
     print(f"classifying {len(items)} items")
     OUT.mkdir(exist_ok=True)
     with (OUT / "classified.jsonl").open("w") as f:
-        for r in classify_items(items):
+        for r in classify_items(items, batch_size=10, ask=lambda jobs, **kw: claude_json.ask_json_many(jobs, workers=8, **kw)):
             f.write(json.dumps(r) + "\n")
     print(f"wrote {OUT / 'classified.jsonl'}")
 

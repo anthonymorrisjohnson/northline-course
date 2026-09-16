@@ -1,3 +1,4 @@
+import json
 from northline.pm import propose as pr
 
 CAND = {"persona": "patient", "proposed_tool": "request_refill", "count": 14, "share": 0.12, "quotes": ["Can someone call it in?"],
@@ -18,3 +19,21 @@ def test_render_deploy_has_four_decisions():
                               "tools_needed": ["pending_messages"], "decisions_for_humans": [], "acceptance_test": "Exhibit E",
                               "metrics_it_should_move": ["median response"], "risks": "downgrading"})
     assert t.count("\n1. ") == 1 and "4. " in t and "Urgent thresholds" in t and "/deploy triage" in t and "41%" in t
+
+
+def test_main_clears_stale_tool_proposals(tmp_path, monkeypatch):
+    monkeypatch.setattr(pr, "OUT", tmp_path)
+    (tmp_path / "candidates.json").write_text(json.dumps([CAND]))
+    (tmp_path / "queue_metrics.json").write_text(json.dumps(QM))
+    (tmp_path / "proposals").mkdir()
+    (tmp_path / "proposals" / "tool-old.md").write_text("stale")
+
+    def fake(jobs, **kw):
+        return [dict(OUT), {"agent_name": "triage", "placement": "p", "purpose": "p", "tools_needed": [],
+                             "decisions_for_humans": [], "acceptance_test": "t", "metrics_it_should_move": [], "risks": "r"}]
+
+    pr.main(top=1, ask=fake)
+    proposals = tmp_path / "proposals"
+    assert not (proposals / "tool-old.md").exists()
+    assert (proposals / "tool-request_refill.md").exists()
+    assert (proposals / "agent-triage.md").exists()

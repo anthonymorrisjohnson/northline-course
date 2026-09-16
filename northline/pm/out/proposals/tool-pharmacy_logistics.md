@@ -1,17 +1,17 @@
 # Expansion proposal: `pharmacy_logistics`
 
-**Kind:** tool  **Persona(s):** patient facing SMS check-in agent, nurse receiving escalation queue tasks, pharmacy logistics coordinator  **Evidence:** 19 conversations (16% of patient conversations)
+**Kind:** tool  **Persona(s):** rural chronic-care patient on SMS, on-call nurse receiving escalation, community health worker or NEMT coordinator  **Evidence:** 19 conversations (16% of patient conversations)
 
 ## What users asked for
-Patient in rural area needs mail pharmacy delivery and ride assistance; system cannot arrange transportation or logistics.
+User needed medication refill and transportation to pharmacy but lacked access.
 
 Example quotes:
-- "even once the script is sent, the nearest pharmacy is like 45 minutes out. Is there any way to set up mail delivery or get help with a ride?"
-- "Bigger issue is I'm almost out of lisinopril and my doctor said I need an actual new prescription this time, not just a refill. Pharmacy's a 45-minute drive one way."
-- "Problem is the pharmacy is 40 miles from me and getting out there isn't easy."
+- "That's the problem. I've been out of lisinopril for three days. My truck's been in the shop and the pharmacy is 45 miles away."
+- "pharmacy says they need a new script before they'll refill it and the nearest one is 45 miles from me. Almost out."
+- "I'm almost out of my lisinopril and the pharmacy told me they need a brand new prescription, not just a refill authorization. Problem is that pharmacy is 40 miles out and I don't have a ride lined up."
 
 ## Proposed tool
-**Docstring (what the model reads):** Arrange mail-order prescription delivery or non-emergency medical transportation to a pharmacy for patients facing distance or mobility barriers, and escalate to a nurse when the request involves a new prescription or any clinical question.
+**Docstring (what the model reads):** Coordinates prescription-and-transport barriers by escalating the clinical need to the on-call nurse with full context and simultaneously queuing a transportation assistance request, so neither track stalls waiting for the other.
 
 **Input schema:**
 ```json
@@ -19,76 +19,81 @@ Example quotes:
   "type": "object",
   "required": [
     "patient_id",
-    "request_type"
+    "medication_name",
+    "days_supply_remaining",
+    "prescription_barrier",
+    "pharmacy_distance_miles",
+    "transportation_available"
   ],
   "properties": {
     "patient_id": {
       "type": "string",
-      "description": "Northline patient identifier"
+      "description": "Unique patient identifier."
     },
-    "request_type": {
+    "medication_name": {
+      "type": "string",
+      "description": "Name of the medication the patient is trying to obtain."
+    },
+    "days_supply_remaining": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Patient-reported doses or days of medication left. Drives clinical urgency triage."
+    },
+    "prescription_barrier": {
       "type": "string",
       "enum": [
-        "mail_delivery",
-        "ride_assistance",
-        "both",
-        "nurse_escalation"
+        "new_script_required",
+        "refill_authorization_only",
+        "prior_auth_pending",
+        "unknown"
       ],
-      "description": "What the patient needs; use nurse_escalation when a new prescription or clinical question is detected"
-    },
-    "medication_names": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Medications the patient named; used to pre-populate the logistics order or nurse handoff"
-    },
-    "is_new_prescription": {
-      "type": "boolean",
-      "description": "True if the patient indicated they need a new prescription (not a refill); forces request_type to nurse_escalation"
-    },
-    "preferred_date": {
-      "type": "string",
-      "format": "date",
-      "description": "Earliest acceptable delivery date or ride date (ISO 8601)"
-    },
-    "patient_address": {
-      "type": "string",
-      "description": "Delivery address for mail orders or pickup address for rides; pulled from record if omitted"
+      "description": "What the pharmacy says is blocking the fill. Determines what the nurse needs to act on."
     },
     "pharmacy_name": {
       "type": "string",
-      "description": "Patient's current pharmacy, if known"
+      "description": "Name of the pharmacy the patient uses (optional but aids nurse lookup)."
     },
-    "patient_note": {
+    "pharmacy_distance_miles": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Approximate distance in miles from patient to pharmacy. Flags rural transport need."
+    },
+    "transportation_available": {
+      "type": "boolean",
+      "description": "Whether the patient currently has a way to reach the pharmacy."
+    },
+    "preferred_contact_window": {
       "type": "string",
-      "description": "Verbatim or summarized patient context to include in the logistics request or nurse handoff"
-    }
-  },
-  "if": {
-    "properties": {
-      "is_new_prescription": {
-        "const": true
-      }
-    }
-  },
-  "then": {
-    "properties": {
-      "request_type": {
-        "const": "nurse_escalation"
-      }
+      "description": "Optional. Patient's preferred time to be reached (e.g., 'mornings', 'after 2pm')."
+    },
+    "additional_context": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Optional free-text from the patient's message for the nurse's review."
     }
   }
 }
 ```
 
-**Nearest existing tool(s):** next_checkin, escalate_to_nurse
+**Nearest existing tool(s):** escalate_to_nurse, log_reading
 
 ## What the backend needs
-Two integrations required: (1) a mail-order pharmacy network API (e.g., Amazon Pharmacy, Nimble Rx, or an existing PBM partner) to place and track delivery orders; (2) a Non-Emergency Medical Transportation (NEMT) broker API (e.g., MTM, Modivcare, or Lyft Healthcare) to schedule and confirm rides. When request_type is nurse_escalation, the tool writes a pre-populated task to the existing escalate_to_nurse queue with medication names, is_new_prescription flag, and patient_note — no new backend needed for that path.
+Two parallel writes on tool invocation:
+
+1. **Nurse escalation queue** — creates an `escalate_to_nurse` task pre-populated with medication name, days remaining, prescription barrier, pharmacy name, and patient contact window. If `days_supply_remaining` ≤ 3, the task is flagged `priority: urgent`. The nurse sees everything needed to call the pharmacy and authorize/write a script without a separate lookup.
+
+2. **Transportation coordination service** — if `transportation_available` is `false`, enqueues a transport assistance request (NEMT broker API, volunteer driver network, or community health worker dispatch — whichever is configured per region). Payload includes patient_id, pharmacy name, distance, and a reference to the open nurse task so transport timing can be coordinated once the script is cleared.
 
 ## Safety notes
-1. Clinical firewall: the tool never advises on dosage, interactions, or prescription appropriateness — any clinical content in patient_note is passed verbatim to the nurse, not interpreted. 2. New-prescription hard-stop: if is_new_prescription is true the tool MUST set request_type to nurse_escalation regardless of what the caller supplied; the logistics order must not be created. 3. Consent: confirm patient consent to share address and medication list with third-party logistics vendors before dispatching. 4. Confirmation loop: send the patient an SMS confirmation with estimated delivery window or ride time so they can flag errors before a no-show. 5. Failure fallback: if the logistics API returns an error, fall through to escalate_to_nurse with the full context so no patient request is silently dropped.
+1. **No clinical advice through this tool.** The tool never tells the patient whether, when, or how to take medication, nor does it comment on whether the refill is appropriate. All prescription decisions flow exclusively through the nurse.
+
+2. **Urgency gate.** `days_supply_remaining` ≤ 3 must set `priority: urgent` on the nurse task. The SMS agent must not imply to the patient that the situation is routine when this flag is active.
+
+3. **Transport does not gate clinical action.** The nurse escalation fires immediately regardless of whether transport can be arranged. Transportation is a parallel track, never a prerequisite.
+
+4. **Confirmation to patient is non-clinical.** The only message returned to the SMS agent for the patient is: confirmation that a nurse has been notified and that transport assistance is being arranged (if applicable). No medication guidance, no estimated timelines for the script.
+
+5. **Audit trail.** Both the nurse task and the transport request must reference the same `patient_id` and a shared `case_id` so outcomes can be linked in the care record.
 
 ## Decision
 - [ ] Approve: `/expand tool-pharmacy_logistics`

@@ -1,67 +1,69 @@
 # Expansion proposal: `insurance_question`
 
-**Kind:** tool  **Persona(s):** care coordinator, on-call nurse  **Evidence:** 20 conversations (17% of patient conversations)
+**Kind:** tool  **Persona(s):** care coordinator, nurse  **Evidence:** 19 conversations (16% of patient conversations)
 
 ## What users asked for
-Patient needs help with insurance prior authorization for medication refill
+User asked for help processing insurance prior authorization for medication refill.
 
 Example quotes:
 - "any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now."
-- "I'm almost out of my lisinopril and my insurance has been rejecting the refill for two weeks."
 - "My insurance denied my test strips last week so I've only been checking every few days."
+- "My insurance denied my test strip claim and I'm basically out now."
 
 ## Proposed tool
-**Docstring (what the model reads):** Captures a patient's insurance or prior authorization barrier for a medication or supply, then routes it to the care coordination queue — or directly to the on-call nurse if the patient reports critically low days of supply remaining.
+**Docstring (what the model reads):** Captures a patient's insurance or prior-authorization question and queues it for a care coordinator, supplying enough context to act without calling the patient back.
 
 **Input schema:**
 ```json
 {
   "type": "object",
-  "required": [
-    "patient_id",
-    "medication_or_supply",
-    "issue_type",
-    "patient_description"
-  ],
   "properties": {
     "patient_id": {
       "type": "string",
-      "description": "Northline Care patient identifier"
+      "description": "Northline patient identifier"
+    },
+    "question_text": {
+      "type": "string",
+      "description": "Patient's verbatim or close-paraphrase message about the insurance issue"
     },
     "medication_or_supply": {
       "type": "string",
-      "description": "Name of the medication or supply affected (e.g., 'metoprolol 25mg', 'test strips')"
+      "description": "Drug name, device, or supply being denied or delayed (e.g. 'metoprolol 25 mg', 'test strips')"
     },
     "issue_type": {
       "type": "string",
       "enum": [
-        "prior_authorization",
-        "coverage_denial",
-        "refill_delay",
-        "unknown"
+        "prior_auth",
+        "claim_denial",
+        "coverage_question",
+        "other"
       ],
-      "description": "Category of insurance barrier as understood from the patient's message"
+      "description": "Category of insurance barrier"
     },
-    "patient_description": {
-      "type": "string",
-      "description": "Verbatim or close-paraphrase of what the patient said, preserved for the nurse or coordinator"
-    },
-    "days_of_supply_remaining": {
+    "days_without_supply": {
       "type": "integer",
-      "minimum": 0,
-      "description": "Estimated days of medication or supply the patient has left; null if patient did not specify"
+      "description": "How many days the patient has been without the medication or supply; omit if unknown"
+    },
+    "insurance_carrier": {
+      "type": "string",
+      "description": "Insurer name as stated by the patient; omit if unknown"
     }
-  }
+  },
+  "required": [
+    "patient_id",
+    "question_text",
+    "issue_type"
+  ]
 }
 ```
 
 **Nearest existing tool(s):** log_reading, next_checkin
 
 ## What the backend needs
-Care Coordination Queue API (creates a task for a care coordinator to work the prior auth) + Nurse Escalation API (pages the on-call nurse with full context when days_of_supply_remaining is ≤ 3 or null and issue has been ongoing > 7 days) + EHR read (pulls current prescription and last fill date so the nurse or coordinator has context without asking the patient again)
+A care-coordination task queue (e.g. the existing EHR worklist or a lightweight ticket store) that can create a tagged task visible to nurses and care coordinators, pre-populated with the schema fields and a computed urgency flag (days_without_supply >= 3 → HIGH).
 
 ## Safety notes
-1. The tool NEVER tells the patient whether to take, skip, or substitute a medication — any clinical question surfaces as a nurse escalation, not a tool response. 2. If days_of_supply_remaining ≤ 3 (or the patient says they are already rationing), the call goes to the nurse queue immediately, not the coordinator queue — rationing chronic-disease medication (beta-blockers, ACE inhibitors, insulin supplies) is a safety event. 3. The patient-facing confirmation is administrative only: 'We've flagged this for your care team — someone will follow up within [SLA].' 4. Patient description is stored verbatim to avoid lossy summarization before the nurse sees it. 5. Tool does not attempt to contact the insurer directly or provide prior auth form guidance; that action belongs to the coordinator workflow triggered downstream.
+No clinical advice ever — the tool acknowledges the patient and sets expectations only. If days_without_supply >= 3 for a cardiac or diabetes-critical supply, the task is flagged HIGH and surfaces immediately in the nurse queue. The tool queues human action only; it does not submit prior-auth requests, contact payers, or promise outcomes, keeping liability with credentialed staff.
 
 ## Decision
 - [ ] Approve: `/expand tool-insurance_question`

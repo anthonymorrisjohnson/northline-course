@@ -2,24 +2,24 @@
 
 ## Headline
 
-The AI is working. The nurses are not keeping up — and signing the expansion contract with today's staffing will make that worse by an order of magnitude.
+Northline Care: A Capacity Crisis in Plain Sight
 
 ## What the board sees
 
-The board deck shows a system that looks controlled: roughly 2,400 escalations a week, a median nurse response of about 30 hours, and a 99% answer rate. Those numbers suggest a predictable backlog and a team that is mostly current. Nothing in the deck signals an imminent breakdown.
+The board deck shows 2,400 escalations a week and a median nurse response time of roughly 30 hours. Those numbers are accurate as far as they go, but they describe today's load — 40,000 patients spread across 22 nurses — and they omit the tail: one in ten patients waits more than 72 hours to hear back, and 344 people in the queue right now have not been reached in over 24 hours.
 
 ## What the logs show
 
-The logs show 344 patients waiting more than 24 hours with no reply, and 342 who went silent after their escalation — they stopped engaging, almost certainly because no one came back to them. Urgent clinical escalations wait just as long as routine ones (29.1 hours versus 29.6 hours), which means the queue has no working triage and a patient in crisis waits in the same line as someone asking a billing question. Four in ten nurse contacts are non-clinical — insurance, pharmacy logistics, opt-outs — work that consumes the same clinical hours as a genuine medical decision.
+The logs reveal two things the board deck does not. First, 40 percent of every message landing in the nurse queue has nothing clinical in it — insurance questions, pharmacy logistics, medication refills, broken blood-pressure cuffs — tasks that consume nurse time without requiring a nurse. Second, 342 patients went silent after being escalated, a number that almost certainly reflects people who stopped engaging because no one answered fast enough.
 
 ## The bottleneck
 
-The constraint is nurse headcount and available hours, not the AI platform. Twenty-two nurses are absorbing 2,401 escalations every week, nearly half of them outside business hours when staffing is at its lowest. Because there is no triage separating urgent from routine, and because a large share of the queue is administrative rather than clinical, every nurse hour spent on a prior-auth question is an hour not spent on a patient whose blood pressure reading flagged overnight.
+The bottleneck is nurse capacity, full stop. The AI agent is working: it handles check-ins, flags concerns, and routes correctly. But every routed concern lands in a human queue that already has more volume than 22 people can clear quickly, and 46 percent of that volume arrives outside business hours when staffing is thinnest.
 
 ## Why signing Prairie makes it worse
 
-The Prairie contract would take Northline from 40,000 to 100,000 patients — a 2.5x increase — with the same 22 nurses on day one. The capacity model projects median nurse response rising from 30 hours to 336 hours, roughly 14 days, under that load. The AI will continue to check in on patients and flag concerns at the same rate; the people responsible for acting on those flags will simply be unable to reach them in any clinically meaningful timeframe.
+Signing the Prairie contract more than doubles patient volume — from 40,000 to 100,000 — while the nurse headcount stays at 22. If response time scales proportionally with load, the model puts median nurse response at 336 hours after signing: fourteen days. That is not a projection where some patients wait a long time; it is a projection where the queue functionally stops moving for most people.
 
 ## The one metric to watch
 
-Patients inactive after escalation — currently 342. This is the most direct measure of care failure already happening: a patient who stops responding after being ignored has disengaged from their own treatment, and that disengagement is invisible to the board deck. As volume grows, this number will grow faster than any other metric and is the clearest early signal that the nurse bottleneck is producing real clinical harm, not just a slow inbox.
+Watch median nurse response time. At 30 hours today it is already slow enough that hundreds of patients are going dark after escalation; at 336 hours it becomes a patient-safety exposure and a regulatory one. Every other number in this report — resolution rates, inactive patients, unanswered escalations — is a downstream consequence of that single figure.
