@@ -1,0 +1,119 @@
+[
+  {
+    "id": "pt-1001",
+    "name": "Alice Johnson",
+    "phone": "701-555-0101",
+    "town": "Bismarck",
+    "conditions": ["hypertension", "type2_diabetes"],
+    "nurse_id": "n-01",
+    "plan_id": "plan-prairie",
+    "medications": ["lisinopril 10 mg", "metformin 500 mg"],
+    "last_readings": [
+      {"kind": "bp", "value": "146/92", "at": "2026-09-15T08:30:00Z"},
+      {"kind": "glucose", "value": "162", "at": "2026-09-15T09:00:00Z"}
+    ],
+    "engaged": true
+  },
+  {
+    "id": "pt-1002",
+    "name": "Bob Smith",
+    "phone": "701-555-0102",
+    "town": "Dickinson",
+    "conditions": ["hypertension"],
+    "nurse_id": "n-02",
+    "plan_id": "plan-dakota",
+    "medications": ["enalapril 5 mg"],
+    "last_readings": [
+      {"kind": "bp", "value": "138/88", "at": "2026-09-14T07:15:00Z"}
+    ],
+    "engaged": true
+  },
+  {
+    "id": "pt-1003",
+    "name": "Carol Davis",
+    "phone": "701-555-0103",
+    "town": "Minot",
+    "conditions": ["type2_diabetes"],
+    "nurse_id": "n-03",
+    "plan_id": "plan-dakota",
+    "medications": ["glipizide 5 mg"],
+    "last_readings": [
+      {"kind": "glucose", "value": "145", "at": "2026-09-15T06:45:00Z"}
+    ],
+    "engaged": true
+  },
+  {
+    "id": "pt-1004",
+    "name": "Diana Wilson",
+    "phone": "701-555-0104",
+    "town": "Ward County",
+    "conditions": ["hypertension", "type2_diabetes"],
+    "nurse_id": "n-01",
+    "plan_id": "plan-dakota",
+    "medications": ["lisinopril 10 mg", "pioglitazone 15 mg"],
+    "last_readings": [
+      {"kind": "bp", "value": "142/90", "at": "2026-09-13T10:00:00Z"},
+      {"kind": "glucose", "value": "158", "at": "2026-09-13T10:30:00Z"}
+    ],
+    "engaged": false,
+    "note": "no response since unanswered escalation 2026-08-30"
+  },
+  {
+    "id": "pt-1005",
+    "name": "Edward Brown",
+    "phone": "701-555-0105",
+    "town": "Williston",
+    "conditions": ["hypertension"],
+    "nurse_id": "n-02",
+    "plan_id": "plan-dakota",
+    "medications": ["amlodipine 5 mg"],
+    "last_readings": [
+      {"kind": "bp", "value": "128/80", "at": "2026-09-15T07:30:00Z"}
+    ],
+    "engaged": true
+  },
+  {
+    "id": "pt-1006",
+    "name": "Fiona Miller",
+    "phone": "701-555-0106",
+    "town": "Bismarck",
+    "conditions": ["type2_diabetes"],
+    "nurse_id": "n-03",
+    "plan_id": "plan-prairie",
+    "medications": ["metformin 1000 mg"],
+    "last_readings": [
+      {"kind": "glucose", "value": "168", "at": "2026-09-14T08:15:00Z"}
+    ],
+    "engaged": true
+  },
+  {
+    "id": "pt-1007",
+    "name": "George Taylor",
+    "phone": "701-555-0107",
+    "town": "Dickinson",
+    "conditions": ["hypertension", "type2_diabetes"],
+    "nurse_id": "n-01",
+    "plan_id": "plan-dakota",
+    "medications": ["lisinopril 5 mg", "glyburide 5 mg"],
+    "last_readings": [
+      {"kind": "bp", "value": "135/85", "at": "2026-09-15T09:45:00Z"},
+      {"kind": "glucose", "value": "151", "at": "2026-09-15T10:00:00Z"}
+    ],
+    "engaged": false,
+    "note": "no response since unanswered escalation 2026-08-30"
+  },
+  {
+    "id": "pt-1008",
+    "name": "Hannah Anderson",
+    "phone": "701-555-0108",
+    "town": "Minot",
+    "conditions": ["hypertension"],
+    "nurse_id": "n-02",
+    "plan_id": "plan-dakota",
+    "medications": ["hydrochlorothiazide 25 mg"],
+    "last_readings": [
+      {"kind": "bp", "value": "132/82", "at": "2026-09-14T06:00:00Z"}
+    ],
+    "engaged": true
+  }
+]

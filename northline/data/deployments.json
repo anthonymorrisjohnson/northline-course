@@ -1,0 +1,12 @@
+[
+  {
+    "name": "checkin_agent",
+    "live_from_week": 1,
+    "effects": {
+      "engaged_weekly": 0.78,
+      "escalation_rate": 0.06,
+      "inbound_rate": 0.0775,
+      "readings_per_response": 0.89
+    }
+  }
+]

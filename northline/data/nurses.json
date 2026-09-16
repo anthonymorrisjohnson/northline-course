@@ -1,0 +1,20 @@
+[
+  {
+    "id": "n-01",
+    "name": "Sarah Martinez",
+    "region": "Bismarck",
+    "patients": ["pt-1001", "pt-1004", "pt-1007"]
+  },
+  {
+    "id": "n-02",
+    "name": "James Chen",
+    "region": "Dickinson",
+    "patients": ["pt-1002", "pt-1005", "pt-1008"]
+  },
+  {
+    "id": "n-03",
+    "name": "Maria Lopez",
+    "region": "Minot",
+    "patients": ["pt-1003", "pt-1006"]
+  }
+]
