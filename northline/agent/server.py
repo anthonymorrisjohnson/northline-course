@@ -1,5 +1,5 @@
 """Front door 2: the check-in agent as an SMS-style page. The dashboard is served here too."""
-import os, uuid
+import os, re, uuid
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
@@ -10,6 +10,7 @@ app = FastAPI(title="Northline check-in agent")
 STATIC = Path(__file__).resolve().parent / "static"
 run_turn_fn = claude_runner.run_turn
 _claude_sessions: dict[str, str] = {}
+SESSION_RE = re.compile(r"^[0-9a-f]{12}$")
 
 
 class ChatIn(BaseModel):
@@ -24,7 +25,7 @@ def index():
 
 @app.post("/chat")
 def chat(body: ChatIn):
-    sid = body.session_id or uuid.uuid4().hex[:12]
+    sid = body.session_id if body.session_id and SESSION_RE.fullmatch(body.session_id) else uuid.uuid4().hex[:12]
     r = run_turn_fn(body.message, system_prompt=prompt.system_prompt(), mcp_config=prompt.mcp_config(sid),
                     session_id=_claude_sessions.get(sid), model=os.environ.get("NORTHLINE_MODEL"))
     if r.session_id:
