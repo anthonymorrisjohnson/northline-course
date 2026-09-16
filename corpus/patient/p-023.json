@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-023",
+  "persona": "patient",
+  "started": "2026-06-10T01:22:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi! Weekly check-in. Did you log a reading?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yep - 138 BP, been pretty steady",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect, got it. How's the medication supply looking?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "running low on my pills - only got 2 weeks left",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't process refills myself, but you can call your pharmacy or your doctor's office. They usually turn those around quick.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "already scheduled it but thx",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "All set then. I'll check in next week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "\ud83d\udc4d",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-062",
+  "persona": "patient",
+  "started": "2026-06-11T10:37:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: blood pressure cuff shows ERR, device support. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1007. Vary tone and wording; conversation number 62.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "## SMS Conversation - Patient pt-1007, Check-in #62\n\n**Patient:** Hi northline\u2014my blood pressure machine is broken. Won't give readings just shows ERR. I need to check my BP regularly. This is stressing me out.\n\n**Agent:** Hi, I'm sorry you're dealing with this. I can't help troubleshoot the device itself, but ERR usually means low battery or connection issue. Have you tried new batteries or restarting it?\n\n**Patient:** tried everything already. this is day 3. who do I call?\n\n**Agent:** I get it\u2014that's really frustrating. I can escalate this to our nurse team, though I should tell you our median wait time right now is 31 hours. For faster device support, your cuff's customer service line might actually be quicker. What would you prefer?\n\n**Patient:** just escalate me. I don't know who made this thing. also did my last reading come through ok?\n\n**Agent:** Escalating you now. Someone from our nurse team will contact you\u2014median wait is 31 hours. Your last reading came through fine a few days ago at 138/88. For the device itself, check the manual or box for the manufacturer's support number.\n\n**Patient:** ok thanks. I'll try calling them too.\n\n**Agent:** Good plan. In the meantime, do you need me to log any medications you took today? Next check-in is scheduled for 7 days from now.\n\n**Patient:** yeah, took metformin this morning. 1000mg.\n\n**Agent:** Logged your metformin 1000mg for today. You're all set. Escalation to nurse team is in progress. Hang in there.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "blood pressure cuff shows ERR, device support"
+}

@@ -1,0 +1,1 @@
+{"ts": "2026-07-23T12:06:00", "session_id": "corpus-s-027", "persona": "plan", "tool": "synthetic_tool_log", "args": {"format": "northline_mcp_session_log", "session_id": "27", "analyst_role": "health_plan_analyst", "plan_id": "plan-prairie", "call_count": 5, "includes_error": true, "error_type": "invalid_member_id_format"}, "status": "ok", "error": null}

@@ -1,0 +1,75 @@
+{
+  "session_id": "corpus-p-079",
+  "persona": "patient",
+  "started": "2026-06-18T15:20:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi, this is Northline Care's check-in. Your morning glucose was 289. Our nurse team is reviewing this today and will reach out to you shortly.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "That high? What do I do??",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Don't panic\u2014the nurse will talk you through next steps. They can give clinical advice, I can't.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Can I adjust my insulin dose?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Please wait to talk to the nurse about that. Don't change your medications on your own.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "How soon will they call?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Our median response time is currently 31 hours. You should hear from them by tomorrow or the day after. If you feel really unwell before then, call 911.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Ok got it",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good. I'm marking you for next week's check-in. Hang tight! \ud83d\udc99",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "reading flagged high and escalated to a nurse"
+}

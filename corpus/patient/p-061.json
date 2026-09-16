@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-061",
+  "persona": "patient",
+  "started": "2026-06-22T10:10:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation between rural ND patient pt-1006 with type 2 diabetes and Northline Care agent. Patient has transport/pharmacy access problem. Agent can log readings/meds, escalate to nurse (31h median response), schedule checkins\u2014but cannot do refills, insurance, transport, diet advice, device support. Agent must say plainly what it cannot do and escalate clinical issues. 4-8 short texts, conversation #61.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "# Conversation 61: pt-1006\n\n**Agent (11:42 AM):**\nHi pt-1006, it's Northline Care's weekly check-in. How's it going?\n\n**Patient (11:47 AM):**\nnot great. my metformin ran out 2 days ago and the pharmacy is 40 miles away. work till 6, they close at 5. i'm stuck\n\n**Agent (11:48 AM):**\nThat's a tough spot. I can't handle refills or transport, but a nurse might know options. Want me to escalate? Usually takes about 31 hours to hear back.\n\n**Patient (11:52 AM):**\nyes please. also my blood sugar's been all over\u2014287 monday, 156 wednesday. nothing since then\n\n**Agent (11:53 AM):**\nLogging those readings now. Nurse will want that history and can address the swings properly\u2014I'm not able to give guidance on that. They're reaching out within a day.\n\n**Patient (11:58 AM):**\nok thanks. really hoping they have ideas\n\n**Agent (11:59 AM):**\nThey will. Next check-in is set for next week. Take care.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "the long drive to the pharmacy or clinic, transport"
+}

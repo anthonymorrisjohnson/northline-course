@@ -1,0 +1,28 @@
+{
+  "session_id": "corpus-p-092",
+  "persona": "patient",
+  "started": "2026-07-19T00:21:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: blood pressure cuff shows ERR, device support. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1005. Vary tone and wording; conversation number 92. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Conversation #92: Blood Pressure Device Issue**\n\nPt: \"My BP cuff won't work\u2014just showing ERROR.\"\n\nAgent: \"Hi pt-1005, sorry to hear that. I can't troubleshoot devices, so I'm escalating this to our nursing team. They'll contact you\u2014median wait is 31 hours. Are you feeling OK?\"\n\nPt: \"Yeah, feel fine. But what do I do about my readings?\"\n\nAgent: \"Nursing will talk through options when they reach out\u2014might be troubleshooting, replacement, or something else. That's their call, not mine.\"\n\nPt: \"Alright. How long did you say?\"\n\nAgent: \"31 hours, roughly. They're your best resource for this. I've flagged you as priority.\"\n\nPt: \"Cool, thanks.\"\n\nAgent: \"You got it. Take care.\"",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "blood pressure cuff shows ERR, device support"
+}

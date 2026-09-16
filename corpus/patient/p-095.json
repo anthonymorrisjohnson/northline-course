@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-095",
+  "persona": "patient",
+  "started": "2026-06-25T09:16:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi! Weekly check-in. How have you been?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "not great. my ride broke down. pharmacy is 40 mins away and i'm out of my blood pressure meds",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's tough. I can't help with rides or refills, but our nurse team can\u2014want me to escalate? Median response is 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yes please. also been dizzy since i stopped them",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Escalating now. Tell them about the dizziness. Any BP reading handy?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "150/94 yesterday. will that help?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged (150/94). That helps the nurse see the picture. They'll call/text within 31 hours with access resources.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "ok thanks",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "the long drive to the pharmacy or clinic, transport"
+}

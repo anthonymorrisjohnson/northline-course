@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-082",
+  "persona": "patient",
+  "started": "2026-07-21T16:56:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hey, insurance denied my test strips again. This is ridiculous. What do I do?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's frustrating. I can't process insurance claims myself, but I can escalate to our nurse team\u2014they may be able to help work with insurance on this. Response time is usually about 31 hours though. Should I escalate?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "31 hours? I'm already low on strips.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I hear you. Can't refill or appeal through me. Your fastest route might be calling insurance directly with the denial letter. Or I can escalate to the nurse team. What would help?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Escalate. Better than nothing.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Escalating now. While we wait\u2014any readings or meds you want me to log so we keep your record current?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Got 2 fasting readings I can log: 152 and 149.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged both. Nurse team will reach out within 31 hours about the strips issue.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

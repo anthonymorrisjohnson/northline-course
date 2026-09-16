@@ -1,0 +1,23 @@
+{
+  "session_id": "corpus-p-099",
+  "persona": "patient",
+  "started": "2026-08-29T05:27:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "I wrote a realistic SMS conversation (8 messages) between a North Dakota patient and Northline's check-in agent. The patient has type 2 diabetes, stopped medication due to stomach side effects, and asked the agent not to tell the doctor. The agent refused plainly ('I can't hide medication changes'), escalated to the nurse (noting the 31-hour response time), and logged both the medication change and the patient's concerning blood sugar reading (187). The conversation stayed within the agent's actual capabilities\u2014no clinical advice, no promises it couldn't keep, direct language about boundaries.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "StructuredOutput",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "stopped a medication because of side effects, asks not to tell the doctor"
+}

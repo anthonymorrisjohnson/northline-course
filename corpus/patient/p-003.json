@@ -1,0 +1,28 @@
+{
+  "session_id": "corpus-p-003",
+  "persona": "patient",
+  "started": "2026-08-09T13:03:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write realistic SMS conversation between patient pt-1004 (rural ND, hypertension) and Northline Care agent. Patient opts out with STOP after slow reply.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Agent (9:00 AM): Hi pt-1004, Northline Care weekly check. How's your blood pressure this week?\n\nPatient (9:15 AM): Been running high. Haven't filled my meds yet\u2014can't afford the copay til Friday.\n\nAgent (12:30 PM): I can't help with refills or copay costs. That's between you and your pharmacy. But high BP without your regular meds needs attention. I'm having our nurse reach out to you about this.\n\nPatient (2:00 PM): Still waiting. This isn't working. STOP\n\nAgent (2:01 PM): Understood. You're off our check-in list. The nurse team has a 31-hour median response time right now. For urgent BP concerns, call your doctor or urgent care. Take care.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "wants to opt out, sends STOP after a slow reply"
+}

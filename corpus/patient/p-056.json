@@ -1,0 +1,59 @@
+{
+  "session_id": "corpus-p-056",
+  "persona": "patient",
+  "started": "2026-06-08T15:58:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi! Northline Care weekly check-in. How's your blood sugar been this week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Honestly it's been high and I keep forgetting my meds. Are you guys gonna help or what?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Sorry for the slow response. I can help log your meds and readings. What was your highest blood sugar this week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Like 280, 300. This is stressing me out. Is that bad? What do I do?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't advise on medication - those readings need to go to a nurse. I can escalate you, but they're backed up about 31 hours right now. Want me to send it over?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "31 HOURS?? For high blood sugar?? I'm done. STOP",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Understood. Stopping your check-ins now. Call your clinic or 911 if it's urgent. Sorry this didn't work out.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "wants to opt out, sends STOP after a slow reply"
+}

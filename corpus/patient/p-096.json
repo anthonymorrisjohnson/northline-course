@@ -1,0 +1,58 @@
+{
+  "session_id": "corpus-p-096",
+  "persona": "patient",
+  "started": "2026-07-09T22:48:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hey Northline. Its been so quiet out here since the snow. How u doing?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hi! Good to hear from you. How's everything been\u2014meds going ok?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah meds are fine. Just... been kinda lonely. Nobody's been by in a while.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I hear you. Winter can feel really isolating out there. I can't arrange visits or transport myself, but our nurses can talk through things with you. Want me to connect you with someone?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "I guess so. What's the wait time?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Usually about 31 hours for a nurse callback. Is that ok?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah that works. Thanks for listening.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You got it. Take care of yourself out there.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "lonely, just wanted to talk, nobody has been by since the snow"
+}

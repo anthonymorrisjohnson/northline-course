@@ -1,0 +1,29 @@
+{
+  "session_id": "corpus-p-015",
+  "persona": "patient",
+  "started": "2026-08-06T15:18:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "**NORTHLINE CARE WEEKLY CHECK-IN \u2014 Patient pt-1008 (Conversation #15)**\n\nAgent: Hey, Northline here. Got your BP at 158 over 92. How's the week going?\n\nPatient: Pretty good. Same numbers as usual, so can't complain.\n\nAgent: Steady is good. Anything new or anything bugging you?\n\nPatient: Honestly just tired of doing this every single day. Can I skip some days?\n\nAgent: I hear you on the fatigue. But I can't say whether to change your check routine\u2014that's a doctor call. Want to talk to a nurse about managing it?\n\nPatient: Nah, I'll ask my doc at the next visit. See you next week?\n\nAgent: Yep, same time next Wednesday. Hang in there.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

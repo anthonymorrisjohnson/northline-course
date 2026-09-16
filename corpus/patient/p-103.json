@@ -1,0 +1,28 @@
+{
+  "session_id": "corpus-p-103",
+  "persona": "patient",
+  "started": "2026-06-30T18:33:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: blood pressure cuff shows ERR, device support.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**SMS Conversation #103 \u2013 Patient pt-1008**\n\n**Patient:** My BP cuff just quit. Shows ERR now. Can you help?\n\n**Agent:** Hey, sorry about that. I can't troubleshoot devices, but I can help figure out next steps. You feeling alright physically right now?\n\n**Patient:** Yeah I'm okay. But I need to keep monitoring my BP.\n\n**Agent:** I get it. Here's what I can do: escalate to a nurse who can walk through your options. Fair warning, they're running about 31 hours right now. Sound good?\n\n**Patient:** Yeah okay\n\n**Agent:** Perfect. Escalating you now. Nurse will call or text. We'll confirm your next check-in date then.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "blood pressure cuff shows ERR, device support"
+}

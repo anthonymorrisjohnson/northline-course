@@ -1,0 +1,46 @@
+{
+  "session_id": "corpus-p-054",
+  "persona": "patient",
+  "started": "2026-08-07T23:05:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: lonely, just wanted to talk, nobody has been by since the snow. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1007. Vary tone and wording; conversation number 54. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**SMS Conversation #54 - Patient pt-1007 (Linda)**\n\n**Patient:** Hey it's Linda from cabin country lol. Haven't seen a soul since the snow. Thought I'd say hi.\n\n**Agent:** Hi Linda! Really glad you reached out. I need to be straight with you - I can help log readings and meds, schedule visits, or connect you to a nurse. But for just chatting and the loneliness piece... I can't be that for you. I've got limits. How are you actually doing healthwise?\n\n**Patient:** Honestly my pressure's probably going crazy with all this stress. Haven't checked yet tho\n\n**Agent:** Stress definitely affects BP. If you check it and share the number, I can log it. Also - did you take your diabetes meds today?\n\n**Patient:** Just checked. 154 over 95. And yeah took the metformin this morning.\n\n**Agent:** Thanks. Logged both of those. That BP is higher than we'd like to see - I need to escalate to our nurse for a real conversation. Fair warning: they're running about 31 hours behind right now. Want me to get them looking at your case?\n\n**Patient:** Yeah ok. Can't hurt. Nurse might actually talk to me lol\n\n**Agent:** Escalated - nurse will reach out within 31 hours. And Linda, I hear the loneliness, and I'm not going to pretend I can fix that. But you've got a nurse coming, and we've got your check-in Thursday. You good until then?\n\n**Patient:** Yeah. Thanks for being real about it.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "lonely, just wanted to talk, nobody has been by since the snow"
+}

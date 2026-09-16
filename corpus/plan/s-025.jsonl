@@ -1,0 +1,1 @@
+{"ts": "2026-06-18T21:31:00", "session_id": "corpus-s-025", "persona": "plan", "tool": "StructuredOutput", "args": {"type": "mcp_tool_log", "session": 25, "plan": "plan-prairie", "call_count": 5, "error_pattern": "invalid_member_id_format_corrected"}, "status": "ok", "error": null}

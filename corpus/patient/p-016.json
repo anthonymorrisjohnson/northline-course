@@ -1,0 +1,48 @@
+{
+  "session_id": "corpus-p-016",
+  "persona": "patient",
+  "started": "2026-06-19T09:32:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "hey northline, my insurance company saying I hit my limit on test strips already but I barely used any this month",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That sounds frustrating. I can't fix insurance issues or fight claims \u2014 that's not in my wheelhouse. But I can escalate you to our nurse team who's better equipped to help with this stuff. Interested?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "will they actually be able to do anything?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "They can't override your insurance, but they know how to help with appeals, talking to your doctor, all that. Median wait is about 31 hours right now though. Your call.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yeah escalate me",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Done. Escalation submitted for pt-1001. Nurse will reach out soon. Sorry you're dealing with this.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

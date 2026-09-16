@@ -1,0 +1,48 @@
+{
+  "session_id": "corpus-p-065",
+  "persona": "patient",
+  "started": "2026-06-30T08:00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hey, quick question about what to eat. I've been cutting bread for my blood sugar. What's a good swap?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good thinking on the diet adjustment. I can't give diet advice, but I can escalate you to a nurse who can give you solid recommendations. Want me to do that?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yeah sure",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Setting that up now. Fair warning\u2014our nurses are running about 31 hours response time right now, but they'll help you figure it out.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "sounds good",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "All set. Your next check-in is Friday. Any readings to log today while I've got you?",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "diet question, what to eat instead of bread"
+}

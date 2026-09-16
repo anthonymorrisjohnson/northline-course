@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-093",
+  "persona": "patient",
+  "started": "2026-08-25T08:24:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write realistic SMS conversation #93: rural North Dakota patient (pt-1006, hypertension), routine weekly check-in with Northline Care agent. 4\u20138 texts, natural tone variation, agent clearly states what it cannot do.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Northline Care Weekly Check-In \u2014 Conversation #93**\n\nMon, 2:14 PM\n\nNorthline Care: Hey pt-1006, weekly check-in! Got a reading for me?\n\nPatient: Yep, BP was 138/86 this morning\n\nNorthline Care: Thanks for logging that. U staying on ur meds?\n\nPatient: Every morning, no problem. Also quick Q\u2014should I cut back on salt?\n\nNorthline Care: Ill log that reading and meds. On the salt question, I can't give diet advice\u2014that's for ur doctor. But great work staying consistent!\n\nPatient: Ok got it\n\nNorthline Care: Next check Friday. Keep going \ud83d\udc4d",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

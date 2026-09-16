@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-085",
+  "persona": "patient",
+  "started": "2026-06-20T21:15:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Patient id pt-1006. Conversation #85.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Conversation #85 \u2014 Northline Care Weekly Check-in (pt-1006)**\n\n**Agent:** Morning pt-1006\u2014got your BP, 128/80, nice. Everything else good this week?\n\n**Patient:** Yeah pretty much. One thing though, I've had some joint pain.\n\n**Agent:** Joint pain isn't something I can give advice on, that's clinical. Should I get a nurse involved?\n\n**Patient:** Sure, how long does that usually take?\n\n**Agent:** Median response right now is 31 hours.\n\n**Patient:** That's alright, go ahead.\n\n**Agent:** Will do. They'll call you. Next check-in is next Wednesday like usual.\n\n**Patient:** Sounds good, thanks.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

@@ -1,0 +1,5 @@
+{"ts": "2026-07-10T19:23:00", "session_id": "corpus-s-039", "persona": "plan", "tool": "member_engagement", "args": {"plan_id": "plan-prairie"}, "status": "ok", "error": null}
+{"ts": "2026-07-08T15:38:00", "session_id": "corpus-s-039", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
+{"ts": "2026-06-08T19:40:00", "session_id": "corpus-s-039", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "555-867-5309"}, "status": "error", "error": "Invalid member_id format. Expected: pt-[4 digits]"}
+{"ts": "2026-08-07T11:02:00", "session_id": "corpus-s-039", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "pt-1247"}, "status": "ok", "error": null}
+{"ts": "2026-07-04T08:02:00", "session_id": "corpus-s-039", "persona": "plan", "tool": "enroll_members", "args": {"plan_id": "plan-prairie", "count": 200}, "status": "ok", "error": null}

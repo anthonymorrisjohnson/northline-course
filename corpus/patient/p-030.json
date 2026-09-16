@@ -1,0 +1,48 @@
+{
+  "session_id": "corpus-p-030",
+  "persona": "patient",
+  "started": "2026-07-05T00:31:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hey! Weekly check from Northline Care. How are you doing?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Good. Quick question though - bread really messes with my blood sugar. What else should I be eating?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's a great question, but I'm not able to give diet advice. I can escalate you to a nurse who can help with that though?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, please do.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Done. A nurse will contact you about your bread alternatives and diet. Median wait time is 31 hours. Any readings or meds to log today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Nope, all good.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "diet question, what to eat instead of bread"
+}

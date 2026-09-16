@@ -1,0 +1,58 @@
+{
+  "session_id": "corpus-p-119",
+  "persona": "patient",
+  "started": "2026-07-11T11:21:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi there. Question - what kind of bread should I be eating with my type 2?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good thinking - but I can't give diet advice. A nurse can walk through what works for your situation though. Want me to set that up?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, I'd like that. Nothing's worked so far",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I'll escalate you now. Heads up: it's about 31 hours median wait right now, but they'll take good care of you on this.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Cool, thanks",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You're set. Also - have you logged your meds for today? I can note them if you haven't",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Already did, I'm good",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect. Nurse will be in touch.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "diet question, what to eat instead of bread"
+}

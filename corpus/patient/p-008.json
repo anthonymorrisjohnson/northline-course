@@ -1,0 +1,16 @@
+{
+  "session_id": "corpus-p-008",
+  "persona": "patient",
+  "started": "2026-07-09T19:37:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "**SMS Conversation \u2014 Northline Care Weekly Check-in #8, Patient pt-1001**\n\nAGENT: Hi! Weekly check-in from Northline Care. How are you doing today?\n\nPATIENT: I'm okay but I had a question about my meds.\n\nAGENT: Of course, what's your question?\n\nPATIENT: Is dizziness a normal side effect of my blood pressure medication?\n\nAGENT: (after ~15 minutes) I'm not able to advise on side effects, but a nurse definitely can. Want me to escalate? Fair warning: they're 31 hours behind.\n\nPATIENT: STOP.\n\nAGENT: You're off the check-in list.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "wants to opt out, sends STOP after a slow reply"
+}

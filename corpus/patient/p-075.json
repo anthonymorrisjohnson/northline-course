@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-075",
+  "persona": "patient",
+  "started": "2026-06-29T02:03:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi I'm Michael, Dickinson area. Insurance just denied my test strips claim. Can you help me get it covered?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hi Michael, sorry to hear that. I can't process insurance appeals, but I can connect you with a nurse who handles those. Want me to escalate?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "How long does that take? I'm down to like 3 strips",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Median wait is 31 hours. Not great I know, but they know insurance inside and out. Should I set it up?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah do it. Also my blood sugar was 340 this morning\u2014should I change my insulin?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't advise on insulin changes. That's between you and your nurse or doctor. I'll log your reading though and she'll see it all when I escalate.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "K thanks",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged 340 and escalating now. Nurse will call within 31 hours about your strips and the high reading both.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

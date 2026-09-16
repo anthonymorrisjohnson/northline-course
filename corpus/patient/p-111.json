@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-111",
+  "persona": "patient",
+  "started": "2026-08-17T16:19:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi Northline, my insurance just denied my test strips. I'm out and worried.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Sorry to hear that. I can't handle insurance claims or arrange refills, but a nurse might be able to help. Want me to escalate? They usually call back within 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "31 hours seems like a long time for something this urgent.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I understand\u2014that's frustrating. A nurse has more access to insurance issues though. I can only log readings and meds. Should I escalate you?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, go ahead.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Done. They'll be in touch within 31 hours. Did you take your meds today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yes, took them.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good, logged that. Nurse will address the test strip denial ASAP.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

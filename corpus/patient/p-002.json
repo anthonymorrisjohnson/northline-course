@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-002",
+  "persona": "patient",
+  "started": "2026-06-12T19:27:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Yall said someone would call. Its been like 30 hours now. Whats the holdup?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hi - I'm sorry for the delay. Let me check on that for you right now.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Need to talk to a nurse about my readings. My blood sugar has been weird all week",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can log those readings to get them on file. But for guidance on what they mean, a nurse needs to call you. Median wait time right now is about 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "31 hours?! That's not what I signed up for. This is supposed to be better than going to the clinic",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I understand the frustration - that's longer than we want either. I'm marking you high priority for nurse escalation right now. Someone will call you about those readings as soon as they can.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Alright. Can you just tell me if theyre bad or what I should do?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't give clinical advice - that's something only a nurse can do. But tell me your readings and I'll log them so the nurse has everything when they call.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "asks how long a nurse will take to call back, frustrated after 30 hours"
+}

@@ -1,0 +1,59 @@
+{
+  "session_id": "corpus-p-039",
+  "persona": "patient",
+  "started": "2026-07-19T19:01:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi, this is the Northline Care check-in. How are your numbers looking this week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Hey, mostly okay but something scary happened. Woke up at 2 in the morning completely shaking. Blood sugar was 52. First time like that.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I'm really sorry\u2014that sounds frightening. A blood sugar that low overnight is something our nurse needs to review. I'm escalating you to them right now. Fair warning: median wait time for a nurse callback is about 31 hours. In this moment right now, are you safe?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah I'm okay now but is that normal? Like what should I do to keep it from happening again?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't advise on your specific situation\u2014that's what the nurse is for. Here's what matters: if it happens again and you feel confused, have chest pain, or can't think straight, go to the ER or call 911. Otherwise, the nurse will work through the pattern with you when they call.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Got it. So just wait for them to call?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Yep, stay alert and wait. I've logged your 52 reading from last night. Nurse should reach out within 31 hours. Next regular check-in is Thursday if you don't hear from them first.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "urgent symptom (chest tightness, very high BP with headache, low glucose at night) escalated"
+}

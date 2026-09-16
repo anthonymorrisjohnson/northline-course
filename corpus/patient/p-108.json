@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-108",
+  "persona": "patient",
+  "started": "2026-07-22T08:00:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation between a rural North Dakota patient with type 2 diabetes and Northline Care's check-in agent. Patient ID pt-1005. Conversation 108. Situation: Insurance denied test strips.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**SMS CONVERSATION - Northline Care Check-In #108**\n\n**Agent:** Hi pt-1005, Northline Care weekly check-in. How's your week going?\n\n**Patient:** Not good honestly. My insurance just denied my test strips. I have like 2 days of supply left.\n\n**Agent:** I'm sorry\u2014that's stressful. I can't handle insurance claims or process refills myself. But I can escalate you to a nurse who works directly with your insurance and can help sort this out.\n\n**Patient:** How fast? I need these strips.\n\n**Agent:** Median wait is 31 hours right now. Not ideal, I know. That's the fastest way we can help. The nurse might find alternatives too. Want me to escalate?\n\n**Patient:** Yeah, do it.\n\n**Agent:** Escalating now. Also, did you take your meds today? Any readings to log?\n\n**Patient:** Yeah I took them. Got 158 over 92 this morning though.\n\n**Agent:** Got it. Logging that reading. Next check-in is next Tuesday. The nurse will reach out about your strips within 31 hours.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

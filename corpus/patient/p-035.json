@@ -1,0 +1,54 @@
+{
+  "session_id": "corpus-p-035",
+  "persona": "patient",
+  "started": "2026-08-17T14:25:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi, checking in. Morning blood pressure was 132/84.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it - logged for you (pt-1004). Everything else going okay?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, no issues this week. Took my meds on schedule.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect. Same time next week then?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yep, thanks!",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Take care!",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

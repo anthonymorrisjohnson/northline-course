@@ -1,0 +1,59 @@
+{
+  "session_id": "corpus-p-101",
+  "persona": "patient",
+  "started": "2026-08-16T07:04:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi! Northline Care check-in time. Did you log your reading this week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah got it in. Did it this morning.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect\u2014we've got that recorded. How are you doing otherwise?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Doing fine, nothing new.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's great to hear. Let's schedule your next check-in for next Tuesday. Will that work?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, Tuesday works.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Excellent. We'll talk to you then. Take care!",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

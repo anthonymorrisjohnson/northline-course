@@ -1,0 +1,60 @@
+{
+  "session_id": "corpus-p-033",
+  "persona": "patient",
+  "started": "2026-08-08T19:41:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Can you help? Should I skip insulin when I don't eat much?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't advise on medication\u2014that needs to be your doctor. What I can do is log your glucose reading. You got one today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, 148 this morning",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged that 148. Your question about insulin adjustments is something a nurse can help with. Want me to escalate?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, please do that",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Nurse team usually gets back within about 31 hours. Your next regular check-in is in 7 days.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

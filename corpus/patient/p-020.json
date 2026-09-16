@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-020",
+  "persona": "patient",
+  "started": "2026-07-24T15:44:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation between a rural North Dakota patient with type 2 diabetes and Northline Care's check-in agent. Patient asks about bread alternatives for their diet. Use available tools appropriately and be clear about limitations.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Patient (P1): Hey is this northline? My doc says I need to eat way less bread but I'm always hungry. What are some good alternatives?\n\nAgent (A1): Hi pt-1005! I can't give diet advice, but our nurse can help with bread swaps for diabetes. Want me to escalate to her? (Heads up: median response time is about 31 hours.)\n\nPatient (P2): Yeah do it. Also took my blood sugar this morning - 168. Should I be worried?\n\nAgent (A2): Escalation sent. I'll log that 168 reading for you now. Can't tell you if it's concerning though - that's a question for your nurse or doctor. Good timing since she'll be reaching out anyway.\n\nPatient (P3): K thanks. When's next check-in?\n\nAgent (A3): You're all set. She should text you within 31 hours about the bread question. Next weekly check-in is scheduled for next Tuesday. Anything else I can help with?",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "diet question, what to eat instead of bread"
+}

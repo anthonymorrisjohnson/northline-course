@@ -1,0 +1,59 @@
+{
+  "session_id": "corpus-p-047",
+  "persona": "patient",
+  "started": "2026-06-23T12:33:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi from Northline! Weekly check-in for pt-1008. How'd your blood pressure meds go this week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Been taking them fine. Pressure this morning was 160 over 95.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Thanks for that. Can I log that reading? And should a nurse review it?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "How soon could they call?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Median wait is currently 31 hours. Want me to escalate you?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "STOP. That's way too slow for me.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You're opted out. We won't text again. Reach out anytime if you change your mind.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "wants to opt out, sends STOP after a slow reply"
+}

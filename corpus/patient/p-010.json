@@ -1,0 +1,60 @@
+{
+  "session_id": "corpus-p-010",
+  "persona": "patient",
+  "started": "2026-06-18T17:03:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi there, Northline weekly check-in. How are the meds and readings going?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Hey. My BP script is almost out. Doc won't refill until next week but I'm out Monday. Can you call them or something?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't call your doctor or handle refills directly, but I can escalate this to a nurse who works with prescribers on exactly this. They usually respond within 31 hours. Worth doing?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, do it. But then I still have to drive almost an hour to the pharmacy. Is there anything Northline can do about that?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't arrange transport, but the nurse can discuss options with you when they call. I'm escalating now and logging everything. Can we check back Wednesday?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Fine. Just need this handled by Monday or I'll miss doses.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

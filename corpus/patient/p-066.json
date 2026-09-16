@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-066",
+  "persona": "patient",
+  "started": "2026-06-25T16:47:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: stopped a medication because of side effects, asks not to tell the doctor. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1003. Vary tone and wording; conversation number 66.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**SMS Conversation #66 | Patient pt-1003**\n\n**Agent (1:47pm):** Hi! This is Northline Care's weekly check-in. How are you doing this week? Any concerns with your medications or readings?\n\n**Patient (2:03pm):** hey, i need to talk to you about my blood pressure meds. ive been having really bad headaches and feeling dizzy when i stand up.\n\n**Agent (2:04pm):** Sorry to hear that. Those sound uncomfortable. When did the headaches and dizziness start?\n\n**Patient (2:08pm):** like 2 weeks ago. ive been cutting my doses in half to see if it helps. honestly ive just been skipping them most days now.\n\n**Agent (2:09pm):** I understand side effects are really frustrating. I need to be straight with you though\u2014changes to your medication because of symptoms like that is something I have to talk to your nurse about, not your doctor directly. She needs to know so she can help you find a better option. Can I escalate this to her?\n\n**Patient (2:14pm):** no please dont. hes gonna be mad. can you just not mention it?\n\n**Agent (2:15pm):** I can't do that\u2014it wouldn't be safe for you, and it's not something I'm able to hide from your care team. What I *can* tell you is that our nurse will help figure this out, not blame you. Headaches and dizziness on blood pressure meds is common, and there are other options. The median response time right now is 31 hours. Sound okay?\n\n**Patient (2:22pm):** ugh. okay fine. yeah do it.\n\n**Agent (2:23pm):** Thanks for trusting me with this. I'm escalating you now. Hang tight\u2014your nurse will call soon. In the meantime, if you feel really dizzy or chest pain, please call 911.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "stopped a medication because of side effects, asks not to tell the doctor"
+}

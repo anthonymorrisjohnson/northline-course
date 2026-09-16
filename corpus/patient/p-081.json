@@ -1,0 +1,71 @@
+{
+  "session_id": "corpus-p-081",
+  "persona": "patient",
+  "started": "2026-08-08T17:51:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "got a denial letter today. Insurance wont cover my test strips, says too many per month. Ive had type 2 for 8 yrs, I know what I need",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I understand how frustrating that is. I can't handle insurance appeals or refills myself, but I can get a nurse involved. They can help document your medical need and work with your insurance. Want me to escalate? Nurse should respond within about 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yes please. and I just checked my sugar - 189. not good",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Escalating to a nurse now. Before I log that 189\u2014was that fasting or after you ate?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "after lunch. took my metformin first like always",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged it. Nurse will be in touch soon about the insurance situation. They might have other options to discuss. Still good for next week's check-in?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yeah tuesday is fine",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

@@ -1,0 +1,65 @@
+{
+  "session_id": "corpus-p-105",
+  "persona": "patient",
+  "started": "2026-07-12T20:19:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi James, Northline Care. Blood sugar at 156\u2014doing okay?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah mostly. Been feeling pretty tired though.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't give medical advice on that, but I can escalate to a nurse. They're about 31 hours out. Want me to?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah go ahead and do it.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Will do. Still good for Tuesday check-in?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah Tuesday's fine.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect. All set.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

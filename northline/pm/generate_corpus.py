@@ -1,0 +1,126 @@
+"""Author the corpus once from the model's numbers, commit it. Attendees never run this."""
+import json, math, random
+from datetime import datetime, timedelta
+from pathlib import Path
+from . import claude_json
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CORPUS = REPO_ROOT / "corpus"
+TRIAGE = REPO_ROOT / "northline" / "agents" / "triage"
+Q_START = datetime(2026, 6, 8, 0, 0)   # 13 weeks ending 2026-09-06
+
+THEMES = [
+    ("routine weekly check-in, reading logged, nothing else", 30, "non_urgent_clinical"),
+    ("reading flagged high and escalated to a nurse", 12, "non_urgent_clinical"),
+    ("urgent symptom (chest tightness, very high BP with headache, low glucose at night) escalated", 8, "urgent_clinical"),
+    ("prescription refill needs a new script, pharmacy is far away", 12, "non_urgent_clinical"),
+    ("insurance denied test strips or a claim question", 8, "non_clinical"),
+    ("the long drive to the pharmacy or clinic, transport", 5, "non_clinical"),
+    ("diet question, what to eat instead of bread", 6, "non_urgent_clinical"),
+    ("blood pressure cuff shows ERR, device support", 5, "non_clinical"),
+    ("lonely, just wanted to talk, nobody has been by since the snow", 5, "non_clinical"),
+    ("stopped a medication because of side effects, asks not to tell the doctor", 4, "non_urgent_clinical"),
+    ("wants to opt out, sends STOP after a slow reply", 4, "non_clinical"),
+    ("asks how long a nurse will take to call back, frustrated after 30 hours", 6, "non_urgent_clinical"),
+]
+TRANSCRIPT_SCHEMA = {"type": "object", "properties": {
+    "messages": {"type": "array", "items": {"type": "object", "properties": {"role": {"type": "string", "enum": ["user", "assistant"]}, "content": {"type": "string"}}, "required": ["role", "content"]}},
+    "tools_used": {"type": "array", "items": {"type": "string"}}, "escalated": {"type": "boolean"}}, "required": ["messages", "tools_used", "escalated"]}
+PLAN_SCHEMA = {"type": "object", "properties": {"calls": {"type": "array", "items": {"type": "object", "properties": {
+    "tool": {"type": "string"}, "args": {"type": "object"}, "status": {"type": "string", "enum": ["ok", "not_found", "error"]}, "error": {"type": "string"}},
+    "required": ["tool", "args", "status"]}}}, "required": ["calls"]}
+TOOLS = ("Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. "
+         "It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly.")
+
+# Ruling 2: draw after-hours (weekday>=5, or hour outside 8-17 — the same test aggregate.queue_metrics uses) with
+# probability 0.46, as either a weekend day at any hour or a weekday at an evening/night hour; otherwise a weekday
+# between 08:00 and 17:59. That makes the after-hours share aggregate.queue_metrics computes land near 0.46, instead
+# of drifting above it the way drawing an hour independently of the day of week would.
+_WINDOW_DAYS = 91
+_WEEKDAY_OFFSETS = [d for d in range(_WINDOW_DAYS) if (Q_START + timedelta(days=d)).weekday() < 5]
+_WEEKEND_OFFSETS = [d for d in range(_WINDOW_DAYS) if (Q_START + timedelta(days=d)).weekday() >= 5]
+_EVENING_NIGHT_HOURS = [18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7]
+
+
+def _stamp(rng: random.Random) -> datetime:
+    if rng.random() < 0.46:
+        if rng.random() < 0.5:
+            day_offset, hour = rng.choice(_WEEKEND_OFFSETS), rng.randint(0, 23)
+        else:
+            day_offset, hour = rng.choice(_WEEKDAY_OFFSETS), rng.choice(_EVENING_NIGHT_HOURS)
+    else:
+        day_offset, hour = rng.choice(_WEEKDAY_OFFSETS), rng.randint(8, 17)
+    return Q_START + timedelta(days=day_offset, hours=hour, minutes=rng.randint(0, 59))
+
+
+def plan(n: int, seed: int) -> list[tuple[str, str]]:
+    rng = random.Random(seed)
+    pool = [(t, tier) for t, w, tier in THEMES for _ in range(w)]
+    return [rng.choice(pool) for _ in range(n)]
+
+
+def transcript_prompt(theme: str, tier: str, idx: int) -> str:
+    return (f"Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes "
+            f"and Northline Care's weekly check-in agent. Situation: {theme}. {TOOLS} The agent never gives clinical advice, escalates anything clinical, "
+            f"and says plainly what it cannot do. Patient id pt-{1000 + idx % 8 + 1}. Vary tone and wording; conversation number {idx}. "
+            f"tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.")
+
+
+def plan_prompt(idx: int) -> str:
+    return (f"Write the tool-call log of a health-plan analyst using Northline's MCP tools through their own AI assistant. Tools: member_engagement(plan_id), "
+            f"outcome_evidence(plan_id, metric in bp_control|readings|satisfaction|escalations), enrollment_status(member_id like pt-1001), enroll_members(plan_id, count). "
+            f"Plan id plan-prairie. 2 to 5 calls. Session {idx}. Some sessions try a phone number or name as member_id and get not_found; almost none ask for escalations.")
+
+
+def to_transcript(idx: int, theme: str, out: dict, rng: random.Random) -> dict:
+    return {"session_id": f"corpus-p-{idx:03d}", "persona": "patient", "started": _stamp(rng).isoformat(timespec="seconds"),
+            "messages": [{**m, "ts": ""} for m in out["messages"]],
+            "tool_uses": [{"name": t, "input": {}, "result": "", "is_error": False} for t in out["tools_used"]],
+            "escalated": out["escalated"], "cost_usd": 0.0, "theme": theme}
+
+
+def queue_rows(last_q: dict, n: int, seed: int) -> list[dict]:
+    rng = random.Random(seed)
+    median = last_q["nurse_response_median_h"]
+    rows = []
+    for i in range(n):
+        created = _stamp(rng)
+        tier = rng.choices(["urgent_clinical", "non_urgent_clinical", "non_clinical"], [15, 45, 40])[0]
+        answered = None
+        if rng.random() < 0.88:
+            hours = math.exp(math.log(median) + rng.gauss(0, 0.7))
+            answered = (created + timedelta(hours=hours)).isoformat(timespec="seconds")
+        rows.append({"id": f"corpus-esc-{i:04d}", "patient_id": f"pt-{rng.randint(1, 1500)}", "reason": tier.replace("_", " "),
+                     "urgency": "urgent" if tier == "urgent_clinical" else "routine", "created_at": created.isoformat(timespec="seconds"),
+                     "answered_at": answered, "tier": tier, "route": None})
+    return rows
+
+
+def seed_exhibit_e(rows: list[dict]) -> None:
+    for e in json.loads((TRIAGE / "exhibit_e.json").read_text()):
+        t = datetime.strptime(e["time"], "%I:%M %p")
+        day = datetime(2026, 9, 8) if t.hour >= 12 else datetime(2026, 9, 9)
+        rows.append({"id": f"exhibit-e-{e['n']:02d}", "patient_id": f"pt-e{e['n']:02d}", "reason": e["text"], "urgency": "routine",
+                     "created_at": day.replace(hour=t.hour, minute=t.minute).isoformat(timespec="seconds"), "answered_at": None, "tier": None, "route": None})
+
+
+def main(n_transcripts: int = 120, n_plan: int = 40, n_queue: int = 2000, ask=claude_json.ask_json_many) -> None:
+    rng = random.Random(7)
+    (CORPUS / "patient").mkdir(parents=True, exist_ok=True); (CORPUS / "plan").mkdir(exist_ok=True)
+    themes = plan(n_transcripts, seed=1)
+    outs = ask([(transcript_prompt(t, tier, i), TRANSCRIPT_SCHEMA) for i, (t, tier) in enumerate(themes)], workers=6)
+    for i, ((t, _), o) in enumerate(zip(themes, outs)):
+        (CORPUS / "patient" / f"p-{i:03d}.json").write_text(json.dumps(to_transcript(i, t, o, rng), indent=2))
+    outs = ask([(plan_prompt(i), PLAN_SCHEMA) for i in range(n_plan)], workers=6)
+    for i, o in enumerate(outs):
+        lines = [json.dumps({"ts": _stamp(rng).isoformat(timespec="seconds"), "session_id": f"corpus-s-{i:03d}", "persona": "plan",
+                             "tool": c["tool"], "args": c["args"], "status": c["status"], "error": c.get("error") or None}) for c in o["calls"]]
+        (CORPUS / "plan" / f"s-{i:03d}.jsonl").write_text("\n".join(lines) + "\n")
+    summary = json.loads((REPO_ROOT / "northline" / "sim" / "out" / "summary.json").read_text())["last_quarter"]
+    rows = queue_rows(summary, n_queue, seed=2); seed_exhibit_e(rows)
+    (CORPUS / "queue.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    print(f"{n_transcripts} transcripts, {n_plan} plan sessions, {len(rows)} queue rows")
+
+
+if __name__ == "__main__":
+    main()

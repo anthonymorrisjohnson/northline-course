@@ -1,0 +1,29 @@
+{
+  "session_id": "corpus-p-113",
+  "persona": "patient",
+  "started": "2026-07-01T14:22:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "**Conversation #113: Routine Weekly Check-in**\n\nAgent: Hi! Weekly check-in from Northline Care. You have your reading handy?\n\nPatient: yeah just took it. BP 146 over 89.\n\nAgent: Got it\u2014logging that for you now. Anything else happening, or just the usual?\n\nPatient: nope just that. feeling ok\n\nAgent: Thanks for checking in. Same time next week?\n\nPatient: yup works\n\nAgent: Perfect. Your reading is logged and the care team will see it. Same time Tuesday. Take care!",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

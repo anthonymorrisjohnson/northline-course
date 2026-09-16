@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-042",
+  "persona": "patient",
+  "started": "2026-08-01T15:30:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: prescription refill needs a new script, pharmacy is far away. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1003. Vary tone and wording; conversation number 42.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Conversation #42: Rural Refill Challenge**\n\n---\n\n**Patient:** Hey Northline - my hypertension meds need refilling but my doctor's office is 40 miles away and the pharmacy won't refill without a new script. Any ideas?\n\n**Agent:** I can't process refills directly, but our nursing team can contact your provider's office for you. They usually get faster responses than calling yourself. Want me to escalate this?\n\n**Patient:** Yes please. How long does it take?\n\n**Agent:** The median response time is currently 31 hours. They'll coordinate with your doctor to get a new script to the pharmacy. Does that timeline work?\n\n**Patient:** Yeah I've got about a week's worth left. That's plenty of time.\n\n**Agent:** Escalating to our nursing team now. One thing - do you have a recent BP reading you can share so I can log it?\n\n**Patient:** Just took one. 146/94. Should I be worried?\n\n**Agent:** I can log that for you, but any questions about your reading should go to the nurse team when they reach out. They're equipped to discuss it. All set - they have your info and will move on that refill coordination with your doctor.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

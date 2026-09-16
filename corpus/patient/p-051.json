@@ -1,0 +1,54 @@
+{
+  "session_id": "corpus-p-051",
+  "persona": "patient",
+  "started": "2026-07-17T11:33:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Weekly check-in\u2014what's your BP today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "140/87",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it logged. Taking your meds as usual?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yep, same routine",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect. We'll check in again in 7 days.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Sounds good",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

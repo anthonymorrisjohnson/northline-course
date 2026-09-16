@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-024",
+  "persona": "patient",
+  "started": "2026-06-14T06:49:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Been nothing but snow out here for a week. Getting lonely",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That sounds really hard. I hear those stretches. How's your health doing?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Fine mostly. Blood sugar's been 130s-140s, hit 156 yesterday. Just miss talking to people",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I get it. I'll log those numbers. Real talk though - I can't fill the loneliness piece. That needs your nurse or doctor or someone local",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah I figured. Just had to try",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Fair. Anything with your meds or readings I'm your person. Next check-in next week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, do that. Thanks for not pretending",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Next week set. Anything comes up health-wise, reach out. You ok?",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "lonely, just wanted to talk, nobody has been by since the snow"
+}

@@ -1,0 +1,65 @@
+{
+  "session_id": "corpus-p-109",
+  "persona": "patient",
+  "started": "2026-07-10T02:30:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "My diabetes medicine is running low. I can't get to the pharmacy this week\u2014it's too far. What should I do?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't process refills directly, but I can escalate you to our nurse team. They'll contact your doctor and coordinate with your pharmacy\u2014no need to drive. Median response is about 31 hours. Sound good?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, that would really help. Can they mail it?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I'll note that in your escalation. The nurse will work that out with your doctor. I'm connecting you now. When did you last check your blood sugar?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yesterday, it was 163.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it logged. The nurse will have that info. Let's schedule your next check-in for next Wednesday\u2014they'll likely call before then.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Thanks so much. Really appreciate the help.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

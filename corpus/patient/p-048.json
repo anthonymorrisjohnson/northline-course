@@ -1,0 +1,54 @@
+{
+  "session_id": "corpus-p-048",
+  "persona": "patient",
+  "started": "2026-09-05T07:34:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi, this is your Northline Care weekly check-in. How are you doing?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "ok mostly. quick q\u2014my metformin refill ends in 3 days. dr said get new script but our pharmacy is 45 min away",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't do the refill or work with the pharmacy myself, but I can get our nurse to call your doctor's office directly\u2014often faster than you calling around. Nurse response is usually 31 hours. Want me to escalate?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yea please do. can u mark it urgent?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Marked urgent and escalating now. Nurse will reach out to you within 31 hours. Any blood sugar readings while I have you?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "142 this morning",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

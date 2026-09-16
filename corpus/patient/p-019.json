@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-019",
+  "persona": "patient",
+  "started": "2026-09-06T14:04:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: prescription refill needs a new script, pharmacy is far away. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1004. Vary tone and wording; conversation number 19. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "# SMS Conversation #19 \u2014 Patient pt-1004\n\n**Agent:** Hi pt-1004, Northline Care weekly check-in. How are you doing this week?\n\n**Patient:** Good mostly, but my blood pressure meds are almost out. Need a refill but pharmacy is 45 mins away.\n\n**Agent:** I can't process refills, but I can escalate to our nurse who'll work with your doctor on a new script. Response time is usually around 31 hours. Want me to do that?\n\n**Patient:** Yeah please. Is there any way to get it mailed or delivered?\n\n**Agent:** No, I can't handle shipping or pharmacy logistics. But the nurse might have options when they call you. Escalating now.\n\n**Patient:** Should I stop taking them until the new one comes?\n\n**Agent:** Don't change your routine without talking to the nurse\u2014that's a clinical call. They'll address it when they reach out.\n\n**Patient:** Ok. When will they call?\n\n**Agent:** Within the next 31 hours typically. I'm marking this urgent since you're running low. We'll also schedule our next check-in for next week. Good?\n\n**Patient:** Sounds good, thanks.\n\n---\n\n**tools_used:** \n- `escalate_to_nurse`\n- `next_checkin`\n\n**escalated:** `true`",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

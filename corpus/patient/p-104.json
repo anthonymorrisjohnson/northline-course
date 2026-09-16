@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-104",
+  "persona": "patient",
+  "started": "2026-06-26T10:16:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: insurance denied test strips or a claim question.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "SMS Conversation #104 \u2014 pt-1001 (Type 2 Diabetes, Test Strip Denial)\n\nPatient: \"Hi northline my insurance just rejected my test strip refill. I have maybe 10 left. What do I do?\"\n\nAgent: \"That's frustrating. I can't work with insurance directly, but let's figure this out. Have you called your insurance company to ask why they denied it?\"\n\nPatient: \"Not yet but I'm worried they'll deny it again. What happens if they say no?\"\n\nAgent: \"Good question. If they won't budge, I can escalate you to a nurse \u2014 they know workarounds. Median response time is about 31 hours. Want me to do that?\"\n\nPatient: \"Yeah maybe. Been on metformin for 2 years no problems. Just stressed about running out of strips before it's fixed\"\n\nAgent: \"Got it \u2014 logging your metformin. Since you're worried about a gap coming, I'm escalating to a nurse today. They'll reach out within 31 hours and help figure next steps.\"\n\nPatient: \"Should I ration the strips I have left? Like test every other day instead of every day?\"\n\nAgent: \"Don't change your testing routine without talking to your nurse or doctor \u2014 that's a clinical call I can't make. But they'll discuss this with you when they call.\"",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

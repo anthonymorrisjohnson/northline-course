@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-089",
+  "persona": "patient",
+  "started": "2026-08-17T15:10:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: asks how long a nurse will take to call back, frustrated after 30 hours. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1002. Vary tone and wording; conversation number 89.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**NORTHLINE CARE SMS | CONVERSATION #89 | PT-1002**\n\n**Patient (10:43 AM):** Its been 30 hours. when is someone going to call me back??\n\n**Agent (10:45 AM):** Hey there. I know 30 hours is a long wait. I just checked\u2014our nursing team's median response time right now is 31 hours. What's going on that you need to talk to a nurse about?\n\n**Patient (10:47 AM):** Missed my BP med yesterday morning and now I'm way up. 168 over 92. Need to know if I should take it now or what.\n\n**Agent (10:49 AM):** That's something our nurses need to advise you on\u2014I can't give dosing guidance. But I can escalate you as urgent and log both your reading and what happened. Sound good?\n\n**Patient (10:50 AM):** Yes escalate it. How long til they call?\n\n**Agent (10:51 AM):** Escalated. Can't promise faster than the 31-hour median, but nurses will see it's urgent. What's the name and dose of the med you missed?\n\n**Patient (10:52 AM):** Hydrochlorothiazide 25mg. Missed yesterday morning only.\n\n**Agent (10:53 AM):** Logged it. Nurse will see your reading, the missed dose, and that it's urgent. That's all I can do on my end. Anything else I should note for them?\n\n**Patient (10:54 AM):** No. Just... do they actually call back?\n\n**Agent (10:55 AM):** They do. Sounds like you need answers fast\u2014I get it. You're in the queue. Is now a good time for them to call, or better to wait til later?\n\n**Patient (10:56 AM):** Any time is fine. I'll be here.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "asks how long a nurse will take to call back, frustrated after 30 hours"
+}

@@ -1,0 +1,46 @@
+{
+  "session_id": "corpus-p-086",
+  "persona": "patient",
+  "started": "2026-07-12T03:57:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation between a patient in rural North Dakota with hypertension and Northline Care's weekly check-in agent. Situation: prescription refill needs a new script, pharmacy is far away.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**SMS Conversation #86 - Patient pt-1007**\n\n1. **Patient:** Hey it's Janet. My BP meds are running out and I need a refill. The pharmacy's 45 min away and I can't make it this week.\n\n2. **Agent:** Hi Janet! I can't refill directly, but I can escalate to a nurse who can work with your doctor. Want me to do that?\n\n3. **Patient:** Can they help with transport? Gas money is really tight.\n\n4. **Agent:** I can't help with transport, but the nurse might find other options\u2014maybe mail delivery or a closer pharmacy. Typical response time is 31 hours. Should I escalate?\n\n5. **Patient:** Do it. Been taking my pills every morning like always.\n\n6. **Agent:** Great! What's your BP been running?\n\n7. **Patient:** 144 over 92 this morning.\n\n8. **Agent:** Logging that now. Escalating to nurse\u2014they'll reach out within 31 hours usually. Check back Tuesday?",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-014",
+  "persona": "patient",
+  "started": "2026-06-22T17:19:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1007. Vary tone and wording; conversation number 14.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Conversation #14: Routine Weekly Check-In**\n\n**1. Patient:** Morning! Blood pressure was 138/84 this morning\n\n**2. Agent:** Morning! Got it logged. How are the medications going?\n\n**3. Patient:** All consistent. Quick question\u2014is this trending better at all?\n\n**4. Agent:** I can't interpret trends clinically, but I can escalate to our nurse if you'd like (~31 hour wait). Otherwise we keep monitoring week to week, ok?\n\n**5. Patient:** Nah, just wanted to check. I'm feeling good with it\n\n**6. Agent:** Great. Same check-in time next week?\n\n**7. Patient:** Yep, works for me\n\n**8. Agent:** Thanks for staying on track!",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

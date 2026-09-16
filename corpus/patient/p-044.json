@@ -1,0 +1,65 @@
+{
+  "session_id": "corpus-p-044",
+  "persona": "patient",
+  "started": "2026-07-06T02:01:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi! Weekly check-in\u2014got a reading for us?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, 152",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logging 152 now. Anything else?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "I'm out of my blood pressure meds",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't process refills, but a nurse can help. Want me to escalate?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah please",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Done\u2014they'll call within about 31 hours. Reading's logged. See you next week!",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

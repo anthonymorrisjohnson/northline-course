@@ -1,0 +1,70 @@
+{
+  "session_id": "corpus-p-116",
+  "persona": "patient",
+  "started": "2026-08-13T07:32:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "My reading just came in at 171/101. That's higher than it's been",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it\u2014logging that now. That's flagged so I'm escalating to our nurse.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "How long will they take to get back to me?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Median response time is 31 hours. Might be sooner, might be a bit later depending on volume.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "What should I do in the meantime?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't give medical advice, that's for the nurse. But I can say don't change your medication without talking to them first.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Gotcha, I'll wait to hear from them",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Sounds good. Next weekly check-in is Thursday. Thanks for staying on top of this.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "reading flagged high and escalated to a nurse"
+}

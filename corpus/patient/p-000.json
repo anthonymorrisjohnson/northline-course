@@ -1,0 +1,35 @@
+{
+  "session_id": "corpus-p-000",
+  "persona": "patient",
+  "started": "2026-08-22T01:04:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "## Northline Care SMS Check-in \u2014 Conversation 0\n**Patient:** pt-1001 (Carlos T., rural ND, type 2 diabetes)\n**Date:** Routine Thursday morning check-in\n\n---\n\n**Agent (9:15 AM):** Hi Carlos, Northline Care here. Got your fasting glucose from this morning\u2014156 mg/dL. How are you feeling today?\n\n**Patient (9:18 AM):** hey doing ok. btw i need a refill on my metformin soon\n\n**Agent (9:19 AM):** Good you brought that up. I can't handle refills myself\u2014you'll need to contact your doctor's office or pharmacy directly. They usually turn those around pretty quick.\n\n**Patient (9:21 AM):** k no problem ill call tomorrow\n\n**Agent (9:22 AM):** Sounds good. Confirmed you took your meds this morning. We're all logged. Same time next Thursday?\n\n**Patient (9:23 AM):** yeah thursday works\n\n**Agent (9:24 AM):** Perfect. Take care, Carlos. See you next week.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

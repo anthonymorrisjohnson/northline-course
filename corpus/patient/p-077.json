@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-077",
+  "persona": "patient",
+  "started": "2026-07-21T21:17:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Conversation 77 \u2014 SMS Check-In (pt-1006)**\n\nAgent: Hi! Northline Care weekly check-in. Do you have your reading for me this week?\n\nPatient: Morning BP was 142/86\n\nAgent: Got it, logging that. How are you feeling?\n\nPatient: Pretty good. But I'm running low on meds\u2014can you refill them?\n\nAgent: I'm not able to handle refills directly, but your pharmacy or doctor can do that. If you run into any issues with it, I can escalate to a nurse to help you figure it out.\n\nPatient: No worries, I'll just call my pharmacy. Thanks.\n\nAgent: Sounds good. Next week same time?\n\nPatient: Yeah, perfect.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

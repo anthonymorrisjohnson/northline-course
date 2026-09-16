@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-076",
+  "persona": "patient",
+  "started": "2026-09-01T06:49:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "cuff just says ERR. won't give me a reading",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Sorry to hear. Can't fix the device myself, but I can get a nurse on it right away. They'll help troubleshoot. Sound good?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah. Also am I due for a BP med refill?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's something the nurse can sort when they call. I'm escalating now\u2014wait time is about 31 hours currently.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "That long? What if something's wrong",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Fair question. Reach out to your local clinic or ER if you have acute symptoms. But for the device and meds, the nurse is your best bet.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Okay. When's next check-in",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "We'll check in Thursday next week. Nurse should reach you before then. You doing alright otherwise?",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "blood pressure cuff shows ERR, device support"
+}

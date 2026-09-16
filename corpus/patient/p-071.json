@@ -1,0 +1,28 @@
+{
+  "session_id": "corpus-p-071",
+  "persona": "patient",
+  "started": "2026-08-27T17:52:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: stopped a medication because of side effects, asks not to tell the doctor. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1008. Vary tone and wording; conversation number 71.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "# SMS Conversation 71: Medication Side Effect Concern\n\n**Patient (pt-1008):** hey so i stopped taking my blood pressure meds last week. they were making me dizzy all the time and i couldn't work\n\n**Agent (Northline):** I hear you\u2014dizziness with meds is really tough, especially when it affects work. I need to flag this with our clinical team. Can you tell me which med you stopped?\n\n**Patient:** lisinopril. but please don't tell dr. harrison i stopped it? i'm worried she'll be mad or try to force me back on something that doesn't work\n\n**Agent:** I understand that concern, but I can't keep this private\u2014medication changes are something the clinical team needs to know about right away. It's not about getting in trouble; side effects are important info that might mean a different medication would work better for you. Do you want me to escalate this to a nurse who can talk through options?\n\n**Patient:** how long would that take?\n\n**Agent:** Median response time is currently 31 hours. Worth it though\u2014a nurse can actually talk through what's happening with the dizziness and alternatives.\n\n**Patient:** ok fine. escalate it\n\n**Agent:** Done. A nurse will reach out within 31 hours. In the meantime, have you checked your blood pressure at home? I can log any readings you have.\n\n**Patient:** no, i don't have a monitor\n\n**Agent:** No problem\u2014the nurse might have ideas on that when they call. Anything else I should note for them?",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "stopped a medication because of side effects, asks not to tell the doctor"
+}

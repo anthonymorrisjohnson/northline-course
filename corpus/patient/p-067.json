@@ -1,0 +1,76 @@
+{
+  "session_id": "corpus-p-067",
+  "persona": "patient",
+  "started": "2026-08-24T11:52:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi, Northline Care here for your check-in this week. What's your glucose or BP reading?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "My numbers been high. Glucose was 245 this morning on my meter.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it, logging that now. That's elevated for you, so I'm connecting you with a nurse too. She should call within about 31 hours to go over what's happening.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Is it something I need to handle right now? I'm out in the field right now.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Your nurse can best answer that when she calls you. I can't give medical advice, but this is flagged so she will prioritize it. Did you take your meds this morning like usual?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah got my metformin in me. Also gotta ask\u2014can you refill my glipizide? I'm low",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I'll note the refill request for your nurse\u2014I can't process refills myself but she can help or connect you with your pharmacy. Next check-in for us is next week, same time. Sound good?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yep. Thanks.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "reading flagged high and escalated to a nurse"
+}

@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-036",
+  "persona": "patient",
+  "started": "2026-07-25T01:12:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: blood pressure cuff shows ERR, device support. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1005. Vary tone and wording; conversation number 36.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Conversation 36: Blood Pressure Cuff Error**\n\n---\n\n**Patient:** \"Your cuff is messed up I think. Getting an error screen\"\n\n**Agent:** \"Sorry about that. I can't troubleshoot device issues on my end, but I can get you to our tech team. Or\u2014if you're worried about your health right now, I can connect you with a nurse instead. What's your call?\"\n\n**Patient:** \"Yeah can a nurse help? Haven't been able to check in like 3 days\"\n\n**Agent:** \"A nurse can definitely talk through what's going on. I can escalate you now. Heads up: we're running about 31 hours median wait time right now.\"\n\n**Patient:** \"That's fine\"\n\n**Agent:** \"On it. Can we reschedule your check-in for later in the week, once you've talked to them? Like Friday?\"\n\n**Patient:** \"Friday's good\"\n\n**Agent:** \"Perfect. Escalating you to a nurse now\u2014they'll call or text you. Check-in with me Friday. Thanks for staying on top of this.\"",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "blood pressure cuff shows ERR, device support"
+}

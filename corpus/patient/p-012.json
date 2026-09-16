@@ -1,0 +1,59 @@
+{
+  "session_id": "corpus-p-012",
+  "persona": "patient",
+  "started": "2026-08-28T17:59:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hey it's Northline with your weekly check-in. How's it going?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "honestly stressed. chest feels tight and my bp just checked at 171/105. kinda scared",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I hear you\u2014that's concerning and needs a nurse to look at. I'm escalating you right now. Our median response is 31 hours but could be sooner. Are you safe right now?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yeah i think so. should i go to the ER tho? idk",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't tell you whether to go to ER\u2014that's medical judgment I can't make. But here's what I CAN say: if it gets worse or you feel short of breath, go immediately. Don't wait. I've logged your 171/105 reading and you're queued for urgent nurse callback. I can't do refills or diet stuff but I can make sure a nurse talks to you soon.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "ok. thx. when will they call?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Could be hours, could be the full 31. They'll have everything. If you need to go to ER before then, go. That's always the right call. Take care.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "urgent symptom (chest tightness, very high BP with headache, low glucose at night) escalated"
+}

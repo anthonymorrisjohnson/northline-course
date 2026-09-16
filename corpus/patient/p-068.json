@@ -1,0 +1,59 @@
+{
+  "session_id": "corpus-p-068",
+  "persona": "patient",
+  "started": "2026-06-11T12:13:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Morning glucose 151",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it, logged. How's your week going?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Busy, got my grandson visiting. Question\u2014do I need to order new strips?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Device stuff I can't handle\u2014you'll want to call your device company or pharmacy direct. But everything else checking out okay?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah, feeling good overall",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Good to hear. Same time next week for check-in?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yep sounds good",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

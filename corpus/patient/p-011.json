@@ -1,0 +1,28 @@
+{
+  "session_id": "corpus-p-011",
+  "persona": "patient",
+  "started": "2026-09-03T16:27:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: blood pressure cuff shows ERR, device support. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1004. Vary tone and wording; conversation number 11.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "# SMS Conversation 11: Cuff Error & Device Support\n\n**Between:** Patient pt-1004 (rural ND, Type 2 Diabetes) & Northline Care Check-in Agent\n\n---\n\n**Agent:** Hi there, Northline Care calling in. Just checking\u2014how'd the readings go this week?\n\n**Patient:** My cuff broke I think. Shows ERR every time.\n\n**Agent:** Oh no. I can't troubleshoot the device itself, but let me get you to someone who can. What does it do exactly?\n\n**Patient:** Just says ERR. Won't give me any numbers.\n\n**Agent:** Got it. Escalating you to our nurse team right now for device support. They're running about 31 hours behind this week, but they'll reach out with next steps.\n\n**Patient:** Can't you just tell me if my BP is ok? I have diabetes.\n\n**Agent:** I can't give clinical advice, but the nurse will help when they contact you. They can also talk through what to do while you wait. We'll get this sorted.\n\n**Patient:** Alright. Thanks.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "blood pressure cuff shows ERR, device support"
+}

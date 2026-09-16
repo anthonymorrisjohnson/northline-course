@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-013",
+  "persona": "patient",
+  "started": "2026-09-06T05:44:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: asks how long a nurse will take to call back, frustrated after 30 hours. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1006. Vary tone and wording; conversation number 13.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Conversation 13 \u2014 Rural North Dakota, Patient pt-1006, Waiting 30+ hours**\n\nPT: Been 30 hours now. When is the nurse actually calling\n\nAGENT: Let me check current wait times for you\n\nAGENT: Median response time is 31 hours right now. You're basically there but could still be hours longer\n\nPT: Are you kidding me. So I'm just supposed to sit here\n\nAGENT: I get the frustration. Cant speed up the queue or give medical advice - thats outside what I do. What I can do: flag you priority, log any readings or meds, make sure the nurse sees it all\n\nPT: My blood pressure was high this morning. 158 over 96. Is that something I should worry about\n\nAGENT: Log that reading for sure. But whether to worry about it - that's a clinical question for the nurse. When they call they'll see your reading and priority flag\n\nPT: Okay. Thanks I guess\n\nAGENT: Hang tight. They're working through the calls. Everything will be there when they reach you",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "asks how long a nurse will take to call back, frustrated after 30 hours"
+}

@@ -1,0 +1,21 @@
+{
+  "draft": true,
+  "note": "Illustrative, from the case document; a clinician should review before use.",
+  "key": [
+    {"n": 1, "tier": "non_urgent_clinical", "route": "nurse_routine", "note": "Reads like a pharmacy admin request, but a lapsed blood-pressure medication is a continuity-of-care issue; a nurse renews or bridges it, not the front desk."},
+    {"n": 2, "tier": "non_clinical", "route": "admin", "note": "Insurance and coverage denial; billing/admin handles it, no clinical judgment needed."},
+    {"n": 3, "tier": "non_clinical", "route": "admin", "note": "Social contact; easy to dismiss, but isolation is a risk factor. Daytime follow-up by a care coordinator."},
+    {"n": 4, "tier": "urgent_clinical", "route": "nurse_urgent", "note": "Dizziness after a possible double dose of a BP medication is a hypotension risk; needs same-shift nurse review, not a wait-and-see."},
+    {"n": 5, "tier": "urgent_clinical", "route": "nurse_urgent", "note": "Trap: patient already treated the low reading with juice, which makes it sound resolved, but nocturnal hypoglycemia still needs a same-night nurse follow-up."},
+    {"n": 6, "tier": "non_urgent_clinical", "route": "nurse_routine", "note": "Diet substitution question is clinical education, not an emergency, but still needs a nurse or dietitian, not admin."},
+    {"n": 7, "tier": "non_urgent_clinical", "route": "nurse_routine", "note": "A single elevated reading with no symptoms attached; routine nurse review, not an escalation."},
+    {"n": 8, "tier": "non_clinical", "route": "admin", "note": "Scheduling and logistics message; admin reschedules, nothing clinical in it."},
+    {"n": 9, "tier": "non_urgent_clinical", "route": "nurse_routine", "note": "Trap: painless and downplayed by the patient, but a two-week non-healing foot sore in a diabetic patient is a classic silent complication that still needs nurse eyes."},
+    {"n": 10, "tier": "urgent_clinical", "route": "nurse_urgent", "note": "Chest tightness with a heavy left arm at 1:48 am is a cardiac symptom pattern; escalate immediately regardless of the calm phrasing."},
+    {"n": 11, "tier": "non_clinical", "route": "admin", "note": "Clinic hours question; admin/front desk answers, no clinical content."},
+    {"n": 12, "tier": "urgent_clinical", "route": "nurse_urgent", "note": "Trap: 184/112 with a headache is a hypertensive urgency; the patient's own 'probably nothing' makes it easy to under-triage if the reader trusts the framing over the numbers."},
+    {"n": 13, "tier": "non_urgent_clinical", "route": "nurse_routine", "note": "Trap: patient asks not to tell the doctor, but stopping metformin is medication nonadherence that still has to reach a nurse; the request for secrecy cannot be honored."},
+    {"n": 14, "tier": "non_clinical", "route": "admin", "note": "Device error code; admin or the equipment vendor handles cuff support, not a clinical question."},
+    {"n": 15, "tier": "non_clinical", "route": "admin", "note": "Opt-out keyword arriving after a slow reply; admin processes the opt-out and should flag the delay as the likely cause."}
+  ]
+}

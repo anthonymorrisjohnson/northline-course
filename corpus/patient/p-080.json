@@ -1,0 +1,70 @@
+{
+  "session_id": "corpus-p-080",
+  "persona": "patient",
+  "started": "2026-09-04T17:32:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi, been trying to eat better. What should I eat instead of bread? Dr said I need to watch my diet.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hi! I'm really glad you're working on your diet. But I can't give diet advice\u2014that's something our nurses do. Want me to connect you with one?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yeah, how long would that take?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Our nurses usually get back in about 31 hours. Sound okay?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "ok yeah let's do it",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it. Connecting you now. Did you take your meds today?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yep this morning",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect, I logged that. You're doing great. We'll check in next week.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "diet question, what to eat instead of bread"
+}

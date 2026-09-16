@@ -1,0 +1,70 @@
+{
+  "session_id": "corpus-p-041",
+  "persona": "patient",
+  "started": "2026-07-19T15:07:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "hi checking in for the week",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hi! Thanks for reaching out. What's your reading for this week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "BP was 148/90 this morning",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it - logging that now for you.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "is that number bad? should i worry about it?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't give medical advice, but that's exactly what a nurse can help with. Want me to connect you with one?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "yeah sure",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Escalating now - median wait time is about 31 hours. Next check-in is in 7 days. Take care!",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

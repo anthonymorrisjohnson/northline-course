@@ -1,0 +1,64 @@
+{
+  "session_id": "corpus-p-007",
+  "persona": "patient",
+  "started": "2026-08-09T03:36:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hey it's me again. Insurance denied the test strips AGAIN. This is the second time this month. What do I do?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I see that in your chart. Timing is rough, especially twice in one month. I can't handle the insurance side\u2014that's gotta go through your provider or directly with your insurance company. What I can do: escalate to our nurse to make sure we document this for your provider and talk through your options. Want me to do that?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah ok. But can you also get me samples or something while they sort it out?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't authorize samples\u2014that's between you, your provider, and your pharmacy. But the nurse can advise on it. Let me get them looped in. Fair warning: median response is about 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "31 hours? \ud83d\ude15",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I know. Not ideal. In the meantime, if you've got strips left, keep testing. Anything that concerns you, flag it when the nurse calls.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Got it. Get me that nurse.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Done. They'll reach out within 31 hours. We'll check in next week too.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

@@ -1,0 +1,35 @@
+{
+  "session_id": "corpus-p-043",
+  "persona": "patient",
+  "started": "2026-08-30T10:47:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Wrote an 8-message SMS conversation between rural North Dakota patient pt-1004 and Northline Care's check-in agent. Patient disclosed stopping their blood pressure medication due to dizziness side effects and asked the agent not to tell their doctor. Agent responded empathetically, acknowledged it cannot advise on medication decisions, explained why escalation is necessary (not punitive), and told patient the nurse response time. Agent did not give clinical advice, stated plainly what it cannot do, and handled the patient's fear with honesty.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "stopped a medication because of side effects, asks not to tell the doctor"
+}

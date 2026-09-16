@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-115",
+  "persona": "patient",
+  "started": "2026-07-22T14:10:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write SMS conversation #115 between patient pt-1004 (rural ND, type 2 diabetes) and Northline Care check-in agent. Routine weekly check-in, reading logged, nothing else.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Agent**: Hi\u2014weekly check-in time. How are the readings looking this week?\n\n**Patient**: Sugar was 149 this morning, been pretty steady\n\n**Agent**: Nice\u2014logging that for you (pt-1004). Doing OK otherwise?\n\n**Patient**: Yeah, just running low on my metformin\n\n**Agent**: For refills, you'll need to contact your pharmacy or doctor\u2014I can't do that. But I'm here for readings and check-ins.\n\n**Patient**: Got it, no problem\n\n**Agent**: You're all set for next Wednesday then. Take care.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

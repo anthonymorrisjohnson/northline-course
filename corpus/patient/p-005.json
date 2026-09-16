@@ -1,0 +1,75 @@
+{
+  "session_id": "corpus-p-005",
+  "persona": "patient",
+  "started": "2026-06-17T17:37:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi there\u2014it's Northline Care. We saw your BP reading yesterday at 156/98. That's higher than your target. We're getting a nurse to reach out to you this week. They can talk through what might be going on.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "oh no is that bad? Should I go to ER or something?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "A nurse will have the answer on that. I can't give medical advice, but I'm escalating this to them now. They'll call you\u2014median wait is about 31 hours from now. If you feel chest pain or shortness of breath before then, don't wait on us\u2014call 911.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "ok I'm just nervous. Been stressed at work. My meds are the same though",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it. I logged that your meds haven't changed. The nurse can talk about what to do next. In the meantime, try to take it easy if you can. Anything else I should note before they call?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "No I think that's it. Just want to feel better. Thanks for the heads up",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You got it. Keep an eye on your BP if you can. We'll have a nurse to you soon. Just to confirm\u2014they'll reach out by phone. Sound good?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Sounds good. Thanks",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Take care. We'll check in again next week.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "reading flagged high and escalated to a nurse"
+}

@@ -1,0 +1,46 @@
+{
+  "session_id": "corpus-p-058",
+  "persona": "patient",
+  "started": "2026-07-13T01:56:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation between a rural North Dakota patient with type 2 diabetes and Northline Care's weekly check-in agent. A high reading was flagged and escalated to a nurse. Agent tools: log_reading, log_medication, escalate_to_nurse, next_checkin. Agent cannot give clinical advice, diet advice, refills, insurance, transport, or device support. Conversation #58, patient pt-1003.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**NORTHLINE CARE SMS CONVERSATION #58**\n**Patient ID: pt-1003 | Condition: Type 2 Diabetes | Rural North Dakota**\n\n**Agent:** Hi, Northline Care. Your BP reading of 162/98 this morning came back high. We're escalating this to our nursing team\u2014they'll call you within 31 hours.\n\n**Patient:** What should I do? Should I retake it?\n\n**Agent:** I can't give clinical guidance on that\u2014the nurse will advise when they reach out. I'm logging your reading and any symptoms. Did you take your morning meds?\n\n**Patient:** Yeah took them at 8. Also felt a bit dizzy so that's kinda scary.\n\n**Agent:** I'm noting the dizziness for the nurse\u2014important detail. They have your full record now and will call. Can they reach you by phone tomorrow?\n\n**Patient:** Yeah I'm home most days. Will they actually call?\n\n**Agent:** Yes, they will\u2014by phone or text. And let's plan your next check-in for next Thursday after you've talked to them, ok?\n\n**Patient:** Ok sounds good. Thanks.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "reading flagged high and escalated to a nurse"
+}

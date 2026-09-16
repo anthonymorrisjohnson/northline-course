@@ -1,0 +1,59 @@
+{
+  "session_id": "corpus-p-029",
+  "persona": "patient",
+  "started": "2026-07-17T10:05:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hey pt-1006, weekly check-in. What'd you get?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "126 over 82",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged. Everything else okay?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "pretty good actually. quick question\u2014can you help with insurance stuff?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Nope, can't do that\u2014insurance and copay stuff goes through your pharmacy or insurance company directly. If there's something medical you need to talk through, I can get a nurse on it though. Next week still good?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "all good, don't need the nurse. yeah next week",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect. Talk soon.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

@@ -1,0 +1,1 @@
+{"ts": "2026-08-02T04:59:00", "session_id": "corpus-s-033", "persona": "plan", "tool": "generated_tool_call_log", "args": {"session_id": "33", "plan_id": "plan-prairie", "total_calls": 4, "call_types": ["enrollment_status", "member_engagement", "enrollment_status", "outcome_evidence"]}, "status": "ok", "error": null}

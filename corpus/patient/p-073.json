@@ -1,0 +1,70 @@
+{
+  "session_id": "corpus-p-073",
+  "persona": "patient",
+  "started": "2026-06-10T15:49:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "My insurance just rejected the test strip claim. Says it's not approved. How am I supposed to check my blood sugar?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hey pt-1002. I hear you\u2014that's frustrating. I can't work with insurance claims or arrange refills myself, but I can escalate this to our nursing team. They've got better tools for this stuff. Fair warning: they're running about 31 hours for a response right now. Want me to?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah do it. I have readings from this week though if that helps.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely, go ahead and share them\u2014I'll log them for your chart. The nurses will take it from there on the insurance side. That's really their wheelhouse.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "BP was 138 over 84 yesterday, glucose 156 this morning.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got those logged. Escalating you to nursing now\u2014they'll reach out within a day with options. One quick thing: we've got your next check-in on [date]. Still work for you?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah that's fine. Thanks.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You got it. Sit tight\u2014the team will help sort this out.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

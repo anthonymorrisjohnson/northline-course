@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-038",
+  "persona": "patient",
+  "started": "2026-06-25T08:36:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: routine weekly check-in, reading logged, nothing else.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "# SMS Conversation #38 | pt-1007\n\n**Northline Care Weekly Check-In \u2014 Type 2 Diabetes \u2014 Rural North Dakota**\n\n---\n\n**Agent:** Hi there! Northline Care here. Quick weekly check\u2014what's your blood sugar reading today?\n\n**Patient:** Hey. It's 131 this morning. That's normal for me.\n\n**Agent:** Great, got that logged. Everything else going okay this week\u2014any issues with your meds or how you're feeling?\n\n**Patient:** Nope, all good. Same routine.\n\n**Agent:** Perfect. Your next check-in is scheduled for Tuesday at 9am. Does that still work for you?\n\n**Patient:** Works for me \ud83d\udc4d\n\n**Agent:** You're all set. Take care!",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": false,
+  "cost_usd": 0.0,
+  "theme": "routine weekly check-in, reading logged, nothing else"
+}

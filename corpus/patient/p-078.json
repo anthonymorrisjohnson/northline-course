@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-078",
+  "persona": "patient",
+  "started": "2026-08-01T17:01:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: reading flagged high and escalated to a nurse. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1007. Vary tone and wording; conversation number 78. tools_used lists the tools the agent would call; escalated is true if escalate_to_nurse is among them.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "# SMS Conversation 78 \u2014 Patient pt-1007, Rural North Dakota\n\n**Agent:** Weekly check-in for Northline Care. You got a min?\n\n**Patient:** ya sure\n\n**Agent:** Any BP or glucose readings from this week?\n\n**Patient:** checked my blood pressure yesterday morning it was 186 over 98. thats like the highest ive seen it\n\n**Agent:** Got it logged. That reading needs a nurse to take a look at it so I'm escalating to our team now. Median response time is 31 hours but they may reach you sooner. Did you take your blood pressure meds yesterday?\n\n**Patient:** yeah i did. is this bad\n\n**Agent:** Can't say\u2014that's for the nurse to assess. They'll contact you and go over everything. If you feel chest pain or shortness of breath before then, go to the ER.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "reading flagged high and escalated to a nurse"
+}

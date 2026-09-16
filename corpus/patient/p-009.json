@@ -1,0 +1,65 @@
+{
+  "session_id": "corpus-p-009",
+  "persona": "patient",
+  "started": "2026-07-10T13:06:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hey\u2014need a refill on my diabetes meds. My pharmacy's out but I'm 40 miles from town. Can you help?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hi pt-1002. I can't process refills or arrange transport. But a nurse can contact your doctor about options like mail delivery. Want me to set that up?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "How long would that take?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Median response time is 31 hours. She might be able to work something out faster if it's urgent.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Not urgent but I'd like it handled soon. Also got a glucose reading if you need it\u2014127 this morning fasting.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logged that reading. I'm escalating to a nurse now who can reach out to your doctor about the refill. Check in with you next week?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yeah sounds good",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

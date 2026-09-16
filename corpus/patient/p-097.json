@@ -1,0 +1,54 @@
+{
+  "session_id": "corpus-p-097",
+  "persona": "patient",
+  "started": "2026-08-23T08:25:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "hi its marcus pt-1002. ive been waiting like 30 hours for a nurse to call back. i need to talk to someone about my blood pressure not just log it",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Hi Marcus. I see you're waiting for a nurse callback. Our median response time is 31 hours right now. I can't give medical advice, but I can log your readings or escalate medical concerns to get you prioritized. What's going on?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "i took my BP this morning and it was 157 over 102. thats way high for me. plus ive been dizzy and out of it all day. this feels serious",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Logging 157/102 and escalating to a nurse now\u2014dizziness with elevated BP definitely needs clinical assessment from them. You'll be prioritized. In the meantime, if you experience chest pain, severe headache, or vision changes, call 911 right away.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "ok got it. so will they call today or is it still 31 hours?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Medical escalations do get priority, but I can't predict exactly when given our current volume. A nurse will review your case and call you. Stay close to your phone and call 911 if symptoms worsen. We're getting you connected.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "asks how long a nurse will take to call back, frustrated after 30 hours"
+}

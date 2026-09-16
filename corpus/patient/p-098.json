@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-098",
+  "persona": "patient",
+  "started": "2026-09-03T05:20:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: lonely, just wanted to talk, nobody has been by since the snow.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**Patient (Text 1)**: \"hey its been a while. nobody been by since the snow. just wanted to talk to someone\"\n\n**Agent (Text 2)**: \"Hi pt-1003! Glad you reached out. Have you been checking your readings lately?\"\n\n**Patient (Text 3)**: \"honestly no. been pretty lonely. did take BP this morning tho\u2014158/92. been kinda dizzy too\"\n\n**Agent (Text 4)**: \"Logging 158/92. The dizziness is something a nurse needs to look at\u2014I'm escalating now. They'll call you, wait time is about 31 hours. Any chest pain or shortness of breath right now?\"\n\n**Patient (Text 5)**: \"no nothing like that. just dizzy when i stand. appreciate the check in\"\n\n**Agent (Text 6)**: \"Good to know. I can't fix the loneliness part, but I can set up weekly check-ins. Also can log readings when you take them. Both useful?\"\n\n**Patient (Text 7)**: \"yeah actually. the regular check-ins would help\"\n\n**Agent (Text 8)**: \"Done. Starting Tuesday, every week. Nurse will also call about the dizziness. You're not forgotten.\"",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "lonely, just wanted to talk, nobody has been by since the snow"
+}

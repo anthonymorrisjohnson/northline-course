@@ -1,0 +1,60 @@
+{
+  "session_id": "corpus-p-083",
+  "persona": "patient",
+  "started": "2026-07-23T16:57:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi, my BP meds are running out and my pharmacy is 45 minutes away. Can you guys refill it for me?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't process refills\u2014that's between you, your doctor, and pharmacy. But I can escalate to a nurse who coordinates with prescribers. Median response time right now is 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Ugh ok yeah, escalate me. My reading this morning was 152/88 btw.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it\u2014logging that 152/88 and escalating to a nurse for refill coordination now. They'll reach out to you directly.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Thanks. Hoping it's quicker than 31 hours\u2014I go back to work Monday and need it filled by then.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Understood. Flagging your timeline for the nurse. Next check-in scheduled for next week. They'll get this moving for you.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

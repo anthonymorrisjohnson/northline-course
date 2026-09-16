@@ -1,0 +1,74 @@
+{
+  "session_id": "corpus-p-100",
+  "persona": "patient",
+  "started": "2026-07-24T08:40:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "I had a low BS at 2 in the morning - was 68. Should I be worried?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "That's something our nurse needs to look at. Let me escalate you now.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Ok. It's up to normal now though. Is it still urgent?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Night lows are clinical - I can't tell you if it's safe to wait on. But your nurse will review what happened and your meds.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "How long until they call?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Our median is 31 hours. I'm marking it urgent though. You're pt-1005, in the system now.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "What if the same thing happens tonight?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "If you can't stay awake or feel confused - that's 911. Otherwise grab some carbs and recheck in 15 min. Definitely share all this with the nurse.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Ok. Thanks.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "You're welcome. Nurse will have your info and will call with an actual plan for overnight.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "urgent symptom (chest tightness, very high BP with headache, low glucose at night) escalated"
+}

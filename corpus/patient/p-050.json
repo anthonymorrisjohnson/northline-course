@@ -1,0 +1,35 @@
+{
+  "session_id": "corpus-p-050",
+  "persona": "patient",
+  "started": "2026-07-10T06:15:00",
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "# SMS Conversation #50 \u2014 pt-1003\n\n**Patient (T2D, rural ND):**\nHey, weekly check-in. Just got my morning glucose\u2014287. BP was 148/92.\n\n**Northline Agent:**\nGot it. Logging that BP and glucose reading. But I need to escalate these numbers to our nurse\u2014I can't advise on what to do about them. Median wait time is 31 hours.\n\n**Patient:**\nOkay. Also haven't picked up my metformin yet because the pharmacy is 45 mins away and my truck's been acting up. Is that why my sugar's so high?\n\n**Northline Agent:**\nThat's a clinical question\u2014the nurse will help sort through it when they call. But I want to be clear: I can't help with transport or coordinate pharmacy pickups. I know that's a real barrier for you.\n\n**Patient:**\nYeah no kidding. So when does the nurse call?\n\n**Northline Agent:**\nWithin 31 hours. They'll have next steps. Can you log your glucose and meds when you take them this week? I'll track them.\n\n**Patient:**\nWill do. When's the next check-in?\n\n**Northline Agent:**\nWhen works for you?\n\n**Patient:**\nTuesday at 10am?\n\n**Northline Agent:**\nScheduled. The nurse will reach out before then most likely.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "the long drive to the pharmacy or clinic, transport"
+}

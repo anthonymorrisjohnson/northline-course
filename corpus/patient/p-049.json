@@ -1,0 +1,70 @@
+{
+  "session_id": "corpus-p-049",
+  "persona": "patient",
+  "started": "2026-09-04T13:40:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Insurance company denied my test strips AGAIN. Says they're not medically necessary. I'm type 2 and I check twice a day like my doc said. What do I do?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I'm sorry that happened. I can't work with insurance directly, but I can get a nurse involved who might help advocate for you. They'd review your readings and medication history. Want me to escalate this? Fair warning: median response time is 31 hours right now.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Can you at least write down that this happened so there's a record? In case I need to fight them?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely. I can note readings and meds in your chart. Do you have your readings from the last few days handy? That'll help the nurse too.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Yesterday morning 167, yesterday evening 189. Been taking my metformin like normal.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Got it\u2014logged both readings and your metformin. I'm escalating to the nurse now so they can see this pattern and possibly push back with your insurance. You should hear from them within about 31 hours.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "Thanks. Can you also help me get a refill while we're at it?",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "I can't process refills\u2014that's between you, your pharmacy, and your doctor. But definitely mention the strip issue to your doc when you call about the refill. They might have more weight with the insurance company.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "insurance denied test strips or a claim question"
+}

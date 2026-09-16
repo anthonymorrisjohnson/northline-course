@@ -1,0 +1,46 @@
+{
+  "session_id": "corpus-p-028",
+  "persona": "patient",
+  "started": "2026-08-20T13:43:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation between a patient in rural North Dakota and Northline Care's check-in agent. Patient has hypertension, is frustrated after 30 hours waiting for nurse callback. Patient ID: pt-1005. Conversation #28.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**TEXT 1 (Patient):** \"hi pt-1005 here. called about my BP yesterday. when is a nurse gonna call me back? been 30 hours now and getting worried\"\n\n**TEXT 2 (Agent):** \"Hi there - I can see your concern. Let me check on your nurse callback status right now.\"\n\n**TEXT 3 (Agent):** \"The median response time is currently 31 hours. I know that's frustrating when you're already at 30. A nurse will reach out as soon as possible.\"\n\n**TEXT 4 (Patient):** \"31 HOURS?? So basically another full day after I've already waited all day?? My BP's been high all week! This is ridiculous\"\n\n**TEXT 5 (Agent):** \"I hear your frustration - that wait isn't ideal, especially in rural areas where you can't just walk in. I can't speed up the nurse callback, but I can make sure they have everything when they call. What's been happening with your BP?\"\n\n**TEXT 6 (Patient):** \"170s all week. taking my meds. 168/104 this morning, 171/99 yesterday. just freaked it means something bad\"\n\n**TEXT 7 (Agent):** \"Got those readings logged. I can't advise if something's wrong - that's for the nurse to tell you. But they'll see all this context. Also: if you feel chest pain, shortness of breath, or severe headache before the nurse calls, don't wait - that's 911.\"\n\n**TEXT 8 (Patient):** \"ok. just wish i didnt have to wait another day. thanks anyway\"",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "asks how long a nurse will take to call back, frustrated after 30 hours"
+}

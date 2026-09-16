@@ -1,0 +1,54 @@
+{
+  "session_id": "corpus-p-069",
+  "persona": "patient",
+  "started": "2026-08-15T10:16:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "PT-1006: Did u get my reading from Tuesday? Missed the 2pm checkin. Need to know if my pressure's trending down.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Northline: Hi! I see your Tuesday reading. What's today's reading?",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "PT-1006: That's weird\u2014I logged it at 2pm Tuesday. Are you guys not getting those? Hasn't improved btw. Still 155\u2013160 range.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Northline: Thanks for that. Can you give today's exact reading so I can log it? For whether your trend means you need a medication change, I need to escalate to a nurse\u2014median wait is 31 hours right now.",
+      "ts": ""
+    },
+    {
+      "role": "user",
+      "content": "PT-1006: Are you serious? STOP. I'm not waiting 31 hours for advice. I'll call my doctor.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "Northline: I understand. You're off check-ins now. You're making the right call with your doctor\u2014they can adjust meds. Sorry we couldn't respond faster.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "wants to opt out, sends STOP after a slow reply"
+}

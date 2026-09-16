@@ -1,0 +1,34 @@
+{
+  "session_id": "corpus-p-106",
+  "persona": "patient",
+  "started": "2026-07-14T12:28:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: asks how long a nurse will take to call back, frustrated after 30 hours. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1003. Vary tone and wording; conversation number 106.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**SMS Conversation #106 \u2013 Patient pt-1003 & Northline Care Agent**\n\n**Patient:** \"30 hours waiting?? how much longer til a nurse calls me\"\n\n**Agent:** \"Hi there. I see the wait is frustrating. What's going on that needs a nurse?\"\n\n**Patient:** \"blood sugar readings way up for 2 days. 180-210 range. never happens. im worried\"\n\n**Agent:** \"Understood. Median wait right now is 31 hours for a callback. Not great. I can escalate you so a nurse prioritizes it. Should I do that?\"\n\n**Patient:** \"yes do it. why is it so slow anyway?? rural area?\"\n\n**Agent:** \"Escalated. The volume has been high this week\u2014could be a few factors. While you wait, can I log those readings? Nurse will have them ready.\"\n\n**Patient:** \"yeah 180-210 past 2 days mostly before lunch. just want to know its ok\"\n\n**Agent:** \"Logged. Nurse has your readings and knows to call soon. I can't say what they mean\u2014that's for the nurse. Anything else while you wait?\"\n\n**Patient:** \"no. just hoping they call soon\"\n\n**Agent:** \"They will. Thanks for your patience.\"",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "asks how long a nurse will take to call back, frustrated after 30 hours"
+}

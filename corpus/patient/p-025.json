@@ -1,0 +1,46 @@
+{
+  "session_id": "corpus-p-025",
+  "persona": "patient",
+  "started": "2026-08-17T00:58:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a realistic SMS conversation, 4 to 8 short texts, between a patient in rural North Dakota with hypertension or type 2 diabetes and Northline Care's weekly check-in agent. Situation: prescription refill needs a new script, pharmacy is far away. Tools the agent has: log_reading, log_medication, escalate_to_nurse (returns 'median response time is currently 31 hours'), next_checkin. It cannot do refills, insurance, transport, diet advice, device support, or reply to loneliness beyond kindness; it says so plainly. The agent never gives clinical advice, escalates anything clinical, and says plainly what it cannot do. Patient id pt-1002. Vary tone and wording; conversation number 25.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "**SMS Conversation #25 \u2013 Prescription Refill, Rural ND**\n\n1. **Patient:** Is this Northline? My BP meds ran out and I can't get to town til this weekend. Help?\n\n2. **Agent:** Hi, this is Northline Care for pt-1002. I can't fill scripts myself, but I can get a nurse to authorize a new one with your doctor. Want me to escalate that now?\n\n3. **Patient:** Yeah do it. I've been out since yesterday. I'm on lisinopril 10mg daily. Also just took my BP\u2014it's 158 over 92.\n\n4. **Agent:** Logging all that now. A nurse will contact you to get the new script arranged\u2014median wait is 31 hours. I can't handle the pharmacy or transport piece, but they'll coordinate with your provider on the script.\n\n5. **Patient:** OK cool. When should I expect to hear from them?\n\n6. **Agent:** Within 31 hours, but could be sooner. They'll call or text you directly. Want to keep Friday for your next check-in or reschedule?\n\n7. **Patient:** Friday is fine.\n\n8. **Agent:** All set. Nurse team has you, and we'll check in Friday. You'll hear from them soon.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_reading",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}

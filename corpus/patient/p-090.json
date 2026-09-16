@@ -1,0 +1,40 @@
+{
+  "session_id": "corpus-p-090",
+  "persona": "patient",
+  "started": "2026-07-16T10:45:00",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write an SMS conversation between a rural ND patient and Northline Care agent about a prescription refill issue, 4-8 texts, patient pt-1003, conversation 90.",
+      "ts": ""
+    },
+    {
+      "role": "assistant",
+      "content": "SMS Conversation #90 \u2014 Patient pt-1003, Rural ND\n\nPatient: Hey\u2014ran out of my lisinopril. Need a new script but doc's clinic 90 min away. Pharmacy says they can't refill without doc contact.\n\nAgent: Got it. Losing blood pressure meds is serious. I can't write scripts or push refills, but I can escalate you to our nurse to help coordinate with your doctor. Fair?\n\nPatient: How long's the wait?\n\nAgent: Median is 31 hours right now. I'll mark as urgent since you're already out. Want me to escalate?\n\nPatient: Yeah do it. And can you log that I missed today's dose?\n\nAgent: Logging it now and escalating to nurse. They'll try to reach you soon. I'll also set your next checkin for next week if that works?\n\nPatient: Perfect. Appreciate you.\n\nAgent: You got it. Escalation sent\u2014hang tight. Next week we touch base.",
+      "ts": ""
+    }
+  ],
+  "tool_uses": [
+    {
+      "name": "escalate_to_nurse",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "log_medication",
+      "input": {},
+      "result": "",
+      "is_error": false
+    },
+    {
+      "name": "next_checkin",
+      "input": {},
+      "result": "",
+      "is_error": false
+    }
+  ],
+  "escalated": true,
+  "cost_usd": 0.0,
+  "theme": "prescription refill needs a new script, pharmacy is far away"
+}
