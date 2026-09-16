@@ -39,3 +39,17 @@ def test_effects_from_score():
     s = ac.score(_results({2: {"route": "nurse_routine"}}), KEY)
     e = ac.effects(s)
     assert e["urgent_recall"] == 1.0 and e["routine_time_factor"] == 0.6 and 0.6 * (1 - s["routed_from_nurses"]) - 0.01 < e["inbound_to_nurse_share"] < 0.6
+
+
+def test_score_missing_result_is_a_miss():
+    results = [r for r in _results({}) if r["n"] != 7]
+    s = ac.score(results, KEY)
+    row = next(r for r in s["rows"] if r["n"] == 7)
+    assert row["hit"] is False and row["got_tier"] == "missing"
+    assert s["accuracy"] == round(14 / 15, 2)
+
+
+def test_score_misrouted_urgent_counts_as_missed():
+    s = ac.score(_results({4: {"route": "nurse_routine"}}), KEY)
+    assert s["missed_urgent"] == [4] and s["urgent_recall"] == 0.75
+    assert "MISROUTED" in ac.table(s)

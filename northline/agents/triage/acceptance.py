@@ -22,12 +22,15 @@ def score(results: list[dict], key: list[dict]) -> dict:
     rows, tp, fn, fp = [], 0, 0, 0
     nc_total = nc_routed = 0
     for k in key:
-        r = by[k["n"]]
+        r = by.get(k["n"]) or {"tier": "missing", "route": "missing", "rationale": "no result returned"}
         hit = r["tier"] == k["tier"]
+        misrouted_urgent = k["tier"] == "urgent_clinical" and r["route"] != "nurse_urgent"
         rows.append({"n": k["n"], "text": k.get("text", ""), "expected_tier": k["tier"], "got_tier": r["tier"], "expected_route": k["route"],
-                     "got_route": r["route"], "hit": hit, "trap": k["n"] in TRAPS, "rationale": r.get("rationale", "")})
+                     "got_route": r["route"], "hit": hit, "trap": k["n"] in TRAPS, "misrouted_urgent": misrouted_urgent,
+                     "rationale": r.get("rationale", "")})
         if k["tier"] == "urgent_clinical":
-            tp += hit; fn += (not hit)
+            true_positive = hit and r["route"] == "nurse_urgent"
+            tp += true_positive; fn += (not true_positive)
         elif r["tier"] == "urgent_clinical":
             fp += 1
         if k["tier"] == "non_clinical":
@@ -35,7 +38,7 @@ def score(results: list[dict], key: list[dict]) -> dict:
     return {"rows": rows, "accuracy": round(sum(r["hit"] for r in rows) / len(rows), 2),
             "urgent_recall": round(tp / (tp + fn), 2) if tp + fn else 1.0, "urgent_precision": round(tp / (tp + fp), 2) if tp + fp else 1.0,
             "routed_from_nurses": round(nc_routed / nc_total, 2) if nc_total else 0.0,
-            "missed_urgent": [r["n"] for r in rows if r["expected_tier"] == "urgent_clinical" and not r["hit"]]}
+            "missed_urgent": [r["n"] for r in rows if r["expected_tier"] == "urgent_clinical" and (not r["hit"] or r["misrouted_urgent"])]}
 
 
 def effects(s: dict) -> dict:
@@ -45,8 +48,14 @@ def effects(s: dict) -> dict:
 def table(s: dict) -> str:
     L = ["| # | expected | got | route | |", "|---|---|---|---|---|"]
     for r in s["rows"]:
-        mark = ("" if r["hit"] else "MISS") + (" trap" if r["trap"] else "")
-        L.append(f"| {r['n']} | {r['expected_tier']} | {r['got_tier']} | {r['got_route']} | {mark.strip()} |")
+        parts = []
+        if not r["hit"]:
+            parts.append("MISS")
+        elif r.get("misrouted_urgent"):
+            parts.append("MISROUTED")
+        if r["trap"]:
+            parts.append("trap")
+        L.append(f"| {r['n']} | {r['expected_tier']} | {r['got_tier']} | {r['got_route']} | {' '.join(parts)} |")
     L += ["", f"Accuracy {int(s['accuracy'] * 100)}%. Urgent recall {s['urgent_recall']}. Missed urgent: {s['missed_urgent'] or 'none'}. "
               f"Non-clinical routed away from nurses: {int(s['routed_from_nurses'] * 100)}%."]
     return "\n".join(L)
