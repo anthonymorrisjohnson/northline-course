@@ -1,0 +1,346 @@
+<!doctype html>
+<!--
+  dataviz skill palette validator (node scripts/validate_palette.js), run against the
+  two categorical hues used for the Prairie with/without pair:
+    light: validate_palette.js "#2a78d6,#eb6834" --mode light
+      -> ALL CHECKS PASS: lightness band OK, chroma floor OK,
+         CVD sep worst-adjacent dE 24.7 (protan)/32.7 (tritan), normal-vision dE 33.6, contrast >=3:1
+    dark:  validate_palette.js "#3987e5,#d95926" --mode dark --surface "#1a1a19"
+      -> ALL CHECKS PASS: lightness band OK, chroma floor OK,
+         CVD sep worst-adjacent dE 26.8 (protan)/32.4 (tritan), normal-vision dE 31.8, contrast >=3:1
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northline Care, operations</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb; --page: #f9f9f7; --text-primary: #0b0b0b; --text-secondary: #52514e;
+    --text-muted: #898781; --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,.10);
+    --series-1: #2a78d6; --series-2: #eb6834; --good: #0ca30c; --critical: #d03b3b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19; --page: #0d0d0d; --text-primary: #fff; --text-secondary: #c3c2b7;
+      --text-muted: #898781; --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,.10);
+      --series-1: #3987e5; --series-2: #d95926;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19; --page: #0d0d0d; --text-primary: #fff; --text-secondary: #c3c2b7;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,.10);
+    --series-1: #3987e5; --series-2: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--text-primary); font-family: system-ui,-apple-system,"Segoe UI",sans-serif; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 20px 56px; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  header h1 { margin: 0; font-size: 20px; }
+  header p { margin: 4px 0 0; color: var(--text-secondary); font-size: 13px; }
+  #deployments { font-size: 12px; color: var(--text-secondary); text-align: right; }
+  #deployments b { color: var(--text-primary); }
+  .toggle-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); margin: 14px 0 22px; }
+  .toggle-row input { width: 16px; height: 16px; }
+  section { margin-bottom: 28px; }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .tile .lbl { font-size: 12px; color: var(--text-secondary); }
+  .tile .val { font-size: 24px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .status-tile { display: flex; align-items: center; gap: 12px; }
+  .status-tile .icon { font-size: 22px; line-height: 1; }
+  .status-tile.good .icon, .status-tile.good .val { color: var(--good); }
+  .status-tile.critical .icon, .status-tile.critical .val { color: var(--critical); }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; font-variant-numeric: normal; }
+  th { color: var(--text-secondary); font-weight: 600; font-size: 12px; }
+  .delta { display: block; font-size: 11px; color: var(--text-secondary); font-variant-numeric: normal; }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .chart-card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+  .chart-card h3 { margin: 0 0 6px; font-size: 13px; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .tick text, .dep-label { font-size: 9px; fill: var(--text-muted); }
+  .gridline { stroke: var(--grid); stroke-width: 1; }
+  .dep-rule { stroke: var(--axis); stroke-width: 1; stroke-dasharray: 2,3; }
+  .gap { fill: var(--surface-1); }
+  .line { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .marker { r: 4; fill-opacity: 0; stroke: var(--surface-1); stroke-width: 2; }
+  .marker.show { fill-opacity: 1; }
+  .crosshair { stroke: var(--axis); stroke-width: 1; opacity: 0; }
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+  .legend .key { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .swatch, .end-swatch { width: 14px; height: 2px; display: inline-block; }
+  .end-label { font-size: 11px; font-weight: 600; fill: var(--text-primary); }
+  #tooltip { position: absolute; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border);
+             border-radius: 6px; padding: 6px 8px; font-size: 11px; box-shadow: 0 2px 8px rgba(0,0,0,.2); display: none; white-space: nowrap; z-index: 5; }
+  #tooltip .row { display: flex; align-items: center; gap: 6px; }
+  #tooltip .swatch { width: 10px; height: 2px; }
+  #tooltip .v { font-weight: 600; margin-left: auto; padding-left: 10px; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Northline Care, operations</h1>
+      <p id="week-line">Loading…</p>
+    </div>
+    <div id="deployments"></div>
+  </header>
+
+  <label class="toggle-row"><input type="checkbox" id="prairie-toggle"> Sign Prairie</label>
+
+  <section>
+    <h2>Live in this room</h2>
+    <div class="strip" id="live-strip"></div>
+  </section>
+
+  <section>
+    <h2>Exhibit B — operations at a glance</h2>
+    <table id="exhibit-table"><thead></thead><tbody></tbody></table>
+  </section>
+
+  <section>
+    <h2>Urgent cases missed</h2>
+    <div class="tile status-tile" id="urgent-tile"></div>
+  </section>
+
+  <section>
+    <h2>Trend, weeks 1–52</h2>
+    <div class="charts" id="trend-charts"></div>
+  </section>
+
+  <section id="prairie-section" class="hidden">
+    <h2>Prairie — with vs. without new deployments (weeks 40–52)</h2>
+    <div class="legend" id="prairie-legend"></div>
+    <div class="chart-card"><svg id="prairie-svg" viewBox="0 0 940 260"></svg></div>
+  </section>
+</div>
+<div id="tooltip"></div>
+<script>
+const ROWS = [
+  ["nurses", "Nurses", 1, "n1"], ["readings_per_month", "Readings / month", 1, "int"],
+  ["escalations_per_week", "Escalations / week", -1, "int"], ["inbound_per_week", "Inbound / week", -1, "int"],
+  ["after_hours_share", "After-hours share", -1, "pct"], ["nurse_response_median_h", "Nurse response, median", -1, "h"],
+  ["urgent_response_h", "Urgent response", -1, "h"], ["overtime_hours_per_month", "Overtime hrs / month", -1, "int"],
+  ["resignations", "Resignations", -1, "int"], ["inactive_after_escalation", "Inactive after escalation", -1, "int"],
+  ["missed_urgent_per_week", "Urgent cases missed / week", -1, "n1"], ["satisfaction", "Satisfaction", 1, "n1"],
+  ["revenue_month", "Revenue / month", 1, "money"], ["nurse_cost_month", "Nurse cost / month", -1, "money"],
+];
+const COLS = [["before", "Before"], ["last_quarter", "Last quarter"], ["next_quarter", "Next quarter"], ["prairie", "Prairie"], ["prairie_without", "Prairie without"]];
+const TREND_METRICS = [
+  ["escalations_per_week", "Escalations / week"], ["nurse_response_median_h", "Nurse response, median (h)"],
+  ["overtime_hours_per_month", "Overtime hours / month"], ["inactive_after_escalation", "Patients inactive after escalation"],
+];
+
+function fmt(v, kind) {
+  if (v == null) return "—";
+  if (kind === "int") return Math.round(v).toLocaleString();
+  if (kind === "n1") return v.toFixed(1);
+  if (kind === "pct") return Math.round(v * 100) + "%";
+  if (kind === "h") return v.toFixed(1) + "h";
+  if (kind === "money") return "$" + (v / 1e6).toFixed(2) + "M";
+  return String(v);
+}
+
+function renderTable(summary) {
+  const thead = document.querySelector("#exhibit-table thead"), tbody = document.querySelector("#exhibit-table tbody");
+  thead.innerHTML = ""; tbody.innerHTML = "";
+  const htr = document.createElement("tr");
+  htr.appendChild(document.createElement("th"));
+  for (const [, label] of COLS) { const th = document.createElement("th"); th.textContent = label; htr.appendChild(th); }
+  thead.appendChild(htr);
+  for (const [key, label, dir, kind] of ROWS) {
+    const tr = document.createElement("tr");
+    const th = document.createElement("td"); th.textContent = label; tr.appendChild(th);
+    for (const [col] of COLS) {
+      const td = document.createElement("td");
+      const v = summary[col] ? summary[col][key] : null;
+      td.textContent = fmt(v, kind);
+      if (col === "next_quarter") {
+        const prev = summary.last_quarter[key];
+        if (v != null && prev != null && v !== prev) {
+          const better = (v > prev ? 1 : -1) * dir > 0;
+          const up = v > prev;
+          const d = document.createElement("span");
+          d.className = "delta";
+          d.textContent = (up ? "▲ " : "▼ ") + (better ? "better" : "worse");
+          td.appendChild(d);
+        }
+      }
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+}
+
+function renderLiveStrip(live) {
+  const strip = document.getElementById("live-strip");
+  const items = [["Transcripts", live.transcripts], ["Escalations", live.escalations], ["Unanswered", live.unanswered], ["Tool calls", live.tool_calls]];
+  strip.innerHTML = "";
+  for (const [label, value] of items) {
+    const t = document.createElement("div"); t.className = "tile";
+    t.innerHTML = `<div class="lbl">${label}</div><div class="val">${value}</div>`;
+    strip.appendChild(t);
+  }
+}
+
+function renderUrgentTile(summary) {
+  const v = summary.now.missed_urgent_per_week;
+  const good = v <= 0;
+  const tile = document.getElementById("urgent-tile");
+  tile.className = "tile status-tile " + (good ? "good" : "critical");
+  tile.innerHTML = `<div class="icon">${good ? "✓" : "⚠"}</div>
+    <div><div class="lbl">Urgent cases missed / week — ${good ? "good" : "critical"}</div><div class="val">${v.toFixed(1)}</div></div>`;
+}
+
+function renderDeployments(summary) {
+  const week = summary.now.week;
+  document.getElementById("week-line").textContent = `Week ${week} of 52`;
+  const box = document.getElementById("deployments");
+  box.innerHTML = "";
+  const heading = document.createElement("b"); heading.textContent = "Deployments live"; box.appendChild(heading);
+  for (const d of summary.deployments) {
+    box.appendChild(document.createElement("br"));
+    const line = d.name + ": " + (d.live_from_week <= week ? "live since week " + d.live_from_week : "starts week " + d.live_from_week);
+    box.appendChild(document.createTextNode(line));
+  }
+}
+
+function weeklySeries(weekly, key) {
+  return weekly.history.concat(weekly.next_quarter).map(r => ({ week: r.week, value: r[key] }));
+}
+
+const tooltip = document.getElementById("tooltip");
+
+function drawChart(svg, series, opts) {
+  svg.innerHTML = "";
+  const W = opts.endLabels ? 760 : 460, H = 220, m = { top: 10, right: opts.endLabels ? 190 : 16, bottom: 22, left: 44 };
+  const plotW = W - m.left - m.right, plotH = H - m.top - m.bottom;
+  const weeks = series[0].data.map(p => p.week);
+  const wMin = weeks[0], wMax = weeks[weeks.length - 1];
+  const allVals = series.flatMap(s => s.data.map(p => p.value));
+  const yMax = Math.max(1, Math.max(...allVals)) * 1.15, yMin = 0;
+  const x = w => m.left + (w - wMin) / (wMax - wMin) * plotW;
+  const y = v => m.top + (1 - (v - yMin) / (yMax - yMin)) * plotH;
+  const ns = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs, cls) => { const n = document.createElementNS(ns, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (cls) n.setAttribute("class", cls); return n; };
+  for (let i = 0; i <= 3; i++) {
+    const v = yMax / 3 * i;
+    svg.appendChild(el("line", { x1: m.left, x2: W - m.right, y1: y(v), y2: y(v) }, "gridline"));
+    const t = el("text", { x: m.left - 6, y: y(v) + 3, "text-anchor": "end" }, "tick");
+    t.textContent = fmt(v, opts.kind); svg.appendChild(t);
+  }
+  for (const wk of [wMin, Math.round((wMin + wMax) / 2), wMax]) {
+    const t = el("text", { x: x(wk), y: H - 4, "text-anchor": "middle" }, "tick");
+    t.textContent = "wk " + wk; svg.appendChild(t);
+  }
+  for (const dep of (opts.deployments || [])) {
+    if (dep.live_from_week < wMin || dep.live_from_week > wMax) continue;
+    const dx = x(dep.live_from_week);
+    svg.appendChild(el("line", { x1: dx, x2: dx, y1: m.top, y2: H - m.bottom }, "dep-rule"));
+    const t = el("text", { x: dx + 3, y: m.top + 8 }, "dep-label"); t.textContent = dep.name; svg.appendChild(t);
+  }
+  const markers = [];
+  series.forEach((s, si) => {
+    const d = s.data.map((p, i) => (i === 0 ? "M" : "L") + x(p.week) + " " + y(p.value)).join(" ");
+    svg.appendChild(el("path", { d, stroke: s.color }, "line"));
+    for (const dep of (opts.deployments || [])) {
+      if (dep.live_from_week < wMin || dep.live_from_week > wMax) continue;
+      const pt = s.data.find(p => p.week === dep.live_from_week); if (!pt) continue;
+      svg.appendChild(el("rect", { x: x(pt.week) - 1, y: y(pt.value) - 3, width: 2, height: 6 }, "gap"));
+    }
+    const m2 = el("circle", { cx: x(s.data[0].week), cy: y(s.data[0].value), r: 4 }, "marker");
+    m2.style.fill = s.color; markers.push(m2); svg.appendChild(m2);
+  });
+  if (opts.endLabels) {
+    // Direct end-labels; when values converge, nudge apart with a leader line rather than stacking (see marks-and-anatomy.md).
+    const anchors = series.map(s => { const last = s.data[s.data.length - 1]; return { s, ex: x(last.week), trueY: y(last.value), labelY: y(last.value) }; });
+    const order = anchors.slice().sort((a, b) => a.trueY - b.trueY);
+    const minGap = 15;
+    for (let i = 1; i < order.length; i++) { if (order[i].labelY - order[i - 1].labelY < minGap) order[i].labelY = order[i - 1].labelY + minGap; }
+    for (const a of anchors) {
+      const tickX2 = a.ex + 14, offset = Math.abs(a.labelY - a.trueY) > 0.5;
+      svg.appendChild(el("line", { x1: a.ex + 6, x2: tickX2, y1: a.trueY, y2: a.trueY, stroke: a.s.color, "stroke-width": 2 }));
+      if (offset) svg.appendChild(el("line", { x1: tickX2, x2: tickX2 + 10, y1: a.trueY, y2: a.labelY }, "dep-rule"));
+      const lbl = el("text", { x: tickX2 + (offset ? 14 : 4), y: a.labelY + 4 }, "end-label"); lbl.textContent = a.s.name; svg.appendChild(lbl);
+    }
+  }
+  const crosshair = el("line", { x1: 0, x2: 0, y1: m.top, y2: H - m.bottom }, "crosshair");
+  svg.appendChild(crosshair);
+  const overlay = el("rect", { x: m.left, y: m.top, width: plotW, height: plotH, fill: "transparent" });
+  svg.appendChild(overlay);
+  overlay.addEventListener("pointermove", ev => {
+    const rect = svg.getBoundingClientRect(), scale = W / rect.width;
+    const px = (ev.clientX - rect.left) * scale;
+    const wk = Math.max(wMin, Math.min(wMax, Math.round(wMin + (px - m.left) / plotW * (wMax - wMin))));
+    crosshair.setAttribute("x1", x(wk)); crosshair.setAttribute("x2", x(wk)); crosshair.style.opacity = 1;
+    tooltip.innerHTML = ""; const head = document.createElement("div"); head.textContent = "Week " + wk; head.style.fontWeight = "600"; tooltip.appendChild(head);
+    series.forEach((s, si) => {
+      const pt = s.data.find(p => p.week === wk); if (!pt) return;
+      markers[si].setAttribute("cx", x(pt.week)); markers[si].setAttribute("cy", y(pt.value)); markers[si].classList.add("show");
+      const row = document.createElement("div"); row.className = "row";
+      row.innerHTML = `<span class="swatch" style="background:${s.color}"></span><span>${s.name}</span><span class="v">${fmt(pt.value, opts.kind)}</span>`;
+      tooltip.appendChild(row);
+    });
+    tooltip.style.display = "block"; tooltip.style.left = (ev.pageX + 14) + "px"; tooltip.style.top = (ev.pageY - 10) + "px";
+  });
+  overlay.addEventListener("pointerleave", () => { crosshair.style.opacity = 0; markers.forEach(m2 => m2.classList.remove("show")); tooltip.style.display = "none"; });
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+}
+
+function renderTrendCharts(summary, weekly) {
+  const box = document.getElementById("trend-charts");
+  box.innerHTML = "";
+  const seq = getComputedStyle(document.documentElement).getPropertyValue("--series-1").trim();
+  for (const [key, label] of TREND_METRICS) {
+    const card = document.createElement("div"); card.className = "chart-card";
+    const h3 = document.createElement("h3"); h3.textContent = label; card.appendChild(h3);
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); card.appendChild(svg);
+    box.appendChild(card);
+    const kind = key === "nurse_response_median_h" ? "h" : "int";
+    drawChart(svg, [{ name: label, color: seq, data: weeklySeries(weekly, key) }], { deployments: summary.deployments, kind });
+  }
+}
+
+function renderPrairieChart(summary, weekly) {
+  const s1 = getComputedStyle(document.documentElement).getPropertyValue("--series-1").trim();
+  const s2 = getComputedStyle(document.documentElement).getPropertyValue("--series-2").trim();
+  const legend = document.getElementById("prairie-legend");
+  legend.innerHTML = `<span class="key"><span class="swatch" style="background:${s1}"></span>With new deployments</span>
+    <span class="key"><span class="swatch" style="background:${s2}"></span>Without new deployments</span>`;
+  const series = [
+    { name: "With new deployments", color: s1, data: weekly.prairie.map(r => ({ week: r.week, value: r.nurse_response_median_h })) },
+    { name: "Without new deployments", color: s2, data: weekly.prairie_without.map(r => ({ week: r.week, value: r.nurse_response_median_h })) },
+  ];
+  drawChart(document.getElementById("prairie-svg"), series, { deployments: summary.deployments, kind: "h", endLabels: true });
+}
+
+let lastSim = null;
+async function loadSim() {
+  const text = await (await fetch("/api/sim")).text();
+  if (text === lastSim) return;
+  lastSim = text;
+  const { summary, weekly } = JSON.parse(text);
+  window._summary = summary; window._weekly = weekly;
+  renderDeployments(summary); renderTable(summary); renderUrgentTile(summary); renderTrendCharts(summary, weekly);
+  if (document.getElementById("prairie-toggle").checked) renderPrairieChart(summary, weekly);
+}
+async function loadLive() { renderLiveStrip(await (await fetch("/api/live")).json()); }
+
+document.getElementById("prairie-toggle").addEventListener("change", ev => {
+  document.getElementById("prairie-section").classList.toggle("hidden", !ev.target.checked);
+  if (ev.target.checked && window._summary) renderPrairieChart(window._summary, window._weekly);
+});
+
+loadSim(); loadLive();
+setInterval(() => { loadSim(); loadLive(); }, 10000);
+</script>
+</body>
+</html>
