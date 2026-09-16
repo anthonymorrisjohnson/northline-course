@@ -39,13 +39,27 @@ def api_sim():
                          "weekly": json.loads((SIM_OUT / "weekly.json").read_text())})
 
 
+def _jsonl(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    rows = []
+    for line in path.read_text().splitlines():
+        if not line.strip():
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    return rows
+
+
 @app.get("/api/live")
 def api_live():
     d = log_dir()
-    q = [json.loads(l) for l in (d / "queue.jsonl").read_text().splitlines() if l.strip()] if (d / "queue.jsonl").exists() else []
-    calls = sum(1 for l in (d / "tool_calls.jsonl").read_text().splitlines() if l.strip()) if (d / "tool_calls.jsonl").exists() else 0
+    q = _jsonl(d / "queue.jsonl")
+    calls = _jsonl(d / "tool_calls.jsonl")
     return {"transcripts": len(list((d / "transcripts").glob("*.json"))) if (d / "transcripts").exists() else 0,
-            "escalations": len(q), "unanswered": sum(1 for r in q if r.get("answered_at") is None), "tool_calls": calls}
+            "escalations": len(q), "unanswered": sum(1 for r in q if r.get("answered_at") is None), "tool_calls": len(calls)}
 
 
 @app.post("/chat")

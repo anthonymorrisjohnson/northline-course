@@ -14,3 +14,9 @@ def test_api_live_counts(log_dir, data_dir):
     (log_dir / "queue.jsonl").write_text(json.dumps({"id": "esc-1", "answered_at": None}) + "\n" + json.dumps({"id": "esc-2", "answered_at": "x"}) + "\n")
     d = TestClient(server.app).get("/api/live").json()
     assert d["escalations"] == 2 and d["unanswered"] == 1 and d["transcripts"] == 0
+
+
+def test_api_live_skips_malformed_lines(log_dir, data_dir):
+    (log_dir / "queue.jsonl").write_text(json.dumps({"id": "esc-1", "answered_at": None}) + "\n{not json\n\n")
+    d = TestClient(server.app).get("/api/live").json()
+    assert d["escalations"] == 1

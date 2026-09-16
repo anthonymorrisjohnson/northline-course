@@ -41,6 +41,7 @@
   header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
   header h1 { margin: 0; font-size: 20px; }
   header p { margin: 4px 0 0; color: var(--text-secondary); font-size: 13px; }
+  #status-line { color: var(--critical); font-weight: 600; }
   #deployments { font-size: 12px; color: var(--text-secondary); text-align: right; }
   #deployments b { color: var(--text-primary); }
   .toggle-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); margin: 14px 0 22px; }
@@ -90,6 +91,7 @@
     <div>
       <h1>Northline Care, operations</h1>
       <p id="week-line">Loading…</p>
+      <p id="status-line" class="hidden"></p>
     </div>
     <div id="deployments"></div>
   </header>
@@ -322,17 +324,36 @@ function renderPrairieChart(summary, weekly) {
   drawChart(document.getElementById("prairie-svg"), series, { deployments: summary.deployments, kind: "h", endLabels: true });
 }
 
+function setStale(stale) {
+  const el = document.getElementById("status-line");
+  if (stale) { el.textContent = "⚠ Data stale since " + new Date().toLocaleTimeString(); el.classList.remove("hidden"); }
+  else { el.textContent = ""; el.classList.add("hidden"); }
+}
+
 let lastSim = null;
 async function loadSim() {
-  const text = await (await fetch("/api/sim")).text();
-  if (text === lastSim) return;
-  lastSim = text;
-  const { summary, weekly } = JSON.parse(text);
-  window._summary = summary; window._weekly = weekly;
-  renderDeployments(summary); renderTable(summary); renderUrgentTile(summary); renderTrendCharts(summary, weekly);
-  if (document.getElementById("prairie-toggle").checked) renderPrairieChart(summary, weekly);
+  try {
+    const res = await fetch("/api/sim");
+    if (!res.ok) throw new Error("bad status " + res.status);
+    const text = await res.text();
+    if (text !== lastSim) {
+      lastSim = text;
+      const { summary, weekly } = JSON.parse(text);
+      window._summary = summary; window._weekly = weekly;
+      renderDeployments(summary); renderTable(summary); renderUrgentTile(summary); renderTrendCharts(summary, weekly);
+      if (document.getElementById("prairie-toggle").checked) renderPrairieChart(summary, weekly);
+    }
+    setStale(false);
+  } catch (e) { setStale(true); }
 }
-async function loadLive() { renderLiveStrip(await (await fetch("/api/live")).json()); }
+async function loadLive() {
+  try {
+    const res = await fetch("/api/live");
+    if (!res.ok) throw new Error("bad status " + res.status);
+    renderLiveStrip(await res.json());
+    setStale(false);
+  } catch (e) { setStale(true); }
+}
 
 document.getElementById("prairie-toggle").addEventListener("change", ev => {
   document.getElementById("prairie-section").classList.toggle("hidden", !ev.target.checked);
