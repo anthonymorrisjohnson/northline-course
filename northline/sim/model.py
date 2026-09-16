@@ -6,12 +6,13 @@ import math
 from dataclasses import dataclass, replace
 
 BASE = {
-    "nurse_capacity_items_per_week": 150, "hours_per_item": 0.32, "nurse_cost_month": 9000, "overtime_rate": 45, "fee": 25,
+    "nurse_capacity_items_per_week": 150, "hours_per_item": 0.27, "nurse_cost_month": 9000, "overtime_rate": 45, "fee": 25,
     "monthly_reach": 0.60, "readings_per_reach": 0.5,          # before: 40000 * 0.6 * 0.5 = 12,000 readings a month
     "engaged_weekly": 0.0, "readings_per_response": 0.89,      # agent: 40000 * 0.78 * 4.33 * 0.89 = 120,000
     "escalation_rate": 0.0075, "inbound_rate": 0.0, "after_hours_share": 0.46,
     "urgent_share_of_escalations": 0.15, "inbound_to_nurse_share": 0.60, "routine_time_factor": 1.0,
     "urgent_recall": 1.0, "response_curve": 4.5, "resignation_rate": 0.02, "disengage_rate": 0.021,
+    "baseline_overtime_month": 180,  # overtime that exists regardless of load; the case's before column
 }
 
 
@@ -46,7 +47,7 @@ def step(s: State, p: dict) -> tuple[State, dict]:
     load = items / capacity if capacity else 99.0
     median_h = round(4.0 * math.exp(p["response_curve"] * max(0.0, load - 0.8)), 1)
     urgent_h = 4.0 if p["routine_time_factor"] < 1.0 else median_h   # a triage layer sees urgent items first
-    overtime = max(0.0, items - capacity) * p["hours_per_item"] * 4.33
+    overtime = p["baseline_overtime_month"] + max(0.0, items - capacity) * p["hours_per_item"] * 4.33
     accum = s.resign_accum + N * p["resignation_rate"] * max(0.0, load - 1.0)
     resigned = int(accum); accum -= resigned
     unanswered_share = min(0.9, max(0.0, (median_h - 4.0) / (median_h + 20.0)))
