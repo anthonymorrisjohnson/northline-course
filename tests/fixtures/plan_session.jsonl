@@ -1,0 +1,2 @@
+{"ts": "2026-09-01T10:00:00+00:00", "session_id": "fx-p1", "persona": "plan", "tool": "outcome_evidence", "args": {"plan_id": "plan-prairie", "metric": "bp_control"}, "status": "ok", "error": null}
+{"ts": "2026-09-01T10:00:05+00:00", "session_id": "fx-p1", "persona": "plan", "tool": "enrollment_status", "args": {"member_id": "701-555-0101"}, "status": "not_found", "error": "no member 701-555-0101"}

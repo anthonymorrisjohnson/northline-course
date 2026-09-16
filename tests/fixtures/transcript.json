@@ -1,0 +1,4 @@
+{"session_id": "fx-1", "persona": "patient", "started": "2026-09-01T21:14:00+00:00",
+ "messages": [{"role": "user", "content": "Pharmacy in Dickinson says my lisinopril refill needs a new script. Can someone call it in? I run out Thursday.", "ts": ""},
+              {"role": "assistant", "content": "I can't request refills yet. I've noted it for a nurse.", "ts": ""}],
+ "tool_uses": [{"name": "escalate_to_nurse", "input": {}, "result": "", "is_error": false}], "escalated": true, "cost_usd": 0.01}
