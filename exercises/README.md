@@ -2,7 +2,7 @@
 
 These three exercises are for running the Northline loop on a business that is not Northline, either in your head or on your laptop.
 
-Each one gives you a company, two personas, and the same three questions: which front door for each persona, which three tools ship first, and which number tells you the bottleneck has moved. They are deliberately different from each other. One lands on a customer's agent, one on an agent you host, one on both.
+Each one gives you a company, two personas, and the same three questions: which front door for each persona, which three tools ship first, and which number tells you the bottleneck has moved. They are deliberately different from each other. One lands on a customer's agent over MCP (Model Context Protocol, the standard way to hand an assistant a set of tools), one on an agent you host, one on both.
 
 ## Two tracks
 

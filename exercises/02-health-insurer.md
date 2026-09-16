@@ -46,7 +46,7 @@ Then, in a Claude Code session in the new folder:
 
 **Members get a controlled agent.** This is the reverse of the pharmacy's app customers, and the reason is liability. A sentence about whether something is covered is close to a promise to pay, and you cannot let that sentence be composed by an agent you do not own, wrapped in framing you never see. You also need the words: the reason a member is calling is a product defect, and it does not survive being reduced to a tool call.
 
-**Employer HR gets MCP.** They already work in their own tools, they want data rather than conversation, and tool calls tell you everything that matters — which cuts they ask for, which arguments fail, which report they rebuild by hand every quarter because you never shipped it. Giving them the tools also takes the analyst out of the loop, which is the whole point.
+**Employer HR gets MCP (Model Context Protocol, the standard way to hand an assistant a set of tools).** They already work in their own tools, they want data rather than conversation, and tool calls tell you everything that matters — which cuts they ask for, which arguments fail, which report they rebuild by hand every quarter because you never shipped it. Giving them the tools also takes the analyst out of the loop, which is the whole point.
 
 **First three tools:** `coverage_check`, `claim_status`, `find_in_network_provider` — the three questions that are most of 40,000 calls a month. `coverage_check` is the one that needs a guardrail written before it ships: it states benefits, it never promises payment, and it says so in the reply.
 

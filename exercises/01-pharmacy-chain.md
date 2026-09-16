@@ -44,7 +44,7 @@ Then, in a Claude Code session in the new folder:
 
 **The bottleneck moves to the pharmacist.** The calls that disappear are the easy ones. What is left, plus what the assistant surfaces — transfers, prior authorisations, rejected claims, "can I get a 90-day instead" — all needs a pharmacist's signature, and each one takes minutes rather than seconds. The counter gets quieter and the verification queue behind it gets longer.
 
-**App customers get MCP.** They already live in an assistant, they do not want another app, and for refill status and transfers the tool calls tell you everything you need: which lookups fail, which arguments people pass, which stores get asked for things they cannot do. You give up their words, which for status questions costs you very little.
+**App customers get MCP (Model Context Protocol, the standard way to hand an assistant a set of tools).** They already live in an assistant, they do not want another app, and for refill status and transfers the tool calls tell you everything you need: which lookups fail, which arguments people pass, which stores get asked for things they cannot do. You give up their words, which for status questions costs you very little.
 
 **Counter technicians get a controlled agent.** Two reasons and they are both about control. The conversation is regulated, and you need to own every sentence that goes near a medication. And the technicians' words are the best product signal in the company — they are describing the failure the moment it happens, which no tool call will ever do.
 

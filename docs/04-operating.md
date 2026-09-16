@@ -64,7 +64,7 @@ Pausing means the deployment comes out and the previous behaviour comes back, no
 
 Northline charges $25 per patient per month. Forty thousand patients, a million dollars a month. That number has not moved since before the agent existed.
 
-Everything else moved. Readings went from 12,000 a month to 120,235. Escalations went from 300 a week to 2,400. Patients started sending 3,100 messages a week that nobody asked for and nothing tracked before. Nurse cost went from $233,100 a month to $257,543, most of that overtime — 180 hours a month before, 1,154 now.
+Everything else moved. Readings went from 12,000 a month to about 120,000. Escalations went from 300 a week to 2,400. Patients started sending 3,100 messages a week that nobody asked for and nothing tracked before. Nurse cost went from $233,100 a month to $257,543, most of that overtime — 180 hours a month before, 1,154 now.
 
 Same fee. Eight times the work.
 

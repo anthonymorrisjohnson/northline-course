@@ -2,7 +2,7 @@
 
 This page is for deciding, for one AI experience, whether you hand the customer tools or you run the conversation yourself.
 
-Northline Care built one set of tools and put them behind two doors. Patients talk to a page Northline wrote. Prairie Health Plan's analyst talks to the same data from her own Claude Code. The tools are the cheap part. The door is the strategy, because the door decides who owns the loop, what you get to see, and who is answerable when it goes wrong.
+Northline Care built one set of tools and put them behind two doors. Patients talk to a page Northline wrote. Prairie Health Plan's analyst talks to the same data from her own Claude Code. One of those doors is MCP (Model Context Protocol, the standard way to hand an assistant a set of tools); the other is a product Northline built and runs. The tools are the cheap part. The door is the strategy, because the door decides who owns the loop, what you get to see, and who is answerable when it goes wrong.
 
 ## The two doors, side by side
 
@@ -36,7 +36,7 @@ Northline Care built one set of tools and put them behind two doors. Patients ta
 
 **Time to first user.** Days for the customer who already has an agent. Weeks for the one who does not, because a controlled agent is a product and a product needs a brief, a page, hosting and logging before the first person can use it.
 
-**What Prairie saw.** Engagement at 78% a week and readings up from 12,000 a month to 120,000. Those numbers are why the contract is on the table. Across the forty committed Prairie sessions there is not one call about escalations or nurse response time, because Northline never built a tool that answers that question. The customer saw the outcomes. Nobody showed them the queue.
+**What Prairie saw.** Engagement at 78% a week and readings up from 12,000 a month to about 120,000. Those numbers are why the contract is on the table. Across the forty committed Prairie sessions there is not one call about escalations or nurse response time, because Northline never built a tool that answers that question. The customer saw the outcomes. Nobody showed them the queue.
 
 ## The hybrid
 

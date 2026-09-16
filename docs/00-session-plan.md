@@ -2,6 +2,8 @@
 
 This page is for the two people running the session: what happens minute by minute, what to type, what to have open, and what to do when something breaks.
 
+Two front doors appear on screen: the check-in page Northline hosts, and MCP (Model Context Protocol, the standard way to hand an assistant a set of tools), which is how Prairie's own analyst reaches the same data.
+
 The paper case runs first and runs whole. The laptops come out at minute 25. Attendees type two commands all session: `/pm-run` and `/deploy triage`.
 
 ## Pre-work, three days ahead
@@ -31,7 +33,7 @@ The split matters. A single person doing both will fill the classification wait 
 | Minutes | Room | Screen | Slides | Presenter notes |
 |---|---|---|---|---|
 | 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 title, 2 the email | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
-| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, three minutes: Prairie's analyst pulls outcome evidence over MCP | 3 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
+| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 3 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
 | 15–25 | Board recommendation on paper, in teams | Idle, dashboard still up | none | No laptops. Keep it to ten minutes even if nobody is finished. Land: "Hold on to your recommendation. You are going to check it against the logs." |
 | 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 4 the loop, 5 the four decisions filled live | See the block below. |
 | 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 6 pushback questions | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
@@ -42,7 +44,7 @@ The split matters. A single person doing both will fill the classification wait 
 
 **Type `/pm-run`.** It says how many items it is about to classify, then runs. The whole thing takes about five minutes: roughly two and a half in classification, half a minute for the diagnosis, a minute and a half for the proposals.
 
-Talk through the classification wait. It is the only long pause in the session and it is the best three minutes you have: explain what is being read, what a record looks like, and that the counting afterwards is plain Python. Do not fill it with typing.
+Talk through the classification wait. It is the only long pause in the session and it is the best two and a half minutes you have: explain what is being read, what a record looks like, and that the counting afterwards is plain Python. Do not fill it with typing.
 
 **When the report appears**, put the two-column table on the screen and read the left column first. The board was not wrong. Then read the two rows where the logs have a number and the deck says "not reported".
 
