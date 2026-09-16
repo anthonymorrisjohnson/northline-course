@@ -13,8 +13,9 @@ def build(root: Path = ROOT, out: Path | None = None) -> Path:
     out.parent.mkdir(exist_ok=True)
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(root.rglob("*")):
-            rel = p.relative_to(root).as_posix()
-            if p.is_dir() or any(part in EXCLUDE_DIRS for part in p.parts) or rel in EXCLUDE_FILES:
+            rel_path = p.relative_to(root)
+            rel = rel_path.as_posix()
+            if p.is_dir() or any(part in EXCLUDE_DIRS for part in rel_path.parts) or rel in EXCLUDE_FILES:
                 continue
             if rel.startswith(EXCLUDE_PREFIX) and not rel.endswith(".gitkeep"):
                 continue

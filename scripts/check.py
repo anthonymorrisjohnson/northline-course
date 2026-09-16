@@ -1,5 +1,7 @@
 """Pre-flight. Run: uv run python scripts/check.py"""
 import argparse
+import copy
+import json
 import re
 import shutil
 import subprocess
@@ -10,16 +12,48 @@ from northline.tools import registry
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Mirrors the shipped .mcp.json's "northline" server entry. write_mcp rebuilds the
+# entry from this template rather than editing whatever is on disk, so it is
+# idempotent and never depends on a placeholder still being present.
+_MCP_SERVER_TEMPLATE = {
+    "type": "stdio",
+    "command": "uv",
+    "args": ["run", "--directory", "${CLAUDE_PROJECT_DIR}", "python", "-m", "northline.mcp_server"],
+    "env": {
+        "NORTHLINE_PERSONA": "${NORTHLINE_PERSONA:-plan}",
+        "NORTHLINE_LOG_DIR": "${CLAUDE_PROJECT_DIR}/northline/logs",
+        "NORTHLINE_DATA_DIR": "${CLAUDE_PROJECT_DIR}/northline/data",
+    },
+}
+
+_ENV_DEFAULT_RE = re.compile(r"\$\{\w+:-([^}]*)\}")
+
+
+def _resolve(value, root: Path):
+    """Recursively replace ${CLAUDE_PROJECT_DIR} with root.as_posix() (never str(root) -- on
+    Windows that contains backslashes, which are invalid unescaped JSON) and ${VAR:-default}
+    with its embedded default."""
+    if isinstance(value, str):
+        value = value.replace("${CLAUDE_PROJECT_DIR}", root.as_posix())
+        return _ENV_DEFAULT_RE.sub(lambda m: m.group(1), value)
+    if isinstance(value, list):
+        return [_resolve(v, root) for v in value]
+    if isinstance(value, dict):
+        return {k: _resolve(v, root) for k, v in value.items()}
+    return value
+
 
 def write_mcp(root: Path = ROOT) -> Path:
-    """Rewrite .mcp.json with absolute paths instead of ${CLAUDE_PROJECT_DIR}, and ${VAR:-default} env
-    entries resolved to their defaults. Headless Claude does not expand ${CLAUDE_PROJECT_DIR} unless the
-    variable happens to be set, so absolute paths remove the dependency on this laptop."""
+    """Rewrite .mcp.json's "northline" server entry with absolute paths instead of
+    ${CLAUDE_PROJECT_DIR}, and ${VAR:-default} env entries resolved to their defaults. Headless
+    Claude does not expand ${CLAUDE_PROJECT_DIR} unless the variable happens to be set, so
+    absolute paths remove the dependency on this laptop. Idempotent: every call rebuilds the
+    entry from the template and the current root, so re-running it (even after the file no
+    longer has the placeholder) still produces the same result."""
     path = root / ".mcp.json"
-    text = path.read_text()
-    text = text.replace("${CLAUDE_PROJECT_DIR}", str(root))
-    text = re.sub(r"\$\{\w+:-([^}]*)\}", r"\1", text)
-    path.write_text(text)
+    config = json.loads(path.read_text())
+    config["mcpServers"]["northline"] = _resolve(copy.deepcopy(_MCP_SERVER_TEMPLATE), root)
+    path.write_text(json.dumps(config, indent=2) + "\n")
     return path
 
 
