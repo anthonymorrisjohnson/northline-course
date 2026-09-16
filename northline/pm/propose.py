@@ -9,7 +9,7 @@ OUT = HERE / "out"
 T = REPO_ROOT / "templates"
 PROPOSAL_SCHEMA = {"type": "object", "properties": {"tool_name": {"type": "string"}, "description": {"type": "string"},
                    "input_schema": {"type": "object"}, "backend_needed": {"type": "string"}, "safety_notes": {"type": "string"},
-                   "personas": {"type": "array", "items": {"type": "string"}}},
+                   "personas": {"type": "array", "items": {"type": "string", "enum": ["patient", "plan"]}, "minItems": 1}},
                    "required": ["tool_name", "description", "input_schema", "backend_needed", "safety_notes", "personas"]}
 DEPLOY_SCHEMA = {"type": "object", "properties": {"agent_name": {"type": "string"}, "placement": {"type": "string"}, "purpose": {"type": "string"},
                  "tools_needed": {"type": "array", "items": {"type": "string"}}, "decisions_for_humans": {"type": "array", "items": {"type": "string"}},
@@ -52,7 +52,8 @@ def _tool_prompt(c):
     return (f"You are the product manager at Northline Care, a rural chronic-care company with an SMS check-in agent. Patients asked {c['count']} times "
             f"for something no tool can do: {c['description']}. Quotes: {c['quotes']}. Nearest tools: {c['nearest_tools']}. Draft a tool named "
             f"{c['proposed_tool']}: a one-sentence docstring, a JSON input schema with snake_case fields including patient_id, the backend it needs, "
-            f"and safety notes. Patients never receive clinical advice through a tool; if this request is clinical, design the tool to route to a nurse with the right context.")
+            f"and safety notes. Patients never receive clinical advice through a tool; if this request is clinical, design the tool to route to a nurse with the right context. "
+            f"personas must be one or both of exactly `patient` (served through the SMS check-in agent) and `plan` (health-plan analysts over MCP).")
 
 
 def _deploy_prompt(qm):

@@ -9,6 +9,10 @@ QM = {"escalations_per_week": 2400, "nurse_response_median_h": 31.0, "nurse_resp
       "unanswered_over_24h": 300, "patients_inactive_after_escalation": 280}
 
 
+def test_proposal_schema_constrains_personas():
+    assert pr.PROPOSAL_SCHEMA["properties"]["personas"]["items"]["enum"] == ["patient", "plan"]
+
+
 def test_render_tool():
     t = pr.render_tool(CAND, OUT)
     assert "`request_refill`" in t and "12%" in t and "/expand tool-request_refill" in t and "{" not in t.split("```json")[0]
