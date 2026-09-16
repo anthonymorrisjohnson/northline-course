@@ -23,3 +23,29 @@ def test_classify_batches_and_copies_ids():
                              for _ in range(p.count("### item"))]} for p, _ in jobs]
     recs = c.classify_items(items, batch_size=4, ask=fake)
     assert [r["id"] for r in recs] == [f"i{n}" for n in range(10)] and recs[0]["persona"] == "patient" and calls == [3]
+
+
+def test_classify_pads_short_batches():
+    items = [{"id": f"i{n}", "persona": "patient", "text": "user: hi"} for n in range(3)]
+    rec = {"id": "x", "persona": "plan", "intent": "known", "tier": "none", "outcome": "resolved", "tools_used": [],
+           "unmet_need": False, "unmet_need_description": "", "proposed_tool": "", "evidence_quote": ""}
+
+    def fake(jobs, **kw):
+        return [{"records": [dict(rec)]} for _ in jobs]
+
+    recs = c.classify_items(items, batch_size=3, ask=fake)
+    assert [r["id"] for r in recs] == ["i0", "i1", "i2"]
+    assert recs[0]["intent"] == "known"
+    assert recs[1]["intent"] == "unclassified" and recs[2]["intent"] == "unclassified"
+
+
+def test_classify_truncates_long_batches():
+    items = [{"id": f"i{n}", "persona": "patient", "text": "user: hi"} for n in range(3)]
+    rec = {"id": "x", "persona": "plan", "intent": "known", "tier": "none", "outcome": "resolved", "tools_used": [],
+           "unmet_need": False, "unmet_need_description": "", "proposed_tool": "", "evidence_quote": ""}
+
+    def fake(jobs, **kw):
+        return [{"records": [dict(rec) for _ in range(5)]} for _ in jobs]
+
+    recs = c.classify_items(items, batch_size=3, ask=fake)
+    assert [r["id"] for r in recs] == ["i0", "i1", "i2"]
