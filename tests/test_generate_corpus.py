@@ -12,7 +12,7 @@ def test_queue_rows_shape():
     rows = g.queue_rows({"escalations_per_week": 2400, "nurse_response_median_h": 31.0}, n=2000, seed=2)
     assert len(rows) == 2000 and all(r["id"].startswith("corpus-esc-") for r in rows)
     answered = [(datetime.fromisoformat(r["answered_at"]) - datetime.fromisoformat(r["created_at"])).total_seconds() / 3600 for r in rows if r["answered_at"]]
-    assert 0.85 <= len(answered) / 2000 <= 0.91 and 26 <= statistics.median(answered) <= 36
+    assert 0.98 <= len(answered) / 2000 <= 1.0 and 26 <= statistics.median(answered) <= 36
     after = sum(1 for r in rows if datetime.fromisoformat(r["created_at"]).weekday() >= 5 or not 8 <= datetime.fromisoformat(r["created_at"]).hour < 18)
     assert 0.42 <= after / 2000 <= 0.50
 

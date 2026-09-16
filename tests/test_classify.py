@@ -39,6 +39,11 @@ def test_classify_pads_short_batches():
     assert recs[1]["intent"] == "unclassified" and recs[2]["intent"] == "unclassified"
 
 
+def test_record_schema_constrains_proposed_tool():
+    enum = c.RECORD_SCHEMA["properties"]["proposed_tool"]["enum"]
+    assert enum == c.PROPOSED_TOOLS and "" in enum and "request_refill" in enum and "insurance_question" in enum
+
+
 def test_classify_truncates_long_batches():
     items = [{"id": f"i{n}", "persona": "patient", "text": "user: hi"} for n in range(3)]
     rec = {"id": "x", "persona": "plan", "intent": "known", "tier": "none", "outcome": "resolved", "tools_used": [],

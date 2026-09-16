@@ -133,10 +133,10 @@ def queue_rows(last_q: dict, n: int, seed: int) -> list[dict]:
         created = _stamp(rng)
         tier = rng.choices(["urgent_clinical", "non_urgent_clinical", "non_clinical"], [15, 45, 40])[0]
         answered = None
-        if rng.random() < 0.88:
+        if rng.random() < 0.989:
             hours = math.exp(math.log(median) + rng.gauss(0, 0.7))
             answered = (created + timedelta(hours=hours)).isoformat(timespec="seconds")
-        rows.append({"id": f"corpus-esc-{i:04d}", "patient_id": f"pt-{rng.randint(1, 1500)}", "reason": tier.replace("_", " "),
+        rows.append({"id": f"corpus-esc-{i:04d}", "patient_id": f"pt-{rng.randint(1, 40000)}", "reason": tier.replace("_", " "),
                      "urgency": "urgent" if tier == "urgent_clinical" else "routine", "created_at": created.isoformat(timespec="seconds"),
                      "answered_at": answered, "tier": tier, "route": None})
     return rows
@@ -150,7 +150,7 @@ def seed_exhibit_e(rows: list[dict]) -> None:
                      "created_at": day.replace(hour=t.hour, minute=t.minute).isoformat(timespec="seconds"), "answered_at": None, "tier": None, "route": None})
 
 
-def main(n_transcripts: int = 120, n_plan: int = 40, n_queue: int = 2000, ask=claude_json.ask_json_many) -> None:
+def main(n_transcripts: int = 120, n_plan: int = 40, n_queue: int = 31200, ask=claude_json.ask_json_many) -> None:
     rng = random.Random(7)
     (CORPUS / "patient").mkdir(parents=True, exist_ok=True); (CORPUS / "plan").mkdir(exist_ok=True)
     for p in (CORPUS / "patient").glob("*.json"):

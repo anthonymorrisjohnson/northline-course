@@ -9,11 +9,13 @@ REPO_ROOT = HERE.parents[1]
 OUT = HERE / "out"
 TAXONOMY = (HERE / "taxonomy.md").read_text()
 TIERS = ["urgent_clinical", "non_urgent_clinical", "non_clinical", "none"]
+PROPOSED_TOOLS = ["request_refill", "insurance_question", "pharmacy_logistics", "diet_content", "device_support",
+                  "social_checkin", "opt_out", "lookup_member_by_name_or_phone", "bulk_outcome_export", ""]
 RECORD_SCHEMA = {"type": "object", "properties": {
     "id": {"type": "string"}, "persona": {"type": "string"}, "intent": {"type": "string"},
     "tier": {"type": "string", "enum": TIERS}, "outcome": {"type": "string", "enum": ["resolved", "partial", "failed", "escalated"]},
     "tools_used": {"type": "array", "items": {"type": "string"}}, "unmet_need": {"type": "boolean"},
-    "unmet_need_description": {"type": "string"}, "proposed_tool": {"type": "string"}, "evidence_quote": {"type": "string"}},
+    "unmet_need_description": {"type": "string"}, "proposed_tool": {"type": "string", "enum": PROPOSED_TOOLS}, "evidence_quote": {"type": "string"}},
     "required": ["id", "persona", "intent", "tier", "outcome", "tools_used", "unmet_need", "unmet_need_description", "proposed_tool", "evidence_quote"]}
 BATCH_SCHEMA = {"type": "object", "properties": {"records": {"type": "array", "items": RECORD_SCHEMA}}, "required": ["records"]}
 EMPTY = {"intent": "unclassified", "tier": "none", "outcome": "failed", "tools_used": [], "unmet_need": False,

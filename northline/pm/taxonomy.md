@@ -8,7 +8,7 @@ Classify each check-in conversation or plan tool-log session into one record.
 - **tools_used**: tool names that appear.
 - **unmet_need**: true when the user asked for something no available tool could do, even if the assistant declined gracefully. A polite "I can't do that yet" is still an unmet need.
 - **unmet_need_description**: one sentence.
-- **proposed_tool**: snake_case, reused across conversations for the same need: `request_refill`, `insurance_question`, `pharmacy_logistics`, `diet_content`, `device_support`, `social_checkin`, `opt_out`, `lookup_member_by_phone`, `bulk_outcome_export`. Empty when none.
+- **proposed_tool**: snake_case, reused across conversations for the same need: `request_refill`, `insurance_question`, `pharmacy_logistics`, `diet_content`, `device_support`, `social_checkin`, `opt_out`, `lookup_member_by_name_or_phone`, `bulk_outcome_export`. Empty when none.
 - **evidence_quote**: the single user line that best shows the need, verbatim.
 
-Rules: a clinical question that was escalated is `escalated`, not an unmet need. Never propose a tool that would give clinical advice; if a patient wanted advice, set unmet_need true and proposed_tool empty so the count shows the demand without a tool.
+Rules: a clinical question (a symptom, a reading, a medication worry) that was escalated is `escalated` and not an unmet need. A request the agent could not perform (a refill, an insurance question, transport, a device problem) is an unmet need with a proposed tool even when the agent passed it to a nurse. Never propose a tool that would give clinical advice; if a patient wanted advice, set unmet_need true and proposed_tool empty so the count shows the demand without a tool.

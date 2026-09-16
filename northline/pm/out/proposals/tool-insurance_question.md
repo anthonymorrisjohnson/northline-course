@@ -1,69 +1,67 @@
 # Expansion proposal: `insurance_question`
 
-**Kind:** tool  **Persona(s):** SMS check-in agent (creates the tool call), Care navigator (receives and works the queued task), On-call nurse (receives critical-urgency pages and flagged clinical questions)  **Evidence:** 21 conversations (17% of patient conversations)
+**Kind:** tool  **Persona(s):** care coordinator, on-call nurse  **Evidence:** 20 conversations (17% of patient conversations)
 
 ## What users asked for
-Patient asked for help with insurance prior authorization for medication refill.
+Patient needs help with insurance prior authorization for medication refill
 
 Example quotes:
-- "Any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now."
-- "Yeah, I'm almost out of my lisinopril and my insurance has been rejecting the refill for two weeks. Any chance you can sort that out?"
+- "any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now."
+- "I'm almost out of my lisinopril and my insurance has been rejecting the refill for two weeks."
 - "My insurance denied my test strips last week so I've only been checking every few days."
 
 ## Proposed tool
-**Docstring (what the model reads):** Capture a patient's insurance or prior-authorization question and route it to a care-team navigator — never dispenses clinical advice, never promises outcomes, and always closes with a human callback.
+**Docstring (what the model reads):** Captures a patient's insurance or prior authorization barrier for a medication or supply, then routes it to the care coordination queue — or directly to the on-call nurse if the patient reports critically low days of supply remaining.
 
 **Input schema:**
 ```json
 {
   "type": "object",
+  "required": [
+    "patient_id",
+    "medication_or_supply",
+    "issue_type",
+    "patient_description"
+  ],
   "properties": {
     "patient_id": {
       "type": "string",
-      "description": "Unique patient identifier"
-    },
-    "question_text": {
-      "type": "string",
-      "description": "Verbatim or lightly normalised text of the patient's insurance question"
+      "description": "Northline Care patient identifier"
     },
     "medication_or_supply": {
       "type": "string",
-      "description": "Drug name, device, or supply at issue (e.g. 'metoprolol 50 mg', 'test strips'); empty string if not applicable"
+      "description": "Name of the medication or supply affected (e.g., 'metoprolol 25mg', 'test strips')"
     },
-    "days_until_exhausted": {
-      "type": "integer",
-      "description": "Patient-reported days of supply remaining; null if unknown",
-      "minimum": 0
-    },
-    "urgency": {
+    "issue_type": {
       "type": "string",
       "enum": [
-        "routine",
-        "urgent",
-        "critical"
+        "prior_authorization",
+        "coverage_denial",
+        "refill_delay",
+        "unknown"
       ],
-      "description": "Derived from days_until_exhausted: >7 days = routine, 2\u20137 = urgent, <2 = critical"
+      "description": "Category of insurance barrier as understood from the patient's message"
     },
-    "prior_denial": {
-      "type": "boolean",
-      "description": "True if the patient states the insurer has already denied the claim at least once"
+    "patient_description": {
+      "type": "string",
+      "description": "Verbatim or close-paraphrase of what the patient said, preserved for the nurse or coordinator"
+    },
+    "days_of_supply_remaining": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Estimated days of medication or supply the patient has left; null if patient did not specify"
     }
-  },
-  "required": [
-    "patient_id",
-    "question_text",
-    "urgency"
-  ]
+  }
 }
 ```
 
 **Nearest existing tool(s):** log_reading, next_checkin
 
 ## What the backend needs
-Care navigation queue (not the SMS agent's own DB). On call: writes a task to the care-team task system with patient_id, urgency, medication_or_supply, days_until_exhausted, and question_text; triggers an automated acknowledgement SMS to the patient ("A care navigator will contact you within [X hours]"); for critical urgency also pages the on-call nurse directly. Does not touch payer APIs, does not submit PAs on behalf of the practice — that remains a human workflow.
+Care Coordination Queue API (creates a task for a care coordinator to work the prior auth) + Nurse Escalation API (pages the on-call nurse with full context when days_of_supply_remaining is ≤ 3 or null and issue has been ongoing > 7 days) + EHR read (pulls current prescription and last fill date so the nurse or coordinator has context without asking the patient again)
 
 ## Safety notes
-1. No clinical advice path: the tool must never recommend dose changes, substitutions, or clinical workarounds for a denied medication — if question_text contains clinical language, the routing note to the nurse must flag it explicitly. 2. No outcome promises: the SMS acknowledgement must not say 'we will get this approved' — only that the team will follow up. 3. Urgency escalation: days_until_exhausted ≤ 1 must page a nurse synchronously, not just queue a task, because a gap in a critical medication (cardiac, diabetes) is a patient-safety event. 4. PII handling: question_text is stored in the care-team system under the same access controls as clinical notes — not logged to general application logs. 5. Scope boundary: this tool handles administrative/coverage questions only; any question that is primarily 'what should I take instead?' must be routed to nurse triage, not answered inline.
+1. The tool NEVER tells the patient whether to take, skip, or substitute a medication — any clinical question surfaces as a nurse escalation, not a tool response. 2. If days_of_supply_remaining ≤ 3 (or the patient says they are already rationing), the call goes to the nurse queue immediately, not the coordinator queue — rationing chronic-disease medication (beta-blockers, ACE inhibitors, insulin supplies) is a safety event. 3. The patient-facing confirmation is administrative only: 'We've flagged this for your care team — someone will follow up within [SLA].' 4. Patient description is stored verbatim to avoid lossy summarization before the nurse sees it. 5. Tool does not attempt to contact the insurer directly or provide prior auth form guidance; that action belongs to the coordinator workflow triggered downstream.
 
 ## Decision
 - [ ] Approve: `/expand tool-insurance_question`

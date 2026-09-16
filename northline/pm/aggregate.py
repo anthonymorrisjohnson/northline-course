@@ -62,16 +62,20 @@ def candidates(records: list[dict]) -> list[dict]:
     return sorted(out, key=lambda c: (-c["count"], c["proposed_tool"]))
 
 
+def _fmt(x):
+    return int(x) if float(x).is_integer() else x
+
+
 def report(records, cands, qm, summary) -> str:
     board = {**CASE, **(summary or {}).get("last_quarter", {})} if summary else CASE
     L = ["# Northline PM loop report", "", f"{len(records)} conversations and sessions classified; {qm['escalations_per_week']} escalations a week in the queue log.", "",
          "## The board's numbers next to the logs", "", "| metric | Board deck | From logs |", "|---|---|---|",
-         f"| Escalations per week | {board['escalations_per_week']} | {qm['escalations_per_week']} |",
+         f"| Escalations per week | {_fmt(board['escalations_per_week'])} | {qm['escalations_per_week']} |",
          f"| Median nurse response (h) | {board['nurse_response_median_h']} | {qm['nurse_response_median_h']} (p90 {qm['nurse_response_p90_h']}) |",
          f"| Urgent escalations, median response (h) | not reported | {qm['urgent_median_h']} |",
          f"| After-hours share | {board['after_hours_share']} | {qm['after_hours_share']} |",
          f"| Non-clinical share of the nurse queue | not reported | {qm['non_clinical_share_of_queue']} |",
-         f"| Patients inactive after an escalation | {board['inactive_after_escalation']} | {qm['patients_inactive_after_escalation']} |", ""]
+         f"| Patients inactive after an escalation | {_fmt(board['inactive_after_escalation'])} | {qm['patients_inactive_after_escalation']} |", ""]
     for persona in ("patient", "plan"):
         rs = [r for r in records if r["persona"] == persona]
         if rs:
