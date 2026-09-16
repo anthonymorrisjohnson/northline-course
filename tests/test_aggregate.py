@@ -22,3 +22,12 @@ def test_candidates():
 def test_report_mentions_both_columns():
     r = ag.report(RECS, ag.candidates(RECS), ag.queue_metrics(Q, weeks=1.0), None)
     assert "Board deck" in r and "From logs" in r and "request_refill" in r and "Unanswered escalations: 2, from 2 patients." in r
+
+
+def test_queue_metrics_mixes_naive_and_aware():
+    rows = [
+        {"created_at": "2026-09-07T09:00:00", "answered_at": "2026-09-07T13:00:00"},
+        {"created_at": "2026-09-07T10:00:00+00:00", "answered_at": "2026-09-08T10:00:00+00:00"},
+    ]
+    m = ag.queue_metrics(rows, weeks=1.0)
+    assert m["nurse_response_median_h"] == 14.0

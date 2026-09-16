@@ -1,7 +1,7 @@
 """Step 3 of the loop: arithmetic only. Unmet needs from the records, the bottleneck from the queue timestamps."""
 import json, statistics
 from collections import Counter, defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -12,7 +12,10 @@ CASE = {"escalations_per_week": 2400, "nurse_response_median_h": 31, "after_hour
 
 
 def _dt(s):
-    return datetime.fromisoformat(s.replace("Z", "+00:00"))
+    dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt
 
 
 def load_queue(corpus_dir: Path, log_dir: Path) -> list[dict]:
