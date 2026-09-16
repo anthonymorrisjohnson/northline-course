@@ -7,5 +7,6 @@ northline/logs/*
 northline/agents/triage/decisions.json
 northline/agents/triage/prompt.md
 northline/agents/triage/out/
-briefs/
+briefs/*
+!briefs/.gitkeep
 dist/
