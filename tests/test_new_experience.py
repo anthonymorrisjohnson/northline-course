@@ -86,6 +86,18 @@ def test_no_northline_string_remains(tmp_path):
     assert "demo_exp" in pyproject
 
 
+def test_scaffolded_skills_do_not_assume_northline_tests(tmp_path):
+    dest = create("demo_exp", tmp_path, repo_root=ROOT)
+    agent_skill = (dest / ".claude" / "skills" / "agent" / "SKILL.md").read_text()
+    tools_skill = (dest / ".claude" / "skills" / "tools" / "SKILL.md").read_text()
+
+    assert "demo_exp" in agent_skill
+    assert "test_prompt.py" not in agent_skill
+
+    assert "demo_exp" in tools_skill
+    assert "if that file does not exist" in tools_skill
+
+
 def test_model_has_recalibrate_comment(tmp_path):
     dest = create("demo_exp", tmp_path, repo_root=ROOT)
     text = (dest / "demo_exp" / "sim" / "model.py").read_text()

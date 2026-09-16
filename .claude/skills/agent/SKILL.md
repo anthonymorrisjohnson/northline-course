@@ -13,6 +13,6 @@ Read `briefs/$name.md`. Fill `templates/agent-brief.md` and save it to `briefs/$
 
 Keep the whole file under 60 lines.
 
-Then offer to install it over `northline/agent/brief.md`. If they say yes, copy it in and run `uv run pytest tests/test_prompt.py -q`. Report the result; if a test fails, quote the failure and say it likely means that test still expects wording specific to the old brief.
+Then offer to install it over `northline/agent/brief.md`. If they say yes, copy it in and run `uv run python -c "from northline.agent.prompt import system_prompt; print(system_prompt()[:300])"`. Show the user those first lines so they can see the new brief is live, and tell them to restart the agent server for it to take effect.
 
 Never run git.
