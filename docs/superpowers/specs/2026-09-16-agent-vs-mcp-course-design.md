@@ -45,7 +45,7 @@ The choice of persona is also a choice of what product signal you get. That mapp
 - Python 3.12 with `uv`. Pre-work installs `uv` if missing; a `/setup` skill does that from inside Claude Code.
 - Fresh clone to working demo in under ten minutes.
 - No real clinical advice. The agent is administrative and informational only.
-- No real integrations, auth, deployment, or slide deck. Docs are the readable material.
+- No real integrations, auth, or deployment. Docs are the readable material; a slide deck carries the presenter through the hour.
 
 ## 4. Architecture
 
@@ -53,7 +53,7 @@ The choice of persona is also a choice of what product signal you get. That mapp
 africinvest/
   README.md                   quickstart and the run of show in brief
   .mcp.json                   registers the MediBridge MCP server for anyone who clones
-  .claude/skills/             the step templates as slash commands (section 7)
+  .claude/skills/             the step templates as slash commands (section 8)
   docs/
     00-session-plan.md        60-minute run of show with timings and what attendees do
     01-tradeoff.md            MCP vs agent decision table, with the region row
@@ -154,17 +154,21 @@ Pre-work, sent ahead: clone, open Claude Code in the folder, run `/setup`. That 
 | 0 to 8 | Ask their own Claude Code to book an appointment via MCP. Open the web agent, ask the same. | Names the two front doors. Shows what each logs. |
 | 8 to 18 | Discussion. | Walks the tradeoff table with the region row. Asks which of their systems is which. |
 | 18 to 30 | Run `/brief` on a system from their own company. Three read out their front-door decision per region. | Runs `/brief` on MediBridge for comparison. |
-| 30 to 48 | Pick a track. Run `/pm-run`. Compare the two regional backlogs. Run `/expand` on one proposal. Restart. Test it in both front doors. | Same on screen. Narrates the classify, aggregate, propose steps as they run. |
+| 30 to 48 | Pick a track. Ask the agent, or their own Claude Code over MCP, for something it cannot do, in their own words. Run `/pm-run`. Find their own request in the backlog. Run `/expand` on it or on another proposal. Restart. Test it in both front doors. | Same on screen. Narrates the classify, aggregate, propose steps as they run. Uses a request the guardrails should refuse as a discussion point. |
 | 48 to 55 | Discussion. | Operating it: who owns the backlog, review cadence, why generated tools get human review, cost per conversation. |
 | 55 to 60 | Run `/new-experience` once to see a clean folder appear. | Closes on the thesis. |
 
-## 6. Readable track
+## 6. Slides
+
+A presenter deck in `slides/`, built as a `.pptx` from a markdown outline kept next to it so it can be regenerated after edits. About fifteen slides, one per beat of the run of show, plus the tradeoff table, the region table, and the loop diagram. Slides carry the framing and the discussion prompts; the live work happens in the terminal and the browser. The deck is the last thing built, after the docs and code have settled.
+
+## 7. Readable track
 
 Every step has a finished example a reader can follow without running anything: the filled MediBridge brief, the tool specs, the agent brief, the taxonomy, the committed classification output, the report, and the proposals. The three exercises in `exercises/` each state a business, the two-region contrast, and a read track (answer the brief on paper) and a build track (run the skills).
 
 Exercise businesses: a pharmacy chain, a health insurer, a telemedicine startup. Each gives a different answer to the front-door question.
 
-## 7. Skills
+## 8. Skills
 
 All live in `.claude/skills/<name>/SKILL.md` so anyone who clones the repo gets them.
 
@@ -179,7 +183,7 @@ All live in `.claude/skills/<name>/SKILL.md` so anyone who clones the repo gets 
 | `/new-experience <name>` | a name | a fresh folder with empty templates and the skills, starting at step 1 |
 | `/generate-corpus` | region profiles | the synthetic corpus, used once by the author |
 
-## 8. Testing
+## 9. Testing
 
 - Unit tests for every tool function with fixture data, no LLM.
 - Registry test: every tool has a schema, persona, and region set, and both front doors see the same list.
@@ -187,7 +191,7 @@ All live in `.claude/skills/<name>/SKILL.md` so anyone who clones the repo gets 
 - Server smoke test with the Claude Code subprocess replaced by a fake that returns a canned JSON result.
 - A `/setup` check that runs the MCP server in-process and lists its tools.
 
-## 9. Success criteria
+## 10. Success criteria
 
 - Fresh clone, `/setup`, and both front doors answer a booking request within ten minutes.
 - `/pm-run` finishes on the committed corpus in under five minutes on a laptop and the two regional backlogs differ visibly.
@@ -195,6 +199,6 @@ All live in `.claude/skills/<name>/SKILL.md` so anyone who clones the repo gets 
 - A reader with no laptop can follow the loop end to end from the docs and committed outputs.
 - The session fits in sixty minutes with the timings in section 5.
 
-## 10. Out of scope
+## 11. Out of scope
 
-Real WhatsApp, SMS, or mobile-money integrations. Authentication. Deployment. EHR or scheme connectivity. A slide deck. Any clinical decision support.
+Real WhatsApp, SMS, or mobile-money integrations. Authentication. Deployment. EHR or scheme connectivity. Any clinical decision support.
