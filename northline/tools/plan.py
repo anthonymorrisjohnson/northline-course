@@ -12,7 +12,7 @@ FALLBACK = {"engaged_weekly": 0.78, "readings_per_month": 120000, "escalations_p
 def _now() -> dict:
     if _SUMMARY.exists():
         try:
-            return {**FALLBACK, **json.loads(_SUMMARY.read_text())["now"]}
+            return {**FALLBACK, **json.loads(_SUMMARY.read_text(encoding="utf-8"))["now"]}
         except (KeyError, ValueError):
             pass
     return FALLBACK
@@ -23,19 +23,25 @@ def _plan(pid):
 
 
 def member_engagement(plan_id: str) -> dict[str, Any]:
-    """Engagement figures for a plan's enrolled members: weekly response rate and readings logged."""
+    """Engagement figures for a plan's enrolled members: weekly response rate and readings logged.
+
+    plan_id looks like `plan-prairie` or `plan-dakota`.
+    """
     p = _plan(plan_id)
     if p is None:
-        return {"status": "not_found", "message": f"no plan {plan_id}"}
+        return {"status": "not_found", "message": f"no plan {plan_id}; plan_id looks like `plan-prairie` or `plan-dakota`."}
     n = _now()
     return {"status": "ok", "plan": p["name"], "enrolled": p["enrolled"], "weekly_response_rate": n["engaged_weekly"],
             "readings_per_month": int(n["readings_per_month"] * p["enrolled"] / 40000)}
 
 
 def outcome_evidence(plan_id: str, metric: str) -> dict[str, Any]:
-    """Outcome evidence for a plan. metric: bp_control, readings, satisfaction, escalations."""
+    """Outcome evidence for a plan. metric: bp_control, readings, satisfaction, escalations.
+
+    plan_id looks like `plan-prairie` or `plan-dakota`.
+    """
     if _plan(plan_id) is None:
-        return {"status": "not_found", "message": f"no plan {plan_id}"}
+        return {"status": "not_found", "message": f"no plan {plan_id}; plan_id looks like `plan-prairie` or `plan-dakota`."}
     n = _now()
     table = {"bp_control": (0.58, "share of hypertensive members with last reading under 140/90"),
              "readings": (n["readings_per_month"], "readings logged per month, all members"),
@@ -48,19 +54,25 @@ def outcome_evidence(plan_id: str, metric: str) -> dict[str, Any]:
 
 
 def enrollment_status(member_id: str) -> dict[str, Any]:
-    """Whether a member is enrolled and engaged with the check-in program."""
+    """Whether a member is enrolled and engaged with the check-in program.
+
+    member_id looks like `pt-1001`.
+    """
     pt = next((x for x in store.load("patients") if x["id"] == member_id), None)
     if pt is None:
-        return {"status": "not_found", "message": f"no member {member_id}"}
+        return {"status": "not_found", "message": f"no member {member_id}; member_id looks like `pt-1001`."}
     return {"status": "ok", "member_id": member_id, "plan_id": pt["plan_id"], "engaged": pt["engaged"]}
 
 
 def enroll_members(plan_id: str, count: int) -> dict[str, Any]:
-    """Enroll additional members from a plan into the program."""
+    """Enroll additional members from a plan into the program.
+
+    plan_id looks like `plan-prairie` or `plan-dakota`.
+    """
     plans = store.load("plans")
     p = next((x for x in plans if x["id"] == plan_id), None)
     if p is None:
-        return {"status": "not_found", "message": f"no plan {plan_id}"}
+        return {"status": "not_found", "message": f"no plan {plan_id}; plan_id looks like `plan-prairie` or `plan-dakota`."}
     try:
         count_int = int(count)
         if count_int <= 0:

@@ -21,8 +21,8 @@ def main() -> dict:
     summary = {"before": before, "last_quarter": last_q, "next_quarter": next_q, "prairie": m.average(prairie),
                "prairie_without": m.average(prairie_wo), "now": next_q if new_live else last_q, "deployments": deps}
     OUT.mkdir(exist_ok=True)
-    (OUT / "weekly.json").write_text(json.dumps({"history": history, "next_quarter": nxt, "prairie": prairie, "prairie_without": prairie_wo}))
-    (OUT / "summary.json").write_text(json.dumps(summary, indent=2))
+    (OUT / "weekly.json").write_text(json.dumps({"history": history, "next_quarter": nxt, "prairie": prairie, "prairie_without": prairie_wo}), encoding="utf-8")
+    (OUT / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     return summary
 
 

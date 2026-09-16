@@ -62,14 +62,14 @@ def table(s: dict) -> str:
 
 
 def main(ask=claude_json.ask_json_many) -> dict:
-    exhibit = json.loads((HERE / "exhibit_e.json").read_text())
-    key = json.loads((HERE / "nurse_key.json").read_text())["key"]
+    exhibit = json.loads((HERE / "exhibit_e.json").read_text(encoding="utf-8"))
+    key = json.loads((HERE / "nurse_key.json").read_text(encoding="utf-8"))["key"]
     for k in key:
         k["text"] = next(e["text"] for e in exhibit if e["n"] == k["n"])
-    results = classify_exhibit((HERE / "prompt.md").read_text(), exhibit, ask=ask)
+    results = classify_exhibit((HERE / "prompt.md").read_text(encoding="utf-8"), exhibit, ask=ask)
     s = score(results, key); s["effects"] = effects(s); s["results"] = results
     OUT.mkdir(exist_ok=True)
-    (OUT / "acceptance.json").write_text(json.dumps(s, indent=2)); (OUT / "acceptance.md").write_text(table(s))
+    (OUT / "acceptance.json").write_text(json.dumps(s, indent=2), encoding="utf-8"); (OUT / "acceptance.md").write_text(table(s), encoding="utf-8")
     print(table(s))
     return s
 

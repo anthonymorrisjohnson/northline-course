@@ -51,9 +51,9 @@ def write_mcp(root: Path = ROOT) -> Path:
     entry from the template and the current root, so re-running it (even after the file no
     longer has the placeholder) still produces the same result."""
     path = root / ".mcp.json"
-    config = json.loads(path.read_text())
+    config = json.loads(path.read_text(encoding="utf-8"))
     config["mcpServers"]["northline"] = _resolve(copy.deepcopy(_MCP_SERVER_TEMPLATE), root)
-    path.write_text(json.dumps(config, indent=2) + "\n")
+    path.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
     return path
 
 
@@ -81,7 +81,7 @@ def main() -> int:
         print("claude not found on PATH"); ok = False
     print("\nREADY" if ok else "\nNOT READY, see above")
     print("Check-in agent + dashboard: uv run python -m northline.agent.server  ->  http://127.0.0.1:8765 and /dashboard")
-    print("Prairie's analyst (MCP): this Claude Code session already has the northline tools.")
+    print("Prairie's analyst (MCP): the northline tools appear in Claude Code after you restart it in this folder.")
     return 0 if ok else 1
 
 

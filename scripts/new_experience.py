@@ -65,7 +65,7 @@ def _substitute(text: str, name: str) -> str:
 def _copy_file(src: Path, dst: Path, name: str) -> None:
     dst.parent.mkdir(parents=True, exist_ok=True)
     if dst.suffix in _SUBSTITUTE_SUFFIXES:
-        dst.write_text(_substitute(src.read_text(), name))
+        dst.write_text(_substitute(src.read_text(encoding="utf-8"), name))
     else:
         shutil.copy(src, dst)
 
@@ -102,14 +102,14 @@ def create(name: str, dest: Path, repo_root: Path | None = None) -> Path:
 
     pkg = target / name
     (pkg / "__init__.py").parent.mkdir(parents=True, exist_ok=True)
-    (pkg / "__init__.py").write_text("")
+    (pkg / "__init__.py").write_text("", encoding="utf-8")
 
     # tools/
     _copy_file(repo_root / "northline" / "tools" / "store.py", pkg / "tools" / "store.py", name)
     _copy_file(repo_root / "northline" / "tools" / "calllog.py", pkg / "tools" / "calllog.py", name)
-    (pkg / "tools" / "__init__.py").write_text("")
-    (pkg / "tools" / "patient.py").write_text(_PATIENT_STUB.format(name=name))
-    (pkg / "tools" / "registry.py").write_text(_REGISTRY.format(name=name))
+    (pkg / "tools" / "__init__.py").write_text("", encoding="utf-8")
+    (pkg / "tools" / "patient.py").write_text(_PATIENT_STUB.format(name=name), encoding="utf-8")
+    (pkg / "tools" / "registry.py").write_text(_REGISTRY.format(name=name), encoding="utf-8")
 
     # mcp_server.py
     _copy_file(repo_root / "northline" / "mcp_server.py", pkg / "mcp_server.py", name)
@@ -120,39 +120,39 @@ def create(name: str, dest: Path, repo_root: Path | None = None) -> Path:
 
     # sim/
     (pkg / "sim" / "__init__.py").parent.mkdir(parents=True, exist_ok=True)
-    (pkg / "sim" / "__init__.py").write_text("")
-    model_text = _substitute((repo_root / "northline" / "sim" / "model.py").read_text(), name)
+    (pkg / "sim" / "__init__.py").write_text("", encoding="utf-8")
+    model_text = _substitute((repo_root / "northline" / "sim" / "model.py").read_text(encoding="utf-8"), name)
     model_text = model_text.replace("BASE = {", "# recalibrate BASE to your company\nBASE = {", 1)
-    (pkg / "sim" / "model.py").write_text(model_text)
+    (pkg / "sim" / "model.py").write_text(model_text, encoding="utf-8")
     _copy_file(repo_root / "northline" / "sim" / "run.py", pkg / "sim" / "run.py", name)
 
     # pm/
     (pkg / "pm" / "__init__.py").parent.mkdir(parents=True, exist_ok=True)
-    (pkg / "pm" / "__init__.py").write_text("")
+    (pkg / "pm" / "__init__.py").write_text("", encoding="utf-8")
     for mod in ("claude_json", "classify", "aggregate", "diagnose", "propose"):
         _copy_file(repo_root / "northline" / "pm" / f"{mod}.py", pkg / "pm" / f"{mod}.py", name)
     _copy_file(repo_root / "templates" / "taxonomy.md", pkg / "pm" / "taxonomy.md", name)
 
     # agents/ (empty)
     (pkg / "agents" / "__init__.py").parent.mkdir(parents=True, exist_ok=True)
-    (pkg / "agents" / "__init__.py").write_text("")
+    (pkg / "agents" / "__init__.py").write_text("", encoding="utf-8")
 
     # data/
     (pkg / "data").mkdir(parents=True, exist_ok=True)
-    (pkg / "data" / "deployments.json").write_text(json.dumps([]))
+    (pkg / "data" / "deployments.json").write_text(json.dumps([]), encoding="utf-8")
 
     # logs/
     (pkg / "logs").mkdir(parents=True, exist_ok=True)
-    (pkg / "logs" / ".gitkeep").write_text("")
+    (pkg / "logs" / ".gitkeep").write_text("", encoding="utf-8")
 
     # scripts/
     (target / "scripts" / "__init__.py").parent.mkdir(parents=True, exist_ok=True)
-    (target / "scripts" / "__init__.py").write_text("")
+    (target / "scripts" / "__init__.py").write_text("", encoding="utf-8")
     _copy_file(repo_root / "scripts" / "check.py", target / "scripts" / "check.py", name)
 
     # tests/
     (target / "tests" / "__init__.py").parent.mkdir(parents=True, exist_ok=True)
-    (target / "tests" / "__init__.py").write_text("")
+    (target / "tests" / "__init__.py").write_text("", encoding="utf-8")
     _copy_file(repo_root / "tests" / "conftest.py", target / "tests" / "conftest.py", name)
 
     # README
@@ -161,7 +161,8 @@ def create(name: str, dest: Path, repo_root: Path | None = None) -> Path:
         f"Scaffolded from the Northline course's take-home skills: `/brief`, `/tools`, "
         f"`/agent`, `/pm-run`, `/expand`, `/deploy`, and `/setup`.\n\n"
         f"No corpus on purpose — the loop runs on your own first conversations, not generated ones.\n\n"
-        f"Start with `/brief {name}`.\n"
+        f"Start with `/brief {name}`.\n",
+        encoding="utf-8",
     )
 
     return target

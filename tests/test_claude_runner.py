@@ -22,7 +22,7 @@ def test_parse_stream():
 
 def test_build_command_lockdown(tmp_path):
     cmd = cr.build_command("hi", system_prompt="SP", mcp_config={"mcpServers": {}}, session_id=None, model=None, cwd=tmp_path)
-    assert cmd[:3] == ["claude", "-p", "hi"]
+    assert cmd[0].endswith("claude") and cmd[1:3] == ["-p", "hi"]
     assert cmd[cmd.index("--tools") + 1] == "" and cmd[cmd.index("--allowedTools") + 1] == "mcp__northline__*"
     assert cmd[cmd.index("--permission-mode") + 1] == "dontAsk" and "--strict-mcp-config" in cmd and "--resume" not in cmd
 

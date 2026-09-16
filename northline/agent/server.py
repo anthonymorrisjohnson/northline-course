@@ -35,15 +35,15 @@ def dashboard():
 def api_sim():
     if not (SIM_OUT / "summary.json").exists():
         sim_run.main()
-    return JSONResponse({"summary": json.loads((SIM_OUT / "summary.json").read_text()),
-                         "weekly": json.loads((SIM_OUT / "weekly.json").read_text())})
+    return JSONResponse({"summary": json.loads((SIM_OUT / "summary.json").read_text(encoding="utf-8")),
+                         "weekly": json.loads((SIM_OUT / "weekly.json").read_text(encoding="utf-8"))})
 
 
 def _jsonl(path: Path) -> list[dict]:
     if not path.exists():
         return []
     rows = []
-    for line in path.read_text().splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         try:

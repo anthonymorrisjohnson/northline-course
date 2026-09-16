@@ -1,12 +1,21 @@
 """One conversational turn through headless Claude Code. The controlled agent is *our* Claude Code
 configuration: locked system prompt, only the Northline MCP tools, no built-ins."""
-import json, subprocess
+import json, shutil, subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PREFIX = "mcp__northline__"
+CLAUDE = shutil.which("claude")
+NO_CLAUDE = "Claude Code (`claude`) is not on PATH; run /setup"
+
+
+def claude_bin() -> str:
+    """The resolved `claude` executable, looked up once at import."""
+    if CLAUDE is None:
+        raise RuntimeError(NO_CLAUDE)
+    return CLAUDE
 
 
 @dataclass
@@ -19,7 +28,7 @@ class TurnResult:
 
 
 def build_command(message, *, system_prompt, mcp_config, session_id, model, cwd) -> list[str]:
-    cmd = ["claude", "-p", message, "--output-format", "stream-json", "--verbose",
+    cmd = [claude_bin(), "-p", message, "--output-format", "stream-json", "--verbose",
            "--system-prompt", system_prompt, "--mcp-config", json.dumps(mcp_config), "--strict-mcp-config",
            "--tools", "", "--allowedTools", PREFIX + "*", "--permission-mode", "dontAsk", "--max-turns", "10"]
     if session_id:

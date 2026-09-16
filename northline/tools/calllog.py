@@ -14,7 +14,7 @@ def log_call(tool: str, args: dict, result: dict, *, persona: str, session_id: s
     line = {"ts": datetime.now(timezone.utc).isoformat(timespec="seconds"), "session_id": session_id, "persona": persona,
             "tool": tool, "args": args, "status": result.get("status", "unknown"),
             "error": result.get("message") if result.get("status") != "ok" else None}
-    with (d / "tool_calls.jsonl").open("a") as f:
+    with (d / "tool_calls.jsonl").open("a", encoding="utf-8") as f:
         f.write(json.dumps(line) + "\n")
 
 

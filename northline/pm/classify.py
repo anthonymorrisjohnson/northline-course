@@ -7,7 +7,7 @@ from . import claude_json
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parents[1]
 OUT = HERE / "out"
-TAXONOMY = (HERE / "taxonomy.md").read_text()
+TAXONOMY = (HERE / "taxonomy.md").read_text(encoding="utf-8")
 TIERS = ["urgent_clinical", "non_urgent_clinical", "non_clinical", "none"]
 PROPOSED_TOOLS = ["request_refill", "insurance_question", "pharmacy_logistics", "diet_content", "device_support",
                   "social_checkin", "opt_out", "lookup_member_by_name_or_phone", "bulk_outcome_export", ""]
@@ -34,15 +34,15 @@ def _calls_text(calls):
 def load_items(corpus_dir: Path, log_dir: Path) -> list[dict]:
     items = []
     for p in sorted((corpus_dir / "patient").glob("*.json")):
-        items.append({"id": p.stem, "persona": "patient", "text": _transcript_text(json.loads(p.read_text()))})
+        items.append({"id": p.stem, "persona": "patient", "text": _transcript_text(json.loads(p.read_text(encoding="utf-8")))})
     for p in sorted((log_dir / "transcripts").glob("*.json")) if (log_dir / "transcripts").exists() else []:
-        items.append({"id": f"live-{p.stem}", "persona": "patient", "text": _transcript_text(json.loads(p.read_text()))})
+        items.append({"id": f"live-{p.stem}", "persona": "patient", "text": _transcript_text(json.loads(p.read_text(encoding="utf-8")))})
     for p in sorted((corpus_dir / "plan").glob("*.jsonl")):
-        items.append({"id": p.stem, "persona": "plan", "text": _calls_text([json.loads(l) for l in p.read_text().splitlines() if l.strip()])})
+        items.append({"id": p.stem, "persona": "plan", "text": _calls_text([json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()])})
     live = log_dir / "tool_calls.jsonl"
     if live.exists():
         groups = defaultdict(list)
-        for l in live.read_text().splitlines():
+        for l in live.read_text(encoding="utf-8").splitlines():
             if l.strip():
                 c = json.loads(l); groups[c["session_id"]].append(c)
         for sid, calls in groups.items():
@@ -70,7 +70,7 @@ def main() -> None:
     items = load_items(REPO_ROOT / "corpus", REPO_ROOT / "northline" / "logs")
     print(f"classifying {len(items)} items")
     OUT.mkdir(exist_ok=True)
-    with (OUT / "classified.jsonl").open("w") as f:
+    with (OUT / "classified.jsonl").open("w", encoding="utf-8") as f:
         for r in classify_items(items, batch_size=10, ask=lambda jobs, **kw: claude_json.ask_json_many(jobs, workers=8, **kw)):
             f.write(json.dumps(r) + "\n")
     print(f"wrote {OUT / 'classified.jsonl'}")

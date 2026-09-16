@@ -13,16 +13,16 @@ def _now():
 def record_turn(session_id: str, user: str, result: TurnResult) -> Path:
     d = log_dir() / "transcripts"; d.mkdir(parents=True, exist_ok=True)
     path = d / f"{session_id}.json"
-    doc = json.loads(path.read_text()) if path.exists() else {
+    doc = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {
         "session_id": session_id, "persona": "patient", "started": _now(), "messages": [], "tool_uses": [],
         "escalated": False, "cost_usd": 0.0}
     doc["messages"] += [{"role": "user", "content": user, "ts": _now()}, {"role": "assistant", "content": result.reply, "ts": _now()}]
     doc["tool_uses"] += result.tool_uses
     doc["escalated"] = doc["escalated"] or any(t["name"] == "escalate_to_nurse" for t in result.tool_uses)
     doc["cost_usd"] = round(doc["cost_usd"] + result.cost_usd, 6)
-    path.write_text(json.dumps(doc, indent=2))
+    path.write_text(json.dumps(doc, indent=2), encoding="utf-8")
     return path
 
 
 def load_all(directory: Path) -> list[dict]:
-    return [json.loads(p.read_text()) for p in sorted(Path(directory).glob("*.json"))]
+    return [json.loads(p.read_text(encoding="utf-8")) for p in sorted(Path(directory).glob("*.json"))]

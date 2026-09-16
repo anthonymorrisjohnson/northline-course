@@ -7,7 +7,7 @@ REPO_ROOT = HERE.parents[1]
 
 
 def system_prompt() -> str:
-    return (HERE / "brief.md").read_text().rstrip() + f"\n\nToday is {date.today().isoformat()}."
+    return (HERE / "brief.md").read_text(encoding="utf-8").rstrip() + f"\n\nToday is {date.today().isoformat()}."
 
 
 def mcp_config(session_id: str) -> dict:

@@ -1,4 +1,4 @@
-import json, threading, pytest
+import json, subprocess, threading, pytest
 from types import SimpleNamespace
 from northline.pm import claude_json as cj
 S = {"type": "object", "properties": {"x": {"type": "integer"}}, "required": ["x"]}
@@ -55,3 +55,40 @@ def test_many_raises_after_retries():
         return SimpleNamespace(stdout=json.dumps({"is_error": False, "structured_output": {"x": int(cmd[2])}}), returncode=0, stderr="")
     with pytest.raises(RuntimeError, match="boom"):
         cj.ask_json_many([(str(i), S) for i in range(6)], workers=3, runner=fake)
+
+
+def test_ask_json_timeout_is_runtime_error():
+    def fake(cmd, **kw):
+        raise subprocess.TimeoutExpired(cmd, 300)
+    with pytest.raises(RuntimeError, match="claude timed out after 300 s"):
+        cj.ask_json("p", S, runner=fake)
+
+
+def test_many_retries_a_timeout():
+    calls = []
+
+    def fake(cmd, **kw):
+        calls.append(cmd[2])
+        if cmd[2] == "0" and calls.count("0") == 1:
+            raise subprocess.TimeoutExpired(cmd, 300)
+        return SimpleNamespace(stdout=json.dumps({"is_error": False, "structured_output": {"x": int(cmd[2])}}), returncode=0, stderr="")
+
+    assert [o["x"] for o in cj.ask_json_many([("0", S)], workers=1, runner=fake)] == [0]
+    assert len(calls) == 2
+
+
+def test_command_starts_with_the_resolved_binary():
+    seen = {}
+
+    def fake(cmd, **kw):
+        seen["cmd"] = cmd
+        return SimpleNamespace(stdout=json.dumps({"is_error": False, "structured_output": {"x": 1}}), returncode=0, stderr="")
+
+    cj.ask_json("p", S, runner=fake)
+    assert seen["cmd"][0].endswith("claude") and seen["cmd"][0] == cj.CLAUDE
+
+
+def test_missing_binary_raises_at_call_time(monkeypatch):
+    monkeypatch.setattr(cj, "CLAUDE", None)
+    with pytest.raises(RuntimeError, match="not on PATH"):
+        cj.ask_json("p", S, runner=lambda *a, **k: None)

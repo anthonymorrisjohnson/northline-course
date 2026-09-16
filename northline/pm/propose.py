@@ -31,7 +31,7 @@ def _fill(template: str, fill: dict) -> str:
 
 def render_tool(c: dict, o: dict) -> str:
     stem = f"tool-{c['proposed_tool']}"
-    return _fill((T / "expansion-proposal.md").read_text(), {
+    return _fill((T / "expansion-proposal.md").read_text(encoding="utf-8"), {
         "tool_name": o["tool_name"], "personas": ", ".join(o["personas"]), "count": c["count"], "share": int(c["share"] * 100),
         "persona": c["persona"], "description": c["description"], "quotes": "\n".join(f'- "{q}"' for q in c["quotes"]) or "- (none)",
         "tool_description": o["description"], "input_schema": json.dumps(o["input_schema"], indent=2),
@@ -40,7 +40,7 @@ def render_tool(c: dict, o: dict) -> str:
 
 def render_deploy(qm: dict, o: dict) -> str:
     decisions = TRIAGE_DECISIONS if o["agent_name"] == "triage" else o["decisions_for_humans"]
-    return _fill((T / "deployment-proposal.md").read_text(), {
+    return _fill((T / "deployment-proposal.md").read_text(encoding="utf-8"), {
         "agent_name": o["agent_name"], "placement": o["placement"], "purpose": o["purpose"],
         "escalations_per_week": qm["escalations_per_week"], "median_h": qm["nurse_response_median_h"], "p90_h": qm["nurse_response_p90_h"],
         "non_clinical_pct": int(qm["non_clinical_share_of_queue"] * 100), "unanswered": qm["unanswered_over_24h"], "inactive": qm["patients_inactive_after_escalation"],
@@ -65,16 +65,16 @@ def _deploy_prompt(qm):
 
 
 def main(top: int = 4, ask=claude_json.ask_json_many) -> None:
-    cands = json.loads((OUT / "candidates.json").read_text())[:top]
-    qm = json.loads((OUT / "queue_metrics.json").read_text())
+    cands = json.loads((OUT / "candidates.json").read_text(encoding="utf-8"))[:top]
+    qm = json.loads((OUT / "queue_metrics.json").read_text(encoding="utf-8"))
     outs = ask([(_tool_prompt(c), PROPOSAL_SCHEMA) for c in cands] + [(_deploy_prompt(qm), DEPLOY_SCHEMA)], model="sonnet")
     (OUT / "proposals").mkdir(exist_ok=True)
     for p in (OUT / "proposals").glob("tool-*.md"):
         p.unlink()
     for c, o in zip(cands, outs[:-1]):
-        (OUT / "proposals" / f"tool-{c['proposed_tool']}.md").write_text(render_tool(c, o))
+        (OUT / "proposals" / f"tool-{c['proposed_tool']}.md").write_text(render_tool(c, o), encoding="utf-8")
     d = outs[-1]; d["agent_name"] = "triage"
-    (OUT / "proposals" / "agent-triage.md").write_text(render_deploy(qm, d))
+    (OUT / "proposals" / "agent-triage.md").write_text(render_deploy(qm, d), encoding="utf-8")
     print(f"wrote {len(cands)} tool proposals and agent-triage.md")
 
 

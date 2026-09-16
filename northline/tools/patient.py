@@ -56,7 +56,7 @@ def _median_hours() -> float:
     p = _ROOT / "sim" / "out" / "summary.json"
     if p.exists():
         try:
-            return round(json.loads(p.read_text())["now"]["nurse_response_median_h"], 1)
+            return round(json.loads(p.read_text(encoding="utf-8"))["now"]["nurse_response_median_h"], 1)
         except (KeyError, ValueError):
             pass
     return 31.0
@@ -68,10 +68,10 @@ def escalate_to_nurse(patient_id: str, reason: str, urgency: str = "routine") ->
         return {"status": "not_found", "message": f"no patient {patient_id}"}
     d = _log_dir(); d.mkdir(parents=True, exist_ok=True)
     q = d / "queue.jsonl"
-    n = sum(1 for _ in q.open()) + 1 if q.exists() else 1
+    n = sum(1 for _ in q.open(encoding="utf-8")) + 1 if q.exists() else 1
     row = {"id": f"esc-{n}", "patient_id": patient_id, "reason": reason, "urgency": urgency,
            "created_at": _now(), "answered_at": None, "tier": None, "route": None}
-    with q.open("a") as f:
+    with q.open("a", encoding="utf-8") as f:
         f.write(json.dumps(row) + "\n")
     return {"status": "ok", "escalation_id": row["id"],
             "message": f"A nurse will review this. Median response time is currently {_median_hours()} hours."}

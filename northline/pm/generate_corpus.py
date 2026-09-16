@@ -143,7 +143,7 @@ def queue_rows(last_q: dict, n: int, seed: int) -> list[dict]:
 
 
 def seed_exhibit_e(rows: list[dict]) -> None:
-    for e in json.loads((TRIAGE / "exhibit_e.json").read_text()):
+    for e in json.loads((TRIAGE / "exhibit_e.json").read_text(encoding="utf-8")):
         t = datetime.strptime(e["time"], "%I:%M %p")
         day = datetime(2026, 9, 8) if t.hour >= 12 else datetime(2026, 9, 9)
         rows.append({"id": f"exhibit-e-{e['n']:02d}", "patient_id": f"pt-e{e['n']:02d}", "reason": e["text"], "urgency": "routine",
@@ -163,7 +163,7 @@ def main(n_transcripts: int = 120, n_plan: int = 40, n_queue: int = 31200, ask=c
     t_results, t_dropped, t_reasked = _generate_validated(t_jobs, _valid_transcript, ask=ask)
     for i, (t, _) in enumerate(themes):
         if i not in t_dropped:
-            (CORPUS / "patient" / f"p-{i:03d}.json").write_text(json.dumps(to_transcript(i, t, t_results[i], rng), indent=2))
+            (CORPUS / "patient" / f"p-{i:03d}.json").write_text(json.dumps(to_transcript(i, t, t_results[i], rng), indent=2), encoding="utf-8")
     print(f"transcripts: {n_transcripts - len(t_dropped)} written, {t_reasked} re-asked, {len(t_dropped)} dropped {sorted(t_dropped)}")
 
     p_jobs = [(plan_prompt(i), PLAN_SCHEMA) for i in range(n_plan)]
@@ -173,12 +173,12 @@ def main(n_transcripts: int = 120, n_plan: int = 40, n_queue: int = 31200, ask=c
             continue
         lines = [json.dumps({"ts": _stamp(rng).isoformat(timespec="seconds"), "session_id": f"corpus-s-{i:03d}", "persona": "plan",
                              "tool": c["tool"], "args": c["args"], "status": c["status"], "error": c.get("error") or None}) for c in p_results[i]["calls"]]
-        (CORPUS / "plan" / f"s-{i:03d}.jsonl").write_text("\n".join(lines) + "\n")
+        (CORPUS / "plan" / f"s-{i:03d}.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"plan sessions: {n_plan - len(p_dropped)} written, {p_reasked} re-asked, {len(p_dropped)} dropped {sorted(p_dropped)}")
 
-    summary = json.loads((REPO_ROOT / "northline" / "sim" / "out" / "summary.json").read_text())["last_quarter"]
+    summary = json.loads((REPO_ROOT / "northline" / "sim" / "out" / "summary.json").read_text(encoding="utf-8"))["last_quarter"]
     rows = queue_rows(summary, n_queue, seed=2); seed_exhibit_e(rows)
-    (CORPUS / "queue.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    (CORPUS / "queue.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
     print(f"{n_transcripts - len(t_dropped)} transcripts, {n_plan - len(p_dropped)} plan sessions, {len(rows)} queue rows")
 
 

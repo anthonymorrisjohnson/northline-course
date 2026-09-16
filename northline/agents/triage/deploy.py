@@ -15,7 +15,7 @@ def register(name: str, effects: dict, live_from_week: int = 40) -> list[dict]:
 
 
 def main() -> None:
-    s = json.loads((HERE / "out" / "acceptance.json").read_text())
+    s = json.loads((HERE / "out" / "acceptance.json").read_text(encoding="utf-8"))
     deps = register("triage", s["effects"])
     print(f"triage live; deployments: {[d['name'] for d in deps]}; effects {s['effects']}")
 

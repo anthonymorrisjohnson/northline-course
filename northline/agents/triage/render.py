@@ -21,13 +21,13 @@ def render(d: dict) -> str:
     fill = {"systolic": u["systolic"], "diastolic": u["diastolic"], "glucose_low": u["glucose_low"], "glucose_high": u["glucose_high"],
             "always_urgent_words": ", ".join(u["always_urgent_words"]), "after_hours_rule": AFTER_HOURS[d["after_hours_urgent"]],
             "non_clinical_rule": NON_CLINICAL[d["non_clinical_handling"]], "consent_rule": CONSENT[bool(d["honour_dont_tell"])], "chosen_by": d["chosen_by"]}
-    t = (HERE / "prompt_template.md").read_text()
+    t = (HERE / "prompt_template.md").read_text(encoding="utf-8")
     for k, v in fill.items():
         t = t.replace("{" + k + "}", str(v))
     return t
 
 
 def write(d: dict) -> Path:
-    (HERE / "decisions.json").write_text(json.dumps(d, indent=2))
-    (HERE / "prompt.md").write_text(render(d))
+    (HERE / "decisions.json").write_text(json.dumps(d, indent=2), encoding="utf-8")
+    (HERE / "prompt.md").write_text(render(d), encoding="utf-8")
     return HERE / "prompt.md"

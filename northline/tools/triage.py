@@ -10,11 +10,11 @@ ROUTES = {"nurse_urgent", "nurse_routine", "admin", "auto_reply"}
 
 def _rows() -> list[dict]:
     q = _log_dir() / "queue.jsonl"
-    return [json.loads(l) for l in q.read_text().splitlines() if l.strip()] if q.exists() else []
+    return [json.loads(l) for l in q.read_text(encoding="utf-8").splitlines() if l.strip()] if q.exists() else []
 
 
 def _write(rows: list[dict]) -> None:
-    (_log_dir() / "queue.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    (_log_dir() / "queue.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
 
 
 def _update(message_id: str, **fields) -> dict:

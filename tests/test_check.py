@@ -21,7 +21,7 @@ def test_write_mcp_replaces_project_dir_and_env_defaults(tmp_path):
 
     text = result.read_text()
     assert "${" not in text
-    assert str(tmp_repo) in text
+    assert tmp_repo.as_posix() in text
     assert '"plan"' in text
 
 

@@ -24,11 +24,11 @@ def prompt(report_md: str, qm: dict, summary: dict | None) -> str:
 
 def main(ask=claude_json.ask_json) -> None:
     from .aggregate import REPO_ROOT
-    qm = json.loads((OUT / "queue_metrics.json").read_text())
+    qm = json.loads((OUT / "queue_metrics.json").read_text(encoding="utf-8"))
     sp = REPO_ROOT / "northline" / "sim" / "out" / "summary.json"
-    summary = json.loads(sp.read_text()) if sp.exists() else None
-    d = ask(prompt((OUT / "report.md").read_text(), qm, summary), DIAG_SCHEMA, model="sonnet")
-    (OUT / "diagnosis.md").write_text("# Diagnosis\n\n" + "\n\n".join(f"## {TITLES[k]}\n\n{d[k]}" for k in TITLES) + "\n")
+    summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
+    d = ask(prompt((OUT / "report.md").read_text(encoding="utf-8"), qm, summary), DIAG_SCHEMA, model="sonnet")
+    (OUT / "diagnosis.md").write_text("# Diagnosis\n\n" + "\n\n".join(f"## {TITLES[k]}\n\n{d[k]}" for k in TITLES) + "\n", encoding="utf-8")
     print(f"wrote {OUT / 'diagnosis.md'}: {d['headline']}")
 
 

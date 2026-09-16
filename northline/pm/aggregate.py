@@ -22,7 +22,7 @@ def load_queue(corpus_dir: Path, log_dir: Path) -> list[dict]:
     rows = []
     for p in (corpus_dir / "queue.jsonl", log_dir / "queue.jsonl"):
         if p.exists():
-            rows += [json.loads(l) for l in p.read_text().splitlines() if l.strip()]
+            rows += [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
     return rows
 
 
@@ -93,14 +93,14 @@ def report(records, cands, qm, summary) -> str:
 
 
 def main() -> None:
-    records = [json.loads(l) for l in (OUT / "classified.jsonl").read_text().splitlines() if l.strip()]
+    records = [json.loads(l) for l in (OUT / "classified.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
     qm = queue_metrics(load_queue(REPO_ROOT / "corpus", REPO_ROOT / "northline" / "logs"))
     sp = REPO_ROOT / "northline" / "sim" / "out" / "summary.json"
-    summary = json.loads(sp.read_text()) if sp.exists() else None
+    summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
     cands = candidates(records)
-    (OUT / "report.md").write_text(report(records, cands, qm, summary))
-    (OUT / "candidates.json").write_text(json.dumps(cands, indent=2))
-    (OUT / "queue_metrics.json").write_text(json.dumps(qm, indent=2))
+    (OUT / "report.md").write_text(report(records, cands, qm, summary), encoding="utf-8")
+    (OUT / "candidates.json").write_text(json.dumps(cands, indent=2), encoding="utf-8")
+    (OUT / "queue_metrics.json").write_text(json.dumps(qm, indent=2), encoding="utf-8")
     print(f"{len(cands)} candidates; median response {qm['nurse_response_median_h']}h -> {OUT / 'report.md'}")
 
 
