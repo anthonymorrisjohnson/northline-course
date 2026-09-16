@@ -1,0 +1,23 @@
+---
+name: setup
+description: Prepare this laptop for the Northline session. Installs uv if missing, syncs dependencies, runs the checks, confirms the MCP server, and prints what to open. Works on macOS, Linux, and Windows.
+disable-model-invocation: true
+---
+
+You are preparing an attendee's laptop. Do these in order. Stop with a plain-language message if a step fails; do not try workarounds that install other tools.
+
+1. Detect the OS. Run `uv --version`. If missing:
+   - macOS or Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+   - Windows (PowerShell): `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+   Then re-run `uv --version`. If it is still not found, tell the user to close and reopen their terminal or Claude Code, then run /setup again.
+2. Run `uv sync`.
+3. Run `uv run pytest -q` and report the count.
+4. Run `uv run python scripts/check.py --write-mcp`. This rewrites `.mcp.json` with absolute paths in place of `${CLAUDE_PROJECT_DIR}`, which headless Claude does not expand on its own.
+5. Run `uv run python scripts/check.py`. If the last line is not READY, show the output and stop.
+6. Run `claude mcp list`. If `northline` is missing or shows as needing approval, tell the user: start a new Claude Code session in this folder and accept the project MCP server when asked, then come back. If `northline` shows "Failed to connect", run step 4 (`uv run python scripts/check.py --write-mcp`) again and re-check; if it still fails, report the exact line.
+7. Finish with exactly this, filled in:
+   READY: <OS>, <python version>, <claude version>, northline tools: patient <n> plan <n>
+   Ask them to paste that line into the workshop group chat.
+   Then two lines: "In the room you will type /pm-run and /deploy triage. Nothing else."
+
+Never run git. Never modify files. Never install anything other than uv.
