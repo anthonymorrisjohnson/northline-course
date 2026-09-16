@@ -53,7 +53,7 @@ Speaker: four decisions, one at a time, voted by the room during `/deploy triage
 - "Your triage assistant looks great. What did it do with the 184/112 reading?"
 - "Who is paying for the extra care the agent uncovered?"
 
-Speaker: one per click, during the board meeting. Toggle "Sign Prairie" on the presenting team's own numbers while they answer.
+Speaker: one per click, during the board meeting. Toggle "Sign Prairie" on the presenting team's own numbers while they answer. Read them one at a time; do not show all five at once.
 
 ## Slide 7: You didn't automate the bottleneck, you moved it
 
@@ -76,8 +76,9 @@ Speaker: 184 is below 190, and the prompt applies the number literally. Nobody w
 - Chart: nurse response median (hours), weeks 1–52, from the dashboard's trend data
 - The line climbs from 18.1h to 36.4h under the check-in agent alone, then drops to 4.0h the week triage deploys (week 40) and stays there
 - Median nurse response: 29.7h → 4.0h. But urgent cases missed/week: 0.0 → 90.0
+- Caption: "Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard."
 
-Speaker: every queue number gets better in a day. Read the last row before anyone celebrates the rest of the table.
+Speaker: every queue number gets better in a day. Read the last row before anyone celebrates the rest of the table. Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard.
 
 ## Slide 10: A fast fix still needs testing
 
@@ -94,8 +95,9 @@ Speaker: the key is marked `"draft": true` — illustrative, not a clinician's s
 - Chart: the Sign Prairie toggle, weeks 40–52, nurse response median (h), with vs. without the deployment
 - Without new deployments: flat at 336.0h — the model's cap, reached before week 40
 - With new deployments: roughly 24–31h across the same weeks
+- Caption: "Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard."
 
-Speaker: same contract, same 100,000 patients, two very different lines — and the only thing that moved between them is a prompt four people voted on this afternoon.
+Speaker: same contract, same 100,000 patients, two very different lines — and the only thing that moved between them is a prompt four people voted on this afternoon. Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard.
 
 ## Slide 12: Where each front door belongs
 
