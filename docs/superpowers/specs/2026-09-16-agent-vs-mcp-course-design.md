@@ -112,7 +112,7 @@ A `registry.py` lists every tool with name, description, JSON schema, persona, a
 
 ```
 claude -p --output-format json \
-  --system-prompt-file medibridge/agent/brief.md \
+  --system-prompt "<brief.md plus the region block, assembled by the server>" \
   --mcp-config medibridge/agent/mcp.json \
   --allowedTools "mcp__medibridge__*" \
   --disallowedTools "Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,Agent" \
