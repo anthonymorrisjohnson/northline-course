@@ -1,14 +1,11 @@
 """Patient-facing tools for the weekly check-in agent. Administrative only."""
-import json, os
+import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from . import store
+from .calllog import log_dir as _log_dir
 
 _ROOT = Path(__file__).resolve().parents[1]
-
-
-def _log_dir() -> Path:
-    return Path(os.environ.get("NORTHLINE_LOG_DIR", _ROOT / "logs"))
 
 
 def _now() -> str:

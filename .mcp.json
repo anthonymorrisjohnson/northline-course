@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "northline": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "--directory", "${CLAUDE_PROJECT_DIR}", "python", "-m", "northline.mcp_server"],
+      "env": {
+        "NORTHLINE_PERSONA": "${NORTHLINE_PERSONA:-plan}",
+        "NORTHLINE_LOG_DIR": "${CLAUDE_PROJECT_DIR}/northline/logs",
+        "NORTHLINE_DATA_DIR": "${CLAUDE_PROJECT_DIR}/northline/data"
+      }
+    }
+  }
+}
