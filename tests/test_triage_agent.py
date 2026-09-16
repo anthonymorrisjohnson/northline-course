@@ -7,7 +7,7 @@ KEY = json.loads(Path("northline/agents/triage/nurse_key.json").read_text())["ke
 
 def test_render_fills_all_placeholders():
     p = render.render(render.DEFAULTS)
-    assert "{" not in p and "180/110" in p and "northline_default" in p
+    assert "{" not in p and "180/110" in p and "northline_default" in p and "Apply the thresholds literally" in p
 
 
 def test_render_strict_threshold_changes_prompt():
