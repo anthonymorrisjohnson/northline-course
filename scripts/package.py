@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDE_DIRS = {".git", ".venv", "__pycache__", ".pytest_cache", "dist", "briefs", ".superpowers"}
-EXCLUDE_FILES = {"northline/agents/triage/decisions.json", "northline/agents/triage/prompt.md"}
+EXCLUDE_FILES = {"northline/agents/triage/decisions.json", "northline/agents/triage/prompt.md", "slides/deck.pptx"}
 EXCLUDE_PREFIX = ("northline/logs/", "northline/agents/triage/out/", "docs/superpowers/")
 
 

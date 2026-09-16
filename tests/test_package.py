@@ -18,6 +18,13 @@ def test_zip_has_no_git_venv_or_logs(tmp_path):
     assert not any(n.startswith("northline-course/docs/superpowers/") for n in names)
 
 
+def test_zip_excludes_presenter_deck(tmp_path):
+    out = build(out=tmp_path / "z.zip")
+    names = zipfile.ZipFile(out).namelist()
+    assert any(n.endswith("slides/outline.md") for n in names)
+    assert not any(n.endswith("deck.pptx") for n in names)
+
+
 def test_build_ignores_excluded_names_in_ancestor_path(tmp_path):
     # A checkout placed under a directory that happens to be named "dist" (or ".git", etc.)
     # must not have every file excluded: only path components *relative to root* count.
