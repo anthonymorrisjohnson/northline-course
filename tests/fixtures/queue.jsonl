@@ -1,0 +1,8 @@
+{"id": "q1", "patient_id": "P1", "tier": "urgent_clinical", "urgency": "urgent", "created_at": "2026-09-08T08:00:00Z", "answered_at": "2026-09-10T00:00:00Z"}
+{"id": "q2", "patient_id": "P2", "tier": "non_urgent_clinical", "urgency": "routine", "created_at": "2026-09-09T10:00:00Z", "answered_at": "2026-09-09T16:00:00Z"}
+{"id": "q3", "patient_id": "P3", "tier": "non_clinical", "urgency": "routine", "created_at": "2026-09-09T21:14:00Z", "answered_at": "2026-09-10T12:14:00Z"}
+{"id": "q4", "patient_id": "P4", "tier": "non_clinical", "urgency": "routine", "created_at": "2026-09-10T01:48:00Z", "answered_at": "2026-09-10T21:48:00Z"}
+{"id": "q5", "patient_id": "P5", "tier": "non_clinical", "urgency": "routine", "created_at": "2026-09-13T14:00:00Z", "answered_at": "2026-09-15T14:00:00Z"}
+{"id": "q6", "patient_id": "P6", "tier": "non_urgent_clinical", "urgency": "routine", "created_at": "2026-09-07T09:00:00Z", "answered_at": "2026-09-10T07:00:00Z"}
+{"id": "q7", "patient_id": "P7", "tier": "non_urgent_clinical", "urgency": "routine", "created_at": "2026-09-08T10:00:00Z"}
+{"id": "q8", "patient_id": "P8", "tier": "non_urgent_clinical", "urgency": "routine", "created_at": "2026-09-09T09:00:00Z"}
