@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+northline/logs/*
+!northline/logs/.gitkeep
+northline/agents/triage/decisions.json
+northline/agents/triage/prompt.md
+northline/agents/triage/out/
+briefs/
+dist/
