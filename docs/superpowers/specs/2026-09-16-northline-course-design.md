@@ -173,7 +173,7 @@ Unit tests for every tool and the registry gating; simulator calibration tests a
 ## 10. Success criteria
 
 - Unzip, `/setup`, and both front doors answer within ten minutes, on macOS and Windows.
-- `/pm-run` completes in under three minutes on the committed corpus and its "From logs" column matches Exhibit B within 15%.
+- `/pm-run` completes in under five minutes on the committed corpus (classification about two and a half of them, narrated) and its "From logs" column matches Exhibit B within 15%.
 - `/deploy triage` completes in under six minutes including the acceptance run, and two different threshold choices produce visibly different miss tables and nurse response times.
 - The dashboard reflects a new deployment within one refresh.
 - The 75-minute run of show holds with the paper exercise untouched.
