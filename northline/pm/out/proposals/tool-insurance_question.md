@@ -1,66 +1,71 @@
 # Expansion proposal: `insurance_question`
 
-**Kind:** tool  **Persona(s):** patient, plan  **Evidence:** 19 conversations (16% of patient conversations)
+**Kind:** tool  **Persona(s):** patient, plan  **Evidence:** 21 conversations (17% of patient conversations)
 
 ## What users asked for
-User asked for help processing insurance prior authorization for medication refill.
+User needed help with insurance prior authorization for medication refill.
 
 Example quotes:
-- "any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now."
+- "Any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now."
 - "My insurance denied my test strips last week so I've only been checking every few days."
-- "My insurance denied my test strip claim and I'm basically out now."
+- "My insurance denied my test strip claim and I'm basically out now. Haven't been able to check my blood sugar in a couple days."
 
 ## Proposed tool
-**Docstring (what the model reads):** Capture a patient's insurance barrier (prior authorization, claim denial, or coverage question) and open a care-coordination task, escalating to a nurse when supply is critically low.
+**Docstring (what the model reads):** Capture a patient's insurance barrier (prior authorization, denial, or supply gap), triage urgency based on days-without-medication/supplies, and route to care coordination for administrative follow-up or to an on-call nurse when the patient is currently going without a critical medication or monitoring supply.
 
 **Input schema:**
 ```json
 {
   "type": "object",
+  "required": [
+    "patient_id",
+    "issue_type",
+    "item_name"
+  ],
   "properties": {
     "patient_id": {
       "type": "string",
-      "description": "Northline patient identifier"
+      "description": "Unique patient identifier from the SMS session"
     },
     "issue_type": {
       "type": "string",
       "enum": [
         "prior_auth",
         "claim_denial",
-        "coverage_question",
-        "formulary_question"
+        "formulary",
+        "cost_barrier",
+        "other"
       ],
-      "description": "Category of insurance barrier"
+      "description": "Category of insurance barrier the patient is facing"
     },
-    "medication_or_supply": {
+    "item_name": {
       "type": "string",
-      "description": "Name of the medication or supply being denied or held"
+      "description": "Medication or supply held up (e.g., metoprolol, test strips)"
     },
-    "days_supply_remaining": {
+    "days_without": {
       "type": "integer",
       "minimum": 0,
-      "description": "Patient-reported days of supply on hand; drives escalation routing"
+      "description": "Number of days patient has been without the item; null if still has supply"
     },
-    "free_text": {
+    "insurance_name": {
       "type": "string",
-      "description": "Patient's own words describing the situation, preserved verbatim for the care team"
+      "description": "Name of the insurance plan, if patient provided it"
+    },
+    "patient_message_verbatim": {
+      "type": "string",
+      "description": "Exact SMS text from the patient describing the issue, preserved for downstream context"
     }
-  },
-  "required": [
-    "patient_id",
-    "issue_type",
-    "free_text"
-  ]
+  }
 }
 ```
 
 **Nearest existing tool(s):** log_reading, next_checkin
 
 ## What the backend needs
-Care coordination / prior-auth tracking system: creates a task in the case management queue (EHR or standalone), optionally calls the payer's prior-auth API to prefill case details, and triggers a nurse alert via the clinical escalation pathway when days_supply_remaining is 0–2 or absent for a critical medication class.
+Care coordination platform (e.g., Healthie or equivalent) to create a task assigned to the prior-auth specialist; EHR write-back to flag the open insurance issue on the patient chart; nurse escalation queue triggered automatically when days_without > 0 for any medication classified as chronic-disease-critical (antihypertensives, insulin, glucose monitoring supplies).
 
 ## Safety notes
-1. The tool never advises the patient on whether to skip, split, or substitute doses — any supply-gap guidance is a clinical decision routed to a nurse. 2. When days_supply_remaining <= 2 OR the medication_or_supply matches a high-risk class (insulin, beta-blockers, anticoagulants), the backend must page the on-call nurse with full context before confirming the task to the patient. 3. The SMS reply to the patient is administrative only: confirm the case was opened and give an expected callback window; no clinical content in the reply.
+1. The tool never returns insurance coverage determinations, clinical guidance, or dosing advice to the patient — the SMS response is always a warm handoff message (e.g., "I've flagged this for our care team; someone will call you within one business day"). 2. If days_without > 0 AND item_name matches the patient's active chronic-disease medication or monitoring supply list, the tool must simultaneously create a nurse escalation task (same-business-day callback) alongside the administrative task — the patient going without critical supplies is a clinical safety event, not just a billing issue. 3. patient_message_verbatim must be passed to every downstream task so the nurse or coordinator has the patient's own words, not a paraphrase. 4. No PHI from this tool's output is returned to the SMS thread beyond a confirmation message.
 
 ## Decision
 - [ ] Approve: `/expand tool-insurance_question`

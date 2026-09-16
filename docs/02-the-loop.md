@@ -93,11 +93,11 @@ The first table in `northline/pm/out/report.md` is the board's deck next to the 
 | metric | Board deck | From logs |
 |---|---|---|
 | Escalations per week | 2400 | 2401 |
-| Median nurse response (h) | 29.72 | 29.6 (p90 72.9) |
+| Median nurse response (h) | 31 | 29.6 (p90 72.9) |
 | Urgent escalations, median response (h) | not reported | 29.1 |
 | After-hours share | 0.46 | 0.46 |
 | Non-clinical share of the nurse queue | not reported | 0.4 |
-| Patients inactive after an escalation | 334 | 342 |
+| Patients inactive after an escalation | 340 | 342 |
 
 Read the left column first: the board is not wrong. Every number they reported is within a hair of what the logs say, which is worth saying out loud, because the temptation in a room like this is to assume the deck was cooked.
 

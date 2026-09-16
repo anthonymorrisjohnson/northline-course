@@ -3,7 +3,7 @@
 **Kind:** tool  **Persona(s):** patient, plan  **Evidence:** 39 conversations (97% of plan conversations)
 
 ## What users asked for
-System cannot perform member lookup by name; pt-XXXX format required.
+Tool requires member ID in pt-XXXX format but staff attempted name-based lookup.
 
 Example quotes:
 - "enrollment_status({"member_id": "Sandra Okonkwo"}) -> not_found"
@@ -11,7 +11,7 @@ Example quotes:
 - "enrollment_status({"member_id": "312-555-0187"}) -> not_found"
 
 ## Proposed tool
-**Docstring (what the model reads):** Resolve a caller's full name or phone number to their canonical pt-XXXX member ID so downstream tools (e.g. enrollment_status) can complete the request.
+**Docstring (what the model reads):** Resolve a member's canonical `pt-XXXX` ID from a full name or phone number so downstream tools (e.g., `enrollment_status`) can be called with a valid identifier.
 
 **Input schema:**
 ```json
@@ -20,20 +20,35 @@ Example quotes:
   "properties": {
     "full_name": {
       "type": "string",
-      "description": "Patient's full legal name as enrolled (e.g. 'Sandra Okonkwo'). Provide this OR phone_number OR both."
+      "description": "Patient's full legal name as it appears on enrollment records (e.g., 'Sandra Okonkwo')."
     },
     "phone_number": {
       "type": "string",
-      "description": "Patient's SMS or voice number in E.164 or local format (e.g. '312-555-0187')."
+      "description": "Patient's registered phone number in E.164 or local format (e.g., '312-555-0187')."
     },
     "patient_id": {
       "type": "string",
-      "description": "Partial or candidate pt-XXXX ID if the caller supplied one; used to break ties when multiple records match name or phone.",
-      "pattern": "^pt-[0-9]+$"
+      "description": "Partial or approximate pt-XXXX member ID if the caller has one but is unsure of formatting.",
+      "pattern": "^pt-[0-9]{4}$"
     }
   },
-  "required": [],
-  "minProperties": 1,
+  "anyOf": [
+    {
+      "required": [
+        "full_name"
+      ]
+    },
+    {
+      "required": [
+        "phone_number"
+      ]
+    },
+    {
+      "required": [
+        "patient_id"
+      ]
+    }
+  ],
   "additionalProperties": false
 }
 ```
@@ -41,10 +56,10 @@ Example quotes:
 **Nearest existing tool(s):** outcome_evidence, enrollment_status
 
 ## What the backend needs
-Member directory search API (read-only) backed by the enrollment database. Must support case-insensitive, fuzzy full-name matching and exact phone-number lookup; returns the canonical pt-XXXX member ID plus enrollment status. No clinical records are accessed or returned. When multiple candidates match, the API must return a "ambiguous" signal rather than a list of records, so the agent can escalate to a nurse with the collected identifiers as context.
+Member identity-resolution service (read-only query against the enrollment directory). Must support fuzzy-match on `full_name` (Levenshtein ≤ 2 to guard against misspellings) and exact-match on normalized `phone_number`. Returns the canonical `pt-XXXX` member ID plus a confidence score; callers must pass the result to `enrollment_status` for full record access. No PHI beyond the matched ID is returned by this tool itself.
 
 ## Safety notes
-1. Minimum-disclosure: return only the pt-XXXX member ID and enrollment status — no DOB, address, diagnoses, or clinical data. 2. Tie-breaking policy: if more than one member matches, do not return any record; instead hand off to the nurse queue with {full_name, phone_number, patient_id} so a human can verify identity. 3. Enumeration guard: rate-limit to 3 failed lookups per SMS session before locking and routing to nurse. 4. Audit log: every call must record the queried identifiers, the agent session ID, and the result code for HIPAA access-log compliance. 5. No clinical routing: this tool is strictly administrative identity resolution; any clinical question that surfaces during the lookup (e.g. "my medication wasn't refilled") must be passed, with member context, to the nurse queue — the tool must never surface clinical guidance itself.
+1. **Identity confirmation before action**: a fuzzy-name match with confidence < 1.0 must prompt the agent to verbally confirm at least one additional identifier (DOB or phone) with the patient before the returned ID is used in any downstream call. 2. **No clinical data surfaced**: this tool returns only the member ID — never diagnosis, medication, or care-plan data; clinical questions must be routed to a nurse via `escalate_to_nurse` with the resolved ID as context. 3. **PII minimization**: phone numbers and names are logged only as hashed tokens in the audit trail. 4. **Rate limiting**: max 5 lookups per session to deter enumeration attacks against the member directory. 5. **Ambiguous match handling**: if two or more records match with equal confidence, the tool returns `ambiguous_match` and must hand off to a human staff member rather than guessing.
 
 ## Decision
 - [ ] Approve: `/expand tool-lookup_member_by_name_or_phone`

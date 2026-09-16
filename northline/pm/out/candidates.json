@@ -13,7 +13,7 @@
       "outcome_evidence",
       "enrollment_status"
     ],
-    "description": "System cannot perform member lookup by name; pt-XXXX format required.",
+    "description": "Tool requires member ID in pt-XXXX format but staff attempted name-based lookup.",
     "tier_mix": {
       "none": 39
     }
@@ -21,63 +21,64 @@
   {
     "persona": "patient",
     "proposed_tool": "insurance_question",
-    "count": 19,
-    "share": 0.16,
+    "count": 21,
+    "share": 0.17,
     "quotes": [
-      "any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now.",
+      "Any chance you can help with a prior auth? Insurance has been holding up my metoprolol refill for a week now.",
       "My insurance denied my test strips last week so I've only been checking every few days.",
-      "My insurance denied my test strip claim and I'm basically out now."
+      "My insurance denied my test strip claim and I'm basically out now. Haven't been able to check my blood sugar in a couple days."
     ],
     "nearest_tools": [
       "log_reading",
       "next_checkin"
     ],
-    "description": "User asked for help processing insurance prior authorization for medication refill.",
+    "description": "User needed help with insurance prior authorization for medication refill.",
     "tier_mix": {
       "non_clinical": 7,
-      "non_urgent_clinical": 10,
+      "non_urgent_clinical": 12,
       "urgent_clinical": 2
     }
   },
   {
     "persona": "patient",
     "proposed_tool": "pharmacy_logistics",
-    "count": 19,
-    "share": 0.16,
+    "count": 16,
+    "share": 0.13,
     "quotes": [
-      "That's the problem. I've been out of lisinopril for three days. My truck's been in the shop and the pharmacy is 45 miles away.",
+      "I've been out of lisinopril for three days. My truck's been in the shop and the pharmacy is 45 miles away.",
       "pharmacy says they need a new script before they'll refill it and the nearest one is 45 miles from me. Almost out.",
-      "I'm almost out of my lisinopril and the pharmacy told me they need a brand new prescription, not just a refill authorization. Problem is that pharmacy is 40 miles out and I don't have a ride lined up."
+      "pharmacy told me they need a brand new prescription, not just a refill authorization. Problem is that pharmacy is 40 miles out and I don't have a ride lined up."
     ],
     "nearest_tools": [
-      "escalate_to_nurse",
-      "log_reading"
+      "log_medication",
+      "escalate_to_nurse"
     ],
-    "description": "User needed medication refill and transportation to pharmacy but lacked access.",
+    "description": "User needed pharmacy access and transportation to obtain missing lisinopril medication.",
     "tier_mix": {
-      "non_urgent_clinical": 15,
-      "urgent_clinical": 4
+      "non_urgent_clinical": 14,
+      "non_clinical": 1,
+      "urgent_clinical": 1
     }
   },
   {
     "persona": "patient",
     "proposed_tool": "request_refill",
-    "count": 12,
-    "share": 0.1,
+    "count": 14,
+    "share": 0.12,
     "quotes": [
+      "Yeah, I'm almost out of my lisinopril and my insurance has been rejecting the refill for two weeks.",
       "While I'm waiting can you at least send in a refill on my lisinopril? I'm running low.",
-      "Getting a little low on it though \u2014 can you do a refill request? And I don't suppose you can just talk for a bit.",
-      "And I'm out of refills."
+      "Getting a little low on it though \u2014 can you do a refill request? And I don't suppose you can just talk for a bit."
     ],
     "nearest_tools": [
       "log_reading",
       "escalate_to_nurse"
     ],
-    "description": "Patient requested medication refill but assistant cannot process refills directly.",
+    "description": "Patient needed medication refill coordination and transportation assistance to a remote pharmacy.",
     "tier_mix": {
-      "non_urgent_clinical": 6,
-      "non_clinical": 3,
-      "urgent_clinical": 3
+      "urgent_clinical": 3,
+      "non_urgent_clinical": 9,
+      "non_clinical": 2
     }
   },
   {
@@ -88,13 +89,13 @@
     "quotes": [
       "Put the cuff on twice and it just says ERR both times. Dunno what's going on with it.",
       "Been trying for the last hour but my cuff just keeps flashing ERR. Can't get a single reading.",
-      "Every time I put the cuff on it just says ERR. Been like that for two days now."
+      "Every time I put the cuff on it just says ERR. Been like that for two days now. I got no idea what's wrong with it"
     ],
     "nearest_tools": [
       "next_checkin",
       "log_medication"
     ],
-    "description": "Patient's blood pressure cuff is malfunctioning and assistant cannot troubleshoot or advise on replacement options.",
+    "description": "Patient's blood pressure cuff failed and needs device troubleshooting or replacement guidance.",
     "tier_mix": {
       "non_clinical": 5,
       "non_urgent_clinical": 2
@@ -103,21 +104,21 @@
   {
     "persona": "patient",
     "proposed_tool": "diet_content",
-    "count": 6,
-    "share": 0.05,
+    "count": 7,
+    "share": 0.06,
     "quotes": [
+      "my doctor keeps saying lay off the bread but I live 40 miles from the nearest grocery store. What am I supposed to eat instead?",
       "Saw something about cutting white bread but I don't know what to eat instead. Any ideas?",
-      "what should I be eating instead of white bread? My wife keeps after me about it",
-      "My doctor keeps telling me to cut back on bread but honestly I don't really know what to eat instead."
+      "what should I be eating instead of white bread?"
     ],
     "nearest_tools": [
       "log_reading",
       "next_checkin"
     ],
-    "description": "Patient requested nutrition guidance on bread alternatives for carb reduction.",
+    "description": "Patient requested dietary guidance on bread alternatives but was unable to receive this advice.",
     "tier_mix": {
-      "non_clinical": 5,
-      "non_urgent_clinical": 1
+      "non_urgent_clinical": 5,
+      "non_clinical": 2
     }
   },
   {
@@ -128,13 +129,13 @@
     "quotes": [
       "I just want off these texts. how do i stop them",
       "I don't want these texts anymore. STOP",
-      "STOP"
+      "Took you like 20 minutes just to send that back. And now 31 hours for a nurse? I really don't think this is worth my time."
     ],
     "nearest_tools": [
       "log_reading",
-      "log_medication"
+      "next_checkin"
     ],
-    "description": "User wanted to stop receiving check-in texts but system cannot process opt-out requests.",
+    "description": "User wanted to opt out of text check-ins but had no mechanism to do so.",
     "tier_mix": {
       "non_clinical": 4,
       "non_urgent_clinical": 1
@@ -143,10 +144,10 @@
   {
     "persona": "patient",
     "proposed_tool": "social_checkin",
-    "count": 5,
-    "share": 0.04,
+    "count": 4,
+    "share": 0.03,
     "quotes": [
-      "Nobody's made it out since the snow came. Two weeks now.",
+      "I think I just wanted somebody to check in. Silly maybe.",
       "Honestly haven't talked to a real person in five days. Snow came through Monday and nobody's been out this way since.",
       "Road's been drifted shut since Saturday. Nobody's come by, not even the mail. Just me and the dog rattling around in here."
     ],
@@ -154,9 +155,9 @@
       "log_reading",
       "log_medication"
     ],
-    "description": "Patient experiencing isolation and wanted in-home visits or social companionship.",
+    "description": "Patient requested social support and transportation assistance during isolated winter period",
     "tier_mix": {
-      "non_clinical": 4,
+      "non_clinical": 3,
       "non_urgent_clinical": 1
     }
   }

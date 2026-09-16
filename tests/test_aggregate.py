@@ -2,8 +2,8 @@ import json
 from pathlib import Path
 from northline.pm import aggregate as ag
 FX = Path(__file__).parent / "fixtures"
-RECS = [json.loads(l) for l in (FX / "classified.jsonl").read_text().splitlines()]
-Q = [json.loads(l) for l in (FX / "queue.jsonl").read_text().splitlines()]
+RECS = [json.loads(l) for l in (FX / "classified.jsonl").read_text(encoding="utf-8").splitlines()]
+Q = [json.loads(l) for l in (FX / "queue.jsonl").read_text(encoding="utf-8").splitlines()]
 
 
 def test_queue_metrics():
@@ -20,8 +20,19 @@ def test_candidates():
 
 
 def test_report_mentions_both_columns():
-    r = ag.report(RECS, ag.candidates(RECS), ag.queue_metrics(Q, weeks=1.0), None)
+    r = ag.report(RECS, ag.candidates(RECS), ag.queue_metrics(Q, weeks=1.0))
     assert "Board deck" in r and "From logs" in r and "request_refill" in r and "Unanswered escalations: 2, from 2 patients." in r
+
+
+def test_board_column_is_the_paper_exhibit_b():
+    # Whatever the simulator says, the deck column stays the case's Exhibit B.
+    r = ag.report(RECS, ag.candidates(RECS), ag.queue_metrics(Q, weeks=1.0))
+    row = next(l for l in r.splitlines() if l.startswith("| Escalations per week"))
+    assert row.split("|")[2].strip() == str(ag.CASE["escalations_per_week"])
+    resp = next(l for l in r.splitlines() if l.startswith("| Median nurse response"))
+    assert resp.split("|")[2].strip() == str(ag.CASE["nurse_response_median_h"])
+    inact = next(l for l in r.splitlines() if l.startswith("| Patients inactive"))
+    assert inact.split("|")[2].strip() == str(ag.CASE["inactive_after_escalation"])
 
 
 def test_queue_metrics_mixes_naive_and_aware():

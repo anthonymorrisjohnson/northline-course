@@ -66,8 +66,11 @@ def _fmt(x):
     return int(x) if float(x).is_integer() else x
 
 
-def report(records, cands, qm, summary) -> str:
-    board = {**CASE, **(summary or {}).get("last_quarter", {})} if summary else CASE
+def report(records, cands, qm) -> str:
+    # The "Board deck" column is Exhibit B from the paper: what leadership believes, fixed.
+    # The simulator's own last_quarter belongs on the dashboard, not here — the point of the
+    # table is the gap between the deck and the logs, and that gap has to stay legible.
+    board = CASE
     L = ["# Northline PM loop report", "", f"{len(records)} conversations and sessions classified; {qm['escalations_per_week']} escalations a week in the queue log.", "",
          "## The board's numbers next to the logs", "", "| metric | Board deck | From logs |", "|---|---|---|",
          f"| Escalations per week | {_fmt(board['escalations_per_week'])} | {qm['escalations_per_week']} |",
@@ -95,10 +98,8 @@ def report(records, cands, qm, summary) -> str:
 def main() -> None:
     records = [json.loads(l) for l in (OUT / "classified.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
     qm = queue_metrics(load_queue(REPO_ROOT / "corpus", REPO_ROOT / "northline" / "logs"))
-    sp = REPO_ROOT / "northline" / "sim" / "out" / "summary.json"
-    summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
     cands = candidates(records)
-    (OUT / "report.md").write_text(report(records, cands, qm, summary), encoding="utf-8")
+    (OUT / "report.md").write_text(report(records, cands, qm), encoding="utf-8")
     (OUT / "candidates.json").write_text(json.dumps(cands, indent=2), encoding="utf-8")
     (OUT / "queue_metrics.json").write_text(json.dumps(qm, indent=2), encoding="utf-8")
     print(f"{len(cands)} candidates; median response {qm['nurse_response_median_h']}h -> {OUT / 'report.md'}")

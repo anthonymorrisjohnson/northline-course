@@ -1,17 +1,17 @@
 # Expansion proposal: `request_refill`
 
-**Kind:** tool  **Persona(s):** patient  **Evidence:** 12 conversations (10% of patient conversations)
+**Kind:** tool  **Persona(s):** patient, plan  **Evidence:** 14 conversations (12% of patient conversations)
 
 ## What users asked for
-Patient requested medication refill but assistant cannot process refills directly.
+Patient needed medication refill coordination and transportation assistance to a remote pharmacy.
 
 Example quotes:
+- "Yeah, I'm almost out of my lisinopril and my insurance has been rejecting the refill for two weeks."
 - "While I'm waiting can you at least send in a refill on my lisinopril? I'm running low."
 - "Getting a little low on it though — can you do a refill request? And I don't suppose you can just talk for a bit."
-- "And I'm out of refills."
 
 ## Proposed tool
-**Docstring (what the model reads):** Submit a medication refill request on behalf of a patient to the prescribing provider via the EHR e-prescribing workflow, and escalate to a nurse if the medication requires clinical review before reordering.
+**Docstring (what the model reads):** Submits a medication refill coordination request on behalf of the patient and automatically escalates to the on-call nurse — with full context — when supply is critically low, insurance has rejected the refill, or any clinical judgment is required.
 
 **Input schema:**
 ```json
@@ -24,33 +24,45 @@ Example quotes:
   "properties": {
     "patient_id": {
       "type": "string",
-      "description": "Northline patient identifier"
+      "description": "Unique patient identifier from the EHR."
     },
     "medication_name": {
       "type": "string",
-      "description": "Name of the medication the patient is requesting a refill for, as stated by the patient"
+      "description": "Name of the medication the patient is requesting a refill for, as stated by the patient."
     },
     "days_supply_remaining": {
       "type": "integer",
-      "description": "Patient-reported days of supply remaining; omit if unknown",
-      "minimum": 0
+      "minimum": 0,
+      "description": "Patient's self-reported estimate of days of medication remaining. Values \u22647 trigger urgent nurse escalation."
+    },
+    "insurance_rejection": {
+      "type": "boolean",
+      "description": "True if the patient reports the insurer has denied a prior refill attempt. Always triggers nurse escalation for prior-authorization review."
+    },
+    "transportation_needed": {
+      "type": "boolean",
+      "description": "True if the patient cannot reach the pharmacy without assistance. Routes a care-coordination flag alongside the refill request."
+    },
+    "preferred_pharmacy_id": {
+      "type": "string",
+      "description": "Optional identifier for the patient's preferred or nearest pharmacy from the pharmacy directory."
     },
     "patient_note": {
       "type": "string",
-      "description": "Verbatim or paraphrased context from the patient (e.g. 'running low', 'out of refills') to include in the clinical handoff"
+      "maxLength": 500,
+      "description": "Verbatim or lightly cleaned patient statement to be forwarded as context to the nurse or care coordinator."
     }
-  },
-  "additionalProperties": false
+  }
 }
 ```
 
 **Nearest existing tool(s):** log_reading, escalate_to_nurse
 
 ## What the backend needs
-EHR e-prescribing API (Surescripts-connected, e.g. Epic MyChart Refill Request or PointClickCare Rx module) — creates a pending refill task on the prescriber's worklist; falls back to calling `escalate_to_nurse` with full context when the EHR returns a rejection code (controlled substance, no active Rx, prior-auth required, or any 4xx).
+EHR/ePrescribing API (e.g., Surescripts) for refill request submission; insurance prior-authorization workflow API for rejection triage; internal care-coordination platform for transportation dispatch; `escalate_to_nurse` as a downstream call whenever `insurance_rejection` is true or `days_supply_remaining` ≤ 7.
 
 ## Safety notes
-1. The agent must never tell the patient whether the refill will be approved or denied — all clinical judgment stays with the prescriber or nurse. 2. If the EHR rejects the request for any reason (controlled substance flag, expired prescription, prior-auth hold), the tool must automatically call `escalate_to_nurse` with `patient_id`, `medication_name`, `patient_note`, and the rejection code — the patient receives only "I've flagged this for your care team." 3. `days_supply_remaining` ≤ 3 should set escalation urgency to `urgent` in the nurse handoff. 4. The tool must not suggest dose changes, substitutions, or alternative medications under any circumstance.
+1. This tool performs administrative coordination only — it never confirms, denies, or adjusts the clinical appropriateness of any medication. 2. Any `insurance_rejection: true` or `days_supply_remaining` ≤ 7 MUST trigger an immediate call to `escalate_to_nurse`, passing `medication_name`, `days_supply_remaining`, `insurance_rejection`, and `patient_note` as context so the nurse can act without re-interviewing the patient. 3. The SMS response to the patient must not include dosing guidance, therapeutic alternatives, or any language that could be construed as clinical advice — it is limited to confirming the request was received and that a nurse will follow up if escalation fired. 4. `patient_note` must be treated as free text from an unverified source and must not be relayed to third-party systems without PHI-handling compliance checks.
 
 ## Decision
 - [ ] Approve: `/expand tool-request_refill`

@@ -4,6 +4,7 @@ Classify each check-in conversation or plan tool-log session into one record.
 
 - **intent**: what the user wanted, five words or fewer. Examples: weekly reading, refill request, insurance denial, diet question, device error, social contact, opt out, pull outcome evidence.
 - **tier**: for patient conversations, the clinical tier of what they raised: `urgent_clinical` (chest pain, possible stroke, glucose under 70 or over 300, BP at or above 180/110, double dose with symptoms), `non_urgent_clinical` (routine readings, mild symptoms, stopped a medication, a wound, diet, refills), `non_clinical` (insurance, scheduling, logistics, device support, social contact, opt-out). Plan sessions are `none`.
+  A weekly check-in that only logs a reading, even one flagged high and escalated, is `non_urgent_clinical`, not `non_clinical`.
 - **outcome**: `resolved`, `partial`, `failed` (nothing useful and no handoff), `escalated` (handed to a nurse).
 - **tools_used**: tool names that appear.
 - **unmet_need**: true when the user asked for something no available tool could do, even if the assistant declined gracefully. A polite "I can't do that yet" is still an unmet need.
