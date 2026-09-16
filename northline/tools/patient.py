@@ -21,12 +21,13 @@ def _patient(pid):
 
 def _flag(kind: str, value: str) -> str:
     try:
+        value = str(value)
         if kind == "bp":
             s, d = (int(x) for x in value.split("/"))
             return "high" if s >= 160 or d >= 100 else "normal"
         g = float(value)
         return "low" if g < 70 else "high" if g > 250 else "normal"
-    except ValueError:
+    except (ValueError, AttributeError, TypeError):
         return "normal"
 
 

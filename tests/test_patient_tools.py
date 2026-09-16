@@ -30,3 +30,7 @@ def test_escalate_writes_queue(data_dir, log_dir):
 
 def test_next_checkin(data_dir, log_dir):
     assert p.next_checkin(patient_id="pt-1001")["next"].endswith("T09:00")
+
+
+def test_log_reading_tolerates_non_string_value(data_dir, log_dir):
+    assert p.log_reading(patient_id="pt-1001", kind="bp", value=184)["status"] == "ok"

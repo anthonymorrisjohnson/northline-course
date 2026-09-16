@@ -60,6 +60,12 @@ def enroll_members(plan_id: str, count: int) -> dict:
     p = next((x for x in plans if x["id"] == plan_id), None)
     if p is None:
         return {"status": "not_found", "message": f"no plan {plan_id}"}
-    p["enrolled"] += int(count)
+    try:
+        count_int = int(count)
+        if count_int <= 0:
+            return {"status": "error", "message": "count must be a whole number"}
+    except (ValueError, TypeError):
+        return {"status": "error", "message": "count must be a whole number"}
+    p["enrolled"] += count_int
     store.save("plans", plans)
     return {"status": "ok", "plan": p["name"], "enrolled": p["enrolled"]}
