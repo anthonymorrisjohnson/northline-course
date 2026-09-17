@@ -14,7 +14,7 @@ You are preparing an attendee's laptop. Do these in order. Stop with a plain-lan
 3. Run `uv run pytest -q` and report the count.
 4. Run `uv run python scripts/check.py --write-mcp`. This rewrites `.mcp.json` with the absolute path to `uv` and absolute paths in place of `${CLAUDE_PROJECT_DIR}`, which headless Claude does not expand on its own.
 5. Run `uv run python scripts/check.py`. If the last line is not READY, show the output and stop. If it says `claude not found`, the user needs to install Claude Code and sign in first; say so plainly and stop.
-6. Tell the user: close Claude Code and reopen it in this folder so it picks up `uv` and the rewritten `.mcp.json`; approve the `northline` server when asked; then run `claude mcp list` and confirm `northline` shows Connected. If it shows "Failed to connect", run step 4 (`uv run python scripts/check.py --write-mcp`) again, restart once more, and re-check. If they declined the server earlier, run `claude mcp reset-project-choices` and restart. If it still fails, report the exact line.
+6. Tell the user: close Claude Code and reopen it in this folder so it picks up `uv` and the rewritten `.mcp.json`; approve the `northline` server when asked; then type `/mcp` and confirm `northline` shows connected. If it shows "Failed to connect", run step 4 (`uv run python scripts/check.py --write-mcp`) again, restart once more, and re-check. If they declined the server earlier, run `claude mcp reset-project-choices` and restart. If it still fails, report the exact line.
 7. Finish with exactly this, filled in:
    READY: <OS>, <python version>, <claude version>, northline tools: patient <n> plan <n>
    Ask them to paste that line into the workshop group chat.
