@@ -111,7 +111,7 @@ Speaker: same contract, same 100,000 patients, two very different lines — and 
 
 - Table: the two front doors, from `docs/01-front-doors.md` — MCP given to the customer vs. a controlled agent you host
 - Rows: who runs the loop, distribution, what you see, guardrails, who pays for tokens, liability, build cost, time to first user, what Prairie saw
-- **Highlighted row — what Prairie saw:** "78% engagement, tenfold readings" vs. "Nothing; they never asked for escalations"
+- **Highlighted row — what Prairie saw:** "78% engagement, tenfold readings, 2,400 flags a week" vs. "Nothing about the wait; no tool reports it"
 
 Speaker: the highlighted row is the whole lesson. The customer saw the outcomes. Nobody showed them the queue, because nobody built a tool that answers that question.
 

@@ -3,6 +3,7 @@ import json, os, re, uuid
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from . import claude_runner, prompt, transcripts
 from northline.tools.calllog import log_dir
@@ -11,6 +12,8 @@ from northline.sim import run as sim_run
 app = FastAPI(title="Northline check-in agent")
 STATIC = Path(__file__).resolve().parent / "static"
 SLIDES = Path(__file__).resolve().parents[2] / "slides" / "present.html"
+FOLLOW = SLIDES.parent / "follow-along.html"
+DECK_IMG = SLIDES.parent / "img"
 SLIDES_SHELL = ('<!doctype html><html lang="en"><head><meta charset="utf-8">'
                 '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
                 '<style>html,body{margin:0}</style></head><body>%s</body></html>')
@@ -18,6 +21,10 @@ SIM_OUT = sim_run.OUT
 run_turn_fn = claude_runner.run_turn
 _claude_sessions: dict[str, str] = {}
 SESSION_RE = re.compile(r"^[0-9a-f]{12}$")
+
+
+if DECK_IMG.exists():
+    app.mount("/img", StaticFiles(directory=DECK_IMG), name="deck-img")   # captures used by /follow
 
 
 class ChatIn(BaseModel):
@@ -35,12 +42,23 @@ def dashboard():
     return FileResponse(STATIC / "dashboard.html")
 
 
+def _deck(path: Path) -> HTMLResponse:
+    """Decks are authored without a document shell, so wrap them here."""
+    if not path.exists():
+        return HTMLResponse("<p>That deck is not part of this folder.</p>", status_code=404)
+    return HTMLResponse(SLIDES_SHELL % path.read_text(encoding="utf-8"))
+
+
 @app.get("/slides")
 def slides():
-    """The presenter deck. It is authored without a document shell, so wrap it here."""
-    if not SLIDES.exists():
-        return HTMLResponse("<p>The presenter deck is not part of this folder.</p>", status_code=404)
-    return HTMLResponse(SLIDES_SHELL % SLIDES.read_text(encoding="utf-8"))
+    """The presenter deck."""
+    return _deck(SLIDES)
+
+
+@app.get("/follow")
+def follow():
+    """The follow-along deck: what each step should look like, for the room and for anyone without a laptop."""
+    return _deck(FOLLOW)
 
 
 @app.get("/api/sim")

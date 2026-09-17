@@ -1,8 +1,9 @@
-"""Export slides/present.html to slides/present.pptx: one full-bleed image per slide, speaker notes attached.
+"""Export a browser deck to PowerPoint: one full-bleed image per slide, speaker notes attached.
 
 Author-only. Needs Google Chrome (or Edge or Chromium) and python-pptx:
 
-    uv run --with python-pptx python scripts/export_deck.py
+    uv run --with python-pptx python scripts/export_deck.py                # slides/present.html
+    uv run --with python-pptx python scripts/export_deck.py follow-along   # slides/follow-along.html
 
 The slides are images, so they look exactly like the browser deck in PowerPoint, Keynote, and
 Google Slides. To change the words, edit slides/present.html and run this again.
@@ -16,8 +17,9 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "slides" / "present.html"
-OUT = ROOT / "slides" / "present.pptx"
+SLIDES_DIR = ROOT / "slides"
+SOURCE = SLIDES_DIR / "present.html"
+OUT = SLIDES_DIR / "present.pptx"
 SHELL = ('<!doctype html><html lang="en"><head><meta charset="utf-8">'
          '<meta name="viewport" content="width=device-width, initial-scale=1">'
          '<style>html,body{margin:0}</style></head><body>%s</body></html>')
@@ -78,22 +80,26 @@ def build(shots: list[Path], meta: list[dict], out: Path) -> Path:
     return out
 
 
-def main(keep: Path | None = None) -> Path:
-    source = SOURCE.read_text(encoding="utf-8")
+def main(deck: str = "present", keep: Path | None = None) -> Path:
+    source_path, out = SLIDES_DIR / f"{deck}.html", SLIDES_DIR / f"{deck}.pptx"
+    source = source_path.read_text(encoding="utf-8")
     meta = slides_meta(source)
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp = Path(tmp)
-        page = tmp / "deck.html"
+    page = SLIDES_DIR / f".export-{deck}.html"      # beside img/ so relative image paths resolve
+    try:
         page.write_text(SHELL % source, encoding="utf-8")
-        shots = render(len(meta), page, tmp, find_browser())
-        build(shots, meta, OUT)
-        if keep:
-            keep.mkdir(parents=True, exist_ok=True)
-            for s in shots:
-                shutil.copy(s, keep / s.name)
-    print(f"wrote {OUT} ({len(meta)} slides)")
-    return OUT
+        with tempfile.TemporaryDirectory() as tmp:
+            shots = render(len(meta), page, Path(tmp), find_browser())
+            build(shots, meta, out)
+            if keep:
+                keep.mkdir(parents=True, exist_ok=True)
+                for s in shots:
+                    shutil.copy(s, keep / s.name)
+    finally:
+        page.unlink(missing_ok=True)
+    print(f"wrote {out} ({len(meta)} slides)")
+    return out
 
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1]) if len(sys.argv) > 1 else None)
+    args = sys.argv[1:]
+    main(args[0] if args else "present", Path(args[1]) if len(args) > 1 else None)

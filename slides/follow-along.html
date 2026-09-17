@@ -1,0 +1,800 @@
+<title>Northline Follow Along</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F2F5F7; --card:#FFFFFF; --ink:#13212C; --muted:#566977; --rule:#CBD5DC;
+  --accent:#0B6E8A; --accent-soft:#D9ECF1; --alert:#B3261E; --alert-soft:#F7DEDB;
+  --inv-bg:#13212C; --inv-ink:#F2F5F7; --inv-muted:#9DB0BD; --inv-accent:#6CC3DB;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D171E; --card:#15232D; --ink:#E6EDF1; --muted:#8DA0AD; --rule:#263742;
+    --accent:#56B6D1; --accent-soft:#12323C; --alert:#F0776C; --alert-soft:#3A1C19;
+    --inv-bg:#060C11; --inv-ink:#E6EDF1; --inv-muted:#8DA0AD; --inv-accent:#6CC3DB;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D171E; --card:#15232D; --ink:#E6EDF1; --muted:#8DA0AD; --rule:#263742;
+  --accent:#56B6D1; --accent-soft:#12323C; --alert:#F0776C; --alert-soft:#3A1C19;
+  --inv-bg:#060C11; --inv-ink:#E6EDF1; --inv-muted:#8DA0AD; --inv-accent:#6CC3DB;
+}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);overflow:hidden}
+*{box-sizing:border-box}
+
+/* ---------- frame and scaling ---------- */
+#deck{height:100%;display:grid;place-items:center;--s:1}
+.unit{display:none}
+.unit.current{display:block}
+.frame{width:calc(1600px * var(--s));height:calc(900px * var(--s));overflow:hidden;position:relative;background:var(--paper)}
+.scaler{width:1600px;height:900px;transform:scale(var(--s));transform-origin:0 0}
+.notes-out{display:none}
+
+/* ---------- slide base ---------- */
+.slide{width:1600px;height:900px;position:relative;padding:86px 112px 128px;display:flex;flex-direction:column;gap:30px;background:var(--paper);color:var(--ink)}
+.slide.invert{background:var(--inv-bg);color:var(--inv-ink)}
+.slide.center{justify-content:center}
+.kicker{font:500 22px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.invert .kicker{color:var(--inv-accent)}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.015em}
+h1{font-size:112px;line-height:.98;font-weight:800}
+h2{font-size:66px;line-height:1.04;font-weight:700}
+h3{font-size:34px;line-height:1.15;font-weight:700}
+.lead{font-size:36px;line-height:1.32;max-width:34em;margin:0}
+.sub{font-size:28px;line-height:1.4;color:var(--muted);margin:0;max-width:40em}
+.invert .sub{color:var(--inv-muted)}
+.spacer{flex:1}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+.frag{visibility:hidden}
+.frag.on{visibility:visible}
+
+/* ---------- footer rail: the 75-minute timeline ---------- */
+.rail{position:absolute;left:112px;right:112px;bottom:44px;display:flex;align-items:center;gap:28px;font:500 19px/1 var(--mono);color:var(--muted)}
+.invert .rail{color:var(--inv-muted)}
+.rail-line{flex:1;display:flex;gap:5px;height:8px}
+.rail-line i{display:block;border-radius:2px;background:var(--rule)}
+.rail-line i.past{background:var(--muted)}
+.rail-line i.on{background:var(--accent)}
+.invert .rail-line i{background:#2A3A46}
+.invert .rail-line i.past{background:var(--inv-muted)}
+.invert .rail-line i.on{background:var(--inv-accent)}
+
+/* ---------- components ---------- */
+.email{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:36px 44px;max-width:1240px;display:flex;flex-direction:column;gap:18px}
+.email .hdr{font:400 21px/1.5 var(--mono);color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:16px}
+.email .hdr b{color:var(--ink);font-weight:500}
+.email p{font-size:29px;line-height:1.42;margin:0}
+.email p.hot{color:var(--alert);font-weight:600}
+
+.cols{display:grid;gap:36px}
+.cols.c2{grid-template-columns:1fr 1fr}
+.cols.c3{grid-template-columns:repeat(3,1fr)}
+.cols.c4{grid-template-columns:repeat(4,1fr)}
+
+.roles{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.role{border-top:1px solid var(--rule);padding-top:18px;font-size:24px;line-height:1.3}
+.role b{display:block;font-family:var(--display);font-size:27px;margin-bottom:6px}
+.role span{color:var(--muted)}
+
+.big{font:800 250px/.85 var(--display);letter-spacing:-.04em;color:var(--accent)}
+.big small{font-size:64px;letter-spacing:0;color:var(--ink);font-weight:700;margin-left:14px}
+
+.door{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:30px 34px;display:flex;flex-direction:column;gap:12px}
+.door .who{font:500 21px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.door p{margin:0;font-size:26px;line-height:1.35}
+.door p.m{color:var(--muted)}
+.layer{grid-column:1 / -1;background:var(--ink);color:var(--paper);border-radius:10px;padding:24px 34px;font:500 26px/1.3 var(--mono);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.layer span{opacity:.72}
+
+ol.lines{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:l}
+ol.lines li{counter-increment:l;display:grid;grid-template-columns:64px 1fr;align-items:baseline;font-size:31px;line-height:1.3;border-bottom:1px solid var(--rule);padding-bottom:14px}
+ol.lines li::before{content:counter(l);font:500 24px/1 var(--mono);color:var(--accent)}
+ol.lines li b{font-weight:600}
+
+.cmd{display:inline-block;font:500 60px/1 var(--mono);background:var(--ink);color:var(--paper);padding:26px 38px;border-radius:10px}
+.cmdrow{display:flex;align-items:center;gap:34px;flex-wrap:wrap}
+.cmdrow .then{font:500 26px/1 var(--mono);color:var(--muted)}
+
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--card)}
+.flow div{padding:26px 22px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:10px;min-height:230px}
+.flow div:last-child{border-right:0}
+.flow b{font-family:var(--display);font-size:32px}
+.flow span{font-size:22px;line-height:1.35;color:var(--muted)}
+.flow em{font:500 19px/1 var(--mono);font-style:normal;letter-spacing:.08em;text-transform:uppercase;margin-top:auto}
+.flow .ai em{color:var(--accent)} .flow .py em{color:var(--muted)} .flow .you em{color:var(--alert)}
+
+.sms{background:var(--card);border:1px solid var(--rule);border-radius:16px 16px 16px 4px;padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.sms time{font:500 17px/1 var(--mono);color:var(--muted);letter-spacing:.04em}
+.sms p{margin:0;font-size:21px;line-height:1.32}
+.sms.agent{border-radius:16px 16px 4px 16px;background:var(--accent-soft);border-color:transparent}
+.sms.hit{border-color:var(--alert);background:var(--alert-soft)}
+.sms.lg p{font-size:34px;line-height:1.3}
+.sms.lg time{font-size:22px}
+.night{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+.rec{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:26px 30px;font:400 23px/1.7 var(--mono)}
+.rec b{color:var(--accent);font-weight:500}
+
+table.tbl{border-collapse:collapse;width:100%;font-size:30px}
+.tbl th{font:500 20px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 18px 16px;border-bottom:2px solid var(--ink)}
+.tbl td{padding:19px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl td.n,.tbl th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tbl tr.gap td{background:var(--alert-soft)}
+.tbl tr.gap td.n:nth-child(2){color:var(--alert);font-weight:600}
+.tbl.sm{font-size:25px}.tbl.sm td{padding:15px 18px}
+
+.props{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.prop{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:8px}
+.prop .c{font:800 58px/1 var(--display);color:var(--accent)}
+.prop .t{font:500 21px/1.25 var(--mono)}
+.prop .d{font-size:21px;line-height:1.3;color:var(--muted)}
+.prop.agent{grid-column:1 / -1;flex-direction:row;align-items:center;gap:30px;background:var(--ink);color:var(--paper);border-color:transparent}
+.prop.agent .t{font-size:30px}.prop.agent .d{color:inherit;opacity:.75;font-size:24px}
+
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.choice{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:30px 34px;display:flex;flex-direction:column;gap:14px}
+.choice b{font-family:var(--display);font-size:36px}
+.choice p{margin:0;font-size:28px;line-height:1.35;color:var(--muted)}
+.choice .def{font:500 22px/1.3 var(--mono);color:var(--accent)}
+
+.versus{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.vs{border-radius:10px;padding:28px 32px;border:1px solid var(--rule);background:var(--card);display:flex;flex-direction:column;gap:8px}
+.vs .thr{font:500 24px/1 var(--mono);color:var(--muted)}
+.vs .res{font:800 54px/1.05 var(--display)}
+.vs p{margin:0;font-size:27px;line-height:1.35;color:var(--muted)}
+.vs.bad{border-color:var(--alert);background:var(--alert-soft)} .vs.bad .res{color:var(--alert)}
+
+ol.steps{margin:0;padding:0;list-style:none;display:grid;gap:22px;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:96px 1fr;align-items:center;font-size:40px;font-family:var(--display);font-weight:700}
+ol.steps li::before{content:counter(s);font:800 72px/1 var(--display);color:var(--accent)}
+ol.steps li span{display:block;font:400 25px/1.35 var(--body);color:var(--muted);margin-top:6px}
+
+ul.push{margin:0;padding:0;list-style:none;display:grid;gap:24px;counter-reset:q}
+ul.push li{counter-increment:q;display:grid;grid-template-columns:64px 1fr;align-items:baseline;font-size:35px;line-height:1.3;max-width:38em}
+ul.push li::before{content:counter(q);font:500 26px/1 var(--mono);color:var(--accent)}
+ul.push li.hot{color:var(--alert)}
+ul.push li.hot::before{color:var(--alert)}
+
+ul.themes{margin:0;padding:0;list-style:none;display:grid;gap:22px}
+ul.themes li{display:grid;gap:6px;max-width:1240px}
+ul.themes li b{font:700 40px/1.12 var(--display);letter-spacing:-.01em}
+ul.themes li span{font-size:25px;line-height:1.35;color:var(--muted)}
+
+/* ---------- presenter and notes ---------- */
+#notesbar{position:fixed;left:0;right:0;bottom:0;max-height:42%;overflow:auto;background:var(--ink);color:var(--paper);padding:18px 24px calc(18px + env(safe-area-inset-bottom,0px));font-size:18px;line-height:1.5;z-index:5}
+#notesbar p,#ppanel .pnotes p,.notes-out p{margin:0 0 .6em}
+#notesbar b,#ppanel .pnotes b,.notes-out b{font:500 .82em/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--inv-accent);margin-right:.5em}
+#toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:15px;z-index:9;max-width:90%}
+#ppanel{display:none}
+body.mode-presenter{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);overflow:hidden}
+body.mode-presenter #deck{place-items:start center;padding:20px}
+body.mode-presenter #ppanel{display:flex;flex-direction:column;gap:16px;padding:20px 24px;background:var(--inv-bg);color:var(--inv-ink);overflow:auto;height:100%}
+#ppanel .clock{font:500 64px/1 var(--mono);font-variant-numeric:tabular-nums}
+#ppanel .pace{font:500 17px/1.4 var(--mono);color:var(--inv-muted)}
+#ppanel .pace.late{color:#F0776C}
+#ppanel .next{font-size:17px;color:var(--inv-muted)} #ppanel .next b{color:var(--inv-ink);font-weight:600}
+#ppanel .pnotes{font-size:21px;line-height:1.5;border-top:1px solid #2A3A46;padding-top:16px}
+#ppanel .pnotes b{color:var(--inv-accent)}
+#ppanel .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#ppanel button{font:500 14px/1 var(--mono);padding:10px 14px;border-radius:6px;border:1px solid #3A4C59;background:transparent;color:var(--inv-ink);cursor:pointer}
+#ppanel button:focus-visible,a:focus-visible{outline:3px solid var(--inv-accent);outline-offset:2px}
+#ppanel .keys{font:400 13px/1.6 var(--mono);color:var(--inv-muted);margin-top:auto}
+
+/* ---------- handout mode on narrow screens ---------- */
+body.mode-list{overflow:auto;height:auto}
+body.mode-list #deck{display:flex;flex-direction:column;gap:28px;height:auto;padding-block:20px;padding-inline:16px;place-items:stretch}
+body.mode-list .unit{display:block}
+body.mode-list .frame{border:1px solid var(--rule);border-radius:6px}
+body.mode-list .notes-out{display:block;font-size:15px;line-height:1.55;color:var(--ink);padding:12px 2px 0}
+body.mode-list .notes-out b{color:var(--accent)}
+body.mode-list .frag{visibility:visible}
+/* still-image export: everything revealed, no key hints */
+body.mode-export .frag{visibility:visible}
+body.mode-export .hint{visibility:hidden}
+@media (prefers-reduced-motion:no-preference){.frag.on{animation:fin .25s ease-out}}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+<style>
+/* ---------- follow-along additions ---------- */
+.split{display:grid;grid-template-columns:36% 1fr;gap:52px;align-items:start;flex:1;min-height:0}
+.split.wide{grid-template-columns:30% 1fr}
+.say{display:flex;flex-direction:column;gap:22px}
+.say h2{font-size:50px;line-height:1.06}
+.step{align-self:flex-start;font:500 20px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--paper);background:var(--accent);padding:10px 16px;border-radius:999px}
+.step.look{background:var(--muted)}
+.pts{margin:0;padding:0;list-style:none;display:grid;gap:16px}
+.pts li{font-size:26px;line-height:1.36}
+.pts li b{font-weight:600}
+.pts li.key{color:var(--alert);font-weight:600}
+.typed{font:500 30px/1 var(--mono);background:var(--ink);color:var(--paper);padding:16px 22px;border-radius:8px;align-self:flex-start}
+.shot{display:flex;justify-content:center}
+.shot img{display:block;max-width:100%;max-height:664px;width:auto;height:auto;border:1px solid var(--rule);border-radius:10px;background:var(--card)}
+.panel{background:#0F1A22;color:#DCE6EC;border-radius:12px;overflow:hidden;font:400 20px/1.5 var(--mono);display:flex;flex-direction:column}
+.panel .bar{font:500 16px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#8FA3B0;padding:14px 22px;border-bottom:1px solid #22323D}
+.panel .body{padding:20px 24px;display:flex;flex-direction:column;gap:12px}
+.panel .in{color:#6CC3DB}
+.panel .in::before{content:"> ";color:#56707F}
+.panel .dim{color:#8FA3B0}
+.panel .ask{color:#FFD58A}
+.panel .bad{color:#FF9A8F;font-weight:500}
+.panel .ok{color:#8FD9A8}
+.panel p{margin:0}
+.panel table{border-collapse:collapse;width:100%;font-size:18px}
+.panel th{font-weight:500;color:#8FA3B0;text-align:left;padding:4px 14px 8px 0;border-bottom:1px solid #22323D}
+.panel td{padding:5px 14px 5px 0;border-bottom:1px solid #1A2831;vertical-align:top}
+.panel td.n,.panel th.n{text-align:right}
+.panel tr.bad td{color:#FF9A8F}
+.panel.sans{font-family:var(--body);font-size:22px;line-height:1.45}
+.pair{display:grid;gap:18px}
+</style>
+
+<main id="deck" aria-live="polite">
+
+<section class="slide invert center" data-seg="0" data-pre="1" data-title="Follow along">
+  <div class="kicker">Northline Care · follow along</div>
+  <h1 style="font-size:104px">What you<br>should see</h1>
+  <p class="lead">Every step of the session: what to type, what comes back, and what it means. You can follow every slide without a laptop.</p>
+  <div class="spacer"></div>
+  <p class="sub mono hint" style="font-size:20px">→ next · ← back · P presenter view · N notes · F full screen</p>
+  <aside class="notes">
+    <p><b>Use</b>Three ways. On the projector during the do-along instead of switching windows. As a handout for anyone without a laptop. As the fallback if the wifi dies: every capture here is real.</p>
+    <p><b>Know</b>Attendees' own screens will differ in wording, because Claude phrases things its own way each time. The tables and numbers will match.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="0" data-pre="1" data-title="Setup: READY">
+  <div class="split">
+    <div class="say">
+      <span class="step">Before we start</span>
+      <h2>Setup ends with one word</h2>
+      <ul class="pts">
+        <li>New project in the Claude desktop app, in an empty folder called <span class="mono">northline</span>.</li>
+        <li>Paste the download line. Close and reopen the project.</li>
+        <li>Type the command. Stop when you see <b>READY</b>.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">Claude Code · northline</div>
+      <div class="body">
+        <p class="in">/northline-setup</p>
+        <p class="dim">python 3.13 &nbsp;·&nbsp; mcp ok</p>
+        <p>tools patient: 4<br>tools plan: 4<br>tools triage: 0</p>
+        <p class="ok">READY</p>
+        <p class="dim">Check-in agent + dashboard: http://127.0.0.1:8765 and /dashboard</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>Triage shows zero tools on purpose. Those tools only appear once a triage agent is deployed, which you will do in about forty minutes.</p>
+    <p><b>If stuck</b>No READY means a person to help now, not at minute 25.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="The company on one screen">
+  <div class="split wide">
+    <div class="say">
+      <span class="step look">Look · the dashboard</span>
+      <h2>The company on one screen</h2>
+      <ul class="pts">
+        <li>Last quarter: <b>2,400</b> escalations a week, <b>31 hours</b> for a nurse to respond, <b>3</b> resignations.</li>
+        <li>Satisfaction is at an all-time high. Revenue is flat.</li>
+        <li class="key">Next quarter, with no change: 84 hours and 19 nurses.</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="img/dash-before-table.png" alt="Operations dashboard table: before the agent, last quarter, next quarter, and two Prairie projections"></div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>This is Exhibit B, live. Every number is true and none is labelled as a problem. A team that reads only the board update never looks at this table.</p>
+    <p><b>Point at</b>The Next quarter column. The company is already sliding before anyone signs anything.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="Text the agent">
+  <div class="split">
+    <div class="say">
+      <span class="step look">Try · the check-in page</span>
+      <h2>The agent that works</h2>
+      <ul class="pts">
+        <li>It logs the reading and escalates it as <b>urgent</b>.</li>
+        <li>It tells the patient to call 911 if things get worse.</li>
+        <li class="key">It quotes the real nurse wait: about 31 hours.</li>
+        <li>Asked for a refill, it says plainly that it cannot do that yet. Every word is logged.</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="img/checkin.png" alt="A text conversation with the Northline check-in agent about a 184 over 112 reading and a refill request"></div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>This is message 12 from the night of texts, sent for real. The agent did everything right. Hold on to that 31 hours.</p>
+    <p><b>Say</b>The refill went nowhere useful. Remember that too; the loop will find it.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="The other front door">
+  <div class="split">
+    <div class="say">
+      <span class="step look">Watch · minute 8</span>
+      <h2>The customer's agent, our tools</h2>
+      <ul class="pts">
+        <li>Prairie's analyst asks <b>her own</b> assistant. It calls Northline's tools.</li>
+        <li>She sees engagement, outcomes, and 2,400 flags a week. It reads as the agent working.</li>
+        <li class="key">Nothing we handed her says those flags wait 31 hours.</li>
+        <li>Northline sees five tool calls. Not one word of her conversation.</li>
+      </ul>
+    </div>
+    <div class="pair">
+      <div class="panel sans">
+        <div class="bar">What Prairie's analyst sees</div>
+        <div class="body">
+          <p>2,000 enrolled members. Weekly check-in response rate is <b>78%</b>, with roughly 6,000 readings logged per month.</p>
+          <p>58% of hypertensive members have BP under 140/90. Patient satisfaction sits at <b>71.9</b>. The agent surfaced <b>2,400</b> clinical escalation flags per week.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="bar">What Northline sees</div>
+        <div class="body" style="font-size:18px;gap:4px">
+          <p>member_engagement(plan-prairie) <span class="ok">ok</span></p>
+          <p>outcome_evidence(bp_control) <span class="ok">ok</span></p>
+          <p>outcome_evidence(readings) <span class="ok">ok</span></p>
+          <p>outcome_evidence(satisfaction) <span class="ok">ok</span></p>
+          <p>outcome_evidence(escalations) <span class="ok">ok</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>Same tools, two front doors. With patients, we run the loop and see every word. With Prairie, she runs the loop and we see function names.</p>
+    <p><b>Land</b>What your customer can see is exactly what you handed them, and no more. We never handed her a way to ask how long a flag waits.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="Step 1: /pm-run">
+  <div class="split">
+    <div class="say">
+      <span class="step">Step 1 · type it</span>
+      <h2>Read a quarter of logs</h2>
+      <span class="typed">/pm-run</span>
+      <ul class="pts">
+        <li>It reads <b>160</b> conversations and <b>31,215</b> rows of the nurse queue.</li>
+        <li>Judgment goes to Claude: what did they want, did they get it, what was missing?</li>
+        <li>Arithmetic goes to plain code: counts, medians, who waited.</li>
+        <li>About five minutes. The first half is reading.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">Claude Code · northline</div>
+      <div class="body">
+        <p class="in">/pm-run</p>
+        <p>160 items to classify. This takes about two and a half minutes.</p>
+        <p class="dim">classifying 160 items<br>wrote northline/pm/out/classified.jsonl<br>8 candidates; median response 29.6h<br>wrote northline/pm/out/diagnosis.md<br>wrote 4 tool proposals and agent-triage.md</p>
+        <p>Here are the board's numbers next to what the logs say.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>This is what a product manager does with support tickets. It just reads all of them, every week.</p>
+    <p><b>Know</b>Wording on each laptop differs. The file names and numbers match.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="Result: board vs logs">
+  <div class="split wide">
+    <div class="say">
+      <span class="step">Step 1 · result</span>
+      <h2>The board was not wrong</h2>
+      <ul class="pts">
+        <li>Where the board has a number, the logs agree.</li>
+        <li class="key">Urgent cases wait 29 hours. The same as routine ones.</li>
+        <li class="key">Four in ten things a nurse touches are not clinical.</li>
+        <li>Neither number was ever reported.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">northline/pm/out/report.md</div>
+      <div class="body">
+        <table>
+          <thead><tr><th>metric</th><th class="n">Board deck</th><th class="n">From logs</th></tr></thead>
+          <tbody>
+            <tr><td>Escalations per week</td><td class="n">2400</td><td class="n">2401</td></tr>
+            <tr><td>Median nurse response (h)</td><td class="n">31</td><td class="n">29.6 (p90 72.9)</td></tr>
+            <tr class="bad"><td>Urgent escalations, median response (h)</td><td class="n">not reported</td><td class="n">29.1</td></tr>
+            <tr><td>After-hours share</td><td class="n">0.46</td><td class="n">0.46</td></tr>
+            <tr class="bad"><td>Non-clinical share of the nurse queue</td><td class="n">not reported</td><td class="n">0.4</td></tr>
+            <tr><td>Patients inactive after an escalation</td><td class="n">340</td><td class="n">342</td></tr>
+          </tbody>
+        </table>
+        <p class="dim">Unanswered escalations: 344, from 342 patients.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>Read the board column first. Then the two red rows. Do not draw the conclusion; the tool is about to ask them to.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="It stops and asks you">
+  <div class="split">
+    <div class="say">
+      <span class="step">Step 1 · your turn</span>
+      <h2>It stops and asks you</h2>
+      <ul class="pts">
+        <li>The loop has a diagnosis ready. It will not show it yet.</li>
+        <li><b>Answer in one sentence.</b> No laptop? Write it on your recommendation sheet, line 2.</li>
+        <li>There is no grade. The point is to commit before you see its answer.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">Claude Code · northline</div>
+      <div class="body">
+        <p class="ask" style="font-size:30px;line-height:1.3">In one sentence, what is the problem the board doesn't see?</p>
+        <p class="in">The nurses can't keep up with what the agent finds, and signing makes it 2.5 times worse.</p>
+        <p class="dim">Noted. Here is the diagnosis.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Room</b>Take three answers out loud before Screen types one. Call on a team whose line 2 was blank.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="The diagnosis">
+  <div class="split wide">
+    <div class="say">
+      <span class="step">Step 1 · result</span>
+      <h2>The diagnosis, in plain words</h2>
+      <ul class="pts">
+        <li>It names <b>people and capacity</b>, not technology.</li>
+        <li>It gives one metric to watch.</li>
+        <li>It does not recommend a fix. That comes next.</li>
+      </ul>
+    </div>
+    <div class="panel sans">
+      <div class="bar">northline/pm/out/diagnosis.md</div>
+      <div class="body" style="gap:16px">
+        <p style="font-size:26px;line-height:1.3;color:#fff"><b>Northline is about to sign a contract that will make its nurses the bottleneck at scale.</b> The system works today only because the patient load is still small enough to hide the problem.</p>
+        <p><b>The bottleneck.</b> Twenty-two nurses are fielding roughly 109 escalations each per week, and nearly half of that workload does not require a nurse's clinical judgment. The constraint is not the AI agent, not the software, and not the patients.</p>
+        <p><b>The one metric to watch.</b> Median nurse response time for urgent escalations: currently 29.1 hours and already indistinguishable from the overall median.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>This is the pocket memo from the case, written by the loop from raw logs instead of by an exhausted head of clinical operations.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="The proposals">
+  <div class="split">
+    <div class="say">
+      <span class="step">Step 1 · your turn</span>
+      <h2>What should we build?</h2>
+      <ul class="pts">
+        <li>Four <b>tools</b>, from what people asked for and could not get, with their own words as evidence.</li>
+        <li>One <b>agent</b>, because the queue numbers call for it.</li>
+        <li>Pick a tool and it pushes back once: which metric does that move?</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">northline/pm/out/proposals/</div>
+      <div class="body">
+        <table>
+          <thead><tr><th>proposal</th><th class="n">asked</th><th>in their words</th></tr></thead>
+          <tbody>
+            <tr><td>tool-insurance_question</td><td class="n">21</td><td class="dim">"help with a prior auth?"</td></tr>
+            <tr><td>tool-pharmacy_logistics</td><td class="n">16</td><td class="dim">"the pharmacy is 45 miles away"</td></tr>
+            <tr><td>tool-request_refill</td><td class="n">14</td><td class="dim">"can someone call it in?"</td></tr>
+            <tr><td>tool-lookup_member_by_name</td><td class="n">39</td><td class="dim">Prairie's analyst, guessing ids</td></tr>
+            <tr><td class="ask">agent-triage</td><td class="n ask">queue</td><td class="ask">tier, route, draft replies</td></tr>
+          </tbody>
+        </table>
+        <p class="ask">Which proposal do you want to pursue, and why?</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>Every one of these is real demand. Only one of them changes the two red rows.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="Step 2: /deploy triage">
+  <div class="split">
+    <div class="say">
+      <span class="step">Step 2 · type it</span>
+      <h2>Four decisions first</h2>
+      <span class="typed">/deploy triage</span>
+      <ul class="pts">
+        <li>It will not write a line until you answer all four.</li>
+        <li>Each has Northline's default. Taking it is a decision too, and is recorded as one.</li>
+        <li>No laptop? Vote with the room.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">Claude Code · northline</div>
+      <div class="body" style="gap:14px">
+        <p class="in">/deploy triage</p>
+        <p><span class="ask">1. What counts as urgent?</span><br><span class="dim">Default: BP at or above 180/110, glucose under 70 or over 300.</span></p>
+        <p><span class="ask">2. Messages that are not clinical?</span><br><span class="dim">admin (default) · auto_reply · hold_for_morning</span></p>
+        <p><span class="ask">3. Urgent at 1:48 am?</span><br><span class="dim">tell_911_and_page_on_call (default) · tell_911_only · queue_for_morning</span></p>
+        <p><span class="ask">4. Honour "don't tell the doctor"?</span><br><span class="dim">Default: no.</span></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Room</b>Vote each one. Linger on the first. Someone will argue a higher bar saves nurse time; if the room agrees, let them win.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="The test at the defaults">
+  <div class="split wide">
+    <div class="say">
+      <span class="step">Step 2 · result</span>
+      <h2>It is tested before it goes live</h2>
+      <ul class="pts">
+        <li>Fifteen real texts from one night, scored against a nurse's answer key.</li>
+        <li>At Northline's defaults: <b>15 of 15</b>. All four traps handled.</li>
+        <li>About one minute.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">acceptance test · urgent at 180/110</div>
+      <div class="body" style="gap:8px">
+        <table style="font-size:16px">
+          <thead><tr><th class="n">#</th><th>nurse's key</th><th>triage</th><th>route</th><th></th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td>clinical</td><td>clinical</td><td>nurse_routine</td><td></td></tr>
+            <tr><td class="n">2</td><td>not clinical</td><td>not clinical</td><td>admin</td><td></td></tr>
+            <tr><td class="n">3</td><td>not clinical</td><td>not clinical</td><td>admin</td><td></td></tr>
+            <tr><td class="n">4</td><td>urgent</td><td>urgent</td><td>nurse_urgent</td><td></td></tr>
+            <tr><td class="n">5</td><td>urgent</td><td>urgent</td><td>nurse_urgent</td><td class="dim">trap</td></tr>
+            <tr><td class="n">6</td><td>clinical</td><td>clinical</td><td>nurse_routine</td><td></td></tr>
+            <tr><td class="n">7</td><td>clinical</td><td>clinical</td><td>nurse_routine</td><td></td></tr>
+            <tr><td class="n">8</td><td>not clinical</td><td>not clinical</td><td>admin</td><td></td></tr>
+            <tr><td class="n">9</td><td>clinical</td><td>clinical</td><td>nurse_routine</td><td class="dim">trap</td></tr>
+            <tr><td class="n">10</td><td>urgent</td><td>urgent</td><td>nurse_urgent</td><td></td></tr>
+            <tr><td class="n">11</td><td>not clinical</td><td>not clinical</td><td>admin</td><td></td></tr>
+            <tr><td class="n">12</td><td>urgent</td><td>urgent</td><td>nurse_urgent</td><td class="dim">trap</td></tr>
+            <tr><td class="n">13</td><td>clinical</td><td>clinical</td><td>nurse_routine</td><td class="dim">trap</td></tr>
+            <tr><td class="n">14</td><td>not clinical</td><td>not clinical</td><td>admin</td><td></td></tr>
+            <tr><td class="n">15</td><td>not clinical</td><td>not clinical</td><td>admin</td><td></td></tr>
+          </tbody>
+        </table>
+        <p class="ok" style="font-size:17px">Accuracy 100%. Urgent recall 1.0. Missed urgent: none. Non-clinical routed away from nurses: 100%.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>The messages are Exhibit E on your paper. The traps are 5, 9, 12, and 13: already had juice, doesn't hurt, probably nothing, don't tell the doctor.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="The same test at 190 over 115">
+  <div class="split">
+    <div class="say">
+      <span class="step">Step 2 · the trap</span>
+      <h2>Raise the bar, and watch</h2>
+      <ul class="pts">
+        <li>A cost-minded team sets urgent at <b>190/115</b> to save nurse time.</li>
+        <li class="key">Message 12 is 184/112 with a headache. It is now routine.</li>
+        <li>A nurse reads that as a possible stroke. "Probably nothing" is the trap.</li>
+        <li>You saw the miss before any patient met it.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">acceptance test · urgent at 190/115</div>
+      <div class="body">
+        <table>
+          <thead><tr><th class="n">#</th><th>nurse's key</th><th>triage</th><th>route</th><th></th></tr></thead>
+          <tbody>
+            <tr><td class="n">4</td><td>urgent</td><td>urgent</td><td>nurse_urgent</td><td></td></tr>
+            <tr><td class="n">5</td><td>urgent</td><td>urgent</td><td>nurse_urgent</td><td class="dim">trap</td></tr>
+            <tr><td class="n">10</td><td>urgent</td><td>urgent</td><td>nurse_urgent</td><td></td></tr>
+            <tr class="bad"><td class="n">12</td><td>urgent</td><td>clinical, not urgent</td><td>nurse_routine</td><td>MISS trap</td></tr>
+          </tbody>
+        </table>
+        <p class="dim">the other eleven rows match</p>
+        <p class="bad">Accuracy 93%. Urgent recall 0.75. Missed urgent: [12].</p>
+        <p class="ask">Do you deploy it as is, or change a decision and re-test?</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Ask</b>You just made a clinical decision with a parameter. Who signs off on that number in your company?</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3" data-title="The company after">
+  <div class="split wide">
+    <div class="say">
+      <span class="step">Step 2 · result</span>
+      <h2>The company changes</h2>
+      <ul class="pts">
+        <li>Deploying redraws the dashboard within seconds.</li>
+        <li>Next quarter's nurse response: <b>84 hours to 4</b>. Overtime back to baseline. Nobody resigns.</li>
+        <li>Your numbers come from your four decisions. Set the bar too high and a red tile counts the urgent cases you miss.</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="img/dash-after-table.png" alt="Operations dashboard table after deploying triage: next quarter nurse response 4 hours, Prairie 42 hours against 336 without"></div>
+  </div>
+  <aside class="notes">
+    <p><b>Point at</b>Deployments live, top right: triage since week 40. Then the Next quarter column, row by row.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="4" data-title="Sign Prairie, with and without">
+  <div class="split wide">
+    <div class="say">
+      <span class="step look">Look · tick Sign Prairie</span>
+      <h2>Now, do you sign?</h2>
+      <ul class="pts">
+        <li>The dotted line is where triage went live. Response, overtime, and lost patients all fall at once.</li>
+        <li class="key">Prairie without it: the two-week cap, with 19 nurses left.</li>
+        <li>Prairie with it: about <b>42 hours</b>. Better, and still not good. No path is clean.</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="img/dash-after-trends.png" alt="Trend charts showing nurse response, overtime and inactive patients dropping when triage goes live, and the Prairie projection with and without new deployments"></div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>This is the board question with evidence behind it. Forty-two hours is the honest number: triage buys time, it does not buy nurses, and the flat fee still does not pay for the care the agent uncovered.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="5" data-title="What you just did">
+  <div class="kicker">What you just did</div>
+  <ul class="themes">
+    <li><b>You watched an agent work, and saw what it cost the people behind it.</b><span>300 escalations a week became 2,400. Four hours became 31.</span></li>
+    <li><b>You found it in the logs, not the dashboard.</b><span>Two numbers nobody reported: urgent waits as long as routine, and 40% of the queue is not clinical.</span></li>
+    <li><b>You built the fix from four decisions, and tested it first.</b><span>Fifteen texts, a nurse's key, and one miss you could point at.</span></li>
+    <li><b>You saw that who runs the loop decides who can see the problem.</b><span>Prairie saw 2,400 flags. She never saw the wait.</span></li>
+  </ul>
+  <div class="spacer"></div>
+  <p class="sub mono">Next: /new-experience · /brief · github.com/anthonymorrisjohnson/northline-course</p>
+  <aside class="notes">
+    <p><b>Close</b>Where is this bottleneck hiding in your market? When your AI works, whose queue grows, and who is watching that number this week?</p>
+  </aside>
+</section>
+
+</main>
+
+<aside id="ppanel" aria-label="Presenter panel">
+  <div class="row"><span class="clock" id="pclock">00:00</span><button id="pstart" type="button">Start</button><button id="preset" type="button">Reset</button></div>
+  <div class="pace" id="ppace">Timer not started.</div>
+  <div class="next" id="pnext"></div>
+  <div class="pnotes" id="pnotes"></div>
+  <div class="keys">→ next · ← back · Home first · End last · this window drives the audience window</div>
+</aside>
+<div id="notesbar" hidden></div>
+<div id="toast" hidden></div>
+
+<script>
+(function(){
+  var SEGS=[["Open",0,3],["Read the exhibits",3,15],["Recommend",15,25],["Do-along",25,42],["Board meeting",42,50],["Debrief",50,62],["Close",62,75]];
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(deck.querySelectorAll('section.slide'));
+  var presenter=/^#p/.test(location.hash);
+  if(/[?&]export=1/.test(location.search)) document.body.classList.add('mode-export');
+  var units=[], notes=[];
+
+  slides.forEach(function(s,idx){
+    var unit=document.createElement('div'); unit.className='unit';
+    var frame=document.createElement('div'); frame.className='frame';
+    var scaler=document.createElement('div'); scaler.className='scaler';
+    s.parentNode.insertBefore(unit,s); unit.appendChild(frame); frame.appendChild(scaler); scaler.appendChild(s);
+    var n=s.querySelector('aside.notes'); var out=document.createElement('div'); out.className='notes-out';
+    if(n){ out.innerHTML=n.innerHTML; n.remove(); }
+    unit.appendChild(out); units.push(unit); notes.push(out.innerHTML);
+    var pre=!!s.dataset.pre, seg=pre?-1:+s.dataset.seg, g=pre?['Before we start',0,0]:SEGS[seg];
+    var rail=document.createElement('footer'); rail.className='rail';
+    rail.innerHTML='<span>'+(pre?g[0]:(g[1]+'–'+g[2]+' min · '+g[0]))+'</span><span class="rail-line">'+
+      SEGS.map(function(x,k){return '<i style="flex:'+(x[2]-x[1])+'" class="'+(k===seg?'on':(k<seg?'past':''))+'"></i>';}).join('')+
+      '</span><span class="num">'+(idx+1)+' / '+slides.length+'</span>';
+    s.appendChild(rail);
+  });
+
+  var state={i:0,f:0};
+  function parseHash(){ var m=location.hash.match(/(\d+)/); return m?Math.min(slides.length,Math.max(1,+m[1]))-1:0; }
+  function frags(i){ return [].slice.call(slides[i].querySelectorAll('.frag')); }
+
+  function mode(){
+    var list=!presenter && window.innerWidth<720;
+    document.body.classList.toggle('mode-list',list);
+    document.body.classList.toggle('mode-presenter',presenter);
+    return list?'list':(presenter?'presenter':'deck');
+  }
+  function fit(){
+    var m=mode(), w, h;
+    if(m==='list'){ w=deck.clientWidth-32; deck.style.setProperty('--s',Math.max(.1,w/1600)); return; }
+    if(m==='presenter'){ w=deck.clientWidth-40; h=deck.clientHeight-40; }
+    else { w=window.innerWidth; h=window.innerHeight; }
+    deck.style.setProperty('--s',Math.max(.1,Math.min(w/1600,h/900)));
+  }
+
+  function show(broadcast){
+    units.forEach(function(u,k){u.classList.toggle('current',k===state.i);});
+    frags(state.i).forEach(function(el,k){el.classList.toggle('on',k<state.f);});
+    var h=(presenter?'#p/':'#/')+(state.i+1);
+    if(location.hash!==h){ try{history.replaceState(null,'',h);}catch(e){location.hash=h;} }
+    var nb=document.getElementById('notesbar'); if(!nb.hidden) nb.innerHTML=notes[state.i];
+    if(presenter){
+      document.getElementById('pnotes').innerHTML=notes[state.i]||'';
+      var nx=slides[state.i+1];
+      document.getElementById('pnext').innerHTML= nx?('Next: <b>'+nx.dataset.title+'</b>'):'Last slide.';
+      pace();
+    }
+    if(broadcast) send();
+  }
+  function next(){ var n=frags(state.i).length; if(state.f<n){state.f++;} else if(state.i<slides.length-1){state.i++;state.f=0;} show(true); }
+  function prev(){ if(state.f>0){state.f--;} else if(state.i>0){state.i--;state.f=frags(state.i).length;} show(true); }
+  function go(i){ state.i=Math.min(slides.length-1,Math.max(0,i)); state.f=0; show(true); }
+
+  /* ---- sync between the audience window and the presenter window ---- */
+  var bc=null; try{ if('BroadcastChannel' in window){ bc=new BroadcastChannel('northline-follow'); bc.onmessage=function(e){recv(e.data);}; } }catch(e){}
+  var child=null;
+  function send(){
+    var msg={t:'nl',i:state.i,f:state.f};
+    try{ if(bc) bc.postMessage(msg); }catch(e){}
+    try{ localStorage.setItem('nl-follow-state',JSON.stringify(msg)+'|'+Date.now()); }catch(e){}
+    try{ if(child&&!child.closed) child.postMessage(msg,'*'); if(window.opener) window.opener.postMessage(msg,'*'); }catch(e){}
+  }
+  function recv(d){ if(!d||d.t!=='nl') return; if(d.i===state.i&&d.f===state.f) return; state.i=d.i; state.f=d.f; show(false); }
+  window.addEventListener('message',function(e){recv(e.data);});
+  window.addEventListener('storage',function(e){ if(e.key==='nl-follow-state'&&e.newValue){ try{recv(JSON.parse(e.newValue.split('|')[0]));}catch(x){} } if(e.key==='nl-deck-t0') pace(); });
+
+  function toast(t){ var el=document.getElementById('toast'); el.textContent=t; el.hidden=false; clearTimeout(toast.h); toast.h=setTimeout(function(){el.hidden=true;},6000); }
+  function openPresenter(){
+    var url=location.href.split('#')[0]+'#p/'+(state.i+1);
+    try{ child=window.open(url,'northline-follow-presenter','width=1280,height=800'); }catch(e){ child=null; }
+    if(!child){ toggleNotes(true); toast('This browser blocked the presenter window. Notes are shown here instead. Or open this page in a second window and add #p to the address.'); }
+  }
+  function toggleNotes(force){ var nb=document.getElementById('notesbar'); nb.hidden=force?false:!nb.hidden; if(!nb.hidden) nb.innerHTML=notes[state.i]; }
+
+  /* ---- clock and pace, shared through storage so both windows agree ---- */
+  function t0(){ try{ return +localStorage.getItem('nl-deck-t0')||0; }catch(e){ return t0.mem||0; } }
+  function setT0(v){ t0.mem=v; try{ if(v) localStorage.setItem('nl-deck-t0',String(v)); else localStorage.removeItem('nl-deck-t0'); }catch(e){} pace(); }
+  function mmss(sec){ var s=Math.max(0,Math.round(sec)); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+  function pace(){
+    if(!presenter) return;
+    var start=t0(), clock=document.getElementById('pclock'), p=document.getElementById('ppace');
+    var g=SEGS[+slides[state.i].dataset.seg];
+    if(!start){ clock.textContent='00:00'; p.className='pace'; p.textContent='Timer not started. This slide belongs to minutes '+g[1]+' to '+g[2]+' ('+g[0]+').'; return; }
+    var el=(Date.now()-start)/1000, min=el/60; clock.textContent=mmss(el);
+    if(min<g[1]){ p.className='pace'; p.textContent='Ahead. '+g[0]+' starts at '+g[1]+':00.'; }
+    else if(min<=g[2]){ p.className='pace'; p.textContent='On time. '+g[0]+' ends at '+g[2]+':00, in '+mmss(g[2]*60-el)+'.'; }
+    else { p.className='pace late'; p.textContent='Behind by '+mmss(el-g[2]*60)+'. '+g[0]+' ended at '+g[2]+':00.'; }
+  }
+  setInterval(pace,1000);
+  document.getElementById('pstart').addEventListener('click',function(){ if(!t0()) setT0(Date.now()); });
+  document.getElementById('preset').addEventListener('click',function(){ setT0(0); });
+
+  /* ---- input ---- */
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown'||k==='Enter'){ e.preventDefault(); next(); }
+    else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){ e.preventDefault(); prev(); }
+    else if(k==='Home'){ go(0); } else if(k==='End'){ go(slides.length-1); }
+    else if(k==='f'||k==='F'){ var d=document.documentElement; try{ if(document.fullscreenElement) document.exitFullscreen(); else if(d.requestFullscreen) d.requestFullscreen(); }catch(x){} }
+    else if((k==='p'||k==='P')&&!presenter){ openPresenter(); }
+    else if((k==='n'||k==='N')&&!presenter){ toggleNotes(); }
+  });
+  deck.addEventListener('click',function(e){
+    if(document.body.classList.contains('mode-list')) return;
+    if(e.target.closest('a,button')) return;
+    if(e.clientX < window.innerWidth*0.3) prev(); else next();
+  });
+  var tx=null;
+  deck.addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; },{passive:true});
+  deck.addEventListener('touchend',function(e){ if(tx===null||document.body.classList.contains('mode-list')) return; var dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>50){ if(dx<0) next(); else prev(); } tx=null; },{passive:true});
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',function(){ if(/^#p/.test(location.hash)!==presenter){ location.reload(); return; } var i=parseHash(); if(i!==state.i){ state.i=i; state.f=0; show(true);} });
+
+  function start(data){
+    state.i=(data&&typeof data.i==='number')?data.i:parseHash(); state.f=(data&&data.f)||0;
+    fit(); show(false);
+  }
+  try{ if(window.claude&&window.claude.hot&&window.claude.hot.snapshot) window.claude.hot.snapshot(function(){return {i:state.i,f:state.f};}); }catch(e){}
+  if(window.claude&&window.claude.hot&&window.claude.hot.ready) window.claude.hot.ready(start); else start((window.claude&&window.claude.hot&&window.claude.hot.data)||{});
+})();
+</script>
