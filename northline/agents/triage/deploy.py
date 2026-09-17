@@ -15,7 +15,13 @@ def register(name: str, effects: dict, live_from_week: int = 40) -> list[dict]:
 
 
 def main() -> None:
-    s = json.loads((HERE / "out" / "acceptance.json").read_text(encoding="utf-8"))
+    path = HERE / "out" / "acceptance.json"
+    if not path.exists():
+        # The acceptance run did not complete (offline, rate-limited). Fall back to the committed
+        # run with Northline's default decisions so the dashboard still has a Next quarter column.
+        path = HERE / "fallback" / "acceptance.json"
+        print("no acceptance run found; using the committed default-decision run from fallback/")
+    s = json.loads(path.read_text(encoding="utf-8"))
     deps = register("triage", s["effects"])
     print(f"triage live; deployments: {[d['name'] for d in deps]}; effects {s['effects']}")
 

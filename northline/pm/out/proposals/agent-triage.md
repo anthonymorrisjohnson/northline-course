@@ -1,16 +1,16 @@
 # Deployment proposal: `triage`
 
-**Kind:** agent  **Placement:** Sits in the escalation path immediately after the check-in agent emits an escalation event and before any message enters the nurse queue. The check-in agent calls `route_message` (or fires a queue event); the triage agent intercepts every such call, reads the backlog with `pending_messages`, scores each item with `tier_message`, and then calls `route_message` to place the item in one of three destinations: (1) urgent nurse queue — paged immediately, (2) standard nurse queue — normal FIFO order, or (3) self-service deflection — an automated reply sent back to the patient with no nurse touch required. The nurse queue only ever sees items that have already been scored and routed; the raw escalation bus is invisible to nurses.
+**Kind:** agent  **Placement:** Triage sits between the check-in agent's `escalate_to_nurse` call and the nurse queue. The check-in agent still escalates exactly as it does today, placing the message in the nurse queue; triage does not change that step. Triage then reads pending items from that same queue with `pending_messages`, assigns a tier with `tier_message`, and forwards each item with `route_message`. Nothing reaches a nurse, admin, or an auto-reply without passing through triage's tiering and routing step.
 
 ## Why
-Reduce nurse cognitive load and queue latency by doing three jobs the nurses currently do manually at inbox time. First, separate the 40 % non-clinical volume (refill reminders, appointment links, billing redirects) before it hits the nurse queue at all, deflecting those items to automated replies or the appropriate non-clinical channel. Second, sort the remaining clinical items by acuity so the 344 cases sitting unanswered beyond 24 h are not buried under routine follow-ups — urgent items surface to the top regardless of arrival order. Third, provide a structured reason-for-routing on every item so the nurse who opens a case already knows the triage rationale and does not have to re-read the original thread to decide priority.
+Every escalation from check-in currently lands in one undifferentiated nurse queue, so urgent clinical messages wait behind routine refill requests and non-clinical questions (e.g., billing, scheduling, portal access). Triage reads each pending message, assigns exactly one tier — `urgent_clinical`, `non_urgent_clinical`, or `non_clinical` — and routes it accordingly: `urgent_clinical` to `nurse_urgent`, `non_urgent_clinical` (including prescription refills) to `nurse_routine`, and `non_clinical` to either `admin` or `auto_reply`, always with a draft reply attached for the nurse to review before it goes out. The goal is to get urgent items in front of a nurse faster and get non-clinical volume out of the clinical queue entirely, without ever having triage reply to a patient unsupervised.
 
 Evidence from the queue log: 2401 escalations a week, median nurse response 29.6 hours (p90 72.9), 40% of the nurse queue is non-clinical, 344 escalations unanswered over 24 hours from 342 patients.
 
 ## Tools it needs
-- `pending_messages — reads the full escalation backlog so triage can process items in acuity order rather than arrival order; also used to detect items approaching the 24 h unanswered threshold`
-- `tier_message — scores a single message on a clinical acuity scale (e.g. 1 = deflect / non-clinical, 2 = standard nurse queue, 3 = urgent / page now) and returns a structured rationale that travels with the routed item`
-- `route_message — dispatches the scored item to its destination channel (deflect, standard queue, urgent queue) and stamps the item with tier, rationale, and triage timestamp for audit`
+- `pending_messages`
+- `tier_message`
+- `route_message`
 
 ## Decisions a human must make before it goes live
 1. Urgent thresholds: the systolic and diastolic blood pressure, the low and high glucose, and the symptom words that are always urgent.
@@ -19,33 +19,18 @@ Evidence from the queue log: 2401 escalations a week, median nurse response 29.6
 4. Consent: whether 'don't tell the doctor' is honoured, and what the patient is told either way.
 
 ## Acceptance test
-Run the fifteen night-text fixtures from Exhibit E through the triage agent in a sandboxed replay harness. Score each output against the nurse-annotated key using three pass/fail criteria per item.
+Run the fifteen night texts in Exhibit E through the rendered prompt and score each one against the nurse's key (`northline/agents/triage/nurse_key.json`). Two kinds of failure are marked: **MISS**, the tier does not match the key; **MISROUTED**, the tier matched but an urgent message was not sent to `nurse_urgent`. The run reports accuracy across all fifteen, urgent recall (the share of the key's urgent messages the agent kept urgent), the missed-urgent list, and the share of non-clinical messages routed away from nurses.
 
-Criterion 1 — Tier match: the agent's tier assignment (deflect / standard / urgent) must match the nurse key exactly. A downgrade on any item the nurse marked urgent is an automatic overall failure regardless of aggregate score.
-
-Criterion 2 — Rationale coherence: a second nurse (blinded to which items are agent-generated) rates each rationale as adequate or inadequate for clinical handoff. Adequate means the nurse could act without re-reading the original thread.
-
-Criterion 3 — Route destination: the `route_message` call must target the correct channel for the assigned tier with no mismatches between tier and destination.
-
-Pass threshold: 15/15 on Tier match with zero urgent downgrades; ≥13/15 on Rationale coherence; 15/15 on Route destination. Any failure halts deployment. A partial pass (e.g. rationale misses on non-urgent items only) may proceed to a monitored shadow deployment where triage routes are logged but nurses still work from the unmodified queue, with a re-score after 500 live items before go-live.
+**The test does not block the deployment.** Its three numbers (urgent recall, non-clinical share routed away, and the fixed routine-time factor) are what the company model is told about the agent, so a miss in the test becomes a count of missed urgent cases on the dashboard, every week, for as long as the decision stands. The person deploying sees every miss, with the message and the nurse's note, and chooses: deploy as is, or change a decision and re-test. A clean run with Northline's default thresholds passes 15/15; loosening a threshold is what produces misses.
 
 ## Metrics it should move
-- Median escalation response time: current 29.6 h, target ≤8 h at 90-day mark — primary outcome metric
-- Unanswered-over-24h count: current 344/week, target ≤50/week — measures whether urgent surfacing is working
-- Non-clinical items reaching nurse queue: current ~960/week (40% of 2401), target ≤100/week — measures deflection effectiveness
-- Nurse time-to-first-action on urgent items: measured from triage timestamp to nurse first reply on tier-3 cases, target median ≤2 h
-- Triage overturn rate: fraction of triage routing decisions manually changed by a nurse after opening the item, target ≤5% — leading indicator of model drift or calibration failure
+- Median nurse response time (currently 29.6h)
+- Share of nurse-queue items that are non-clinical (currently 40%)
+- Count of escalations unanswered after 24h (currently 344/week)
+- Time-to-first-response specifically for urgent_clinical-tiered items
 
 ## Risks
-**Urgent downgrade (critical).** `tier_message` assigns tier 1 (deflect) or tier 2 (standard) to a message that a nurse would have scored tier 3 (urgent). The patient receives no timely clinical response. Mitigations: (a) the Exhibit E acceptance test fails hard on any urgent downgrade before go-live; (b) any item containing a keyword set (chest pain, can't breathe, bleeding, suicidal, severe, 911, emergency) bypasses `tier_message` entirely and is hard-routed to the urgent queue by rule before the model scores it — the model can only upgrade, never downgrade, items that match the keyword guard; (c) the nurse overturn rate metric is monitored daily in the first 30 days and an automatic circuit-breaker suspends triage routing if the rate exceeds 10% in any rolling 48-hour window, reverting to the unfiltered queue until human review clears the issue.
-
-**Non-clinical misclassification (moderate).** A clinical item is deflected as non-clinical and receives an automated reply instead of reaching a nurse. Mitigation: deflection replies include a one-tap escalation link ("This doesn't answer my question") that re-queues the item directly to the standard nurse queue with a flag; the volume of re-queued deflections is tracked as a secondary safety metric.
-
-**Rationale hallucination (moderate).** `tier_message` returns a plausible-sounding but clinically inaccurate rationale. The nurse trusts the rationale and skips re-reading the thread, missing context. Mitigation: rationales are presented as "triage note" with explicit framing that they are decision-support, not a clinical assessment, and the original message is always one click away in the same view.
-
-**Backlog latency (low).** `pending_messages` returns a large backlog and triage processing time exceeds the real-time arrival rate during a surge, causing the agent to fall behind. Mitigation: triage processes in micro-batches with a maximum per-cycle cap; items older than 20 h are promoted to urgent automatically as a backstop regardless of tier score.
-
-**Over-deflection gaming (low).** Patients learn that certain phrasings bypass triage to reach a nurse faster, causing non-clinical volume to re-enter the nurse queue through the escalation re-queue path. Mitigation: deflection re-queue rate is monitored; if it exceeds 15% of deflected volume, the deflection category thresholds are tightened in the next model calibration cycle.
+The most serious risk is downgrading a genuinely urgent case to `non_urgent_clinical` or `non_clinical`, delaying care; this risk cannot be fully eliminated by tiering logic alone, which is why every routed message — including `auto_reply` — carries a draft for human review rather than being sent automatically. A related risk is misclassifying clinical-but-routine messages (e.g., prescription refills) as `non_clinical`, which would route them to `admin`/`auto_reply` and strip them of clinical review entirely; refills must always tier as `non_urgent_clinical`. Because there is only one tier per message, ambiguous or multi-issue texts (a refill request that also mentions new symptoms) force a single choice — the system should bias toward the more clinically severe tier when a message is ambiguous. Volume patterns (e.g., true clinical emergencies arriving overnight, as in Exhibit E) may differ from daytime patterns the tiering was tuned on, so night-time performance needs explicit scrutiny rather than assumed parity. Finally, because Exhibit E's scoring only informs the deployer rather than gating deployment, there is a risk of proceeding despite a poor score if that signal isn't weighted seriously in the go/no-go call.
 
 ## Decision
 - [ ] Approve: `/deploy triage`

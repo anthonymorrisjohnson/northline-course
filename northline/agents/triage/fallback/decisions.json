@@ -1,0 +1,20 @@
+{
+  "urgent": {
+    "systolic": 180,
+    "diastolic": 110,
+    "glucose_low": 70,
+    "glucose_high": 300,
+    "always_urgent_words": [
+      "chest",
+      "arm heavy",
+      "can't breathe",
+      "slurred",
+      "confused",
+      "stroke"
+    ]
+  },
+  "non_clinical_handling": "admin",
+  "after_hours_urgent": "tell_911_and_page_on_call",
+  "honour_dont_tell": false,
+  "chosen_by": "northline_default"
+}

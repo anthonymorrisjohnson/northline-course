@@ -12,7 +12,7 @@ NON_CLINICAL = {"admin": "`admin`, with a draft reply saying the benefits or sup
 AFTER_HOURS = {"tell_911_and_page_on_call": "draft a reply telling the patient to call 911 now if it is happening now, and page the on-call nurse.",
                "tell_911_only": "draft a reply telling the patient to call 911 now. No nurse is paged overnight.",
                "queue_for_morning": "route `nurse_urgent` and leave it for the first nurse in the morning. Note: this is the 40-hour path."}
-CONSENT = {True: "If a patient asks you not to tell the doctor, honour it: route to `nurse_routine` with the draft addressed to the patient only, and say in the rationale that consent limits what the nurse may share.",
+CONSENT = {True: "If a patient asks you not to tell the doctor, honour it: route to `nurse_routine` with the draft addressed to the patient only, tell the patient in the draft that, as they asked, their doctor will not be told, and say in the rationale that consent limits what the nurse may share.",
            False: "If a patient asks you not to tell the doctor, do not promise that. Route to `nurse_routine` and draft a reply saying a nurse will talk it through with them first."}
 
 

@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 NAME_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
-_SKILLS = ("setup", "brief", "tools", "agent", "pm-run", "expand", "deploy")
+_SKILLS = ("northline-setup", "brief", "tools", "agent", "pm-run", "expand", "deploy")
 _SUBSTITUTE_SUFFIXES = (".py", ".md", ".html", ".json", ".toml")
 
 _PATIENT_STUB = '"""Empty scaffold. Add {name} tool functions here and register them in registry.py."""\n'
@@ -65,7 +65,7 @@ def _substitute(text: str, name: str) -> str:
 def _copy_file(src: Path, dst: Path, name: str) -> None:
     dst.parent.mkdir(parents=True, exist_ok=True)
     if dst.suffix in _SUBSTITUTE_SUFFIXES:
-        dst.write_text(_substitute(src.read_text(encoding="utf-8"), name))
+        dst.write_text(_substitute(src.read_text(encoding="utf-8"), name), encoding="utf-8")
     else:
         shutil.copy(src, dst)
 
@@ -159,7 +159,7 @@ def create(name: str, dest: Path, repo_root: Path | None = None) -> Path:
     (target / "README.md").write_text(
         f"# {name.capitalize()}\n\n"
         f"Scaffolded from the Northline course's take-home skills: `/brief`, `/tools`, "
-        f"`/agent`, `/pm-run`, `/expand`, `/deploy`, and `/setup`.\n\n"
+        f"`/agent`, `/pm-run`, `/expand`, `/deploy`, and `/northline-setup`.\n\n"
         f"No corpus on purpose — the loop runs on your own first conversations, not generated ones.\n\n"
         f"Start with `/brief {name}`.\n",
         encoding="utf-8",

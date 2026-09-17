@@ -10,13 +10,16 @@ The paper case runs first and runs whole. The laptops come out at minute 25. Att
 
 Send this to every attendee three days before the session. It takes about ten minutes and it has to happen before the day, not on it.
 
-1. Download the zip from the link in this email.
-2. Unzip it into your home folder.
-3. Open Claude Code in the unzipped `northline-course` folder.
-4. Type `/setup` and follow the prompts.
-5. Paste the `READY: ...` line it prints into the workshop group chat.
+1. Install the Claude desktop app and sign in. Claude Code is the Code tab inside it.
+2. In Claude Code, click New project, create a new empty folder, and name it `northline`.
+3. Paste: `Download github.com/anthonymorrisjohnson/northline-course as a ZIP, unzip it so the files sit directly in this folder, then delete the zip.`
+4. When it is done, close the project and open it again.
+5. Type `/northline-setup` and follow the prompts.
+6. Paste the `READY: ...` line it prints into the workshop group chat.
 
-Nothing else to install. `/setup` handles the rest, on macOS, Linux and Windows.
+Nothing else to install. `/northline-setup` handles the rest, on macOS, Linux and Windows. The desktop app works the same on Mac and Windows. Anyone who prefers a terminal can unzip the folder, `cd` into it and run `claude`; on Windows that route needs the native Claude Code installer, not npm, because the npm `claude.cmd` shim cannot take the long prompts the classification step sends.
+
+Every laptop makes 40 to 70 model calls during the session on its own Claude subscription. Warn attendees on the Pro plan that a re-test in `/deploy` costs another 15 calls, and expect one or two laptops to hit a limit in the room.
 
 Watch the group chat as the READY lines arrive. Every line names an operating system and a count of tools; a line that does not appear is a person to help before the day. If someone cannot get there, they follow on paper — every output the session produces is already committed in the folder.
 
@@ -32,15 +35,17 @@ The split matters. A single person doing both will fill the classification wait 
 
 | Minutes | Room | Screen | Slides | Presenter notes |
 |---|---|---|---|---|
-| 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 title, 2 the email | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
-| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 3 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
+| 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 setup (up as people arrive), 2 title, 3 the email | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
+| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 4 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
 | 15–25 | Board recommendation on paper, in teams | Idle, dashboard still up | none | No laptops. Keep it to ten minutes even if nobody is finished. Land: "Hold on to your recommendation. You are going to check it against the logs." |
-| 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 4 the loop, 5 the four decisions filled live | See the block below. |
-| 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 6 pushback questions | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
-| 50–62 | Debrief themes; "where is this hiding in your market?" | Before, after the agent, after triage, side by side | 7 to 12 | Have `docs/04-operating.md` open for the fee argument. Land: "The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology." |
-| 62–75 | Case one closer, or buffer | Off | 13, 14 | Buffer first. If minute 42 slipped, this is where you took the time from. |
+| 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 5 the loop, 6 the four decisions filled live | See the block below. |
+| 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 7 pushback questions | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
+| 50–62 | Debrief themes; "where is this hiding in your market?" | Before, after the agent, after triage, side by side | 8 to 13 | Have `docs/04-operating.md` open for the fee argument. Land: "The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology." |
+| 62–75 | Case one closer, or buffer | Off | 14, 15 | Buffer first. If minute 42 slipped, this is where you took the time from. |
 
 ## The do-along, minute by minute
+
+**First, the server.** Say it once, slowly, and put it on the screen. In Claude Code, everyone pastes: `Start the check-in server in the background with uv run python -m northline.agent.server and tell me when http://127.0.0.1:8765 answers.` (Terminal users: a second window, `cd` into the folder, run that command, leave the window alone.) Then everyone opens `http://127.0.0.1:8765` and texts the agent one reading, "my BP was 184/112", so their own conversation is in the logs before the loop runs. Two minutes, no more; anyone who is not there watches the screen.
 
 **Type `/pm-run`.** It says how many items it is about to classify, then runs. The whole thing takes about five minutes: roughly two and a half in classification, half a minute for the diagnosis, a minute and a half for the proposals.
 
@@ -52,7 +57,7 @@ Talk through the classification wait. It is the only long pause in the session a
 
 **Pick triage.** If the room picks a tool, the loop pushes back once with the metric that choice moves, and then accepts whatever they say. Let it.
 
-**Type `/deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 5 live as each one lands.
+**Type `/deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 6 live as each one lands. With all four defaults the acceptance table comes back clean and there is no miss to read, so the lesson lives in Decision 1: if the room is drifting toward the default thresholds, ask "Is 180/110 too cautious? Northline's nurses are already drowning." A vote for 190/115 produces the 184/112 miss the rest of the session is built on.
 
 **When the acceptance table prints**, stop. Read the misses before anything else. Quote the message and the nurse's note for every trap that failed. Then ask question 7.
 
