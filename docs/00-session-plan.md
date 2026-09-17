@@ -84,7 +84,8 @@ Questions 3 to 6 each come with the Northline default. Say it is what Northline'
 
 ## What to have open before you start
 
-- The dashboard, `http://127.0.0.1:8765/dashboard`, with the check-in server running.
+- The deck, `http://127.0.0.1:8765/slides`, on the projector. Press P for the presenter window (notes, timer, next slide) and keep that one on your laptop; F for full screen. Arrow keys in either window move both.
+- The dashboard, `http://127.0.0.1:8765/dashboard`, in the next tab, with the check-in server running.
 - A Claude Code session in the course folder, for Prairie's demo at minute 8 and for the two commands.
 - `docs/03-triage-decisions.md`, for the nurse's key.
 - `docs/04-operating.md`, for the fee argument in the debrief.

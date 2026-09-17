@@ -32,3 +32,14 @@ def test_chat_rejects_malformed_session_id(log_dir, data_dir, monkeypatch):
     r = c.post("/chat", json={"message": "hi", "session_id": "../../evil"}).json()
     assert len(r["session_id"]) == 12 and all(ch in "0123456789abcdef" for ch in r["session_id"])
     assert not any(p.name == "evil.json" for p in Path(log_dir).rglob("*.json"))
+
+
+def test_slides_served_with_document_shell(log_dir):
+    r = TestClient(server.app).get("/slides")
+    assert r.status_code == 200 and r.text.startswith("<!doctype html>")
+    assert "Moving the" in r.text and r.text.count('<section class="slide') == 26
+
+
+def test_slides_missing_is_404(log_dir, monkeypatch, tmp_path):
+    monkeypatch.setattr(server, "SLIDES", tmp_path / "nope.html")
+    assert TestClient(server.app).get("/slides").status_code == 404

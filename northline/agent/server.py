@@ -2,7 +2,7 @@
 import json, os, re, uuid
 from pathlib import Path
 from fastapi import FastAPI
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel
 from . import claude_runner, prompt, transcripts
 from northline.tools.calllog import log_dir
@@ -10,6 +10,10 @@ from northline.sim import run as sim_run
 
 app = FastAPI(title="Northline check-in agent")
 STATIC = Path(__file__).resolve().parent / "static"
+SLIDES = Path(__file__).resolve().parents[2] / "slides" / "present.html"
+SLIDES_SHELL = ('<!doctype html><html lang="en"><head><meta charset="utf-8">'
+                '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
+                '<style>html,body{margin:0}</style></head><body>%s</body></html>')
 SIM_OUT = sim_run.OUT
 run_turn_fn = claude_runner.run_turn
 _claude_sessions: dict[str, str] = {}
@@ -29,6 +33,14 @@ def index():
 @app.get("/dashboard")
 def dashboard():
     return FileResponse(STATIC / "dashboard.html")
+
+
+@app.get("/slides")
+def slides():
+    """The presenter deck. It is authored without a document shell, so wrap it here."""
+    if not SLIDES.exists():
+        return HTMLResponse("<p>The presenter deck is not part of this folder.</p>", status_code=404)
+    return HTMLResponse(SLIDES_SHELL % SLIDES.read_text(encoding="utf-8"))
 
 
 @app.get("/api/sim")

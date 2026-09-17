@@ -23,8 +23,8 @@ def test_zip_has_no_git_venv_or_logs(tmp_path):
 def test_zip_excludes_presenter_deck(tmp_path):
     out = build(out=tmp_path / "z.zip")
     names = zipfile.ZipFile(out).namelist()
-    assert any(n.endswith("slides/outline.md") for n in names)
-    assert not any(n.endswith("deck.pptx") for n in names)
+    # slides/ is presenter material: the speaker notes hold the reveal, so none of it ships
+    assert not any("/slides/" in n for n in names)
 
 
 def test_build_ignores_excluded_names_in_ancestor_path(tmp_path):
