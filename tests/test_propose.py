@@ -41,3 +41,13 @@ def test_main_clears_stale_tool_proposals(tmp_path, monkeypatch):
     assert not (proposals / "tool-old.md").exists()
     assert (proposals / "tool-request_refill.md").exists()
     assert (proposals / "agent-triage.md").exists()
+
+
+def test_triage_proposal_acceptance_text_is_fixed_and_does_not_block():
+    from northline.pm import propose as p
+    qm = {"escalations_per_week": 1, "nurse_response_median_h": 1, "nurse_response_p90_h": 1, "non_clinical_share_of_queue": 0.4,
+          "unanswered_over_24h": 1, "patients_inactive_after_escalation": 1}
+    o = {"agent_name": "triage", "placement": "x", "purpose": "x", "tools_needed": [], "decisions_for_humans": [],
+         "acceptance_test": "Any failure halts deployment.", "metrics_it_should_move": [], "risks": "x"}
+    text = p.render_deploy(qm, o)
+    assert "halts deployment" not in text and "does not block the deployment" in text

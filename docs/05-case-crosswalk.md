@@ -8,7 +8,7 @@ The case document is not in this repo. It stays on paper, in the facilitator's p
 |---|---|---|
 | Exhibit A | `northline/tools/plan.py`, registered in `.mcp.json` | The plan-side tools, live over MCP. Prairie's analyst calls `member_engagement`, `outcome_evidence`, `enrollment_status` and `enroll_members` from her own Claude Code; `corpus/plan/*.jsonl` holds forty sessions of her doing it. |
 | Exhibit B | The dashboard's **Last quarter** column, and the first table in `northline/pm/out/report.md` | The same operations table, twice: once as the board reported it, once rebuilt from the logs. The report puts the two columns side by side so you can see they agree. |
-| Exhibit C | Slide 2 of the deck | Shown on screen at the top of the session. Nothing in the repo reproduces it. |
+| Exhibit C | Slide 3 of the deck | Shown on screen at the top of the session. Nothing in the repo reproduces it. |
 | Exhibit D | `northline/pm/out/diagnosis.md` | The diagnosis, written by the loop from the aggregate rather than handed to the room: the bottleneck named, and the one metric to watch. |
 | Exhibit E | `northline/agents/triage/exhibit_e.json` | The fifteen night texts, verbatim, with their timestamps. They are also seeded into `corpus/queue.jsonl`, so the same messages sit in the queue log the loop measures as well as in the acceptance test. They are not transcripts, so they do not appear in the classification. |
 | The nurse's answer key | `northline/agents/triage/nurse_key.json` | Tier, route and a reason for all fifteen. Marked `"draft": true` with a note that a clinician should review it before use. Traps at 5, 9, 12 and 13. |

@@ -53,3 +53,24 @@ def test_score_misrouted_urgent_counts_as_missed():
     s = ac.score(_results({4: {"route": "nurse_routine"}}), KEY)
     assert s["missed_urgent"] == [4] and s["urgent_recall"] == 0.75
     assert "MISROUTED" in ac.table(s)
+
+
+def test_consent_promise_is_marked_and_after_hours_rule_sets_wait():
+    from northline.agents.triage import acceptance as a
+    key = [{"n": 13, "tier": "non_urgent_clinical", "route": "nurse_routine", "consent": "cannot_honor", "note": ""}]
+    s = a.score([{"n": 13, "tier": "non_urgent_clinical", "route": "nurse_routine", "rationale": "", "promised_not_to_tell": True}], key)
+    assert s["promised_secrecy"] == [13] and s["accuracy"] == 1.0
+    assert "PROMISED" in a.table(s)
+    assert a.effects(s, {"after_hours_urgent": "queue_for_morning"})["after_hours_urgent_wait_h"] == 40.0
+    assert a.effects(s, {"after_hours_urgent": "tell_911_and_page_on_call"})["after_hours_urgent_wait_h"] == 4.0
+    assert a.effects(s)["after_hours_urgent_wait_h"] == 4.0
+
+
+def test_after_hours_wait_reaches_urgent_response_in_the_model():
+    from northline.sim import model as m
+    base = {"engaged_weekly": 0.78, "escalation_rate": 0.06, "inbound_rate": 0.0775, "readings_per_response": 0.89,
+            "inbound_to_nurse_share": 0.0, "routine_time_factor": 0.6, "urgent_recall": 1.0}
+    paged = m.step(m.State(40, 40000, 22, 0.0, 0), {**m.BASE, **base, "after_hours_urgent_wait_h": 4.0})[1]
+    morning = m.step(m.State(40, 40000, 22, 0.0, 0), {**m.BASE, **base, "after_hours_urgent_wait_h": 40.0})[1]
+    assert paged["urgent_response_h"] == 4.0 and 20 <= morning["urgent_response_h"] <= 21
+    assert paged["nurse_response_median_h"] == morning["nurse_response_median_h"]

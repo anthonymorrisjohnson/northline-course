@@ -15,6 +15,20 @@ DEPLOY_SCHEMA = {"type": "object", "properties": {"agent_name": {"type": "string
                  "tools_needed": {"type": "array", "items": {"type": "string"}}, "decisions_for_humans": {"type": "array", "items": {"type": "string"}},
                  "acceptance_test": {"type": "string"}, "metrics_it_should_move": {"type": "array", "items": {"type": "string"}}, "risks": {"type": "string"}},
                  "required": ["agent_name", "placement", "purpose", "tools_needed", "decisions_for_humans", "acceptance_test", "metrics_it_should_move", "risks"]}
+# The acceptance test is the one part of the triage proposal that must match what the code does, so it is
+# fixed text rather than model output: the test informs the deployer, it does not block the deployment.
+TRIAGE_ACCEPTANCE = (
+    "Run the fifteen night texts in Exhibit E through the rendered prompt and score each one against the nurse's key "
+    "(`northline/agents/triage/nurse_key.json`). Two kinds of failure are marked: **MISS**, the tier does not match the key; "
+    "**MISROUTED**, the tier matched but an urgent message was not sent to `nurse_urgent`. The run reports accuracy across "
+    "all fifteen, urgent recall (the share of the key's urgent messages the agent kept urgent), the missed-urgent list, and "
+    "the share of non-clinical messages routed away from nurses.\n\n"
+    "**The test does not block the deployment.** Its three numbers (urgent recall, non-clinical share routed away, and the "
+    "fixed routine-time factor) are what the company model is told about the agent, so a miss in the test becomes a count of "
+    "missed urgent cases on the dashboard, every week, for as long as the decision stands. The person deploying sees every "
+    "miss, with the message and the nurse's note, and chooses: deploy as is, or change a decision and re-test. A clean run "
+    "with Northline's default thresholds passes 15/15; loosening a threshold is what produces misses."
+)
 TRIAGE_DECISIONS = [
     "Urgent thresholds: the systolic and diastolic blood pressure, the low and high glucose, and the symptom words that are always urgent.",
     "Non-clinical handling: route to admin staff, auto-reply from approved content, or hold for the morning.",
@@ -39,13 +53,15 @@ def render_tool(c: dict, o: dict) -> str:
 
 
 def render_deploy(qm: dict, o: dict) -> str:
-    decisions = TRIAGE_DECISIONS if o["agent_name"] == "triage" else o["decisions_for_humans"]
+    triage = o["agent_name"] == "triage"
+    decisions = TRIAGE_DECISIONS if triage else o["decisions_for_humans"]
+    acceptance = TRIAGE_ACCEPTANCE if triage else o["acceptance_test"]
     return _fill((T / "deployment-proposal.md").read_text(encoding="utf-8"), {
         "agent_name": o["agent_name"], "placement": o["placement"], "purpose": o["purpose"],
         "escalations_per_week": qm["escalations_per_week"], "median_h": qm["nurse_response_median_h"], "p90_h": qm["nurse_response_p90_h"],
         "non_clinical_pct": int(qm["non_clinical_share_of_queue"] * 100), "unanswered": qm["unanswered_over_24h"], "inactive": qm["patients_inactive_after_escalation"],
         "tools_needed": "\n".join(f"- `{t}`" for t in o["tools_needed"]), "decisions": "\n".join(f"{i + 1}. {d}" for i, d in enumerate(decisions)),
-        "acceptance_test": o["acceptance_test"], "metrics": "\n".join(f"- {m}" for m in o["metrics_it_should_move"]), "risks": o["risks"]})
+        "acceptance_test": acceptance, "metrics": "\n".join(f"- {m}" for m in o["metrics_it_should_move"]), "risks": o["risks"]})
 
 
 def _tool_prompt(c):
@@ -59,9 +75,14 @@ def _tool_prompt(c):
 def _deploy_prompt(qm):
     return (f"You are the product manager at Northline Care. The nurse queue shows {qm['escalations_per_week']} escalations a week, median response "
             f"{qm['nurse_response_median_h']}h, {int(qm['non_clinical_share_of_queue'] * 100)}% non-clinical items, {qm['unanswered_over_24h']} unanswered over 24h. "
-            f"Draft a deployment proposal for an agent named triage that sits between the check-in agent's escalations and the nurse queue. It has tools "
-            f"pending_messages, tier_message, route_message. Describe placement, purpose, the acceptance test (the fifteen night texts in Exhibit E scored against "
-            f"a nurse's key), the metrics it should move, and the risks, especially downgrading an urgent case. Leave decisions_for_humans empty; they are fixed.")
+            f"Draft a deployment proposal for an agent named triage that sits between the check-in agent's escalations and the nurse queue. "
+            f"Facts to keep to: the check-in agent escalates with `escalate_to_nurse`, which puts the message in the nurse queue. Triage reads the queue with "
+            f"`pending_messages`, assigns exactly one of three tiers with `tier_message` (`urgent_clinical`, `non_urgent_clinical`, `non_clinical`), and sends it "
+            f"on with `route_message` to one of `nurse_urgent`, `nurse_routine`, `admin`, or `auto_reply`, with a draft reply for the nurse to review. Use these "
+            f"names; do not invent numbered tiers, keyword guards, circuit breakers, or shadow deployments. A prescription refill is clinical (non-urgent), not "
+            f"non-clinical. Describe placement, purpose, the metrics it should move, and the risks, especially downgrading an urgent case. For acceptance_test "
+            f"write one sentence: the fifteen night texts in Exhibit E are scored against a nurse's key, and the result informs the deployer rather than "
+            f"blocking the deployment. Leave decisions_for_humans empty; they are fixed.")
 
 
 def main(top: int = 4, ask=claude_json.ask_json_many) -> None:

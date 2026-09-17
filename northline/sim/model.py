@@ -8,13 +8,19 @@ from dataclasses import dataclass, replace
 MAX_RESPONSE_H = 336.0
 
 BASE = {
-    "nurse_capacity_items_per_week": 150, "hours_per_item": 0.27, "nurse_cost_month": 9000, "overtime_rate": 45, "fee": 25,
+    "nurse_capacity_items_per_week": 150, "hours_per_item": 0.323, "nurse_cost_month": 9000, "overtime_rate": 45, "fee": 25,
     "monthly_reach": 0.60, "readings_per_reach": 0.5,          # before: 40000 * 0.6 * 0.5 = 12,000 readings a month
     "engaged_weekly": 0.0, "readings_per_response": 0.89,      # agent: 40000 * 0.78 * 4.33 * 0.89 = 120,000
     "escalation_rate": 0.0075, "inbound_rate": 0.0, "after_hours_share": 0.46,
     "urgent_share_of_escalations": 0.15, "inbound_to_nurse_share": 0.60, "routine_time_factor": 1.0,
-    "urgent_recall": 1.0, "response_curve": 4.5, "resignation_rate": 0.02, "disengage_rate": 0.021,
+    "urgent_recall": 1.0, "after_hours_urgent_wait_h": 4.0,  # what an urgent message waits at 1:48am; the after-hours decision sets it
+    "response_curve": 5.1, "resignation_rate": 0.048, "disengage_rate": 0.021,
     "baseline_overtime_month": 180,  # overtime that exists regardless of load; the case's before column
+    # Nurses do not quit in the first month of overload; the hazard ramps in from week 19 over 8 weeks.
+    # With the check-in agent live from week 1 this puts all three of the case's resignations in the last
+    # quarter (weeks 29, 34, 38) and lands Exhibit B on the paper figures: 22 nurses, 31 h, 1,150 h, 340.
+    "resignation_ramp_start": 19, "resignation_ramp_weeks": 8,
+    "resignation_overload_cap": 0.3,  # past 30% overload the hazard stops growing; nobody quits faster than that
 }
 
 
@@ -48,9 +54,13 @@ def step(s: State, p: dict) -> tuple[State, dict]:
     capacity = N * p["nurse_capacity_items_per_week"]
     load = items / capacity if capacity else 99.0
     median_h = round(min(MAX_RESPONSE_H, 4.0 * math.exp(p["response_curve"] * max(0.0, load - 0.8))), 1)  # capped at two weeks; beyond that the number stops meaning anything
-    urgent_h = 4.0 if p["routine_time_factor"] < 1.0 else median_h   # a triage layer sees urgent items first
+    if p["routine_time_factor"] < 1.0:   # a triage layer sees urgent items first; after hours, the after-hours rule decides
+        urgent_h = round((1 - p["after_hours_share"]) * 4.0 + p["after_hours_share"] * p["after_hours_urgent_wait_h"], 1)
+    else:
+        urgent_h = median_h
     overtime = p["baseline_overtime_month"] + max(0.0, items - capacity) * p["hours_per_item"] * 4.33
-    accum = s.resign_accum + N * p["resignation_rate"] * max(0.0, load - 1.0)
+    ramp = min(1.0, max(0.0, (s.week - p["resignation_ramp_start"]) / p["resignation_ramp_weeks"]))
+    accum = s.resign_accum + N * p["resignation_rate"] * ramp * min(p["resignation_overload_cap"], max(0.0, load - 1.0))
     resigned = int(accum); accum -= resigned
     unanswered_share = min(0.9, max(0.0, (median_h - 4.0) / (median_h + 20.0)))
     inactive_new = int(round(esc * unanswered_share * p["disengage_rate"]))
@@ -84,4 +94,5 @@ def average(rows: list[dict]) -> dict:
         vals = [r[k] for r in rows]
         out[k] = sum(vals) if k in SUMMED else round(sum(vals) / len(vals), 2)
     out["week"] = rows[-1]["week"]
+    out["nurses"] = rows[-1]["nurses"]  # headcount is a point-in-time number, as the board reports it
     return out

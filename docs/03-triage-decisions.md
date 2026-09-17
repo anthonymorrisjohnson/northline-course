@@ -36,7 +36,7 @@ Read the prompt afterwards if you want proof: `northline/agents/triage/prompt.md
 
 **What the default trades.** An on-call rota, and some number of pages that turn out to be nothing. That is the price of the alternative not being a fourteen-hour wait.
 
-**Where you see it: message 10.** 1:48am. "Can't sleep. Chest feels tight and my left arm is heavy." The nurse's key calls it urgent regardless of the calm phrasing. Every after-hours option tiers it the same way. They differ entirely in what happens next, and that difference is measured in hours of a cardiac event.
+**Where you see it: message 10, and the "Urgent response" row.** 1:48am. "Can't sleep. Chest feels tight and my left arm is heavy." The nurse's key calls it urgent regardless of the calm phrasing. Every after-hours option tiers it the same way, so the acceptance table looks identical. They differ entirely in what happens next, and that difference is measured in hours of a cardiac event: the acceptance run records the night-time wait your rule implies (4 hours paged, 14 hours 911-only, 40 hours queued for morning), and the dashboard's "Urgent response" row blends it with the 46% of messages that arrive after hours. Page the on-call nurse and it reads 4.0 hours; queue for morning and it reads about 20.
 
 ## Decision 4: consent
 
@@ -46,7 +46,7 @@ Read the prompt afterwards if you want proof: `northline/agents/triage/prompt.md
 
 **What the default trades.** The patient learns their request was not granted. The draft reply is written so they learn it from you rather than from a call they did not expect.
 
-**Where you see it: message 13.** "Stopped taking the metformin, it upsets my stomach. Don't tell the doctor." The nurse's key routes it to a nurse and notes that the request for secrecy cannot be honored. The word "tell" is doing a lot of work here: the question is not whether to record it, it is what you promise the patient about who sees it.
+**Where you see it: message 13.** "Stopped taking the metformin, it upsets my stomach. Don't tell the doctor." The nurse's key routes it to a nurse and notes that the request for secrecy cannot be honored. The word "tell" is doing a lot of work here: the question is not whether to record it, it is what you promise the patient about who sees it. Both options tier and route it the same way; the difference is in the draft reply. If your prompt promises the patient the doctor will not be told, the acceptance table marks message 13 **PROMISED**, because a nurse is about to read it either way and the patient was told otherwise.
 
 ## The acceptance test
 
@@ -91,7 +91,7 @@ Open `http://127.0.0.1:8765/dashboard`. It refreshes every ten seconds, so the d
 
 Four things move.
 
-**The Exhibit B table** gains a working "Next quarter" column. Before the deploy it is the same story getting worse: median nurse response climbing from 29.7 hours to 40.9, overtime from 1,154 hours a month to 1,370, another 397 patients going quiet. After the deploy, the same column is computed with your triage agent in it.
+**The Exhibit B table** gains a working "Next quarter" column. Before the deploy it is the same story getting worse: median nurse response climbing from 31 hours to 84, overtime from 1,150 hours a month to 1,810, three more nurses gone, another 489 patients going quiet. After the deploy, the same column is computed with your triage agent in it.
 
 **The "Urgent cases missed / week" tile** turns from a zero into a number if your thresholds downgraded anything. This is where message 12 shows up, several days later, as a count of people.
 
@@ -101,13 +101,16 @@ Four things move.
 
 ## How your four decisions reach the numbers
 
-The acceptance run does not just print a table. It writes three numbers, and those three numbers are the only thing the company model is told about your agent.
+The acceptance run does not just print a table. It writes four numbers, and those four numbers are the only thing the company model is told about your agent.
 
 | From the acceptance run | Into the model | What it does there |
 |---|---|---|
 | Share of non-clinical messages routed away from nurses | `inbound_to_nurse_share` | How much of the inbound flood still lands on a nurse. Route all of it away and this falls from 0.60 to 0.0. |
 | Fixed at 0.6 when triage is live | `routine_time_factor` | Routine escalations cost a nurse less time once they arrive pre-sorted, and urgent cases jump the queue: urgent response drops to 4 hours. |
 | Urgent recall | `urgent_recall` | Anything below 1.0 becomes missed urgent cases every week, forever, on the tile. |
+| The after-hours rule, as hours | `after_hours_urgent_wait_h` | What an urgent message waits at night: 4 paged, 14 for 911-only, 40 queued for morning. Blended with the 46% after-hours share, it is the "Urgent response" row. |
+
+The consent decision does not reach the model. It reaches the acceptance table, as a PROMISED mark on message 13 if the draft reply promised something the nurse's key says cannot be kept.
 
 From there the model is short enough to read: items on the queue divided by nurse capacity gives a load, and load above 0.8 pushes the median response up an exponential curve to a cap of 336 hours. Fewer items means a lower load, a shorter wait, less overtime, fewer resignations, fewer patients going quiet.
 

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv --version)",
+      "Bash(uv sync)",
+      "Bash(uv sync:*)",
+      "Bash(uv run:*)",
+      "Bash(claude --version)",
+      "Bash(claude mcp list)",
+      "Read(./**)",
+      "Edit(./northline/agents/triage/decisions.json)",
+      "Edit(./briefs/**)"
+    ]
+  }
+}
