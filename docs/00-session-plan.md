@@ -45,6 +45,8 @@ The split matters. A single person doing both will fill the classification wait 
 
 ## The do-along, minute by minute
 
+**First, the server.** Say it once, slowly, and put it on the screen: open a second terminal window, `cd ~/northline-course`, then `uv run python -m northline.agent.server`, and leave that window alone. Then everyone opens `http://127.0.0.1:8765` and texts the agent one reading, "my BP was 184/112", so their own conversation is in the logs before the loop runs. Two minutes, no more; anyone who is not there watches the screen.
+
 **Type `/pm-run`.** It says how many items it is about to classify, then runs. The whole thing takes about five minutes: roughly two and a half in classification, half a minute for the diagnosis, a minute and a half for the proposals.
 
 Talk through the classification wait. It is the only long pause in the session and it is the best two and a half minutes you have: explain what is being read, what a record looks like, and that the counting afterwards is plain Python. Do not fill it with typing.

@@ -2,11 +2,11 @@
 
 Fifteen slides for the two presenters. A white setup slide first, then a dark title slide, white content slides, one table or one image per slide. Speaker notes below each slide go into the deck's notes pane.
 
-## Slide 1: Get set up
+## Slide 1: Three things, then wait for us
 
-- Shown on screen while people arrive, and left up until the last READY line. Four cards: Claude Code installed and signed in (`claude --version`); the course folder (github.com/anthonymorrisjohnson/northline-course, Code → Download ZIP, unzip into the home folder); `/setup` in Claude Code, then quit, reopen, approve the `northline` server; the server in a second terminal window (`uv run python -m northline.agent.server`), then text the agent "my BP was 184/112" at 127.0.0.1:8765
-- Windows: native Claude Code installer, not npm; PowerShell for the commands
-- Bottom band: the GitHub link, and the two commands for the room: `/pm-run` then `/deploy triage`
+- Shown on screen while people arrive, and left up until the last READY line. Three cards: Claude Code installed and signed in (check with `claude --version`; Windows uses the native installer, not npm); the course folder (link below, Code → Download ZIP, unzip into the home folder); `/setup` in a terminal in that folder, stop at READY
+- Bottom band: the GitHub link, large: github.com/anthonymorrisjohnson/northline-course
+- Everything else (the server window, texting the agent, `/pm-run`, `/deploy triage`) is cued from the front at minute 25, not from this slide
 
 Speaker: do not present this slide. Point at it. Walk the room while it is up and look for anyone stuck on step 1; that is the person who needs help before anything else. Expect 40 to 70 model calls per laptop on their own Claude account over the hour.
 
