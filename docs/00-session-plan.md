@@ -10,14 +10,14 @@ The paper case runs first and runs whole. The laptops come out at minute 25. Att
 
 Send this to every attendee three days before the session. It takes about ten minutes and it has to happen before the day, not on it.
 
-1. Install Claude Code (the command-line tool) and sign in with your Claude account.
-2. Download the zip from the link in this email.
-3. Unzip it into your home folder.
-4. Open a terminal, `cd` into the unzipped `northline-course` folder, and run `claude`.
+1. Install the Claude desktop app and sign in. Claude Code is the Code tab inside it.
+2. In Claude Code, click New project, create a new empty folder, and name it `northline`.
+3. Paste: `Download github.com/anthonymorrisjohnson/northline-course as a ZIP, unzip it so the files sit directly in this folder, then delete the zip.`
+4. When it is done, close the project and open it again.
 5. Type `/setup` and follow the prompts.
 6. Paste the `READY: ...` line it prints into the workshop group chat.
 
-Nothing else to install. `/setup` handles the rest, on macOS, Linux and Windows. Windows attendees should use the native Claude Code installer, not the npm one; the npm `claude.cmd` shim cannot take the long prompts the classification step sends.
+Nothing else to install. `/setup` handles the rest, on macOS, Linux and Windows. The desktop app works the same on Mac and Windows. Anyone who prefers a terminal can unzip the folder, `cd` into it and run `claude`; on Windows that route needs the native Claude Code installer, not npm, because the npm `claude.cmd` shim cannot take the long prompts the classification step sends.
 
 Every laptop makes 40 to 70 model calls during the session on its own Claude subscription. Warn attendees on the Pro plan that a re-test in `/deploy` costs another 15 calls, and expect one or two laptops to hit a limit in the room.
 
@@ -45,7 +45,7 @@ The split matters. A single person doing both will fill the classification wait 
 
 ## The do-along, minute by minute
 
-**First, the server.** Say it once, slowly, and put it on the screen: open a second terminal window, `cd ~/northline-course`, then `uv run python -m northline.agent.server`, and leave that window alone. Then everyone opens `http://127.0.0.1:8765` and texts the agent one reading, "my BP was 184/112", so their own conversation is in the logs before the loop runs. Two minutes, no more; anyone who is not there watches the screen.
+**First, the server.** Say it once, slowly, and put it on the screen. In Claude Code, everyone pastes: `Start the check-in server in the background with uv run python -m northline.agent.server and tell me when http://127.0.0.1:8765 answers.` (Terminal users: a second window, `cd` into the folder, run that command, leave the window alone.) Then everyone opens `http://127.0.0.1:8765` and texts the agent one reading, "my BP was 184/112", so their own conversation is in the logs before the loop runs. Two minutes, no more; anyone who is not there watches the screen.
 
 **Type `/pm-run`.** It says how many items it is about to classify, then runs. The whole thing takes about five minutes: roughly two and a half in classification, half a minute for the diagnosis, a minute and a half for the proposals.
 

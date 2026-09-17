@@ -4,9 +4,9 @@ Fifteen slides for the two presenters. A white setup slide first, then a dark ti
 
 ## Slide 1: Three things, then wait for us
 
-- Shown on screen while people arrive, and left up until the last READY line. Three cards: Claude Code installed and signed in (check with `claude --version`; Windows uses the native installer, not npm); the course folder (link below, Code → Download ZIP, unzip into the home folder); `/setup` in a terminal in that folder, stop at READY
-- Bottom band: the GitHub link, large: github.com/anthonymorrisjohnson/northline-course
-- Everything else (the server window, texting the agent, `/pm-run`, `/deploy triage`) is cued from the front at minute 25, not from this slide
+- Shown on screen while people arrive, and left up until the last READY line. Three cards: open the Claude desktop app, New project, a new empty folder called `northline`; paste the line in the band below and, when it finishes, close and reopen the project; `/setup`, stop at READY
+- Band: the line to paste. "Download github.com/anthonymorrisjohnson/northline-course as a ZIP, unzip it so the files sit directly in this folder, then delete the zip."
+- No terminal anywhere on this slide. The server window, texting the agent, `/pm-run` and `/deploy triage` are cued from the front at minute 25
 
 Speaker: do not present this slide. Point at it. Walk the room while it is up and look for anyone stuck on step 1; that is the person who needs help before anything else. Expect 40 to 70 model calls per laptop on their own Claude account over the hour.
 
