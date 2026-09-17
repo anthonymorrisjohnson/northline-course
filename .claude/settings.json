@@ -8,8 +8,8 @@
       "Bash(claude --version)",
       "Bash(claude mcp list)",
       "Read(./**)",
-      "Write(./northline/agents/triage/decisions.json)",
-      "Write(./briefs/**)"
+      "Edit(./northline/agents/triage/decisions.json)",
+      "Edit(./briefs/**)"
     ]
   }
 }
