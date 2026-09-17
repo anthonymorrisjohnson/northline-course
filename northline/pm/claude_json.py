@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CLAUDE = shutil.which("claude")
-NO_CLAUDE = "Claude Code (`claude`) is not on PATH; run /setup"
+NO_CLAUDE = "Claude Code (`claude`) is not on PATH; run /northline-setup"
 
 
 def claude_bin() -> str:

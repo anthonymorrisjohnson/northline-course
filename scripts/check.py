@@ -86,7 +86,7 @@ def main() -> int:
         # Use the resolved path: on Windows a bare "claude" does not resolve an npm-installed claude.cmd.
         print("claude " + subprocess.run([claude, "--version"], capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.strip())
     else:
-        print("claude not found on PATH. Install Claude Code and sign in, then run /setup again."); ok = False
+        print("claude not found on PATH. Install Claude Code and sign in, then run /northline-setup again."); ok = False
     print("\nREADY" if ok else "\nNOT READY, see above")
     print("Check-in agent + dashboard: uv run python -m northline.agent.server  ->  http://127.0.0.1:8765 and /dashboard")
     print("Prairie's analyst (MCP): the northline tools appear in Claude Code after you restart it in this folder.")

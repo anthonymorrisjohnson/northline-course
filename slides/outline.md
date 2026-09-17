@@ -4,7 +4,7 @@ Fifteen slides for the two presenters. A white setup slide first, then a dark ti
 
 ## Slide 1: Three things, then wait for us
 
-- Shown on screen while people arrive, and left up until the last READY line. Three cards: open the Claude desktop app, New project, a new empty folder called `northline`; paste the line in the band below and, when it finishes, close and reopen the project; `/setup`, stop at READY
+- Shown on screen while people arrive, and left up until the last READY line. Three cards: open the Claude desktop app, New project, a new empty folder called `northline`; paste the line in the band below and, when it finishes, close and reopen the project; `/northline-setup`, stop at READY
 - Band: the line to paste. "Download github.com/anthonymorrisjohnson/northline-course as a ZIP, unzip it so the files sit directly in this folder, then delete the zip."
 - No terminal anywhere on this slide. The server window, texting the agent, `/pm-run` and `/deploy triage` are cued from the front at minute 25
 
@@ -123,7 +123,7 @@ Speaker: hold this one line. It is the reason the four decisions on slide 6 have
 
 ## Slide 15: Take it home
 
-- Unzip the course folder, run `/setup`
+- Unzip the course folder, run `/northline-setup`
 - Type `/new-experience` and build a third front door for a persona this repo doesn't cover
 - Three take-home exercises, in the exercises folder, each buildable with the same skills used today
 - The question to carry out of the room: **where is this bottleneck hiding in your market?**

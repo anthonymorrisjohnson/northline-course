@@ -5,7 +5,7 @@ arguments: [name]
 disable-model-invocation: true
 ---
 
-Run `uv run python scripts/new_experience.py $name`. It creates `../$name` with the take-home skills (`/setup`, `/brief`, `/tools`, `/agent`, `/pm-run`, `/expand`, `/deploy`), an empty tool registry, and no corpus — the loop runs on your own first conversations, not generated ones.
+Run `uv run python scripts/new_experience.py $name`. It creates `../$name` with the take-home skills (`/northline-setup`, `/brief`, `/tools`, `/agent`, `/pm-run`, `/expand`, `/deploy`), an empty tool registry, and no corpus — the loop runs on your own first conversations, not generated ones.
 
 Then:
 

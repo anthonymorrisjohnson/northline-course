@@ -9,12 +9,12 @@ Moving the bottleneck, live: the AI didn't fail Northline Care, the operating mo
 3. Paste this line and let it run:
    `Download github.com/anthonymorrisjohnson/northline-course as a ZIP, unzip it so the files sit directly in this folder, then delete the zip.`
 4. When it says it is done, close the project and open it again, so Claude Code picks up the course's commands.
-5. Type `/setup` and follow the prompts. Stop when it prints a `READY: ...` line.
+5. Type `/northline-setup` and follow the prompts. Stop when it prints a `READY: ...` line.
 6. Paste that line into the workshop group chat.
 
-No API key and nothing else to install: `/setup` handles `uv` and the rest. The session
+No API key and nothing else to install: `/northline-setup` handles `uv` and the rest. The session
 makes 40 to 70 model calls per laptop through your own Claude account. If you would
-rather use a terminal: unzip the folder yourself, `cd` into it, run `claude`, then `/setup`.
+rather use a terminal: unzip the folder yourself, `cd` into it, run `claude`, then `/northline-setup`.
 
 ## What happens in the room
 

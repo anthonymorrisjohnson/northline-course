@@ -29,7 +29,7 @@ def test_scaffold_shape(tmp_path):
     assert (dest / "templates" / "use-case-brief.md").exists()
     assert (dest / "templates" / "agent-brief.md").exists()
     assert (dest / "templates" / "taxonomy.md").exists()
-    for skill in ("setup", "brief", "tools", "agent", "pm-run", "expand", "deploy"):
+    for skill in ("northline-setup", "brief", "tools", "agent", "pm-run", "expand", "deploy"):
         assert (dest / ".claude" / "skills" / skill / "SKILL.md").exists()
     assert not (dest / ".claude" / "skills" / "generate-corpus").exists()
     assert not (dest / ".claude" / "skills" / "new-experience").exists()

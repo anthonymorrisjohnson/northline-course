@@ -8,7 +8,7 @@ from typing import Iterable
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PREFIX = "mcp__northline__"
 CLAUDE = shutil.which("claude")
-NO_CLAUDE = "Claude Code (`claude`) is not on PATH; run /setup"
+NO_CLAUDE = "Claude Code (`claude`) is not on PATH; run /northline-setup"
 
 
 def claude_bin() -> str:
