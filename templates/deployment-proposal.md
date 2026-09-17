@@ -23,5 +23,5 @@ Evidence from the queue log: {escalations_per_week} escalations a week, median n
 {risks}
 
 ## Decision
-- [ ] Approve: `/deploy {agent_name}`
+- [ ] Approve: `/northline-deploy {agent_name}`
 - [ ] Reject, reason:

@@ -4,7 +4,7 @@ This page is for the two people running the session: what happens minute by minu
 
 Two front doors appear on screen: the check-in page Northline hosts, and MCP (Model Context Protocol, the standard way to hand an assistant a set of tools), which is how Prairie's own analyst reaches the same data.
 
-The paper case runs first and runs whole. The laptops come out at minute 25. Attendees type two commands all session: `/pm-run` and `/deploy triage`.
+The paper case runs first and runs whole. The laptops come out at minute 25. Attendees type two commands all session: `/northline-pm-run` and `/northline-deploy triage`.
 
 ## Pre-work, three days ahead
 
@@ -19,7 +19,7 @@ Send this to every attendee three days before the session. It takes about ten mi
 
 Nothing else to install. `/northline-setup` handles the rest, on macOS, Linux and Windows. The desktop app works the same on Mac and Windows. Anyone who prefers a terminal can unzip the folder, `cd` into it and run `claude`; on Windows that route needs the native Claude Code installer, not npm, because the npm `claude.cmd` shim cannot take the long prompts the classification step sends.
 
-Every laptop makes 40 to 70 model calls during the session on its own Claude subscription. Warn attendees on the Pro plan that a re-test in `/deploy` costs another 15 calls, and expect one or two laptops to hit a limit in the room.
+Every laptop makes 40 to 70 model calls during the session on its own Claude subscription. Warn attendees on the Pro plan that a re-test in `/northline-deploy` costs another 15 calls, and expect one or two laptops to hit a limit in the room.
 
 Watch the group chat as the READY lines arrive. Every line names an operating system and a count of tools; a line that does not appear is a person to help before the day. If someone cannot get there, they follow on paper — every output the session produces is already committed in the folder.
 
@@ -38,7 +38,7 @@ The split matters. A single person doing both will fill the classification wait 
 | 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 setup (up as people arrive), 2 title, 3 the email | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
 | 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 4 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
 | 15–25 | Board recommendation on paper, in teams | Idle, dashboard still up | none | No laptops. Keep it to ten minutes even if nobody is finished. Land: "Hold on to your recommendation. You are going to check it against the logs." |
-| 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 5 the loop, 6 the four decisions filled live | See the block below. |
+| 25–42 | Do-along; the seven questions | `/northline-pm-run`, then `/northline-deploy triage` | 5 the loop, 6 the four decisions filled live | See the block below. |
 | 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 7 pushback questions | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
 | 50–62 | Debrief themes; "where is this hiding in your market?" | Before, after the agent, after triage, side by side | 8 to 13 | Have `docs/04-operating.md` open for the fee argument. Land: "The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology." |
 | 62–75 | Case one closer, or buffer | Off | 14, 15 | Buffer first. If minute 42 slipped, this is where you took the time from. |
@@ -47,7 +47,7 @@ The split matters. A single person doing both will fill the classification wait 
 
 **First, the server.** Say it once, slowly, and put it on the screen. In Claude Code, everyone pastes: `Start the check-in server in the background with uv run python -m northline.agent.server and tell me when http://127.0.0.1:8765 answers.` (Terminal users: a second window, `cd` into the folder, run that command, leave the window alone.) Then everyone opens `http://127.0.0.1:8765` and texts the agent one reading, "my BP was 184/112", so their own conversation is in the logs before the loop runs. Two minutes, no more; anyone who is not there watches the screen.
 
-**Type `/pm-run`.** It says how many items it is about to classify, then runs. The whole thing takes about five minutes: roughly two and a half in classification, half a minute for the diagnosis, a minute and a half for the proposals.
+**Type `/northline-pm-run`.** It says how many items it is about to classify, then runs. The whole thing takes about five minutes: roughly two and a half in classification, half a minute for the diagnosis, a minute and a half for the proposals.
 
 Talk through the classification wait. It is the only long pause in the session and it is the best two and a half minutes you have: explain what is being read, what a record looks like, and that the counting afterwards is plain Python. Do not fill it with typing.
 
@@ -57,7 +57,7 @@ Talk through the classification wait. It is the only long pause in the session a
 
 **Pick triage.** If the room picks a tool, the loop pushes back once with the metric that choice moves, and then accepts whatever they say. Let it.
 
-**Type `/deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 6 live as each one lands. With all four defaults the acceptance table comes back clean and there is no miss to read, so the lesson lives in Decision 1: if the room is drifting toward the default thresholds, ask "Is 180/110 too cautious? Northline's nurses are already drowning." A vote for 190/115 produces the 184/112 miss the rest of the session is built on.
+**Type `/northline-deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 6 live as each one lands. With all four defaults the acceptance table comes back clean and there is no miss to read, so the lesson lives in Decision 1: if the room is drifting toward the default thresholds, ask "Is 180/110 too cautious? Northline's nurses are already drowning." A vote for 190/115 produces the 184/112 miss the rest of the session is built on.
 
 **When the acceptance table prints**, stop. Read the misses before anything else. Quote the message and the nurse's note for every trap that failed. Then ask question 7.
 
@@ -79,11 +79,11 @@ Questions 3 to 6 each come with the Northline default. Say it is what Northline'
 
 ## Fallbacks
 
-**The wifi dies.** Almost everything here is local: the tools, the server, the dashboard, the simulator, the corpus, the reports. Only the model calls need the network, which means `/pm-run` and the acceptance run are the two things that stop. Every output they produce is already committed, so switch to a read-through: open `northline/pm/out/report.md`, then `diagnosis.md`, then `proposals/agent-triage.md`, and ask the seven questions exactly as written. You lose the live numbers. You keep the whole lesson.
+**The wifi dies.** Almost everything here is local: the tools, the server, the dashboard, the simulator, the corpus, the reports. Only the model calls need the network, which means `/northline-pm-run` and the acceptance run are the two things that stop. Every output they produce is already committed, so switch to a read-through: open `northline/pm/out/report.md`, then `diagnosis.md`, then `proposals/agent-triage.md`, and ask the seven questions exactly as written. You lose the live numbers. You keep the whole lesson.
 
 **A laptop falls behind.** Tell them to stop typing and watch the screen. The file names are on the slide and every file is in their folder; they can re-run anything afterwards. Nobody debugs a laptop during the do-along, including you.
 
-**A laptop says "Prompt is too long".** This happens when someone has a lot of other tools connected to their own Claude Code. It affects their chat window, not this folder: every script here runs with only Northline's tools loaded, so `/pm-run` and `/deploy triage` still work. Tell them to start a fresh session in the folder and carry on.
+**A laptop says "Prompt is too long".** This happens when someone has a lot of other tools connected to their own Claude Code. It affects their chat window, not this folder: every script here runs with only Northline's tools loaded, so `/northline-pm-run` and `/northline-deploy triage` still work. Tell them to start a fresh session in the folder and carry on.
 
 **The acceptance run fails.** Re-run it once — `uv run python -m northline.agents.triage.acceptance`. If it fails again, do not debug it in front of the room. Open `docs/03-triage-decisions.md` and use the nurse's key table instead: walk messages 5, 9, 12 and 13, ask the room what their thresholds would have done with each, and go to the dashboard from there. The lesson is the miss, not the script that found it.
 

@@ -62,6 +62,6 @@ Member identity-resolution service (read-only query against the enrollment direc
 1. **Identity confirmation before action**: a fuzzy-name match with confidence < 1.0 must prompt the agent to verbally confirm at least one additional identifier (DOB or phone) with the patient before the returned ID is used in any downstream call. 2. **No clinical data surfaced**: this tool returns only the member ID — never diagnosis, medication, or care-plan data; clinical questions must be routed to a nurse via `escalate_to_nurse` with the resolved ID as context. 3. **PII minimization**: phone numbers and names are logged only as hashed tokens in the audit trail. 4. **Rate limiting**: max 5 lookups per session to deter enumeration attacks against the member directory. 5. **Ambiguous match handling**: if two or more records match with equal confidence, the tool returns `ambiguous_match` and must hand off to a human staff member rather than guessing.
 
 ## Decision
-- [ ] Approve: `/expand tool-lookup_member_by_name_or_phone`
+- [ ] Approve: `/northline-expand tool-lookup_member_by_name_or_phone`
 - [ ] Reject, reason:
 - [ ] Merge into existing tool:

@@ -1,6 +1,6 @@
 # The four triage decisions
 
-This page is for the four choices `/deploy triage` asks you to make, and for seeing why each one is a clinical risk decision rather than a setting.
+This page is for the four choices `/northline-deploy triage` asks you to make, and for seeing why each one is a clinical risk decision rather than a setting.
 
 The triage agent sits between the check-in agent and the nurse queue. It does not talk to patients. For each message it does three things: gives it a tier, sends it somewhere, and drafts a reply a nurse can send or edit. Everything it does comes from a prompt, and the prompt is written from your four answers. Nothing else about the agent changes.
 

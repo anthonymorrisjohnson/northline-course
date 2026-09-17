@@ -15,14 +15,14 @@ def test_proposal_schema_constrains_personas():
 
 def test_render_tool():
     t = pr.render_tool(CAND, OUT)
-    assert "`request_refill`" in t and "12%" in t and "/expand tool-request_refill" in t and "{" not in t.split("```json")[0]
+    assert "`request_refill`" in t and "12%" in t and "/northline-expand tool-request_refill" in t and "{" not in t.split("```json")[0]
 
 
 def test_render_deploy_has_four_decisions():
     t = pr.render_deploy(QM, {"agent_name": "triage", "placement": "between escalation and the nurse queue", "purpose": "p",
                               "tools_needed": ["pending_messages"], "decisions_for_humans": [], "acceptance_test": "Exhibit E",
                               "metrics_it_should_move": ["median response"], "risks": "downgrading"})
-    assert t.count("\n1. ") == 1 and "4. " in t and "Urgent thresholds" in t and "/deploy triage" in t and "41%" in t
+    assert t.count("\n1. ") == 1 and "4. " in t and "Urgent thresholds" in t and "/northline-deploy triage" in t and "41%" in t
 
 
 def test_main_clears_stale_tool_proposals(tmp_path, monkeypatch):

@@ -27,18 +27,18 @@ You have seen this one. Try to answer it without looking at the Northline number
 ## Build track
 
 ```
-/new-experience telemed
+/northline-new-experience telemed
 cd ../telemed && uv sync && uv run python scripts/check.py
 ```
 
 Then, in a Claude Code session in the new folder:
 
-1. `/brief telemed` — answer as the founders. Section 5 is the whole exercise; write the clinician queue into it before the tool asks you to.
-2. `/tools telemed` — it builds the tools your brief named, tests first, one at a time. Notice that the patient tools and the partner tools sit in the same registry.
-3. `/agent telemed` — it writes the agent brief and offers to install it as the live prompt. Say yes.
+1. `/northline-brief telemed` — answer as the founders. Section 5 is the whole exercise; write the clinician queue into it before the tool asks you to.
+2. `/northline-tools telemed` — it builds the tools your brief named, tests first, one at a time. Notice that the patient tools and the partner tools sit in the same registry.
+3. `/northline-agent telemed` — it writes the agent brief and offers to install it as the live prompt. Say yes.
 4. Start the page: `uv run python -m telemed.agent.server`, then open `http://127.0.0.1:8765`.
 5. Have five conversations as a patient. Send one of them at 2am in your head and write it the way someone would actually write it. Send one that should go straight to a clinician.
-6. `/pm-run` on your own five conversations, and read the unmet-need list against your own brief's section 7.
+6. `/northline-pm-run` on your own five conversations, and read the unmet-need list against your own brief's section 7.
 
 ## Answer sketch
 

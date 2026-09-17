@@ -1,6 +1,6 @@
 ---
-name: deploy
-description: Deploy an agent from an approved deployment proposal. For triage, interview the user on the four clinical-risk decisions, render the prompt, run the Exhibit E acceptance test against the nurse's key, show the misses, register the deployment, and re-run the company model. Usage /deploy triage
+name: northline-deploy
+description: Deploy an agent from an approved deployment proposal. For triage, interview the user on the four clinical-risk decisions, render the prompt, run the Exhibit E acceptance test against the nurse's key, show the misses, register the deployment, and re-run the company model. Usage /northline-deploy triage
 arguments: [agent]
 ---
 

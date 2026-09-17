@@ -8,7 +8,7 @@ One named person reads `northline/pm/out/report.md` every week. Not a committee,
 
 They are looking for three things. A candidate whose count is climbing. A queue metric that moved. And the quotes, which are the only part of the report that will change anyone's mind in a meeting.
 
-Re-run `/pm-run` to refresh it. The loop picks up anything new in `northline/logs/` alongside the committed corpus, so the report grows with the product rather than being a snapshot of the day it was written.
+Re-run `/northline-pm-run` to refresh it. The loop picks up anything new in `northline/logs/` alongside the committed corpus, so the report grows with the product rather than being a snapshot of the day it was written.
 
 ## Every proposal ends in a decision box
 
@@ -16,7 +16,7 @@ Open any file in `northline/pm/out/proposals/` and scroll to the bottom:
 
 ```
 ## Decision
-- [ ] Approve: `/deploy triage`
+- [ ] Approve: `/northline-deploy triage`
 - [ ] Reject, reason:
 ```
 
@@ -28,7 +28,7 @@ The reject reason matters more than the approval. "The queue metrics say this mo
 
 Two gates, both of them cheap, neither of them optional.
 
-**The acceptance test runs first.** `/deploy triage` renders the prompt, runs the fifteen Exhibit E messages against the nurse's key, and shows you the miss table before it shows you anything good. The deployment is registered afterwards. You always see what you got wrong before you see your improved numbers.
+**The acceptance test runs first.** `/northline-deploy triage` renders the prompt, runs the fifteen Exhibit E messages against the nurse's key, and shows you the miss table before it shows you anything good. The deployment is registered afterwards. You always see what you got wrong before you see your improved numbers.
 
 **A human signs the decisions.** `northline/agents/triage/decisions.json` holds the four choices and a `chosen_by` field. It says `northline_default` when every value is the default and `attendee` when any value was changed. In a real company that field carries a person's name, and that person is the one who answers for what the thresholds did. The file is small enough to read aloud in a meeting, which is the point.
 

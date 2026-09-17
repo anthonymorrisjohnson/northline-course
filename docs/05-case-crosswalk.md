@@ -15,7 +15,7 @@ The case document is not in this repo. It stays on paper, in the facilitator's p
 | The pocket memo | Unchanged, on paper | Read in the room at minute 12. Nothing in the repo replaces it. |
 | The role cards | Unchanged, on paper | The room reads the exhibits in role exactly as before. |
 | The board recommendation template | Unchanged, on paper | Filled in by hand between minutes 15 and 25, before anyone touches a laptop. |
-| The threshold trap | Decision 1 in `/deploy triage` | Message 12 is 184/112 with a headache. At the default 180/110 the agent catches it. At 190/115 it does not, because the prompt applies thresholds literally. The trap is now something the room can set and watch fail. |
+| The threshold trap | Decision 1 in `/northline-deploy triage` | Message 12 is 184/112 with a headache. At the default 180/110 the agent catches it. At 190/115 it does not, because the prompt applies thresholds literally. The trap is now something the room can set and watch fail. |
 | The 40-hour path | The after-hours rule, decision 3 | Choosing `queue_for_morning` is the 40-hour path: message 10 at 1:48am is tiered urgent and then waits for a shift to start. The other two options page an on-call nurse or tell the patient to call 911. |
 | The disengaged cohort | `patients_inactive_after_escalation` in `northline/pm/out/queue_metrics.json` | The board's 340 becomes 342 when counted from the queue log: patients who stopped responding after an escalation nobody answered. It is also a row on the dashboard and a trend chart. |
 | The math table | The **Sign Prairie** toggle on the dashboard | Weeks 40 to 52, with and without the deployment the room just built. Same arithmetic, redrawn every ten seconds from the model. |

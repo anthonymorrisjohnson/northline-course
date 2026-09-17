@@ -18,6 +18,6 @@ You are preparing an attendee's laptop. Do these in order. Stop with a plain-lan
 7. Finish with exactly this, filled in:
    READY: <OS>, <python version>, <claude version>, northline tools: patient <n> plan <n>
    Ask them to paste that line into the workshop group chat.
-   Then two lines: "In the room you will type /pm-run and /deploy triage. Nothing else."
+   Then two lines: "In the room you will type /northline-pm-run and /northline-deploy triage. Nothing else."
 
 Never run git. Never modify files other than `.mcp.json`, and only through the check script. Never install anything other than uv.

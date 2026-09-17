@@ -1,6 +1,6 @@
 ---
-name: agent
-description: Write briefs/$name-agent-brief.md from templates/agent-brief.md, using the hard rules from briefs/$name.md, and offer to install it as the live agent prompt. Usage /agent <name>
+name: northline-agent
+description: Write briefs/$name-agent-brief.md from templates/agent-brief.md, using the hard rules from briefs/$name.md, and offer to install it as the live agent prompt. Usage /northline-agent <name>
 arguments: [name]
 ---
 

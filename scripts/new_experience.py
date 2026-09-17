@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 NAME_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
-_SKILLS = ("northline-setup", "brief", "tools", "agent", "pm-run", "expand", "deploy")
+_SKILLS = ("northline-setup", "northline-brief", "northline-tools", "northline-agent", "northline-pm-run", "northline-expand", "northline-deploy")
 _SUBSTITUTE_SUFFIXES = (".py", ".md", ".html", ".json", ".toml")
 
 _PATIENT_STUB = '"""Empty scaffold. Add {name} tool functions here and register them in registry.py."""\n'
@@ -18,7 +18,7 @@ _PATIENT_STUB = '"""Empty scaffold. Add {name} tool functions here and register 
 _REGISTRY = '''"""The single list of {name} tools. Both front doors read this.
 
 Adding a tool is one function with a docstring plus one line here. A tool with `requires`
-appears only once that deployment is live in data/deployments.json; that is how a /deploy-style
+appears only once that deployment is live in data/deployments.json; that is how a /{name}-deploy-style
 skill changes what agents can do without editing Python on stage.
 """
 from dataclasses import dataclass
@@ -94,7 +94,7 @@ def create(name: str, dest: Path, repo_root: Path | None = None) -> Path:
 
     # take-home skills
     for skill in _SKILLS:
-        _copy_tree(repo_root / ".claude" / "skills" / skill, target / ".claude" / "skills" / skill, name)
+        _copy_tree(repo_root / ".claude" / "skills" / skill, target / ".claude" / "skills" / skill.replace("northline", name), name)
 
     # top-level project files
     _copy_file(repo_root / ".mcp.json", target / ".mcp.json", name)
@@ -158,10 +158,10 @@ def create(name: str, dest: Path, repo_root: Path | None = None) -> Path:
     # README
     (target / "README.md").write_text(
         f"# {name.capitalize()}\n\n"
-        f"Scaffolded from the Northline course's take-home skills: `/brief`, `/tools`, "
-        f"`/agent`, `/pm-run`, `/expand`, `/deploy`, and `/northline-setup`.\n\n"
+        f"Scaffolded from the Northline course's take-home skills: `/{name}-brief`, `/{name}-tools`, "
+        f"`/{name}-agent`, `/{name}-pm-run`, `/{name}-expand`, `/{name}-deploy`, and `/{name}-setup`.\n\n"
         f"No corpus on purpose — the loop runs on your own first conversations, not generated ones.\n\n"
-        f"Start with `/brief {name}`.\n",
+        f"Start with `/{name}-brief {name}`.\n",
         encoding="utf-8",
     )
 

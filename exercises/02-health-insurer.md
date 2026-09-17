@@ -25,18 +25,18 @@ Write one sentence before you read on: **when members can get a straight answer 
 ## Build track
 
 ```
-/new-experience insurer
+/northline-new-experience insurer
 cd ../insurer && uv sync && uv run python scripts/check.py
 ```
 
 Then, in a Claude Code session in the new folder:
 
-1. `/brief insurer` — answer as the insurer. When it asks where the bottleneck moves, do not answer "the call centre"; that queue is shrinking.
-2. `/tools insurer` — it builds the tools your brief named, tests first, one at a time.
-3. `/agent insurer` — it writes the agent brief and offers to install it as the live prompt. Say yes.
+1. `/northline-brief insurer` — answer as the insurer. When it asks where the bottleneck moves, do not answer "the call centre"; that queue is shrinking.
+2. `/northline-tools insurer` — it builds the tools your brief named, tests first, one at a time.
+3. `/northline-agent insurer` — it writes the agent brief and offers to install it as the live prompt. Say yes.
 4. Start the page: `uv run python -m insurer.agent.server`, then open `http://127.0.0.1:8765`.
 5. Have five conversations as a member. Make one of them a denied claim. Make one of them ask for something that would commit the insurer to paying, and read what the agent does with it.
-6. `/pm-run` on your own five conversations.
+6. `/northline-pm-run` on your own five conversations.
 
 ## Answer sketch
 

@@ -29,10 +29,11 @@ def test_scaffold_shape(tmp_path):
     assert (dest / "templates" / "use-case-brief.md").exists()
     assert (dest / "templates" / "agent-brief.md").exists()
     assert (dest / "templates" / "taxonomy.md").exists()
-    for skill in ("northline-setup", "brief", "tools", "agent", "pm-run", "expand", "deploy"):
-        assert (dest / ".claude" / "skills" / skill / "SKILL.md").exists()
+    for skill in ("setup", "brief", "tools", "agent", "pm-run", "expand", "deploy"):
+        assert (dest / ".claude" / "skills" / f"demo_exp-{skill}" / "SKILL.md").exists()
     assert not (dest / ".claude" / "skills" / "generate-corpus").exists()
-    assert not (dest / ".claude" / "skills" / "new-experience").exists()
+    assert not (dest / ".claude" / "skills" / "northline-new-experience").exists()
+    assert not (dest / ".claude" / "skills" / "northline-deploy").exists()
 
     assert (dest / "demo_exp" / "__init__.py").exists()
     assert (dest / "demo_exp" / "tools" / "store.py").exists()
@@ -50,7 +51,7 @@ def test_scaffold_shape(tmp_path):
     assert (dest / "scripts" / "check.py").exists()
     assert (dest / "tests" / "conftest.py").exists()
     assert (dest / "README.md").exists()
-    assert "/brief demo_exp" in (dest / "README.md").read_text()
+    assert "/demo_exp-brief demo_exp" in (dest / "README.md").read_text()
 
     # excluded on purpose
     for excluded in ("corpus", "pm/out", "sim/out", "docs", "exercises", "slides", ".superpowers"):
@@ -88,8 +89,8 @@ def test_no_northline_string_remains(tmp_path):
 
 def test_scaffolded_skills_do_not_assume_northline_tests(tmp_path):
     dest = create("demo_exp", tmp_path, repo_root=ROOT)
-    agent_skill = (dest / ".claude" / "skills" / "agent" / "SKILL.md").read_text()
-    tools_skill = (dest / ".claude" / "skills" / "tools" / "SKILL.md").read_text()
+    agent_skill = (dest / ".claude" / "skills" / "demo_exp-agent" / "SKILL.md").read_text()
+    tools_skill = (dest / ".claude" / "skills" / "demo_exp-tools" / "SKILL.md").read_text()
 
     assert "demo_exp" in agent_skill
     assert "test_prompt.py" not in agent_skill

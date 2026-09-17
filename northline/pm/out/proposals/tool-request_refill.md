@@ -65,6 +65,6 @@ EHR/ePrescribing API (e.g., Surescripts) for refill request submission; insuranc
 1. This tool performs administrative coordination only — it never confirms, denies, or adjusts the clinical appropriateness of any medication. 2. Any `insurance_rejection: true` or `days_supply_remaining` ≤ 7 MUST trigger an immediate call to `escalate_to_nurse`, passing `medication_name`, `days_supply_remaining`, `insurance_rejection`, and `patient_note` as context so the nurse can act without re-interviewing the patient. 3. The SMS response to the patient must not include dosing guidance, therapeutic alternatives, or any language that could be construed as clinical advice — it is limited to confirming the request was received and that a nurse will follow up if escalation fired. 4. `patient_note` must be treated as free text from an unverified source and must not be relayed to third-party systems without PHI-handling compliance checks.
 
 ## Decision
-- [ ] Approve: `/expand tool-request_refill`
+- [ ] Approve: `/northline-expand tool-request_refill`
 - [ ] Reject, reason:
 - [ ] Merge into existing tool:

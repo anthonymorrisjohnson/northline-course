@@ -1,13 +1,13 @@
 # The loop
 
-This page is for understanding what happens when you type `/pm-run`: six stages that turn a pile of conversations and a queue log into a named bottleneck and a short list of things to build.
+This page is for understanding what happens when you type `/northline-pm-run`: six stages that turn a pile of conversations and a queue log into a named bottleneck and a short list of things to build.
 
 ```
 transcripts/*.json ─┐
 tool_calls.jsonl   ─┼─ classify.py ─► classified.jsonl ─┐
 queue.jsonl        ─┘   (claude -p)                     ├─ aggregate.py ─► report.md ─► diagnose.py ─► diagnosis.md
                         queue timestamps ───────────────┘   (python)                    (claude -p)
-                                                                 └─► candidates.json ─► propose.py ─► proposals/{tool-*, agent-triage}.md ─► /expand | /deploy
+                                                                 └─► candidates.json ─► propose.py ─► proposals/{tool-*, agent-triage}.md ─► /northline-expand | /northline-deploy
 ```
 
 The whole run takes about five minutes on the committed corpus. Classification is about two and a half minutes of it, the diagnosis about half a minute, the proposals about a minute and a half. The presenter talks through the classification wait.
@@ -34,7 +34,7 @@ It counts the records, groups the unmet needs into candidate tools with counts a
 
 File: `northline/pm/diagnose.py`. Calls Claude again.
 
-It reads the aggregate and writes one page of plain words, `diagnosis.md`, naming the bottleneck and the one metric to watch. `/pm-run` does not show you this page until you have answered the question it asks first, which is the point of the gate: a room that has already said what it thinks is a room that argues with the answer instead of nodding at it.
+It reads the aggregate and writes one page of plain words, `diagnosis.md`, naming the bottleneck and the one metric to watch. `/northline-pm-run` does not show you this page until you have answered the question it asks first, which is the point of the gate: a room that has already said what it thinks is a room that argues with the answer instead of nodding at it.
 
 ## 5. Propose
 
@@ -44,7 +44,7 @@ Two kinds of proposal come out. Tool expansions, one per candidate need, filling
 
 ## 6. Ship
 
-Commands: `/expand <proposal>` for a tool, `/deploy <agent>` for an agent.
+Commands: `/northline-expand <proposal>` for a tool, `/northline-deploy <agent>` for an agent.
 
 A tool expansion writes a spec, writes failing tests, writes the function, registers it, and gets the tests green. A deployment asks for the decisions, renders the prompt from them, runs the acceptance test, shows the misses, and only then registers the deployment and re-runs the company model.
 

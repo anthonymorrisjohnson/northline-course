@@ -25,6 +25,6 @@ Example quotes:
 {safety_notes}
 
 ## Decision
-- [ ] Approve: `/expand {file_stem}`
+- [ ] Approve: `/northline-expand {file_stem}`
 - [ ] Reject, reason:
 - [ ] Merge into existing tool:

@@ -6,7 +6,7 @@ Fifteen slides for the two presenters. A white setup slide first, then a dark ti
 
 - Shown on screen while people arrive, and left up until the last READY line. Three cards: open the Claude desktop app, New project, a new empty folder called `northline`; paste the line in the band below and, when it finishes, close and reopen the project; `/northline-setup`, stop at READY
 - Band: the line to paste. "Download github.com/anthonymorrisjohnson/northline-course as a ZIP, unzip it so the files sit directly in this folder, then delete the zip."
-- No terminal anywhere on this slide. The server window, texting the agent, `/pm-run` and `/deploy triage` are cued from the front at minute 25
+- No terminal anywhere on this slide. The server window, texting the agent, `/northline-pm-run` and `/northline-deploy triage` are cued from the front at minute 25
 
 Speaker: do not present this slide. Point at it. Walk the room while it is up and look for anyone stuck on step 1; that is the person who needs help before anything else. Expect 40 to 70 model calls per laptop on their own Claude account over the hour.
 
@@ -14,7 +14,7 @@ Speaker: do not present this slide. Point at it. Walk the room while it is up an
 
 - A 75-minute workshop: a paper case, a live tool loop, a board meeting you have to defend
 - Two roles: Room reads the case and asks the questions; Screen drives the dashboard and two commands
-- Two commands all session: `/pm-run`, `/deploy triage`
+- Two commands all session: `/northline-pm-run`, `/northline-deploy triage`
 
 Speaker: what the room will do in 75 minutes. Land it before the email goes up: everything that follows is the same case, run live.
 
@@ -40,7 +40,7 @@ Speaker: this is how Prairie got impressed. Her agent pulled the engagement numb
 - `corpus/patient`, `corpus/plan`, `corpus/queue.jsonl` → **classify** (calls Claude) → `classified.jsonl`
 - → **aggregate** (plain Python) → `report.md`, `queue_metrics.json`
 - → **diagnose** (calls Claude) → `diagnosis.md`, naming the bottleneck and the one metric to watch
-- → **propose** → tool-expansion proposals and the triage deployment proposal → `/expand` or `/deploy`
+- → **propose** → tool-expansion proposals and the triage deployment proposal → `/northline-expand` or `/northline-deploy`
 
 Speaker: the whole run takes about five minutes; roughly half of it is the classification step. Talk through the wait — that pause is where half the teaching happens.
 
@@ -51,7 +51,7 @@ Speaker: the whole run takes about five minutes; roughly half of it is the class
 - **After-hours rule:** _[blank — filled live]_
 - **Consent ("don't tell the doctor"):** _[blank — filled live]_
 
-Speaker: four decisions, one at a time, voted by the room during `/deploy triage`. Each has a Northline default; say so, and don't let the room take all four without a vote.
+Speaker: four decisions, one at a time, voted by the room during `/northline-deploy triage`. Each has a Northline default; say so, and don't let the room take all four without a vote.
 
 ## Slide 7: Pushback questions
 
@@ -124,7 +124,7 @@ Speaker: hold this one line. It is the reason the four decisions on slide 6 have
 ## Slide 15: Take it home
 
 - Unzip the course folder, run `/northline-setup`
-- Type `/new-experience` and build a third front door for a persona this repo doesn't cover
+- Type `/northline-new-experience` and build a third front door for a persona this repo doesn't cover
 - Three take-home exercises, in the exercises folder, each buildable with the same skills used today
 - The question to carry out of the room: **where is this bottleneck hiding in your market?**
 

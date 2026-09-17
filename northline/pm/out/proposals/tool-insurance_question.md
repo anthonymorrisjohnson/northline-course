@@ -68,6 +68,6 @@ Care coordination platform (e.g., Healthie or equivalent) to create a task assig
 1. The tool never returns insurance coverage determinations, clinical guidance, or dosing advice to the patient — the SMS response is always a warm handoff message (e.g., "I've flagged this for our care team; someone will call you within one business day"). 2. If days_without > 0 AND item_name matches the patient's active chronic-disease medication or monitoring supply list, the tool must simultaneously create a nurse escalation task (same-business-day callback) alongside the administrative task — the patient going without critical supplies is a clinical safety event, not just a billing issue. 3. patient_message_verbatim must be passed to every downstream task so the nurse or coordinator has the patient's own words, not a paraphrase. 4. No PHI from this tool's output is returned to the SMS thread beyond a confirmation message.
 
 ## Decision
-- [ ] Approve: `/expand tool-insurance_question`
+- [ ] Approve: `/northline-expand tool-insurance_question`
 - [ ] Reject, reason:
 - [ ] Merge into existing tool:

@@ -1,10 +1,10 @@
 ---
-name: tools
-description: Read briefs/$name.md and build any tool it names that does not exist yet, running the /expand procedure for each. Usage /tools <name>
+name: northline-tools
+description: Read briefs/$name.md and build any tool it names that does not exist yet, running the /northline-expand procedure for each. Usage /northline-tools <name>
 arguments: [name]
 ---
 
-Read `briefs/$name.md`. From section 2 (the jobs, ranked) and section 7 (first release), list the tools it names. For each one that is not already a line in `northline/tools/registry.py`, run the repo's one procedure for adding a tool — the same one `/expand` uses:
+Read `briefs/$name.md`. From section 2 (the jobs, ranked) and section 7 (first release), list the tools it names. For each one that is not already a line in `northline/tools/registry.py`, run the repo's one procedure for adding a tool — the same one `/northline-expand` uses:
 
 1. **Spec.** Copy `templates/tool-spec.md` to `northline/tools/specs/<tool_name>.md`, filling every placeholder from the brief's description of that job. Module: `patient.py` when the tool serves the persona that talks to the check-in agent; `plan.py` when it serves the persona that works through MCP. Keyword arguments, typed. `requires` is `none` unless the brief says the tool belongs to a not-yet-deployed agent. Three test cases minimum: happy path, `not_found`, `error`.
 2. **Tests first.** Add the tests to `tests/test_<module>_tools.py`; if that file does not exist, create it with `from northline.tools import <module> as m` and the `data_dir`/`log_dir` fixtures from `tests/conftest.py`. Run `uv run pytest -q` and confirm they fail.

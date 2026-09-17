@@ -84,6 +84,6 @@ Three integrations required: (1) **Nurse escalation queue** — any call where `
 1. **Clinical gate first**: If `prescription_status` is `needs_new_script` or `needs_refill_auth`, the tool must escalate to a nurse with the complete payload before initiating any logistics action — the tool never tells the patient how to obtain or renew a prescription. 2. **Urgency scoring**: `days_without_medication >= 3` for a cardiovascular or chronic-disease medication (e.g., lisinopril, metformin) must set nurse priority to URGENT and target a ≤2-hour callback SLA. 3. **No clinical promises via SMS**: Confirmation messages to the patient must be limited to logistics status ("A nurse will call you within 2 hours" or "A ride has been requested") — never medication guidance, dosing advice, or prescription timelines. 4. **HIPAA**: Pharmacy name, medication, and distance fields constitute PHI in combination; payloads to NEMT and pharmacy APIs must be transmitted over encrypted channels with minimum-necessary data. 5. **Fallback**: If NEMT booking fails, the tool must re-escalate to the nurse rather than leaving the patient without a resolution path.
 
 ## Decision
-- [ ] Approve: `/expand tool-pharmacy_logistics`
+- [ ] Approve: `/northline-expand tool-pharmacy_logistics`
 - [ ] Reject, reason:
 - [ ] Merge into existing tool:

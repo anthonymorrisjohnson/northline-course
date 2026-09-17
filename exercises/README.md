@@ -8,9 +8,9 @@ Each one gives you a company, two personas, and the same three questions: which 
 
 **Read track — about twenty minutes, no laptop.** Read the company, answer the three questions on paper, then read the answer sketch. Good on a plane. Good for a leadership team to do together and compare.
 
-**Build track — about an hour, laptop.** Scaffold a fresh copy of the course's skills for that company, interview yourself with `/brief`, build the tools it names, install the agent brief, have five real conversations with it, then run `/pm-run` on your own five conversations and see what the loop says about them. The point is not the tools. The point is watching a loop that has only ever seen five conversations still tell you something you did not plan.
+**Build track — about an hour, laptop.** Scaffold a fresh copy of the course's skills for that company, interview yourself with `/northline-brief`, build the tools it names, install the agent brief, have five real conversations with it, then run `/northline-pm-run` on your own five conversations and see what the loop says about them. The point is not the tools. The point is watching a loop that has only ever seen five conversations still tell you something you did not plan.
 
-The diagnosis and proposal prompts in `northline/pm/diagnose.py` and `propose.py` describe Northline; edit their first sentences for your company before running `/pm-run` in a scaffold.
+The diagnosis and proposal prompts in `northline/pm/diagnose.py` and `propose.py` describe Northline; edit their first sentences for your company before running `/northline-pm-run` in a scaffold.
 
 Do the read track first even if you intend to build. The build track will disagree with you, and that is more useful when you have written down what you thought.
 
@@ -32,6 +32,6 @@ The bottleneck question is different. There, a wrong answer is usually recognisa
 
 ## Before the build track
 
-You need the course folder you already have, and `uv`. `/new-experience <name>` creates a sibling folder next to it with the take-home skills, an empty tool registry, and no corpus — the loop runs on conversations you have yourself, not generated ones.
+You need the course folder you already have, and `uv`. `/northline-new-experience <name>` creates a sibling folder next to it with the take-home skills, an empty tool registry, and no corpus — the loop runs on conversations you have yourself, not generated ones.
 
 Nothing in these exercises touches the Northline folder.

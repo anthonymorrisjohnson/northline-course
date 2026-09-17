@@ -21,7 +21,7 @@ rather use a terminal: unzip the folder yourself, `cd` into it, run `claude`, th
 You watch Northline's check-in agent work, then run the same product-management loop
 a team would run on its logs: classify what patients and nurses are actually saying,
 name the bottleneck it reveals, and decide what to build. You'll type two commands,
-`/pm-run` and `/deploy triage`, and everything else is reading and answering questions
+`/northline-pm-run` and `/northline-deploy triage`, and everything else is reading and answering questions
 together. The deployment you build shows up live on the dashboard, alongside what it
 would mean for the health plan's own numbers.
 
@@ -36,8 +36,8 @@ would mean for the health plan's own numbers.
 
 ## Take home
 
-The skills used to build the check-in agent and its tools — `/brief`, `/tools`,
-`/agent`, `/new-experience` — stay on your machine, ready to use on your own work.
+The skills used to build the check-in agent and its tools — `/northline-brief`, `/northline-tools`,
+`/northline-agent`, `/northline-new-experience` — stay on your machine, ready to use on your own work.
 Three take-home exercises in `exercises/` let you run the same loop on a case of
 your own.
 

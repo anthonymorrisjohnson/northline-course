@@ -1,6 +1,6 @@
 ---
-name: brief
-description: Interview the user about one AI experience from their own company and fill templates/use-case-brief.md, ending in a front-door decision and a guess at where the bottleneck will move. Usage /brief <short_name>
+name: northline-brief
+description: Interview the user about one AI experience from their own company and fill templates/use-case-brief.md, ending in a front-door decision and a guess at where the bottleneck will move. Usage /northline-brief <short_name>
 arguments: [name]
 ---
 

@@ -25,18 +25,18 @@ Write one sentence before you read on: **when customers stop phoning to ask whet
 ## Build track
 
 ```
-/new-experience pharmacy
+/northline-new-experience pharmacy
 cd ../pharmacy && uv sync && uv run python scripts/check.py
 ```
 
 Then, in a Claude Code session in the new folder:
 
-1. `/brief pharmacy` — answer as the chain. It will push on where the bottleneck moves; do not let yourself off.
-2. `/tools pharmacy` — it builds the tools your brief named, tests first, one at a time.
-3. `/agent pharmacy` — it writes the agent brief and offers to install it as the live prompt. Say yes.
+1. `/northline-brief pharmacy` — answer as the chain. It will push on where the bottleneck moves; do not let yourself off.
+2. `/northline-tools pharmacy` — it builds the tools your brief named, tests first, one at a time.
+3. `/northline-agent pharmacy` — it writes the agent brief and offers to install it as the live prompt. Say yes.
 4. Start the check-in page: `uv run python -m pharmacy.agent.server`, then open `http://127.0.0.1:8765`.
 5. Have five conversations as a customer. Make one of them easy. Make one of them something you did not build a tool for, and read what the agent says when it cannot help.
-6. `/pm-run` on your own five conversations. There is no corpus here, so the report is entirely about what you just said to it.
+6. `/northline-pm-run` on your own five conversations. There is no corpus here, so the report is entirely about what you just said to it.
 
 ## Answer sketch
 

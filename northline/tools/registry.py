@@ -1,7 +1,7 @@
 """The single list of Northline tools. Both front doors and the triage agent read this.
 
 Adding a tool is one function with a docstring plus one line here. A tool with `requires`
-appears only once that deployment is live in data/deployments.json; that is how /deploy
+appears only once that deployment is live in data/deployments.json; that is how /northline-deploy
 changes what agents can do without editing Python on stage.
 """
 from dataclasses import dataclass
