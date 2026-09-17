@@ -37,7 +37,7 @@ def test_chat_rejects_malformed_session_id(log_dir, data_dir, monkeypatch):
 def test_slides_served_with_document_shell(log_dir):
     r = TestClient(server.app).get("/slides")
     assert r.status_code == 200 and r.text.startswith("<!doctype html>")
-    assert "Moving the" in r.text and r.text.count('<section class="slide') == 27
+    assert "Moving the" in r.text and r.text.count('<section class="slide') == 16
 
 
 def test_slides_missing_is_404(log_dir, monkeypatch, tmp_path):

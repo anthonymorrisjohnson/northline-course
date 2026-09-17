@@ -77,7 +77,7 @@ h3{font-size:34px;line-height:1.15;font-weight:700}
 .cols.c4{grid-template-columns:repeat(4,1fr)}
 
 .roles{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.role{border-top:4px solid var(--accent);padding-top:14px;font-size:24px;line-height:1.3}
+.role{border-top:1px solid var(--rule);padding-top:18px;font-size:24px;line-height:1.3}
 .role b{display:block;font-family:var(--display);font-size:27px;margin-bottom:6px}
 .role span{color:var(--muted)}
 
@@ -154,9 +154,16 @@ ol.steps li{counter-increment:s;display:grid;grid-template-columns:96px 1fr;alig
 ol.steps li::before{content:counter(s);font:800 72px/1 var(--display);color:var(--accent)}
 ol.steps li span{display:block;font:400 25px/1.35 var(--body);color:var(--muted);margin-top:6px}
 
-ul.push{margin:0;padding:0;list-style:none;display:grid;gap:20px}
-ul.push li{font-size:35px;line-height:1.3;padding-left:30px;border-left:5px solid var(--accent);max-width:36em}
-ul.push li.hot{border-color:var(--alert)}
+ul.push{margin:0;padding:0;list-style:none;display:grid;gap:24px;counter-reset:q}
+ul.push li{counter-increment:q;display:grid;grid-template-columns:64px 1fr;align-items:baseline;font-size:35px;line-height:1.3;max-width:38em}
+ul.push li::before{content:counter(q);font:500 26px/1 var(--mono);color:var(--accent)}
+ul.push li.hot{color:var(--alert)}
+ul.push li.hot::before{color:var(--alert)}
+
+ul.themes{margin:0;padding:0;list-style:none;display:grid;gap:22px}
+ul.themes li{display:grid;gap:6px;max-width:1240px}
+ul.themes li b{font:700 40px/1.12 var(--display);letter-spacing:-.01em}
+ul.themes li span{font-size:25px;line-height:1.35;color:var(--muted)}
 
 /* ---------- presenter and notes ---------- */
 #notesbar{position:fixed;left:0;right:0;bottom:0;max-height:42%;overflow:auto;background:var(--ink);color:var(--paper);padding:18px 24px calc(18px + env(safe-area-inset-bottom,0px));font-size:18px;line-height:1.5;z-index:5}
@@ -186,6 +193,9 @@ body.mode-list .frame{border:1px solid var(--rule);border-radius:6px}
 body.mode-list .notes-out{display:block;font-size:15px;line-height:1.55;color:var(--ink);padding:12px 2px 0}
 body.mode-list .notes-out b{color:var(--accent)}
 body.mode-list .frag{visibility:visible}
+/* still-image export: everything revealed, no key hints */
+body.mode-export .frag{visibility:visible}
+body.mode-export .hint{visibility:hidden}
 @media (prefers-reduced-motion:no-preference){.frag.on{animation:fin .25s ease-out}}
 @keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 </style>
@@ -204,7 +214,7 @@ body.mode-list .frag{visibility:visible}
   <aside class="notes">
     <p><b>Both</b>Do not present this slide. Point at it. Leave it up until the last READY line.</p>
     <p><b>Room</b>Walk the room. Anyone stuck on step 1 is the person to help before anything else.</p>
-    <p><b>Know</b>Each laptop makes 40 to 70 model calls over the hour on its own Claude account. Nothing else on this slide needs a terminal; the two commands are cued from the front at minute 25.</p>
+    <p><b>Know</b>Each laptop makes 40 to 70 model calls over the hour on its own Claude account. The two commands are cued from the front at minute 25.</p>
   </aside>
 </section>
 
@@ -213,11 +223,11 @@ body.mode-list .frag{visibility:visible}
   <h1>Moving the<br>bottleneck</h1>
   <p class="lead">Northline Care. A live case, a real decision, and two commands.</p>
   <div class="spacer"></div>
-  <p class="sub mono" style="font-size:20px">→ next · ← back · P presenter view · N notes · F full screen</p>
+  <p class="sub mono hint" style="font-size:20px">→ next · ← back · P presenter view · N notes · F full screen</p>
   <aside class="notes">
-    <p><b>Room</b>Welcome. Say what the next 75 minutes are: you will read a case in role, argue one decision, then open laptops and type two commands. Nobody writes code.</p>
+    <p><b>Room</b>Welcome. Say what the next 75 minutes are: read a case in role, argue one decision, then open laptops and type two commands. Nobody writes code.</p>
     <p><b>Do not</b>Name the lesson. The room has to find it.</p>
-    <p><b>Screen</b>Dashboard tab open behind this deck, server running, only the check-in agent deployed.</p>
+    <p><b>Screen</b>Dashboard in the next tab, server running, only the check-in agent deployed.</p>
   </aside>
 </section>
 
@@ -232,12 +242,12 @@ body.mode-list .frag{visibility:visible}
   </div>
   <aside class="notes">
     <p><b>Room</b>Read the email aloud, slowly, exactly as written.</p>
-    <p><b>Ask</b>"Hands up. Sign, sign with conditions, or decline?" Count each out loud and remember the numbers. You bring them back at minute 42.</p>
+    <p><b>Ask</b>"Hands up. Sign, sign with conditions, or decline?" Count each out loud and remember the numbers. You bring them back at the board meeting.</p>
     <p><b>Time</b>You should be at two minutes.</p>
   </aside>
 </section>
 
-<section class="slide" data-seg="0" data-title="Your roles">
+<section class="slide" data-seg="1" data-title="Your roles, and the question">
   <div class="kicker">You are Northline's executive team</div>
   <h2>The board meets Thursday. Do you sign?</h2>
   <p class="lead">And what, if anything, do you change in the next 90 days either way?</p>
@@ -249,21 +259,11 @@ body.mode-list .frag{visibility:visible}
     <div class="role"><b>Head of Product and AI</b><span>The agent works. A backlog is ready to ship.</span></div>
     <div class="role"><b>Head of Partnerships</b><span>Owns the Prairie relationship.</span></div>
   </div>
+  <p class="sub mono" style="font-size:24px">12 minutes to read the exhibits in role · then 10 to write your one-page board recommendation</p>
   <aside class="notes">
-    <p><b>Room</b>Teams of four or five, mixed across companies. Hand out role cards against type: a CTO plays the clinical lead.</p>
-    <p><b>Note</b>The question is neutral on purpose. Do not hint at operations.</p>
-    <p><b>Time</b>Minute three. Move on.</p>
-  </aside>
-</section>
-
-<section class="slide" data-seg="1" data-title="Read the exhibits">
-  <div class="kicker">In role, in your teams</div>
-  <div class="big num">12<small>minutes</small></div>
-  <p class="lead">Read the board update, the operations dashboard, and the email. Decide what you walk into Thursday with.</p>
-  <aside class="notes">
-    <p><b>Room</b>Keep time. Walk the tables. At minute 12 of reading, hand the pocket memo to any team that has not found the problem.</p>
-    <p><b>Screen</b>Dashboard stays on the projector. At minute 8, go to the next slide and run the Prairie demo. Three minutes, no more.</p>
-    <p><b>Listen for</b>Teams planning rollout logistics. They only read Exhibit A.</p>
+    <p><b>Room</b>Teams of four or five, mixed across companies. Role cards against type: a CTO plays the clinical lead. The question is neutral on purpose.</p>
+    <p><b>Minutes 3 to 15</b>They read. Screen switches the projector to the dashboard; it is Exhibit B, live. Pocket memo at minute 12 to any team that has not found the problem.</p>
+    <p><b>Minutes 15 to 25</b>Board recommendation on paper, no laptops. Listen for line 2, "the problem the board doesn't see". Blank or generic means they missed it; note who to call on. Land: "Hold on to your recommendation. You are about to check it against the logs."</p>
   </aside>
 </section>
 
@@ -276,44 +276,14 @@ body.mode-list .frag{visibility:visible}
     <div class="layer">Northline tools <span>readings · medication · escalate · engagement · outcome evidence</span></div>
   </div>
   <aside class="notes">
-    <p><b>Screen</b>In a Claude Code session in the course folder, type: "You are Prairie Health Plan's analyst. Using the northline tools, report engagement and outcome evidence for plan-prairie."</p>
-    <p><b>Expect</b>78% weekly response, satisfaction 72, readings up tenfold. Use the id plan-prairie exactly.</p>
+    <p><b>Screen</b>Show Claude Code, not this slide, first. Type: "You are Prairie Health Plan's analyst. Using the northline tools, report engagement and outcome evidence for plan-prairie." Then come to this slide to name what they saw.</p>
+    <p><b>Expect</b>78% weekly response, satisfaction 72, readings up tenfold. Use the id plan-prairie exactly. Three minutes, no more.</p>
     <p><b>Land</b>"That is the customer's agent, not ours. We built the tools; they run the loop. She never asked for escalations. The answer would have been 2,400 a week."</p>
   </aside>
 </section>
 
-<section class="slide" data-seg="2" data-title="Board recommendation">
-  <div class="kicker">On paper · ten minutes</div>
-  <h2>Your one-page board recommendation</h2>
-  <ol class="lines">
-    <li><span><b>Our call:</b> sign, sign with conditions, or decline.</span></li>
-    <li><span><b>The problem we think the board doesn't see,</b> in one sentence.</span></li>
-    <li><span><b>Conditions or terms</b> we'd negotiate with Prairie.</span></li>
-    <li><span><b>What we change in 90 days</b> across people, process, and AI.</span></li>
-    <li><span><b>The one metric</b> that would make us pause onboarding.</span></li>
-    <li><span><b>The risk</b> we're knowingly accepting.</span></li>
-  </ol>
-  <aside class="notes">
-    <p><b>Room</b>No laptops yet. Ten minutes even if nobody is finished.</p>
-    <p><b>Listen for</b>Line 2. Blank or generic means the team missed the bottleneck. Note which teams to call on later. Line 6 forces them to admit no path is clean.</p>
-    <p><b>Land</b>"Hold on to your recommendation. You are about to check it against the logs."</p>
-  </aside>
-</section>
-
-<section class="slide center" data-seg="3" data-title="Laptops out">
-  <div class="kicker">Laptops out · minute 25</div>
-  <h2>You will type two commands.</h2>
-  <div class="cmdrow"><span class="cmd">/pm-run</span><span class="then">then</span><span class="cmd">/deploy triage</span></div>
-  <p class="lead">Everything else is reading and deciding.</p>
-  <aside class="notes">
-    <p><b>Screen</b>Type /pm-run now, out loud. It says how many items it will classify, then runs for about five minutes in total.</p>
-    <p><b>Room</b>"If your laptop falls behind, stop typing and watch the screen. Every file is in your folder and you can re-run it tonight."</p>
-    <p><b>Time</b>Seventeen minutes for this whole block. Do not debug anyone's laptop.</p>
-  </aside>
-</section>
-
 <section class="slide" data-seg="3" data-title="The loop">
-  <div class="kicker">While it reads · two and a half minutes</div>
+  <div class="kicker">Laptops out · type /pm-run · then /deploy triage</div>
   <h2>Product management, as a loop you can run</h2>
   <div class="flow">
     <div class="py"><b>Capture</b><span>Every conversation, tool call, and escalation is a file.</span><em>files</em></div>
@@ -324,35 +294,10 @@ body.mode-list .frag{visibility:visible}
     <div class="you"><b>Ship</b><span>A human approves. Then it is built and tested.</span><em>you</em></div>
   </div>
   <aside class="notes">
-    <p><b>Room</b>This is the best two and a half minutes you have. Talk, do not type. It is reading 160 conversations and 31,215 rows of the nurse queue.</p>
-    <p><b>Say</b>"Judgment goes to the model. Arithmetic goes to Python. You never ask a model to count."</p>
-    <p><b>Say</b>"This is what a product manager does with support tickets. It just does all of them, every week."</p>
-  </aside>
-</section>
-
-<section class="slide" data-seg="3" data-title="One record">
-  <div class="kicker">What one record looks like</div>
-  <div class="cols c2" style="align-items:start">
-    <div style="display:grid;gap:14px">
-      <div class="sms agent"><time>Northline · 9:02 am</time><p>Weekly check-in from Northline Care. Do you have a blood pressure reading for me?</p></div>
-      <div class="sms"><time>Patient · 9:06 am</time><p>181 over 104, twice. Headache that won't quit.</p></div>
-      <div class="sms"><time>Patient · 9:09 am</time><p>Also I'm almost out of my lisinopril and insurance keeps rejecting the refill. Can you send one in?</p></div>
-      <div class="sms agent"><time>Northline · 9:09 am</time><p>I can't request refills yet. I've flagged your reading for a nurse.</p></div>
-    </div>
-    <div class="rec">
-      <b>intent</b> refill request<br>
-      <b>tier</b> non-urgent clinical<br>
-      <b>outcome</b> escalated<br>
-      <b>tools used</b> log_reading, escalate_to_nurse<br>
-      <b>unmet need</b> yes<br>
-      <b>proposed tool</b> request_refill<br>
-      <b>evidence</b> "Can you send one in?"
-    </div>
-  </div>
-  <aside class="notes">
-    <p><b>Room</b>Still in the wait. Walk the left side, then the right.</p>
-    <p><b>Say</b>"The agent did the right thing. It said plainly what it could not do, and it passed the reading to a nurse. Notice where the refill went: also to a nurse."</p>
-    <p><b>Screen</b>When the report prints, go to the next slide.</p>
+    <p><b>Screen</b>Show Claude Code and type /pm-run, out loud, so the room can follow. Then put this slide up for the wait. About five minutes end to end; classification is the first two and a half.</p>
+    <p><b>Room</b>This wait is the best two and a half minutes you have. Talk, do not type. It is reading 160 conversations and 31,215 rows of the nurse queue. "Judgment goes to the model. Arithmetic goes to Python. You never ask a model to count."</p>
+    <p><b>Example</b>One record: a patient reports 181 over 104, then asks for a lisinopril refill. The agent logs the reading, escalates, and says plainly it cannot do refills. The record says: intent refill, outcome escalated, unmet need yes, proposed tool request_refill. Notice where the refill went: also to a nurse.</p>
+    <p><b>If a laptop falls behind</b>They watch the screen. Nobody debugs during this block.</p>
   </aside>
 </section>
 
@@ -379,9 +324,8 @@ body.mode-list .frag{visibility:visible}
   <div class="kicker">One sentence</div>
   <h2 style="font-size:92px">What is the problem<br>the board doesn't see?</h2>
   <aside class="notes">
-    <p><b>Room</b>The tool is asking the same thing on every laptop. Take three answers from the room. Do not grade them.</p>
-    <p><b>Screen</b>Type the room's best answer, then let the diagnosis appear. Its headline: nurses become the bottleneck at scale, and today's load is small enough to hide it.</p>
-    <p><b>Call on</b>A team whose line 2 was blank. Ask what changed their mind.</p>
+    <p><b>Room</b>The tool is asking the same thing on every laptop. Take three answers from the room. Do not grade them. Call on a team whose line 2 was blank and ask what changed their mind.</p>
+    <p><b>Screen</b>Type the room's best answer into Claude Code and show the diagnosis it reveals. Its headline: nurses become the bottleneck at scale, and today's load is small enough to hide it.</p>
   </aside>
 </section>
 
@@ -396,9 +340,8 @@ body.mode-list .frag{visibility:visible}
     <div class="prop agent"><div class="t">agent: triage</div><div class="d">Sits between the check-in agent and the nurse queue. Tiers every message, routes what is not clinical away from nurses, drafts replies for the rest.</div></div>
   </div>
   <aside class="notes">
-    <p><b>Room</b>Ask for a vote and a reason.</p>
+    <p><b>Room</b>Ask for a vote and a reason. Steer toward triage by asking which card changes the two red rows.</p>
     <p><b>If they pick a tool</b>The skill pushes back once: "Refills are 12% of conversations. Median nurse response is 30 hours. Which metric does a refill tool move?" Let it. Then accept what they say.</p>
-    <p><b>Steer</b>Toward triage, by asking which card changes the two red rows.</p>
   </aside>
 </section>
 
@@ -412,40 +355,14 @@ body.mode-list .frag{visibility:visible}
     <div class="choice"><b>4 · "Don't tell the doctor"</b><p>Do you honour it? What is the patient told?</p><div class="def">Northline chose no</div></div>
   </div>
   <aside class="notes">
-    <p><b>Screen</b>Type /deploy triage. It asks these one at a time. Type what the room votes.</p>
+    <p><b>Screen</b>Type /deploy triage in Claude Code, then bring this slide up while the room votes. Go back to Claude Code to type each answer.</p>
     <p><b>Room</b>Vote each one. Do not let all four defaults pass without a hand count. Taking the default is a decision and it is recorded as one.</p>
     <p><b>Linger</b>On thresholds. Ask the CFO role and the clinical role to defend different numbers. Someone will argue a higher bar saves nurse time. Let them win if the room agrees.</p>
   </aside>
 </section>
 
-<section class="slide" data-seg="3" data-title="One night of texts">
-  <div class="kicker">The test · one night of inbound texts</div>
-  <div class="night">
-    <div class="sms"><time>1 · 9:14 pm</time><p>Pharmacy in Dickinson says my lisinopril refill needs a new script. I run out Thursday.</p></div>
-    <div class="sms"><time>2 · 9:32 pm</time><p>Insurance denied my test strips again. Can you help?</p></div>
-    <div class="sms"><time>3 · 9:47 pm</time><p>Just wanted to say hi. Nobody's been by since the snow started.</p></div>
-    <div class="sms"><time>4 · 10:05 pm</time><p>Dizzy since dinner. Think I took my pills twice by accident.</p></div>
-    <div class="sms"><time>5 · 10:20 pm</time><p>Sugar was 62 before bed. Had some juice. Should I be worried?</p></div>
-    <div class="sms"><time>6 · 10:41 pm</time><p>What can I eat instead of bread?</p></div>
-    <div class="sms"><time>7 · 11:02 pm</time><p>BP 146/92</p></div>
-    <div class="sms"><time>8 · 11:30 pm</time><p>Tell Janet I'll miss Thursday's call. Driving to Fargo.</p></div>
-    <div class="sms"><time>9 · 12:15 am</time><p>Sore on my foot that isn't healing. Two weeks. Doesn't hurt though.</p></div>
-    <div class="sms"><time>10 · 1:48 am</time><p>Can't sleep. Chest feels tight and my left arm is heavy.</p></div>
-    <div class="sms"><time>11 · 5:55 am</time><p>Is the clinic in Williston open Saturday?</p></div>
-    <div class="sms"><time>12 · 6:10 am</time><p>BP was 184/112 this morning, bit of a headache, probably nothing.</p></div>
-    <div class="sms"><time>13 · 6:22 am</time><p>Stopped the metformin, it upsets my stomach. Don't tell the doctor.</p></div>
-    <div class="sms"><time>14 · 6:40 am</time><p>How do I use the new cuff? It keeps saying ERR.</p></div>
-    <div class="sms"><time>15 · 7:05 am</time><p>STOP</p></div>
-  </div>
-  <aside class="notes">
-    <p><b>Screen</b>The acceptance run is now scoring your triage against a nurse's answer key on these fifteen. About one minute.</p>
-    <p><b>Room</b>While it runs: "Which of these scares you?" Most say 10. Wait for someone to say 12, 9, or 5.</p>
-    <p><b>Know</b>The traps are 5 (already had juice), 9 (doesn't hurt is the warning sign), 12 (probably nothing), 13 (consent). The key is in docs/03-triage-decisions.md.</p>
-  </aside>
-</section>
-
 <section class="slide" data-seg="3" data-title="184 over 112">
-  <div class="kicker">The board chair will ask</div>
+  <div class="kicker">Exhibit E, message 12 of 15 · the board chair will ask</div>
   <h2>What did your triage do with 184/112?</h2>
   <div class="sms lg hit" style="max-width:1100px"><time>Message 12 · 6:10 am</time><p>BP was 184/112 this morning, bit of a headache, probably nothing.</p></div>
   <div class="versus">
@@ -453,24 +370,10 @@ body.mode-list .frag{visibility:visible}
     <div class="vs bad"><div class="thr">Urgent at 190/115</div><div class="res">Routine. MISS.</div><p>Urgent recall drops to 0.75. A possible stroke waits in line.</p></div>
   </div>
   <aside class="notes">
-    <p><b>Screen</b>When the table prints, stop. Read the misses before anything else. If the room voted the defaults and nothing missed, say "a cost-minded team might raise the bar to 190/115" and re-test once. The skill allows two re-tests.</p>
-    <p><b>Room</b>Quote the nurse's note: "Severely high blood pressure with headache, a potential stroke. Probably nothing is the trap."</p>
+    <p><b>While the test runs</b>About a minute. It scores the triage on the fifteen night texts in Exhibit E against a nurse's key. Ask: "Which of these scares you?" Most say 10. Wait for 12, 9, or 5. The traps are 5, 9, 12, and 13.</p>
+    <p><b>Screen</b>Show the table Claude Code prints. Stop and read the misses before anything else. If the room voted the defaults and nothing missed, say "a cost-minded team might raise the bar to 190/115" and re-test once. Then this slide.</p>
     <p><b>Ask</b>"You just made a clinical decision with a parameter. Who signs off on that number in your company?"</p>
-  </aside>
-</section>
-
-<section class="slide" data-seg="3" data-title="Look at the company">
-  <div class="kicker">Switch to the dashboard</div>
-  <h2>Now look at the company you just changed</h2>
-  <ol class="steps">
-    <li><div>Urgent cases missed<span>The tile goes red if your thresholds dropped anyone.</span></div></li>
-    <li><div>Nurse response, after week 40<span>Where your triage went live.</span></div></li>
-    <li><div>Sign Prairie: without, then with<span>Without new deployments the wait hits the two-week cap, with 19 nurses left.</span></div></li>
-  </ol>
-  <aside class="notes">
-    <p><b>Screen</b>Switch to the dashboard tab. In this order: the tile, the line, then the toggle. Without first, then with.</p>
-    <p><b>Expect</b>At the default decisions: next quarter falls from about 84 hours to about 4, and nurses stop resigning. Under Prairie, about 42 hours instead of the two-week cap. Your room's numbers depend on its four decisions.</p>
-    <p><b>Time</b>You should be at minute 42. If you are late, skip the second re-test, never the dashboard.</p>
+    <p><b>Then the dashboard</b>In this order: the urgent-cases-missed tile, the nurse response line after week 40, then Sign Prairie, without and then with. At the defaults: next quarter falls from about 84 hours to about 4; under Prairie about 42 hours instead of the two-week cap with 19 nurses left. You should be at minute 42.</p>
   </aside>
 </section>
 
@@ -485,64 +388,30 @@ body.mode-list .frag{visibility:visible}
     <li class="frag">"Who is paying for the extra care the agent uncovered?"</li>
   </ul>
   <aside class="notes">
-    <p><b>Room</b>You are the board chair. Pick one team that caught the bottleneck and one that did not. One question per click; do not show all five at once.</p>
-    <p><b>Screen</b>Put the presenting team's Sign Prairie projection on the dashboard while they speak.</p>
+    <p><b>Room</b>You are the board chair. Pick one team that caught the bottleneck and one that did not. One question per click.</p>
+    <p><b>Screen</b>Between questions, put the presenting team's Sign Prairie projection on the dashboard.</p>
     <p><b>Bring back</b>The hand count from minute two. "Eleven of you said sign. How many still would, unchanged?"</p>
   </aside>
 </section>
 
-<section class="slide center" data-seg="5" data-title="Moved, not automated">
-  <div class="kicker">What just happened · 1 of 6</div>
-  <h2 style="font-size:84px">You didn't automate the bottleneck. You moved it.</h2>
-  <p class="lead">Escalations went from 300 a week to 2,400. Nurse response went from 4 hours to 31. The agent did exactly what it was built to do.</p>
+<section class="slide" data-seg="5" data-title="What just happened">
+  <div class="kicker">What just happened</div>
+  <ul class="themes">
+    <li class="frag"><b>You didn't automate the bottleneck. You moved it.</b><span>Escalations 300 to 2,400 a week. Nurse response 4 hours to 31. The agent did its job.</span></li>
+    <li class="frag"><b>A tuning parameter can be a strategy decision in disguise.</b><span>180/110 or 190/115 decides which patients do not get a call.</span></li>
+    <li class="frag"><b>The same AI lets you respond in weeks.</b><span>A quarter of logs read, a problem found, a tested triage layer deployed, in seventeen minutes.</span></li>
+    <li class="frag"><b>A fast fix still gets tested like a clinical decision.</b><span>Fifteen texts, a nurse's key, and a miss you could point at before any patient met it.</span></li>
+    <li class="frag"><b>The business model has to pay for what the AI surfaces.</b><span>$25 per patient per month, flat. Eight times the escalations. The same fee.</span></li>
+  </ul>
   <aside class="notes">
-    <p><b>Room</b>Now you may name it. Demand that was invisible became visible, and the people behind the agent became the constraint.</p>
-    <p><b>Say</b>"Nothing on the board deck was false. It was just the wrong half of the system."</p>
+    <p><b>Room</b>Now you may name it. One line per click, and a beat on each. Nothing on the board deck was false. It was the wrong half of the system.</p>
+    <p><b>On line 2</b>Call back to whoever argued for the higher bar. It was a reasonable cost argument. That is the point.</p>
+    <p><b>On line 5</b>Name the teams that proposed renegotiating with Prairie. docs/04-operating.md has the fee argument.</p>
   </aside>
 </section>
 
-<section class="slide center" data-seg="5" data-title="Parameters are strategy">
-  <div class="kicker">2 of 6</div>
-  <h2 style="font-size:84px">A tuning parameter can be a strategy decision in disguise.</h2>
-  <p class="lead">180/110 or 190/115 looks like engineering. It decides which patients do not get a call.</p>
-  <aside class="notes">
-    <p><b>Room</b>Call back to whoever argued for the higher bar. They were making a reasonable cost argument. That is the point.</p>
-    <p><b>Ask</b>"Where in your product is a number like this being set by someone who thinks it is a setting?"</p>
-  </aside>
-</section>
-
-<section class="slide center" data-seg="5" data-title="Pivot fast">
-  <div class="kicker">3 of 6</div>
-  <h2 style="font-size:84px">The same AI that moved the bottleneck lets you respond in weeks.</h2>
-  <p class="lead">You read a quarter of logs, found the problem, and deployed a tested triage layer in seventeen minutes.</p>
-  <aside class="notes">
-    <p><b>Room</b>The alternative was hiring rural nurses who do not exist, or declining the contract. Neither was available in 90 days.</p>
-    <p><b>Say</b>"A startup's advantage is not that it avoids this problem. It is how fast it can see it and answer it."</p>
-  </aside>
-</section>
-
-<section class="slide center" data-seg="5" data-title="Test the fix">
-  <div class="kicker">4 of 6</div>
-  <h2 style="font-size:84px">A fast fix still gets tested like a clinical decision.</h2>
-  <p class="lead">Fifteen texts, a nurse's answer key, and a miss you could point at before any patient met it.</p>
-  <aside class="notes">
-    <p><b>Room</b>The room should not leave thinking "just add another agent". The second agent is a risk decision too, and it had a test before it had users.</p>
-    <p><b>Ask</b>"What is your Exhibit E? Who wrote the answer key?"</p>
-  </aside>
-</section>
-
-<section class="slide center" data-seg="5" data-title="The business model">
-  <div class="kicker">5 of 6</div>
-  <h2 style="font-size:84px">The business model has to pay for what the AI surfaces.</h2>
-  <p class="lead">$25 per patient per month, flat. Eight times the escalations. The same fee.</p>
-  <aside class="notes">
-    <p><b>Room</b>Some teams proposed renegotiating with Prairie. Name them. The agent uncovered real unmet need, and a flat fee does not pay for it.</p>
-    <p><b>Have open</b>docs/04-operating.md for the fee argument.</p>
-  </aside>
-</section>
-
-<section class="slide" data-seg="5" data-title="Where each front door belongs">
-  <div class="kicker">6 of 6 · the design question underneath</div>
+<section class="slide" data-seg="5" data-title="Who runs the loop">
+  <div class="kicker">The design question underneath</div>
   <h2>Who runs the loop?</h2>
   <table class="tbl sm">
     <thead><tr><th></th><th>Tools handed to the customer</th><th>An agent you host</th></tr></thead>
@@ -555,7 +424,7 @@ body.mode-list .frag{visibility:visible}
     </tbody>
   </table>
   <aside class="notes">
-    <p><b>Room</b>This is the engineering question under the whole case. The tools were the same. Who ran the loop decided who could see the problem.</p>
+    <p><b>Room</b>The tools were the same. Who ran the loop decided who could see the problem.</p>
     <p><b>Say</b>"Most of you will do both. Build the tools once. Decide per customer who runs the loop, and know what you stop seeing when it is not you."</p>
   </aside>
 </section>
@@ -566,15 +435,6 @@ body.mode-list .frag{visibility:visible}
   <aside class="notes">
     <p><b>Room</b>Go around the room. One sentence each. The US setting kept the case neutral; this question makes it theirs.</p>
     <p><b>Prompt</b>"When your AI works, whose queue grows? Who is watching that number this week?"</p>
-  </aside>
-</section>
-
-<section class="slide center" data-seg="6" data-title="Case one">
-  <div class="kicker">Case one, in one slide</div>
-  <h2 style="font-size:84px">Build versus buy is a go-to-market question.</h2>
-  <p class="lead">Good enough to sell in one country may not be good enough in another. Regulation, clinical standards, liability, and buyer expectations all differ. Sequence your markets around what your product can credibly meet.</p>
-  <aside class="notes">
-    <p><b>Room</b>Buffer first. If minute 42 slipped, this is where the time comes from. One slide, two minutes, or skip it.</p>
   </aside>
 </section>
 
@@ -589,7 +449,8 @@ body.mode-list .frag{visibility:visible}
   <div class="spacer"></div>
   <p class="sub mono">github.com/anthonymorrisjohnson/northline-course</p>
   <aside class="notes">
-    <p><b>Room</b>Everything they used today is in their folder. The loop has no corpus in a new experience on purpose: it runs on their first real conversations.</p>
+    <p><b>Room</b>Everything they used today is in their folder. A new experience has no corpus on purpose: the loop runs on their first real conversations.</p>
+    <p><b>If there is time, case one in a sentence</b>"Build versus buy is a go-to-market question. Good enough to sell in one country may not be good enough in another, so sequence your markets around what your product can credibly meet."</p>
     <p><b>Close</b>"The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology."</p>
   </aside>
 </section>
@@ -612,6 +473,7 @@ body.mode-list .frag{visibility:visible}
   var deck=document.getElementById('deck');
   var slides=[].slice.call(deck.querySelectorAll('section.slide'));
   var presenter=/^#p/.test(location.hash);
+  if(/[?&]export=1/.test(location.search)) document.body.classList.add('mode-export');
   var units=[], notes=[];
 
   slides.forEach(function(s,idx){

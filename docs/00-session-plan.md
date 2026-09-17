@@ -35,13 +35,24 @@ The split matters. A single person doing both will fill the classification wait 
 
 | Minutes | Room | Screen | Slides | Presenter notes |
 |---|---|---|---|---|
-| 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 setup (up as people arrive), 2 title, 3 the email | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
-| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 4 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
-| 15–25 | Board recommendation on paper, in teams | Idle, dashboard still up | none | No laptops. Keep it to ten minutes even if nobody is finished. Land: "Hold on to your recommendation. You are going to check it against the logs." |
-| 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 5 the loop, 6 the four decisions filled live | See the block below. |
-| 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 7 pushback questions | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
-| 50–62 | Debrief themes; "where is this hiding in your market?" | Before, after the agent, after triage, side by side | 8 to 13 | Have `docs/04-operating.md` open for the fee argument. Land: "The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology." |
-| 62–75 | Case one closer, or buffer | Off | 14, 15 | Buffer first. If minute 42 slipped, this is where you took the time from. |
+| 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 setup (up as people arrive), 2 title, 3 the email, 4 roles and the question | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
+| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 4 stays up, then the dashboard; 5 two front doors, after the Prairie demo | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
+| 15–25 | Board recommendation on paper, in teams | Idle, dashboard still up | none; the dashboard | No laptops. Keep it to ten minutes even if nobody is finished. Land: "Hold on to your recommendation. You are going to check it against the logs." |
+| 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 6 the loop, 7 board deck vs logs, 8 the gate question, 9 the proposals, 10 four decisions, 11 what did it do with 184/112 | See the block below. |
+| 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 12 pushback questions, one per click | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
+| 50–62 | Debrief themes; "where is this hiding in your market?" | Before, after the agent, after triage, side by side | 13 what just happened, one line per click; 14 who runs the loop; 15 your market | Have `docs/04-operating.md` open for the fee argument. Land: "The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology." |
+| 62–75 | Case one closer, or buffer | Off | 16 take it home | Buffer first. If minute 42 slipped, this is where you took the time from. |
+
+Slide numbers are for the browser deck at `/slides` and its PowerPoint export, `slides/present.pptx`. After editing `slides/present.html`, rebuild the export with `uv run --with python-pptx python scripts/export_deck.py`. `slides/deck.pptx` is the earlier editable PowerPoint deck and has its own numbering.
+
+## What the room sees
+
+Slides carry the framing and the questions. The live system carries the evidence. When a slide and the live system would show the same thing, show the live system.
+
+- **Slides:** arrival, the email, the roles and the question, every question you ask the room, and the debrief.
+- **The dashboard:** while teams read and write their recommendation, after the triage deploys, and during the board meeting.
+- **Claude Code:** only when something is being typed or has just printed: the Prairie demo, `/pm-run`, the diagnosis, `/deploy triage`, and the acceptance table.
+- **Never on the projector:** the presenter window, the nurse's key, and `docs/`.
 
 ## The do-along, minute by minute
 
