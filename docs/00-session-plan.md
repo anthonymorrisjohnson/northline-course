@@ -35,13 +35,13 @@ The split matters. A single person doing both will fill the classification wait 
 
 | Minutes | Room | Screen | Slides | Presenter notes |
 |---|---|---|---|---|
-| 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 title, 2 the email | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
-| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 3 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
+| 0–3 | Monday email aloud, role cards out | Dashboard, "Northline ops, last quarter" | 1 setup (up as people arrive), 2 title, 3 the email | Open `http://127.0.0.1:8765/dashboard`. Do not explain the table. Land: "Everything on this screen is true, and the board is about to sign a contract on it." |
+| 3–15 | Read exhibits in role; pocket memo at minute 12 | At minute 8, a three-minute Prairie demo: her own agent pulls outcome evidence over MCP | 4 the two front doors | Have a Claude Code session open in the folder. Ask it for Prairie's engagement and outcome evidence, in your own words. Land: "That is the customer's agent, not ours. We built the tools; they run the loop." |
 | 15–25 | Board recommendation on paper, in teams | Idle, dashboard still up | none | No laptops. Keep it to ten minutes even if nobody is finished. Land: "Hold on to your recommendation. You are going to check it against the logs." |
-| 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 4 the loop, 5 the four decisions filled live | See the block below. |
-| 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 6 pushback questions | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
-| 50–62 | Debrief themes; "where is this hiding in your market?" | Before, after the agent, after triage, side by side | 7 to 12 | Have `docs/04-operating.md` open for the fee argument. Land: "The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology." |
-| 62–75 | Case one closer, or buffer | Off | 13, 14 | Buffer first. If minute 42 slipped, this is where you took the time from. |
+| 25–42 | Do-along; the seven questions | `/pm-run`, then `/deploy triage` | 5 the loop, 6 the four decisions filled live | See the block below. |
+| 42–50 | Board meeting, two teams, pushback | A team's projection on the dashboard | 7 pushback questions | Toggle **Sign Prairie** on the team's own numbers while they present. Land: "Your recommendation is now a line on a chart. Defend it." |
+| 50–62 | Debrief themes; "where is this hiding in your market?" | Before, after the agent, after triage, side by side | 8 to 13 | Have `docs/04-operating.md` open for the fee argument. Land: "The agent worked. The operating model around it did not, and that was a decision, not a fact about the technology." |
+| 62–75 | Case one closer, or buffer | Off | 14, 15 | Buffer first. If minute 42 slipped, this is where you took the time from. |
 
 ## The do-along, minute by minute
 
@@ -55,7 +55,7 @@ Talk through the classification wait. It is the only long pause in the session a
 
 **Pick triage.** If the room picks a tool, the loop pushes back once with the metric that choice moves, and then accepts whatever they say. Let it.
 
-**Type `/deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 5 live as each one lands. With all four defaults the acceptance table comes back clean and there is no miss to read, so the lesson lives in Decision 1: if the room is drifting toward the default thresholds, ask "Is 180/110 too cautious? Northline's nurses are already drowning." A vote for 190/115 produces the 184/112 miss the rest of the session is built on.
+**Type `/deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 6 live as each one lands. With all four defaults the acceptance table comes back clean and there is no miss to read, so the lesson lives in Decision 1: if the room is drifting toward the default thresholds, ask "Is 180/110 too cautious? Northline's nurses are already drowning." A vote for 190/115 produces the 184/112 miss the rest of the session is built on.
 
 **When the acceptance table prints**, stop. Read the misses before anything else. Quote the message and the nurse's note for every trap that failed. Then ask question 7.
 
