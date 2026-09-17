@@ -192,6 +192,22 @@ body.mode-list .frag{visibility:visible}
 
 <main id="deck" aria-live="polite">
 
+<section class="slide" data-seg="0" data-pre="1" data-title="Setup, while you arrive">
+  <div class="kicker">While you arrive</div>
+  <h2>Three things, then wait for us</h2>
+  <div class="cols c3">
+    <div class="door"><div class="who">1 · Open</div><p>The Claude desktop app, Code tab.</p><p class="m">New project, in a new empty folder called <span class="mono">northline</span>.</p></div>
+    <div class="door"><div class="who">2 · Paste</div><p>The line below.</p><p class="m">When it finishes, close the project and open it again.</p></div>
+    <div class="door"><div class="who">3 · Type</div><p class="mono">/northline-setup</p><p class="m">Stop when it prints READY.</p></div>
+  </div>
+  <div class="layer" style="font-size:24px;line-height:1.45">Download github.com/anthonymorrisjohnson/northline-course as a ZIP, unzip it so the files sit directly in this folder, then delete the zip.</div>
+  <aside class="notes">
+    <p><b>Both</b>Do not present this slide. Point at it. Leave it up until the last READY line.</p>
+    <p><b>Room</b>Walk the room. Anyone stuck on step 1 is the person to help before anything else.</p>
+    <p><b>Know</b>Each laptop makes 40 to 70 model calls over the hour on its own Claude account. Nothing else on this slide needs a terminal; the two commands are cued from the front at minute 25.</p>
+  </aside>
+</section>
+
 <section class="slide invert center" data-seg="0" data-title="Title">
   <div class="kicker">Advanced session · AfricInvest AI workshop · Tunis</div>
   <h1>Moving the<br>bottleneck</h1>
@@ -449,11 +465,11 @@ body.mode-list .frag{visibility:visible}
   <ol class="steps">
     <li><div>Urgent cases missed<span>The tile goes red if your thresholds dropped anyone.</span></div></li>
     <li><div>Nurse response, after week 40<span>Where your triage went live.</span></div></li>
-    <li><div>Sign Prairie: without, then with<span>Without new deployments the wait hits the two-week cap, with about 16 nurses left.</span></div></li>
+    <li><div>Sign Prairie: without, then with<span>Without new deployments the wait hits the two-week cap, with 19 nurses left.</span></div></li>
   </ol>
   <aside class="notes">
     <p><b>Screen</b>Switch to the dashboard tab. In this order: the tile, the line, then the toggle. Without first, then with.</p>
-    <p><b>Expect</b>With triage, response falls from about 41 hours next quarter to single digits. Under Prairie, roughly a day instead of two weeks. Your room's numbers depend on its four decisions.</p>
+    <p><b>Expect</b>At the default decisions: next quarter falls from about 84 hours to about 4, and nurses stop resigning. Under Prairie, about 42 hours instead of the two-week cap. Your room's numbers depend on its four decisions.</p>
     <p><b>Time</b>You should be at minute 42. If you are late, skip the second re-test, never the dashboard.</p>
   </aside>
 </section>
@@ -606,9 +622,9 @@ body.mode-list .frag{visibility:visible}
     var n=s.querySelector('aside.notes'); var out=document.createElement('div'); out.className='notes-out';
     if(n){ out.innerHTML=n.innerHTML; n.remove(); }
     unit.appendChild(out); units.push(unit); notes.push(out.innerHTML);
-    var seg=+s.dataset.seg, g=SEGS[seg];
+    var pre=!!s.dataset.pre, seg=pre?-1:+s.dataset.seg, g=pre?['Before we start',0,0]:SEGS[seg];
     var rail=document.createElement('footer'); rail.className='rail';
-    rail.innerHTML='<span>'+g[1]+'–'+g[2]+' min · '+g[0]+'</span><span class="rail-line">'+
+    rail.innerHTML='<span>'+(pre?g[0]:(g[1]+'–'+g[2]+' min · '+g[0]))+'</span><span class="rail-line">'+
       SEGS.map(function(x,k){return '<i style="flex:'+(x[2]-x[1])+'" class="'+(k===seg?'on':(k<seg?'past':''))+'"></i>';}).join('')+
       '</span><span class="num">'+(idx+1)+' / '+slides.length+'</span>';
     s.appendChild(rail);
