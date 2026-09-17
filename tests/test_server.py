@@ -43,3 +43,10 @@ def test_slides_served_with_document_shell(log_dir):
 def test_slides_missing_is_404(log_dir, monkeypatch, tmp_path):
     monkeypatch.setattr(server, "SLIDES", tmp_path / "nope.html")
     assert TestClient(server.app).get("/slides").status_code == 404
+
+
+def test_follow_along_served_with_its_images(log_dir):
+    c = TestClient(server.app)
+    r = c.get("/follow")
+    assert r.status_code == 200 and "What you" in r.text and r.text.count('<section class="slide') == 16
+    assert c.get("/img/checkin.png").status_code == 200

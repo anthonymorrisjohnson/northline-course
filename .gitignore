@@ -15,3 +15,4 @@ dist/
 northline/data/readings.json
 northline/data/medication_log.json
 .playwright-mcp/
+slides/.export-*.html

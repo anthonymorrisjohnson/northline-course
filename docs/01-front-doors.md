@@ -16,7 +16,7 @@ Northline Care built one set of tools and put them behind two doors. Patients ta
 | Liability when it misspeaks | Shared and unclear | Yours, and clear |
 | Build cost | The tool layer only | Tool layer plus prompt, UI, hosting, logging |
 | Time to first user | Days if they already have an agent | Weeks |
-| What Prairie saw | 78% engagement, tenfold readings | Nothing; they never asked for escalations |
+| What Prairie saw | 78% engagement, tenfold readings, 2,400 flags a week | Nothing about the wait; no tool reports it |
 
 ## Row by row, with Northline
 
@@ -36,7 +36,7 @@ Northline Care built one set of tools and put them behind two doors. Patients ta
 
 **Time to first user.** Days for the customer who already has an agent. Weeks for the one who does not, because a controlled agent is a product and a product needs a brief, a page, hosting and logging before the first person can use it.
 
-**What Prairie saw.** Engagement at 78% a week and readings up from 12,000 a month to about 120,000. Those numbers are why the contract is on the table. Across the forty committed Prairie sessions there is not one call about escalations or nurse response time, because Northline never built a tool that answers that question. The customer saw the outcomes. Nobody showed them the queue.
+**What Prairie saw.** Engagement at 78% a week and readings up from 12,000 a month to about 120,000. Those numbers are why the contract is on the table. Across the forty committed Prairie sessions there is not one call about escalations or nurse response time, because Northline never built a tool that answers that question. An analyst who does ask the escalations metric gets 2,400 flags a week, which reads as the agent doing its job. The customer saw the outcomes. Nobody showed them the queue.
 
 ## The hybrid
 
