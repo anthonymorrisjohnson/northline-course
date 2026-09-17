@@ -10,11 +10,11 @@ The paper case runs first and runs whole. The laptops come out at minute 25. Att
 
 Send this to every attendee three days before the session. It takes about ten minutes and it has to happen before the day, not on it.
 
-1. Install Claude Code and sign in. The Code tab in the Claude desktop app or `claude` in a terminal both work; the desktop app's "New project" mode does not.
+1. Install the Claude desktop app and sign in. Use the Code tab (not "New project"). A `claude` terminal session works too, if that is what you already have.
 2. Download the zip from github.com/anthonymorrisjohnson/northline-course (Code, Download ZIP).
 3. Unzip it into your home folder.
-4. Open the `northline-course` folder in the Code tab, or in a terminal `cd ~/northline-course`, then `claude`.
-5. Type `/northline-setup` and follow the prompts.
+4. In the Code tab, open the `northline-course` folder.
+5. Type `/northline-setup` in the chat and follow the prompts.
 6. Paste the `READY: ...` line it prints into the workshop group chat.
 
 Nothing else to install. `/northline-setup` handles the rest, on macOS, Linux and Windows. Two things that do not work, tested: the Claude desktop app's New project mode runs commands in a sandbox whose `claude` only accepts a plain prompt, so the loop cannot run there (the app's Code tab is fine); and on Windows the npm `claude.cmd` shim cannot take the long prompts the classification step sends, so Windows attendees need the native installer.

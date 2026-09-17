@@ -4,14 +4,14 @@ Moving the bottleneck, live: the AI didn't fail Northline Care, the operating mo
 
 ## Pre-work (before the session)
 
-1. Install Claude Code and sign in with your Claude account. Either the Code tab in the
-   Claude desktop app or `claude` in a terminal works. The desktop app's "New project" mode
-   does not: it runs commands in a sandbox that cannot run the course. On Windows use the
-   native installer, not npm.
+1. Install the Claude desktop app and sign in with your Claude account. Use the Code tab,
+   not "New project": New project runs commands in a sandbox that cannot run the course.
+   (If you already use `claude` in a terminal, that works too; on Windows use the native
+   installer, not npm.)
 2. Download the zip: github.com/anthonymorrisjohnson/northline-course, Code, Download ZIP.
 3. Unzip it into your home folder. It should be called `northline-course`.
-4. Open the `northline-course` folder in the Code tab, or in a terminal: `cd ~/northline-course`, then `claude`.
-5. Type `/northline-setup` and follow the prompts. Stop when it prints a `READY: ...` line.
+4. In the Code tab, open the `northline-course` folder.
+5. Type `/northline-setup` in the chat and follow the prompts. Stop when it prints a `READY: ...` line.
 6. Paste that line into the workshop group chat.
 
 No API key and nothing else to install: `/northline-setup` handles `uv` and the rest. The

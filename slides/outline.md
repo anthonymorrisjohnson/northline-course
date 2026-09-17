@@ -4,7 +4,7 @@ Fifteen slides for the two presenters. A white setup slide first, then a dark ti
 
 ## Slide 1: Three things, then wait for us
 
-- Shown on screen while people arrive, and left up until the last READY line. Three cards: Claude Code installed and signed in: the Code tab in the desktop app or `claude` in a terminal, not New project (Windows uses the native installer, not npm); the course folder (link below, Code → Download ZIP, unzip into the home folder); open the folder in Code or in a terminal (`cd ~/northline-course`, `claude`), `/northline-setup`, stop at READY
+- Shown on screen while people arrive, and left up until the last READY line. Three cards: the Claude desktop app installed and signed in, Code tab open (not New project); the course folder (link below, Code → Download ZIP, unzip into the home folder); open the folder in the Code tab, type `/northline-setup` in the chat, stop at READY
 - Bottom band: the GitHub link, large: github.com/anthonymorrisjohnson/northline-course
 - Everything else (the server window, texting the agent, the two commands) is cued from the front at minute 25, not from this slide
 
@@ -123,7 +123,7 @@ Speaker: hold this one line. It is the reason the four decisions on slide 6 have
 
 ## Slide 15: Take it home
 
-- Unzip the course folder, run `/northline-setup`
+- Unzip the course folder, open it in the Code tab, type `/northline-setup`
 - Type `/northline-new-experience` and build a third front door for a persona this repo doesn't cover
 - Three take-home exercises, in the exercises folder, each buildable with the same skills used today
 - The question to carry out of the room: **where is this bottleneck hiding in your market?**
