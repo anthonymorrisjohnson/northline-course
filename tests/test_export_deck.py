@@ -22,7 +22,8 @@ def test_follow_along_is_built_from_its_body_and_has_notes():
     b.build()
     assert b.OUT.read_text(encoding="utf-8") == built, "follow-along.html is stale: run scripts/build_follow_along.py"
     meta = ex.slides_meta(built)
-    assert len(meta) == 16 and all(m["notes"] for m in meta) and meta[5]["title"] == "Step 1: /pm-run"
+    assert len(meta) == 20 and all(m["notes"] for m in meta) and meta[9]["title"] == "Step 1: /pm-run"
+    assert [m["title"] for m in meta[3:7]] == [t for t in (m["title"] for m in meta) if t.startswith("Basics:")]
 
 
 def test_handout_carries_every_exhibit_and_matches_the_triage_data():

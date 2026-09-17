@@ -30,6 +30,13 @@
 .panel tr.bad td{color:#FF9A8F}
 .panel.sans{font-family:var(--body);font-size:22px;line-height:1.45}
 .pair{display:grid;gap:18px}
+.panel .lbl{display:inline-block;min-width:9.2em;color:#8FA3B0}
+.panel .hr{border-top:1px solid #22323D;margin:4px 0}
+.doors2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.doors2 .door p{font-size:23px}
+.doors2 .door .runs{font:500 18px/1.5 var(--mono);color:var(--muted);border-top:1px solid var(--rule);padding-top:10px;margin-top:4px}
+.doors2 .door .runs b{color:var(--accent);font-weight:500}
+.doors2 .layer{font-size:22px;padding:18px 28px}
 </style>
 
 <section class="slide invert center" data-seg="0" data-pre="1" data-title="Follow along">
@@ -88,6 +95,124 @@
   <aside class="notes">
     <p><b>Say</b>This is Exhibit B, live; the paper version is in docs/exhibits.pdf. Every number is true and none is labelled as a problem. A team that reads only the board update never looks at this table.</p>
     <p><b>Point at</b>The Next quarter column. The company is already sliding before anyone signs anything.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="Basics: an agent is a model in a loop">
+  <div class="split">
+    <div class="say">
+      <span class="step look">Basics · 1 of 4</span>
+      <h2>An agent is a model in a loop, with tools</h2>
+      <ul class="pts">
+        <li>A <b>model</b> on its own only writes text. It cannot look anything up or change anything.</li>
+        <li>A <b>tool</b> is a function the model is allowed to ask for.</li>
+        <li>The <b>loop</b>: the model reads the message, asks for a tool, reads what came back, and decides again, until it can answer.</li>
+        <li class="key">Whoever writes the instructions and runs that loop owns the conversation.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="bar">One patient text, inside the loop</div>
+      <div class="body">
+        <p class="in">BP was 184/112 this morning, bit of a headache</p>
+        <div class="hr"></div>
+        <p><span class="lbl">model asks for</span>log_reading(kind "bp", value "184/112")</p>
+        <p class="dim"><span class="lbl">tool returns</span>status ok · flag urgent</p>
+        <p><span class="lbl">model asks for</span>escalate_to_nurse(urgency "urgent")</p>
+        <p class="dim"><span class="lbl">tool returns</span>status ok · queued for a nurse</p>
+        <div class="hr"></div>
+        <p class="ok"><span class="lbl">model replies</span>"I've logged that and flagged it as urgent for a nurse. If it gets worse, call 911."</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>Four slides of basics, then you will see both of these running. For the non-technical half of the room: an agent is not magic. It is a model, some instructions, a short list of functions it may call, and a loop.</p>
+    <p><b>Say</b>Read the panel top to bottom. The model never touched the database. It asked, and code we wrote did the work. That is the whole trick.</p>
+    <p><b>Land</b>"Hold on to the last line. Who runs the loop is the question the rest of this hour turns on."</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="Basics: a tool is a function with a description">
+  <div class="split">
+    <div class="say">
+      <span class="step look">Basics · 2 of 4</span>
+      <h2>A tool is a function with a description</h2>
+      <ul class="pts">
+        <li>The model never sees your code. It sees a <b>name</b>, a <b>sentence</b>, and the <b>arguments</b>.</li>
+        <li>That sentence is product copy. It decides when the tool gets used.</li>
+        <li>The function decides what is allowed. It can check, refuse, and log.</li>
+        <li class="key">Northline has eight of these. They are the product. Everything else is a way in.</li>
+      </ul>
+    </div>
+    <div class="pair">
+      <div class="panel">
+        <div class="bar">What the model sees</div>
+        <div class="body">
+          <p class="in" style="color:#DCE6EC">escalate_to_nurse</p>
+          <p class="dim">Hand a concerning reading or symptom to a nurse. urgency is 'routine' or 'urgent'. Use for any clinical question.</p>
+          <p><span class="lbl">arguments</span>patient_id · reason · urgency</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="bar">What you wrote · northline/tools/patient.py</div>
+        <div class="body">
+          <p>def escalate_to_nurse(patient_id, reason, urgency="routine"):</p>
+          <p class="dim">&nbsp;&nbsp;# check the patient exists, add a row to the nurse queue,</p>
+          <p class="dim">&nbsp;&nbsp;# write the call to the log, return {"status": "ok"}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>Top panel is everything the model knows about this tool. Bottom panel is ordinary code your engineers already know how to write, test, and secure.</p>
+    <p><b>Say</b>Notice "Use for any clinical question." That one sentence is why refills and insurance questions end up in a nurse's queue later. Tool descriptions are product decisions.</p>
+    <p><b>Know</b>Eight tools: four for patients (log a reading, log medication, escalate, next check-in) and four for a health plan (engagement, outcome evidence, enrollment status, enroll members).</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="Basics: two ways to ship the same tools">
+  <div class="kicker">Basics · 3 of 4</div>
+  <h2>Two ways to ship the same tools</h2>
+  <div class="doors2">
+    <div class="door">
+      <div class="who">An agent you host</div>
+      <p>You wrap the tools in <b>your own</b> agent and give people a place to talk to it: a text number, a web page, a chat window.</p>
+      <p class="m">Northline's check-in agent. Patients text it.</p>
+      <div class="runs"><b>you</b> write the instructions · <b>you</b> pick the model · <b>you</b> run the loop</div>
+    </div>
+    <div class="door">
+      <div class="who">MCP, handed to the customer</div>
+      <p>You publish the tools over <b>MCP</b>, a standard plug. The customer connects them to the assistant <b>they already use</b>.</p>
+      <p class="m">Prairie's analyst, in her own Claude.</p>
+      <div class="runs"><b>they</b> write the instructions · <b>they</b> pick the model · <b>they</b> run the loop</div>
+    </div>
+    <div class="layer" style="grid-column:1 / -1">The same eight tools <span>one codebase · one set of rules · one log</span></div>
+  </div>
+  <aside class="notes">
+    <p><b>Say</b>MCP stands for Model Context Protocol. Think of it as USB for tools: you describe your tools once, and any assistant that speaks MCP can plug them in. Claude, ChatGPT, Copilot and most agent frameworks do.</p>
+    <p><b>Say</b>Left: you built the whole experience. Right: you built only the tools, and the customer's assistant does the talking. Nothing about the tools changes between the two.</p>
+    <p><b>Do not</b>Pick a winner. Most companies in this room will do both. The next slide is what you trade.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="Basics: what you trade">
+  <div class="kicker">Basics · 4 of 4</div>
+  <h2>What you trade when you hand over the loop</h2>
+  <table class="tbl sm">
+    <thead><tr><th></th><th>An agent you host</th><th>MCP, handed to the customer</th></tr></thead>
+    <tbody>
+      <tr><td><b>Reach</b></td><td>They have to come to you</td><td>Wherever they already work</td></tr>
+      <tr><td><b>Time to ship</b></td><td>Weeks: tools, instructions, a screen, hosting</td><td>Days: the tools only</td></tr>
+      <tr><td><b>Who pays for AI</b></td><td>You do</td><td>They do</td></tr>
+      <tr><td><b>Guardrails</b></td><td>Yours, end to end</td><td>Only what a tool can refuse</td></tr>
+      <tr class="gap"><td><b>What you see</b></td><td>Every word, including what you could not do</td><td>Tool calls only, never the conversation</td></tr>
+      <tr><td><b>When it misspeaks</b></td><td>Your liability, and clear</td><td>Shared, and unclear</td></tr>
+    </tbody>
+  </table>
+  <p class="sub" style="font-size:26px">Next, both of them live: a patient texts Northline's agent, then Prairie's analyst uses her own.</p>
+  <aside class="notes">
+    <p><b>Say</b>Read it as two honest columns. MCP is cheaper, faster, and meets the customer where they are. A hosted agent costs more and gives you control.</p>
+    <p><b>Point at</b>The red row. It is the one that matters for the next hour. When you run the loop, you read every conversation, including every request you could not meet. When the customer runs it, you see a list of function calls and nothing else.</p>
+    <p><b>Land</b>"Keep that row in mind. Northline is about to learn what it could not see."</p>
   </aside>
 </section>
 
