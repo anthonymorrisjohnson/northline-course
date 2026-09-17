@@ -91,7 +91,7 @@ Open `http://127.0.0.1:8765/dashboard`. It refreshes every ten seconds, so the d
 
 Four things move.
 
-**The Exhibit B table** gains a working "Next quarter" column. Before the deploy it is the same story getting worse: median nurse response climbing from 29.7 hours to 40.9, overtime from 1,154 hours a month to 1,370, another 397 patients going quiet. After the deploy, the same column is computed with your triage agent in it.
+**The Exhibit B table** gains a working "Next quarter" column. Before the deploy it is the same story getting worse: median nurse response climbing from 31 hours to 84, overtime from 1,150 hours a month to 1,810, three more nurses gone, another 489 patients going quiet. After the deploy, the same column is computed with your triage agent in it.
 
 **The "Urgent cases missed / week" tile** turns from a zero into a number if your thresholds downgraded anything. This is where message 12 shows up, several days later, as a count of people.
 

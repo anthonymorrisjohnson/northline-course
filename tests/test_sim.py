@@ -27,8 +27,10 @@ def test_last_quarter_column():
     assert close(lq["readings_per_month"], 120000) and close(lq["escalations_per_week"], 2400)
     assert close(lq["inbound_per_week"], 3100) and lq["after_hours_share"] == 0.46
     assert close(lq["nurse_response_median_h"], 31) and close(lq["overtime_hours_per_month"], 1150)
-    assert 21 <= rows[-1]["nurses"] <= 23 and 2 <= lq["resignations"] <= 4
-    assert close(lq["inactive_after_escalation"], 340, 0.15) and close(lq["satisfaction"], 72, 0.05)
+    # Exhibit B on the paper case: 25 -> 22 nurses, all three resignations inside the last quarter, 340 gone quiet.
+    assert lq["nurses"] == 22 and lq["resignations"] == 3 and rows[-1]["nurses"] == 22
+    assert lq["inactive_after_escalation"] == 340 and close(lq["satisfaction"], 72, 0.05)
+    assert round(lq["nurse_response_median_h"]) == 31 and round(lq["overtime_hours_per_month"], -1) == 1150
 
 
 def test_triage_effects_lower_response_time():

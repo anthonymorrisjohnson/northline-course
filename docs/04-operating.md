@@ -64,11 +64,11 @@ Pausing means the deployment comes out and the previous behaviour comes back, no
 
 Northline charges $25 per patient per month. Forty thousand patients, a million dollars a month. That number has not moved since before the agent existed.
 
-Everything else moved. Readings went from 12,000 a month to about 120,000. Escalations went from 300 a week to 2,400. Patients started sending 3,100 messages a week that nobody asked for and nothing tracked before. Nurse cost went from $233,100 a month to $257,543, most of that overtime — 180 hours a month before, 1,154 now.
+Everything else moved. Readings went from 12,000 a month to about 120,000. Escalations went from 300 a week to 2,400. Patients started sending 3,100 messages a week that nobody asked for and nothing tracked before. Nurse cost went from $233,100 a month to $265,740 with three fewer nurses on payroll, the difference all overtime — 180 hours a month before, 1,150 now.
 
 Same fee. Eight times the work.
 
-That is the part the technology cannot fix, and it gets worse with the contract, not better. The model puts Prairie at 100,000 patients: revenue $2.5m a month, nurse cost $586,470, fourteen resignations in the quarter, and a median nurse response of 336 hours, which is the cap the model stops counting at. Signing the deal scales the revenue by two and a half and the problem by four.
+That is the part the technology cannot fix, and it gets worse with the contract, not better. The model puts Prairie at 100,000 patients: revenue $2.5m a month, nurse cost $669,290, almost all of it overtime, three more resignations in the quarter, and a median nurse response of 336 hours, which is the cap the model stops counting at. Signing the deal scales the revenue by two and a half and the nurse bill by nearly three.
 
 A flat per-patient fee prices a service where the demand is fixed. An agent that works does not leave demand fixed — it surfaces demand that was always there and was never reaching you. If the price does not have a term for that, then every improvement in engagement is a cost increase you agreed to in advance.
 

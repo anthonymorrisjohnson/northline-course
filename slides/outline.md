@@ -58,7 +58,7 @@ Speaker: one per click, during the board meeting. Toggle "Sign Prairie" on the p
 ## Slide 7: You didn't automate the bottleneck, you moved it
 
 - Table: Exhibit B, "Before" and "Last quarter" columns from the dashboard
-- Nurse response, median: 4.0h → 29.7h. Overtime: 180h/month → 1,154h/month. Inactive after escalation: 0 → 334
+- Nurses: 25 → 22. Nurse response, median: 4.0h → 31.1h. Overtime: 180h/month → 1,151h/month. Resignations: 0 → 3. Inactive after escalation: 0 → 340
 - After-hours share: 0% → 46%. Escalations/week: 300 → 2,400
 
 Speaker: readings went up tenfold and engagement hit 78%, and the same motion that produced those numbers produced this table. The agent didn't remove the bottleneck — it moved it from patients not being reached to nurses not being able to answer.
@@ -74,8 +74,8 @@ Speaker: 184 is below 190, and the prompt applies the number literally. Nobody w
 ## Slide 9: AI lets you pivot fast
 
 - Chart: nurse response median (hours), weeks 1–52, from the dashboard's trend data
-- The line climbs from 18.1h to 36.4h under the check-in agent alone, then drops to 4.0h the week triage deploys (week 40) and stays there
-- Median nurse response: 29.7h → 4.0h. But urgent cases missed/week: 0.0 → 90.0
+- The line sits at 22.2h under the check-in agent, steps up to 28.3h, 36.7h and 48.9h as the three nurses resign in the last quarter, then drops to 4.0h the week triage deploys (week 40) and stays there
+- Median nurse response: 31.1h → 4.0h. But urgent cases missed/week: 0.0 → 90.0
 - Caption: "Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard."
 
 Speaker: every queue number gets better in a day. Read the last row before anyone celebrates the rest of the table. Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard.
@@ -94,10 +94,10 @@ Speaker: the key is marked `"draft": true` — illustrative, not a clinician's s
 
 - Chart: the Sign Prairie toggle, weeks 40–52, nurse response median (h), with vs. without the deployment
 - Without new deployments: flat at 336.0h — the model's cap, reached before week 40
-- With new deployments: roughly 24–31h across the same weeks
+- With new deployments: 31h at week 40, climbing to 57h by week 52 as three more nurses leave. Triage buys a quarter; it does not staff the contract
 - Caption: "Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard."
 
-Speaker: same contract, same 100,000 patients, two very different lines — and the only thing that moved between them is a prompt four people voted on this afternoon. Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard.
+Speaker: same contract, same 100,000 patients, two very different lines — and the only thing that moved between them is a prompt four people voted on this afternoon. Then point at the slope of the lower line: it is still climbing, because nurses are still leaving. The prompt bought time, not headcount. Numbers from a triage deployment made with the 190/115 decisions on this laptop; your room's numbers will differ. Show the live dashboard.
 
 ## Slide 12: Where each front door belongs
 
