@@ -23,3 +23,20 @@ def test_follow_along_is_built_from_its_body_and_has_notes():
     assert b.OUT.read_text(encoding="utf-8") == built, "follow-along.html is stale: run scripts/build_follow_along.py"
     meta = ex.slides_meta(built)
     assert len(meta) == 16 and all(m["notes"] for m in meta) and meta[5]["title"] == "Step 1: /pm-run"
+
+
+def test_handout_carries_every_exhibit_and_matches_the_triage_data():
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    handout = (root / "docs" / "exhibits.md").read_text(encoding="utf-8")
+    for letter in "ABCDE":
+        assert f"## Exhibit {letter}:" in handout
+    for row in json.loads((root / "northline/agents/triage/exhibit_e.json").read_text(encoding="utf-8")):
+        assert f"| {row['n']} | {row['time']} | {row['text']} |" in handout
+    # The pocket memo is held back until minute 12, so it must print on its own, last.
+    assert handout.rindex('<div class="pagebreak"></div>') < handout.index("## Exhibit D:")
+    assert handout.index("## Exhibit D:") > handout.index("## Exhibit E:")
+    assert "answer key" not in handout.lower() and "Urgent clinical" not in handout
+    assert (root / "docs" / "exhibits.pdf").stat().st_size > 10_000

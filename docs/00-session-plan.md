@@ -47,6 +47,8 @@ Slide numbers are for the browser deck at `/slides` and its PowerPoint export, `
 
 **The follow-along deck.** `/follow` (and `slides/follow-along.pptx`) is a second, sixteen-slide deck for anyone without a laptop, or anyone who falls behind: each step of the do-along with what to type, a real capture of what comes back, and the narrative that goes with it. Send it with the pre-work, and put it on a second screen if the room has one. Its text lives in `slides/follow-along.body.html`; after editing, run `uv run python scripts/build_follow_along.py`, then `uv run --with python-pptx python scripts/export_deck.py follow-along`.
 
+**The paper.** `docs/exhibits.pdf` is the handout: the company, Exhibits A, B and C with the question, then Exhibit E and Exhibit D each on a page of their own. Print pages 1 to 3 for every attendee for minute 0, page 4 for minute 25, and a few copies of page 5 (the pocket memo) to keep in your pocket until minute 12. The source is `docs/exhibits.md`; after editing it, run `uv run --with markdown python scripts/build_handout.py`.
+
 ## What the room sees
 
 Slides carry the framing and the questions. The live system carries the evidence. When a slide and the live system would show the same thing, show the live system.

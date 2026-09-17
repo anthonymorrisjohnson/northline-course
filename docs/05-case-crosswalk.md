@@ -2,7 +2,7 @@
 
 This page is for anyone holding the paper case and wondering which file in this repo is the live version of which part.
 
-The case document is not in this repo. It stays on paper, in the facilitator's pack, and the exercise around it is unchanged. What follows maps its parts to the things you can open on a laptop.
+The facilitator's case document is not in this repo. The part of it the room reads is: the company narrative, the question, and Exhibits A to E are in `docs/exhibits.md`, with a print-ready `docs/exhibits.pdf` beside it. The exercise around the paper is unchanged. What follows maps its parts to the things you can open on a laptop.
 
 | Part of the case | In this repo | What it is here |
 |---|---|---|
