@@ -4,13 +4,17 @@ Moving the bottleneck, live: the AI didn't fail Northline Care, the operating mo
 
 ## Pre-work (before the session)
 
-1. Download the zip from the link you were sent.
-2. Unzip it into your home folder.
-3. Open Claude Code in the unzipped `northline-course` folder.
-4. Type `/setup` and follow the prompts.
-5. Paste the `READY: ...` line it prints into the workshop group chat.
+1. Install Claude Code (the command-line tool, not the desktop app) from
+   https://claude.com/claude-code and sign in with your Claude account. Every step in
+   the session runs through it.
+2. Download the zip from the link you were sent.
+3. Unzip it into your home folder.
+4. Open a terminal, `cd` into the unzipped `northline-course` folder, and run `claude`.
+5. Type `/setup` and follow the prompts.
+6. Paste the `READY: ...` line it prints into the workshop group chat.
 
-No account, no key, and nothing else to install — `/setup` handles `uv` and the rest.
+No API key and nothing else to install: `/setup` handles `uv` and the rest. The session
+makes 40 to 70 model calls per laptop through your own Claude account.
 
 ## What happens in the room
 

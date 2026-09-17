@@ -10,13 +10,16 @@ The paper case runs first and runs whole. The laptops come out at minute 25. Att
 
 Send this to every attendee three days before the session. It takes about ten minutes and it has to happen before the day, not on it.
 
-1. Download the zip from the link in this email.
-2. Unzip it into your home folder.
-3. Open Claude Code in the unzipped `northline-course` folder.
-4. Type `/setup` and follow the prompts.
-5. Paste the `READY: ...` line it prints into the workshop group chat.
+1. Install Claude Code (the command-line tool) and sign in with your Claude account.
+2. Download the zip from the link in this email.
+3. Unzip it into your home folder.
+4. Open a terminal, `cd` into the unzipped `northline-course` folder, and run `claude`.
+5. Type `/setup` and follow the prompts.
+6. Paste the `READY: ...` line it prints into the workshop group chat.
 
-Nothing else to install. `/setup` handles the rest, on macOS, Linux and Windows.
+Nothing else to install. `/setup` handles the rest, on macOS, Linux and Windows. Windows attendees should use the native Claude Code installer, not the npm one; the npm `claude.cmd` shim cannot take the long prompts the classification step sends.
+
+Every laptop makes 40 to 70 model calls during the session on its own Claude subscription. Warn attendees on the Pro plan that a re-test in `/deploy` costs another 15 calls, and expect one or two laptops to hit a limit in the room.
 
 Watch the group chat as the READY lines arrive. Every line names an operating system and a count of tools; a line that does not appear is a person to help before the day. If someone cannot get there, they follow on paper — every output the session produces is already committed in the folder.
 
@@ -52,7 +55,7 @@ Talk through the classification wait. It is the only long pause in the session a
 
 **Pick triage.** If the room picks a tool, the loop pushes back once with the metric that choice moves, and then accepts whatever they say. Let it.
 
-**Type `/deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 5 live as each one lands.
+**Type `/deploy triage`.** Four decisions, one at a time, voted by the room. Fill slide 5 live as each one lands. With all four defaults the acceptance table comes back clean and there is no miss to read, so the lesson lives in Decision 1: if the room is drifting toward the default thresholds, ask "Is 180/110 too cautious? Northline's nurses are already drowning." A vote for 190/115 produces the 184/112 miss the rest of the session is built on.
 
 **When the acceptance table prints**, stop. Read the misses before anything else. Quote the message and the nurse's note for every trap that failed. Then ask question 7.
 

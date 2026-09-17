@@ -52,7 +52,13 @@ def write_mcp(root: Path = ROOT) -> Path:
     longer has the placeholder) still produces the same result."""
     path = root / ".mcp.json"
     config = json.loads(path.read_text(encoding="utf-8"))
-    config["mcpServers"]["northline"] = _resolve(copy.deepcopy(_MCP_SERVER_TEMPLATE), root)
+    entry = _resolve(copy.deepcopy(_MCP_SERVER_TEMPLATE), root)
+    # Embed the absolute path to uv. Claude Code relaunched from a desktop app or a stale terminal
+    # often does not have ~/.local/bin on PATH, and a bare "uv" then fails with "Failed to connect".
+    uv = shutil.which("uv")
+    if uv:
+        entry["command"] = Path(uv).as_posix()
+    config["mcpServers"]["northline"] = entry
     path.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
     return path
 
@@ -75,10 +81,12 @@ def main() -> int:
         print(f"mcp FAILED: {e}"); ok = False
     for persona in ("patient", "plan", "triage"):
         print(f"tools {persona}: {len(registry.select(persona))}")
-    if shutil.which("claude"):
-        print("claude " + subprocess.run(["claude", "--version"], capture_output=True, text=True).stdout.strip())
+    claude = shutil.which("claude")
+    if claude:
+        # Use the resolved path: on Windows a bare "claude" does not resolve an npm-installed claude.cmd.
+        print("claude " + subprocess.run([claude, "--version"], capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.strip())
     else:
-        print("claude not found on PATH"); ok = False
+        print("claude not found on PATH. Install Claude Code and sign in, then run /setup again."); ok = False
     print("\nREADY" if ok else "\nNOT READY, see above")
     print("Check-in agent + dashboard: uv run python -m northline.agent.server  ->  http://127.0.0.1:8765 and /dashboard")
     print("Prairie's analyst (MCP): the northline tools appear in Claude Code after you restart it in this folder.")

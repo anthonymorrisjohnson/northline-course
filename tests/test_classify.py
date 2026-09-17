@@ -1,3 +1,4 @@
+import json
 import shutil
 from pathlib import Path
 from northline.pm import classify as c
@@ -54,3 +55,25 @@ def test_classify_truncates_long_batches():
 
     recs = c.classify_items(items, batch_size=3, ask=fake)
     assert [r["id"] for r in recs] == ["i0", "i1", "i2"]
+
+
+def test_load_items_counts_a_live_checkin_session_once(tmp_path):
+    (tmp_path / "corpus/patient").mkdir(parents=True); (tmp_path / "corpus/plan").mkdir()
+    (tmp_path / "logs/transcripts").mkdir(parents=True)
+    shutil.copy(FX / "transcript.json", tmp_path / "logs/transcripts/abc123.json")
+    call = {"session_id": "abc123", "persona": "patient", "tool": "log_reading", "args": {}, "status": "ok"}
+    (tmp_path / "logs/tool_calls.jsonl").write_text(json.dumps(call) + "\n" + json.dumps({**call, "session_id": "plan9", "persona": "plan"}) + "\n", encoding="utf-8")
+    ids = [i["id"] for i in c.load_items(tmp_path / "corpus", tmp_path / "logs")]
+    assert ids.count("live-abc123") == 1 and "live-plan9" in ids
+
+
+def test_main_keeps_previous_output_when_classification_fails(monkeypatch, tmp_path):
+    monkeypatch.setattr(c, "OUT", tmp_path)
+    (tmp_path / "classified.jsonl").write_text('{"id": "old"}\n', encoding="utf-8")
+    def boom(*a, **kw):
+        raise RuntimeError("claude failed")
+    monkeypatch.setattr(c.claude_json, "ask_json_many", boom)
+    import pytest
+    with pytest.raises(RuntimeError):
+        c.main()
+    assert (tmp_path / "classified.jsonl").read_text(encoding="utf-8") == '{"id": "old"}\n'

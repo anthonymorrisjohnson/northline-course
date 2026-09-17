@@ -74,7 +74,11 @@ def parse_stream(lines: Iterable[str]) -> TurnResult:
 
 def run_turn(message, *, system_prompt, mcp_config, session_id=None, model=None, cwd=REPO_ROOT, runner=subprocess.run) -> TurnResult:
     cmd = build_command(message, system_prompt=system_prompt, mcp_config=mcp_config, session_id=session_id, model=model, cwd=cwd)
-    proc = runner(cmd, cwd=str(cwd), capture_output=True, text=True, timeout=180)
+    try:
+        proc = runner(cmd, cwd=str(cwd), capture_output=True, text=True, encoding="utf-8", errors="replace",
+                      stdin=subprocess.DEVNULL, timeout=180)
+    except subprocess.TimeoutExpired:
+        return TurnResult("agent error: the turn took longer than 180 s; please send that again", session_id or "", is_error=True)
     if proc.returncode != 0 and not proc.stdout.strip():
         return TurnResult(f"agent error: {getattr(proc, 'stderr', '')}".strip(), session_id or "", is_error=True)
     return parse_stream(proc.stdout.splitlines())

@@ -18,7 +18,10 @@ def ask_json(prompt: str, schema: dict, *, model: str = "haiku", runner=subproce
     cmd = [claude_bin(), "-p", prompt, "--output-format", "json", "--json-schema", json.dumps(schema),
            "--tools", "", "--strict-mcp-config", "--no-session-persistence", "--model", model]
     try:
-        proc = runner(cmd, cwd=str(cwd), capture_output=True, text=True, timeout=300)
+        # encoding="utf-8": claude prints UTF-8; without this Windows decodes it as cp1252 and curly quotes
+        # become mojibake or raise. stdin=DEVNULL: otherwise claude waits 3 s for piped stdin on every call.
+        proc = runner(cmd, cwd=str(cwd), capture_output=True, text=True, encoding="utf-8", errors="replace",
+                      stdin=subprocess.DEVNULL, timeout=300)
     except subprocess.TimeoutExpired as exc:
         raise RuntimeError("claude timed out after 300 s") from exc
     if not proc.stdout.strip():

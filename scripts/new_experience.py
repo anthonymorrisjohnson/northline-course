@@ -65,7 +65,7 @@ def _substitute(text: str, name: str) -> str:
 def _copy_file(src: Path, dst: Path, name: str) -> None:
     dst.parent.mkdir(parents=True, exist_ok=True)
     if dst.suffix in _SUBSTITUTE_SUFFIXES:
-        dst.write_text(_substitute(src.read_text(encoding="utf-8"), name))
+        dst.write_text(_substitute(src.read_text(encoding="utf-8"), name), encoding="utf-8")
     else:
         shutil.copy(src, dst)
 

@@ -35,8 +35,10 @@ def load_items(corpus_dir: Path, log_dir: Path) -> list[dict]:
     items = []
     for p in sorted((corpus_dir / "patient").glob("*.json")):
         items.append({"id": p.stem, "persona": "patient", "text": _transcript_text(json.loads(p.read_text(encoding="utf-8")))})
+    seen_live = set()
     for p in sorted((log_dir / "transcripts").glob("*.json")) if (log_dir / "transcripts").exists() else []:
         items.append({"id": f"live-{p.stem}", "persona": "patient", "text": _transcript_text(json.loads(p.read_text(encoding="utf-8")))})
+        seen_live.add(p.stem)
     for p in sorted((corpus_dir / "plan").glob("*.jsonl")):
         items.append({"id": p.stem, "persona": "plan", "text": _calls_text([json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()])})
     live = log_dir / "tool_calls.jsonl"
@@ -46,6 +48,8 @@ def load_items(corpus_dir: Path, log_dir: Path) -> list[dict]:
             if l.strip():
                 c = json.loads(l); groups[c["session_id"]].append(c)
         for sid, calls in groups.items():
+            if sid in seen_live:
+                continue  # a check-in session already has its transcript above; do not count it twice
             items.append({"id": f"live-{sid}", "persona": calls[0]["persona"], "text": _calls_text(calls)})
     return items
 
@@ -70,10 +74,14 @@ def main() -> None:
     items = load_items(REPO_ROOT / "corpus", REPO_ROOT / "northline" / "logs")
     print(f"classifying {len(items)} items")
     OUT.mkdir(exist_ok=True)
-    with (OUT / "classified.jsonl").open("w", encoding="utf-8") as f:
+    # Write to a temp file and rename at the end, so a failed or interrupted run leaves the previous
+    # classified.jsonl (the shipped fallback) untouched.
+    final, tmp = OUT / "classified.jsonl", OUT / "classified.jsonl.tmp"
+    with tmp.open("w", encoding="utf-8") as f:
         for r in classify_items(items, batch_size=10, ask=lambda jobs, **kw: claude_json.ask_json_many(jobs, workers=8, **kw)):
             f.write(json.dumps(r) + "\n")
-    print(f"wrote {OUT / 'classified.jsonl'}")
+    tmp.replace(final)
+    print(f"wrote {final}")
 
 
 if __name__ == "__main__":
