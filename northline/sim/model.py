@@ -13,7 +13,8 @@ BASE = {
     "engaged_weekly": 0.0, "readings_per_response": 0.89,      # agent: 40000 * 0.78 * 4.33 * 0.89 = 120,000
     "escalation_rate": 0.0075, "inbound_rate": 0.0, "after_hours_share": 0.46,
     "urgent_share_of_escalations": 0.15, "inbound_to_nurse_share": 0.60, "routine_time_factor": 1.0,
-    "urgent_recall": 1.0, "response_curve": 5.1, "resignation_rate": 0.048, "disengage_rate": 0.021,
+    "urgent_recall": 1.0, "after_hours_urgent_wait_h": 4.0,  # what an urgent message waits at 1:48am; the after-hours decision sets it
+    "response_curve": 5.1, "resignation_rate": 0.048, "disengage_rate": 0.021,
     "baseline_overtime_month": 180,  # overtime that exists regardless of load; the case's before column
     # Nurses do not quit in the first month of overload; the hazard ramps in from week 19 over 8 weeks.
     # With the check-in agent live from week 1 this puts all three of the case's resignations in the last
@@ -53,7 +54,10 @@ def step(s: State, p: dict) -> tuple[State, dict]:
     capacity = N * p["nurse_capacity_items_per_week"]
     load = items / capacity if capacity else 99.0
     median_h = round(min(MAX_RESPONSE_H, 4.0 * math.exp(p["response_curve"] * max(0.0, load - 0.8))), 1)  # capped at two weeks; beyond that the number stops meaning anything
-    urgent_h = 4.0 if p["routine_time_factor"] < 1.0 else median_h   # a triage layer sees urgent items first
+    if p["routine_time_factor"] < 1.0:   # a triage layer sees urgent items first; after hours, the after-hours rule decides
+        urgent_h = round((1 - p["after_hours_share"]) * 4.0 + p["after_hours_share"] * p["after_hours_urgent_wait_h"], 1)
+    else:
+        urgent_h = median_h
     overtime = p["baseline_overtime_month"] + max(0.0, items - capacity) * p["hours_per_item"] * 4.33
     ramp = min(1.0, max(0.0, (s.week - p["resignation_ramp_start"]) / p["resignation_ramp_weeks"]))
     accum = s.resign_accum + N * p["resignation_rate"] * ramp * min(p["resignation_overload_cap"], max(0.0, load - 1.0))
