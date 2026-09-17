@@ -22,7 +22,8 @@ def test_follow_along_is_built_from_its_body_and_has_notes():
     b.build()
     assert b.OUT.read_text(encoding="utf-8") == built, "follow-along.html is stale: run scripts/build_follow_along.py"
     meta = ex.slides_meta(built)
-    assert len(meta) == 16 and all(m["notes"] for m in meta) and meta[5]["title"] == "Step 1: /pm-run"
+    assert len(meta) == 20 and all(m["notes"] for m in meta) and meta[9]["title"] == "Step 1: /pm-run"
+    assert [m["title"] for m in meta[3:7]] == [t for t in (m["title"] for m in meta) if t.startswith("Basics:")]
 
 
 def test_handout_carries_every_exhibit_and_matches_the_triage_data():
@@ -40,3 +41,23 @@ def test_handout_carries_every_exhibit_and_matches_the_triage_data():
     assert handout.index("## Exhibit D:") > handout.index("## Exhibit E:")
     assert "answer key" not in handout.lower() and "Urgent clinical" not in handout
     assert (root / "docs" / "exhibits.pdf").stat().st_size > 10_000
+
+
+def test_editable_deck_is_native_text_tables_and_notes(tmp_path):
+    import pytest
+    pytest.importorskip("pptx")
+    pytest.importorskip("bs4")
+    from pathlib import Path
+    from pptx import Presentation
+    from scripts import export_deck_editable as ed
+
+    source = (Path(__file__).resolve().parents[1] / "slides" / "present.html").read_text(encoding="utf-8")
+    prs = Presentation(str(ed.build(source, tmp_path / "deck.pptx")))
+    meta = ex.slides_meta(source)
+    assert len(prs.slides) == len(meta)
+    for slide, m in zip(prs.slides, meta):
+        assert not [s for s in slide.shapes if s.shape_type == 13], "pictures are not editable"
+        assert slide.notes_slide.notes_text_frame.text == m["notes"]
+    words = " ".join(s.text_frame.text for s in prs.slides[4].shapes if s.has_text_frame)
+    assert "Two front doors, one set of tools" in words and "2,400 flags a week" in words
+    assert sum(1 for slide in prs.slides for s in slide.shapes if s.has_table) == 2
