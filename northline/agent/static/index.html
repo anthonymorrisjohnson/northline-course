@@ -50,7 +50,7 @@
   function bubble(role, text) {
     const b = document.createElement("div");
     b.className = "bubble " + role;
-    b.textContent = text;
+    b.textContent = String(text).replace(/\*\*(.+?)\*\*/g, "$1").replace(/^[-*] /gm, "");  // SMS bubbles show plain text
     thread.appendChild(b);
     return b;
   }

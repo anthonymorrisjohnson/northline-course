@@ -10,3 +10,8 @@ northline/agents/triage/out/
 briefs/*
 !briefs/.gitkeep
 dist/
+
+# runtime data written by the check-in tools
+northline/data/readings.json
+northline/data/medication_log.json
+.playwright-mcp/
