@@ -238,6 +238,14 @@ body.mode-export .hint{visibility:hidden}
 .doors2 .door .runs{font:500 18px/1.5 var(--mono);color:var(--muted);border-top:1px solid var(--rule);padding-top:10px;margin-top:4px}
 .doors2 .door .runs b{color:var(--accent);font-weight:500}
 .doors2 .layer{font-size:22px;padding:18px 28px}
+.doors2 .door ul{margin:0;padding-left:22px;font-size:22px;line-height:1.35;color:var(--ink)}
+.doors2 .door ul li{margin:0 0 6px}
+.doors2 .door .fact{font:500 18px/1.4 var(--mono);color:var(--muted)}
+.ask{display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center;background:var(--accent-soft);border-radius:12px;padding:22px 32px}
+.ask p{margin:0;font-size:27px;line-height:1.35}
+.ask p b{font-weight:600}
+.ask .clock{font:800 64px/1 var(--display);color:var(--accent);white-space:nowrap}
+.ask .clock small{display:block;font:500 16px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 </style>
 
 <main id="deck" aria-live="polite">
@@ -416,6 +424,40 @@ body.mode-export .hint{visibility:hidden}
     <p><b>Say</b>Read it as two honest columns. MCP is cheaper, faster, and meets the customer where they are. A hosted agent costs more and gives you control.</p>
     <p><b>Point at</b>The red row. It is the one that matters for the next hour. When you run the loop, you read every conversation, including every request you could not meet. When the customer runs it, you see a list of function calls and nothing else.</p>
     <p><b>Land</b>"Keep that row in mind. Northline is about to learn what it could not see."</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1" data-title="Discuss: which door for which interaction?">
+  <div class="kicker">Discuss · five minutes · in your teams</div>
+  <h2>Northline talks to two kinds of people</h2>
+  <div class="doors2">
+    <div class="door">
+      <div class="who">The patient</div>
+      <ul>
+        <li>A weekly check-in: blood pressure or glucose, medication, how they feel.</li>
+        <li>Escalate anything concerning to a nurse.</li>
+        <li>Answer what comes back: refills, the drive to the pharmacy, diet, insurance.</li>
+      </ul>
+      <div class="fact">40,000 patients · rural · many an hour from a clinic · by text</div>
+    </div>
+    <div class="door">
+      <div class="who">Prairie Health Plan, the payer</div>
+      <ul>
+        <li>Engagement and outcome evidence for its members: response rate, readings, BP control, satisfaction.</li>
+        <li>Enrollment status of a member; enrolling more members.</li>
+        <li>Deciding whether to sign for 60,000 more, at $25 per member per month.</li>
+      </ul>
+      <div class="fact">one analyst · already uses her own AI assistant · reports to the VP who wrote the email</div>
+    </div>
+  </div>
+  <div class="ask">
+    <p><b>For each one: MCP handed to them, or an agent Northline hosts?</b> Say why. Then say what Northline would stop seeing.</p>
+    <div class="clock">5:00<small>then two teams report</small></div>
+  </div>
+  <aside class="notes">
+    <p><b>Room</b>Five minutes on the clock, in the case teams. Two questions per interaction: which door, and what Northline stops seeing. Do not let them settle for "both": make them pick, and write one line each.</p>
+    <p><b>Listen for</b>The patient side is usually easy: no patient will install anything, so Northline hosts. Prairie splits the room: MCP is cheap and meets the analyst where she works; a hosted portal lets Northline shape what the payer is told. Both are defensible. What Northline stops seeing is the answer that matters.</p>
+    <p><b>Report</b>Two teams, one minute each. Then say what Northline actually chose: hosted for patients, MCP for Prairie. The next two slides show both running. Do not say yet what that choice cost.</p>
   </aside>
 </section>
 
