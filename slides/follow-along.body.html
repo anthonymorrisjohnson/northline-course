@@ -584,6 +584,7 @@
   </div>
   <aside class="notes">
     <p><b>Point at</b>Deployments live, top right: triage since week 40. Then the Next quarter column, row by row.</p>
+    <p><b>If asked why escalations are still 2,400</b>"That number is patients, not nurses. Triage didn't change how many people needed help; it changed how much of that help needed a nurse." The check-in agent flags 0.75% of patients a week and triage sits after the flag. What triage moves: the 3,100 inbound texts stop reaching nurses, a routine escalation costs 60% of the time with a drafted reply, and urgent ones are seen first. Nurse work falls from about 4,260 items a week to about 1,580 against a capacity of 3,300, so the wait falls from 31 hours to 4 while the count stays put. The only lever on the count itself is the check-in agent's threshold, and that is the "which patients no longer get a call" question.</p>
   </aside>
 </section>
 
@@ -601,6 +602,7 @@
     <div class="shot"><img src="img/dash-after-trends.png" alt="Trend charts showing nurse response, overtime and inactive patients dropping when triage goes live, and the Prairie projection with and without new deployments"></div>
   </div>
   <aside class="notes">
+    <p><b>If asked why Prairie still shows 6,000 escalations</b>Same answer: 100,000 patients at 0.75% a week. Triage turns them into about 3,960 items against a capacity of 3,000 with 20 nurses, still over capacity, so 42 hours, not 4. Triage buys time. It does not buy nurses.</p>
     <p><b>Say</b>This is the board question with evidence behind it. Forty-two hours is the honest number: triage buys time, it does not buy nurses, and the flat fee still does not pay for the care the agent uncovered.</p>
   </aside>
 </section>
@@ -613,9 +615,27 @@
     <li><b>You built the fix from four decisions, and tested it first.</b><span>Fifteen texts, a nurse's key, and one miss you could point at.</span></li>
     <li><b>You saw that who runs the loop decides who can see the problem.</b><span>Prairie saw 2,400 flags. She never saw the wait.</span></li>
   </ul>
-  <div class="spacer"></div>
-  <p class="sub mono">Next: /new-experience · /brief · github.com/anthonymorrisjohnson/northline-course</p>
   <aside class="notes">
+    <p><b>Say</b>Four things happened in the room. Name them, then go to the last slide and give them the order to do it in.</p>
+  </aside>
+</section>
+
+<section class="slide" data-seg="6" data-title="The framework to take home">
+  <div class="kicker">Take it home · the same order, every time</div>
+  <h2>Six questions, in order</h2>
+  <div class="flow">
+    <div class="py"><b>1 · Tools</b><span>What can it do? Write the functions once. Their descriptions are product copy.</span><em>northline/tools</em></div>
+    <div class="you"><b>2 · The door</b><span>Who runs the loop? Host it, or hand over MCP, per customer. Know what you stop seeing.</span><em>brief.md · .mcp.json</em></div>
+    <div class="py"><b>3 · Capture</b><span>Is every conversation, tool call and escalation a file? If not, nothing else works.</span><em>logs/</em></div>
+    <div class="ai"><b>4 · The loop</b><span>What did they want, and did they get it? Judgment to the model, arithmetic to code.</span><em>/pm-run</em></div>
+    <div class="you"><b>5 · Decide, test</b><span>Which number is a strategy decision? Score it against a key. Read the misses.</span><em>/deploy</em></div>
+    <div class="you"><b>6 · The queue</b><span>When it works, whose queue grows? Put that number where the board can see it.</span><em>/dashboard</em></div>
+  </div>
+  <div class="spacer"></div>
+  <p class="sub mono">Run it on your own company: /new-experience · /brief · github.com/anthonymorrisjohnson/northline-course</p>
+  <aside class="notes">
+    <p><b>Say</b>Everything today was these six, in this order. The tools are the product. The door is a decision per customer, not a technology choice. Capture is boring and non-negotiable. The loop is a model reading and code counting. A human decides, and every number they pick is tested like a clinical decision. Then you watch the queue the work moved to, because it moved.</p>
+    <p><b>Say</b>Colour is who does the step: grey is code, blue is a model, red is a person in this room. Notice how many are red.</p>
     <p><b>Close</b>Where is this bottleneck hiding in your market? When your AI works, whose queue grows, and who is watching that number this week?</p>
   </aside>
 </section>

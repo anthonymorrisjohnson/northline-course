@@ -22,7 +22,8 @@ def test_follow_along_is_built_from_its_body_and_has_notes():
     b.build()
     assert b.OUT.read_text(encoding="utf-8") == built, "follow-along.html is stale: run scripts/build_follow_along.py"
     meta = ex.slides_meta(built)
-    assert len(meta) == 21 and all(m["notes"] for m in meta) and meta[10]["title"] == "Step 1: /pm-run"
+    assert len(meta) == 22 and all(m["notes"] for m in meta) and meta[10]["title"] == "Step 1: /pm-run"
+    assert meta[-1]["title"] == "The framework to take home"
     assert meta[7]["title"].startswith("Discuss:")
     assert [m["title"] for m in meta[3:7]] == [t for t in (m["title"] for m in meta) if t.startswith("Basics:")]
 
